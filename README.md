@@ -1,4 +1,0 @@
-limingit.github.com
-===================
-
-octopress
