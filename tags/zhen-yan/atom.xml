@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 箴言 | Begin iOS]]></title>
+  <link href="http://limingit.github.io/tags/zhen-yan/atom.xml" rel="self"/>
+  <link href="http://limingit.github.io/"/>
+  <updated>2014-01-08T07:00:18+00:00</updated>
+  <id>http://limingit.github.io/</id>
+  <author>
+    <name><![CDATA[Bencalie]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[写给每一位 iOS 初学者]]></title>
+    <link href="http://limingit.github.io/blog/2013/11/18/perface/"/>
+    <updated>2013-11-18T09:45:00+00:00</updated>
+    <id>http://limingit.github.io/blog/2013/11/18/perface</id>
+    <content type="html"><![CDATA[<p>我也是一位 iOS 初学者</p>
+]]></content>
+  </entry>
+  
+</feed>
