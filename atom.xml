@@ -4,7 +4,7 @@
   <title><![CDATA[Begin iOS]]></title>
   <link href="http://limingit.github.io/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-01-10T01:53:50+00:00</updated>
+  <updated>2014-01-10T02:10:11+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -14,18 +14,18 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Welcome to BeginiOS.com]]></title>
-    <link href="http://limingit.github.io/blog/2013/08/28/welcome-to-beginios-dot-com/"/>
-    <updated>2013-08-28T09:41:00+00:00</updated>
-    <id>http://limingit.github.io/blog/2013/08/28/welcome-to-beginios-dot-com</id>
+    <title type="html"><![CDATA[序]]></title>
+    <link href="http://limingit.github.io/blog/2014/01/10/preface/"/>
+    <updated>2014-01-10T01:59:00+00:00</updated>
+    <id>http://limingit.github.io/blog/2014/01/10/preface</id>
     <content type="html"><![CDATA[
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">Bencalie</span> <span class="nl">sayHelloTo:</span> <span class="n">everybody</span><span class="p">];</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[[[</span><span class="n">FrontEndEnginer</span> <span class="n">alloc</span><span class="p">]</span><span class="nl">initWithName:</span><span class="s">@&quot;Bencalie&quot;</span><span class="p">]</span><span class="n">sayHelloToEverybody</span><span class="p">];</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>欢迎你的访问，最新的消息，请大家访问我的<a href="http://weibo.com/bencalie" title="Bencalie">新浪微博</a>。</p>
+<p>欢迎大家光临，我是一名 iOS 初学者，入门之路坎坎坷坷，此博客用于记录我的一些学习笔记，与大家共勉。</p>
 ]]></content>
   </entry>
   
