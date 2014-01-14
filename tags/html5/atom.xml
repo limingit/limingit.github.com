@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: HTML5 | Begin iOS]]></title>
   <link href="http://limingit.github.io/tags/html5/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-01-14T16:56:41+00:00</updated>
+  <updated>2014-01-14T17:00:56+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -20,7 +20,7 @@
     <id>http://limingit.github.io/blog/2014/01/14/using-the-application-cache</id>
     <content type="html"><![CDATA[<h3>简介</h3>
 
-<p>HTML5 提供了一种应用缓存的机制，便于 Web 应用可以在断网的情况下离线运行，类似于“脱机浏览”浏览器还提供了调用应用缓存的接口 window.applicationCache，来设定浏览器缓存的数据。</p>
+<p>HTML5 提供了一种应用缓存的机制，便于 Web 应用可以在断网的情况下离线运行，类似于“脱机浏览”。浏览器还提供了调用应用缓存的接口 window.applicationCache，来设定浏览器缓存的数据。</p>
 
 <p>它带来的好处有：</p>
 
