@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - Begin iOS</title>
+  <title>Mac OSX 下抓包工具 Charles 使用 - Begin iOS</title>
   <meta name="author" content="Bencalie">
 
   
-  <meta name="description" content="Blog Archive 2014 Mac OSX 下抓包工具 Charles 使用
-Jan 14 2014 posted in Tools 序
-Jan 10 2014 posted in ios &#x5173;&#x4e8e;&#x6211; Front-End Engineer &hellip;">
+  <meta name="description" content="对于经常在 Windows 下进行 Web 开发的人来说，Fiddler 是神器。但由于它是 .Net Framework 下开发的，注定了用于 Linux 或者 Unix 之类系统上只能通过反向代理，如果不在同一个局域网内，非常麻烦。 还好在 Mac OSX 下我们还有 Charles， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ Jan 10 2014 posted in ios &#x5173;&#x4e8e;&#x6211; Front-End Engineer &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://limingit.github.io/blog/archives">
+  <link rel="canonical" href="http://limingit.github.io/blog/2014/01/14/charles-proxy-for-mac">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Begin iOS" type="application/atom+xml">
@@ -67,49 +65,112 @@ Jan 10 2014 posted in ios &#x5173;&#x4e8e;&#x6211; Front-End Engineer &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">Mac OSX 下抓包工具 Charles 使用</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-14T02:43:00+00:00" pubdate data-updated="true">Jan 14<span>th</span>, 2014</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p>对于经常在 Windows 下进行 Web 开发的人来说，Fiddler 是神器。但由于它是 .Net Framework 下开发的，注定了用于 Linux 或者 Unix 之类系统上只能通过反向代理，如果不在同一个局域网内，非常麻烦。</p>
 
-  
-  <h2>2014</h2>
+<p>还好在 Mac OSX 下我们还有 Charles，不过它是商业软件，并且价格不菲。不过网上也有破解版本，网友请自行挖掘。</p>
 
-<article>
-  
-<h1><a href="/blog/2014/01/14/charles-proxy-for-mac/">Mac OSX 下抓包工具 Charles 使用</a></h1>
-<time datetime="2014-01-14T02:43:00+00:00" pubdate><span class='month'>Jan</span> <span class='day'>14</span> <span class='year'>2014</span></time>
+<p>一些使用技巧如下：</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/tools/'>Tools</a></span>
-</footer>
+<h3>HTTPS抓包</h3>
 
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/01/10/preface/">序</a></h1>
-<time datetime="2014-01-10T01:59:00+00:00" pubdate><span class='month'>Jan</span> <span class='day'>10</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ios/'>ios</a></span>
-</footer>
-
-
-</article>
-
+<p>下载 Charles 证书<a href="http://www.charlesproxy.com/ssl.zip%EF%BC%8C%E8%A7%A3%E5%8E%8B%E5%90%8E%E5%AF%BC%E5%85%A5%E5%88%B0">http://www.charlesproxy.com/ssl.zip%EF%BC%8C%E8%A7%A3%E5%8E%8B%E5%90%8E%E5%AF%BC%E5%85%A5%E5%88%B0</a> iOS 设备中（将 crt 文件作为邮件附件发给自己，再在 iOS 设备中点击附件即可安装；也可上传至 dropbox 之类的网盘，通过 safari 下载安装）
+在Charles的工具栏上点击设置按钮，选择 Proxy Settings…
+切换到 SSL 选项卡，选中 Enable SSL Proxying，然后在 Locations 表单填写要抓包的域名和端口，点击Add按钮，在弹出的表单中 Host 填写域名，比如填 api.weibo.com，Port 填 443</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Bencalie</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-14T02:43:00+00:00" pubdate data-updated="true">Jan 14<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tools/'>Tools</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+	<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<span class="jiathis_txt">&#x5206;&#x4eab;&#x5230;&#xff1a;</span>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=1822549" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">&#x66f4;&#x591a;</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=1822549" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1822549"></script>
+<!-- UY END -->
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/01/10/preface/" title="Previous Post: 序">&laquo; 序</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>

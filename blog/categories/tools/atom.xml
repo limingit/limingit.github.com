@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Tag: 经验 | Begin iOS]]></title>
-  <link href="http://limingit.github.io/tags/jing-yan/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Tools | Begin iOS]]></title>
+  <link href="http://limingit.github.io/blog/categories/tools/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
   <updated>2014-01-14T03:08:07+00:00</updated>
   <id>http://limingit.github.io/</id>
@@ -29,23 +29,6 @@
 <p>下载 Charles 证书<a href="http://www.charlesproxy.com/ssl.zip%EF%BC%8C%E8%A7%A3%E5%8E%8B%E5%90%8E%E5%AF%BC%E5%85%A5%E5%88%B0">http://www.charlesproxy.com/ssl.zip%EF%BC%8C%E8%A7%A3%E5%8E%8B%E5%90%8E%E5%AF%BC%E5%85%A5%E5%88%B0</a> iOS 设备中（将 crt 文件作为邮件附件发给自己，再在 iOS 设备中点击附件即可安装；也可上传至 dropbox 之类的网盘，通过 safari 下载安装）
 在Charles的工具栏上点击设置按钮，选择 Proxy Settings…
 切换到 SSL 选项卡，选中 Enable SSL Proxying，然后在 Locations 表单填写要抓包的域名和端口，点击Add按钮，在弹出的表单中 Host 填写域名，比如填 api.weibo.com，Port 填 443</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[序]]></title>
-    <link href="http://limingit.github.io/blog/2014/01/10/preface/"/>
-    <updated>2014-01-10T01:59:00+00:00</updated>
-    <id>http://limingit.github.io/blog/2014/01/10/preface</id>
-    <content type="html"><![CDATA[<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[[[</span><span class="n">FrontEndEnginer</span> <span class="n">alloc</span><span class="p">]</span><span class="nl">initWithName:</span><span class="err">@</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">Bencalie</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;]</span><span class="n">sayHelloToEverybody</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>欢迎大家光临，我是一名 iOS 初学者，入门之路坎坎坷坷，此博客用于记录我的一些学习笔记。</p>
-
-<p>我的工作是前端开发(偏 JavaScript 方向)，学习移动开发也是工作和个人兴趣使然。本来是想把前端开发和 iOS 开发的博客分开，因精力有限，就都放一起了。因此，大家在博客中见到一些关于前端开发方向的博文，也不要奇怪。</p>
-
-<p>我目前主攻的方向是 iOS 开发和 Cocos2d-x 游戏开发，欢迎有共同爱好者一起学习探讨。</p>
 ]]></content>
   </entry>
   
