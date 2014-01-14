@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: Charles | Begin iOS]]></title>
   <link href="http://limingit.github.io/tags/charles/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-01-14T08:28:00+00:00</updated>
+  <updated>2014-01-14T08:29:19+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -30,9 +30,9 @@
 
 <p>主菜单 Proxy->Recording Settings&hellip;</p>
 
-<p>Include 填写必须要记录的域名，可以使用通配符</p>
+<p>Include 填写必须要记录的域名，可以使用通配符 * 和 ?，如： *.beginios.com</p>
 
-<p>Exclude 填写不需要记录的域名，可以使用通配符</p>
+<p>Exclude 填写不需要记录的域名，可以使用通配符 * 和 ?</p>
 
 <p>注：如果不设置此项，表示全部记录</p>
 
