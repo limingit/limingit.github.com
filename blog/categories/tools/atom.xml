@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tools | Begin iOS]]></title>
   <link href="http://limingit.github.io/blog/categories/tools/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-01-14T08:29:19+00:00</updated>
+  <updated>2014-01-14T08:37:24+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -24,6 +24,8 @@
 
 <p>和 Fiddler 相比较，二者的功能不相伯仲。优势在于 Charles 跨平台能力强，Charles 支持 Windows/Mac OS/Linux，Fiddler 只能安装在 Windows 下；劣势在于 Charles 是商业软件，最便宜也得 50 美金。</p>
 
+<p>当然，网上已经有很多破解版，感兴趣的网友请自己搜索。</p>
+
 <p>一些使用技巧如下：</p>
 
 <h3>记录设置</h3>
@@ -36,10 +38,17 @@
 
 <p>注：如果不设置此项，表示全部记录</p>
 
+<h3>禁用缓存</h3>
+
+<p>主菜单 Tools->No Caching&hellip;</p>
+
+<p>勾选后，每次都从服务器读取</p>
+
 <h3>iOS 设备 HTTP 抓包</h3>
 
 <ol>
 <li>确保 iOS 设备和 Mac 电脑在同一个局域网内，启动 Charles</li>
+<li>打开 Proxy->Proxy Settings&hellip;，勾选 Enable transparent HTTP proxying</li>
 <li>查看 Mac 电脑的 IP 地址，如：192.168.1.100</li>
 <li>打开 iOS 设备的设置，进入当前 Wifi 连接，设置 HTTP 代理切换到“手动”，将服务器填为上一步中获得的 IP，端口填8888</li>
 <li>iOS 设备中，打开你要抓包的应用进行网络操作</li>
@@ -49,15 +58,22 @@
 
 <h3>HTTPS抓包</h3>
 
-<p>下载 <a href="http://www.charlesproxy.com/ssl.zip">Charles 证书</a>，解压后导入到 iOS 设备中（将 crt 文件作为邮件附件发给自己，再在 iOS 设备中点击附件即可安装；也可上传至 dropbox 之类的网盘，通过 safari 下载安装）</p>
+<ol>
+<li>下载 <a href="http://www.charlesproxy.com/ssl.zip">Charles 证书</a>，解压后导入到 iOS 设备中（将 crt 文件作为邮件附件发给自己，再在 iOS 设备中点击附件即可安装；也可上传至 dropbox 之类的网盘，通过 safari 下载安装）</li>
+<li>在Charles的工具栏上点击设置按钮，选择 Proxy Settings…</li>
+<li>切换到 SSL 选项卡，选中 Enable SSL Proxying，然后在 Locations 表单填写要抓包的域名和端口，点击Add按钮，在弹出的表单中 Host 填写域名，比如填 api.weibo.com，Port 填 443</li>
+</ol>
 
-<p>在Charles的工具栏上点击设置按钮，选择 Proxy Settings…</p>
-
-<p>切换到 SSL 选项卡，选中 Enable SSL Proxying，然后在 Locations 表单填写要抓包的域名和端口，点击Add按钮，在弹出的表单中 Host 填写域名，比如填 api.weibo.com，Port 填 443</p>
 
 <h3>替换本地文件</h3>
 
 <p>Tools &ndash;> Map Local&hellip;</p>
+
+<h3>网络延迟功能</h3>
+
+<p>主菜单  Proxy->Throttle Settings&hellip;</p>
+
+<p>可以用于测试慢速网络下程序的兼容性</p>
 ]]></content>
   </entry>
   
