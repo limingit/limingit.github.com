@@ -9,8 +9,9 @@
   <meta name="author" content="Bencalie">
 
   
-  <meta name="description" content="简介
-">
+  <meta name="description" content="简介 HTML5 提供了一种应用缓存的机制，便于 Web 应用可以在断网的情况下离线运行，类似于“脱机浏览”。开发者还可以通过调用应用缓存的接口，来设定浏览器缓存的数据。 它带来的好处有：
+1. 离线浏览：即使断网状态，网站仍然可以浏览（当然，某些必须连接远程服务器的功能例外）
+2. 应用加速： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -97,6 +98,58 @@
 
 
   <div class="entry-content"><h3>简介</h3>
+
+<p>HTML5 提供了一种应用缓存的机制，便于 Web 应用可以在断网的情况下离线运行，类似于“脱机浏览”。开发者还可以通过调用应用缓存的接口，来设定浏览器缓存的数据。</p>
+
+<p>它带来的好处有：
+1. 离线浏览：即使断网状态，网站仍然可以浏览（当然，某些必须连接远程服务器的功能例外）
+2. 应用加速：因为相关的文件被缓存到本地，没有网络延时和服务器处理时间，加载速度变快了
+3. 减轻服务器的负载：浏览器只会下载服务器上发生变更的资源</p>
+
+<h3>浏览器兼容性</h3>
+
+<p>这么高端大气上档次的功能，当然有其局限性――浏览器兼容。</p>
+
+<p>目前 Web 端需要 Chrome4.0+/Firefox3.5+/IE10.0+/Opera10.6+/Safari4.0+，Mobile 端需要 Android2.1+/Opera Mobile11.0+/Safari3.2+</p>
+
+<h3>配置Apache/Nginx</h3>
+
+<h3>开启应用缓存</h3>
+
+<h3>加载文档与更新应用缓存的流程</h3>
+
+<h3>应用缓存的存储和清理</h3>
+
+<p>在 Chrome 中，你可以在设置中选择 「清除浏览器数据&hellip;」 或访问 chrome://appcache-internals/ 来清除缓存。Safari 在设置中有一个类似的&#8221;清空缓存&#8221; 选项，但是需要重启浏览器后才能生效。</p>
+
+<p>在 Firefox 中，离线缓存数据与 Firefox 配置文件是分开存储的―紧挨着硬盘缓存：</p>
+
+<p>Windows Vista/7: C:\Users&lt;username>\AppData\Local\Mozilla\Firefox\Profiles&lt;salt>.<profile name>\OfflineCache
+Mac/Linux: /Users/<username>/Library/Caches/Firefox/Profiles/<salt>.<profile name>/OfflineCache
+在 Firefox 中可以通过访问 about:cache 页面(在「离线缓存设置」标题下)来检查离线缓存的当前状况。 若想单独清除每个网站的离线缓存，可以使用 工具 &ndash;> 选项 &ndash;> 高级 &ndash;> 网络 &ndash;> 离线数据中的「删除」按钮。</p>
+
+<p>在 Firefox 11 之前，无论是 工具 &ndash;> 清除近期历史 还是 工具 &ndash;> 选项 &ndash;> 高级 &ndash;> 网络 &ndash;> 离线数据 &ndash;> 立即清除 都无法清除离线缓存。这个问题已经被修复。</p>
+
+<p>另请参阅 清除 DOM 存储数据。</p>
+
+<p>应用缓存可以变成废弃的。如果从服务器上移除一个应用的清单文件，浏览器将会清除所有清单中列出的应用缓存，并向 applicationCache 对象发送一个「obsolete」事件。这将使得应用缓存的状态变为 OBSOLETE。</p>
+
+<h3>缓存清单文件（manifest）</h3>
+
+<h3>应用缓存接口</h3>
+
+<p>缓存状态</p>
+
+<p>事件</p>
+
+<h3>陷阱</h3>
+
+<p>永远不要使用传统 GET 参数(例如 other-cached-page.html?parameterName=value) 来访问缓存文件。这会使浏览器绕过缓存，直接从网络获取。若想链接一个参数需要在 JavaScript 中解析的资源，你可以将参数放到链接的 hash 部分，例如 other-cached-page.html#whatever?parameterName=value。</p>
+
+<p>当应用被缓存后，仅仅更新在 web 页面中使用的资源(文件)还不足以更新被缓存的文件。你需要在浏览器获取和使用更新的文件前，去更新缓存清单文件本身。你可以使用 window.applicationCache.swapCache() 以编程的方式完成上述目的，虽然这无法影响到已经加载完毕的资源。为了保证资源从应用缓存的最新版本中加载，最理想的办法就是刷新页面。</p>
+
+<p>通过在 web 服务器上设置 expires header 来使 *.appcache 文件立即过期是个好主意。这避免了将清单文件缓存的风险。例如，在 Apache 中，你可以指定下面的配置项：
+ExpiresByType text/cache-manifest &ldquo;access plus 0 seconds&rdquo;</p>
 </div>
   
   
