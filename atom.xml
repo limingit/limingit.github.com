@@ -4,7 +4,7 @@
   <title><![CDATA[Begin iOS]]></title>
   <link href="http://limingit.github.io/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-01-14T03:10:20+00:00</updated>
+  <updated>2014-01-14T03:13:44+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -18,17 +18,23 @@
     <link href="http://limingit.github.io/blog/2014/01/14/charles-proxy-for-mac/"/>
     <updated>2014-01-14T02:43:00+00:00</updated>
     <id>http://limingit.github.io/blog/2014/01/14/charles-proxy-for-mac</id>
-    <content type="html"><![CDATA[<p>对于经常在 Windows 下进行 Web 开发的人来说，Fiddler 是神器。但由于它是 .Net Framework 下开发的，注定了用于 Linux 或者 Unix 之类系统上只能通过反向代理，如果不在同一个局域网内，非常麻烦。</p>
+    <content type="html"><![CDATA[<p>对于经常在 Windows 下进行 Web 开发的人来说，<a href="http://www.fiddler2.com/">Fiddler</a> 是神器。但由于它是 .Net Framework 下开发的，注定了用于 Linux 或者 Unix 之类系统上只能通过反向代理，如果不在同一个局域网内，非常麻烦。</p>
 
-<p>还好在 Mac OSX 下我们还有 Charles，不过它是商业软件，并且价格不菲。不过网上也有破解版本，网友请自行挖掘。</p>
+<p>还好在 Mac OSX 下我们还有 <a href="http:///www.charlesproxy.com/">Charles</a>，不过它是商业软件，并且价格不菲。不过网上也有破解版本，网友请自行挖掘。</p>
 
 <p>一些使用技巧如下：</p>
 
 <h3>HTTPS抓包</h3>
 
-<p>下载 <a href="http://www.charlesproxy.com/ssl.zip">Charles 证书</a>，解压后导入到 iOS 设备中（将 crt 文件作为邮件附件发给自己，再在 iOS 设备中点击附件即可安装；也可上传至 dropbox 之类的网盘，通过 safari 下载安装）
-在Charles的工具栏上点击设置按钮，选择 Proxy Settings…
-切换到 SSL 选项卡，选中 Enable SSL Proxying，然后在 Locations 表单填写要抓包的域名和端口，点击Add按钮，在弹出的表单中 Host 填写域名，比如填 api.weibo.com，Port 填 443</p>
+<p>下载 <a href="http://www.charlesproxy.com/ssl.zip">Charles 证书</a>，解压后导入到 iOS 设备中（将 crt 文件作为邮件附件发给自己，再在 iOS 设备中点击附件即可安装；也可上传至 dropbox 之类的网盘，通过 safari 下载安装）</p>
+
+<p>在Charles的工具栏上点击设置按钮，选择 Proxy Settings…</p>
+
+<p>切换到 SSL 选项卡，选中 Enable SSL Proxying，然后在 Locations 表单填写要抓包的域名和端口，点击Add按钮，在弹出的表单中 Host 填写域名，比如填 api.weibo.com，Port 填 443</p>
+
+<h3>替换本地文件</h3>
+
+<p>Tools &ndash;> Map Local&hellip;</p>
 ]]></content>
   </entry>
   
