@@ -4,7 +4,7 @@
   <title><![CDATA[Begin iOS]]></title>
   <link href="http://limingit.github.io/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-01-14T08:38:52+00:00</updated>
+  <updated>2014-01-14T16:25:21+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[使用 HTML5 离线应用缓存]]></title>
+    <link href="http://limingit.github.io/blog/2014/01/14/using-the-application-cache/"/>
+    <updated>2014-01-14T16:18:00+00:00</updated>
+    <id>http://limingit.github.io/blog/2014/01/14/using-the-application-cache</id>
+    <content type="html"><![CDATA[<h3>简介</h3>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mac OS 下抓包工具 Charles 使用]]></title>
