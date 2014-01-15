@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: ApplicationCache | Begin iOS]]></title>
   <link href="http://limingit.github.io/tags/applicationcache/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-01-15T06:42:30+00:00</updated>
+  <updated>2014-01-15T07:12:51+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -35,8 +35,9 @@
 
 <ol>
 <li>页面在 &lt;html&gt; 声明使用一个 manifest 文件（后文会详细介绍），manifest 来维护需要缓存的资源文件（如：JS/CSS/图片等）列表。</li>
-<li>初次访问页面的时候，浏览器在后台下载 manifest 中指定的资源文件。当再次访问这些资源文件，就直接使用浏览器缓存了。</li>
-<li>被缓存的文件发生变更后，我们需要服务器端马上更新 manifest 文件。</li>
+<li>初次访问页面的时候，浏览器在后台下载 manifest 中指定的资源文件，生成应用缓存的第一个版本。</li>
+<li>后续访问的时候，就直接使用浏览器应用缓存里的资源了。同时浏览器会触发 applicationCache 对象的 checking 事件，去检查清单文件，如果缓存是最新的，再触发 noupdate 事件。</li>
+<li>如果被缓存的文件发生了变更，我们需要服务器端马上更新 manifest 文件。</li>
 <li>变更后首次访问的时候，浏览器仍然使用缓存文件来运行应用，同时自动在后台更新发生变化的资源文件。</li>
 </ol>
 
@@ -94,9 +95,8 @@
 </span><span class='line'><span class="nt">&lt;p&gt;&lt;/html&gt;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<blockquote><p>有些浏览器，比如说firefox，当用户首次加载一个需要使用应用缓存的应用时，会显示一个提示栏。提示信息如下：</p>
-
-<p>该站点 (www.example.com) 请求在你的电脑上存储数据以供离线使用。[允许] [对此站点永不允许] [暂时不允许]</p></blockquote>
+<p>有些浏览器，比如说firefox，当用户首次加载一个需要使用应用缓存的应用时，会显示一个提示栏。提示信息如下：
+该站点 (www.example.com) 请求在你的电脑上存储数据以供离线使用。[允许] [对此站点永不允许] [暂时不允许]</p>
 
 <p>缓存清单文件（manifest）理论上可以使用任意扩展名，但传输它的 MIME 类型必须为 text/cache-manifest。我这里，将它的文件扩展名指定为 .appcache。</p>
 
@@ -114,7 +114,69 @@
 
 <h3>缓存清单文件格式</h3>
 
-<h3>加载文档与更新应用缓存的流程</h3>
+<p>缓存清单文件是一个UTF-8 格式的纯文本文件，它列出了所有浏览器应该缓存起来的资源，以便能够离线访问。</p>
+
+<p>缓存清单文件可以包含三段内容 (CACHE、NETWORK 和 FALLBACK)，一般我们都按照这个顺序书写。缓存清单文件的第一行必须包含字符串 CACHE MANIFEST。</p>
+
+<p>范例：
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CACHE MANIFEST&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>2014-01-14 V0.1，版本号&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>井号后的代码都是注释&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>CACHE:
+</span><span class='line'>index.html
+</span><span class='line'>main.js
+</span><span class='line'>main.css
+</span><span class='line'>some-picture.png&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>Use from network if available&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>NETWORK:
+</span><span class='line'>*&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>Fallback content&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>FALLBACK:
+</span><span class='line'>/ fallback.html</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>在缓存清单文件中列出的所有记录必须拥有相同的协议、主机名与端口号，可以使用相对路径或者绝对路径</p>
+
+<p>CACHE 模块指定需要被缓存的文件，每行一个是一个文件，不能使用通配符。在 CACHE: 段落标题后(或直接跟在 CACHE MANIFEST 行后)列出的文件会在它们第一次下载完毕后缓存起来。</p>
+
+<p>NETWORK 指定的文件，是需要与服务器连接的白名单资源，必须从网络获取，可以使用通配符</p>
+
+<p>FALLBACK 指定的页面，作为后备资源来提供，当资源无法访问的时候，浏览器使用该页面（例如，当无法与服务器建立连接时）。空格前面是资源，后面是后备的页面。这两个 URL 必须使用相对路径，并且与 manifest 文件同源，可以使用通配符。</p>
+
+<p>可以包含空行；每个段落标识符后的半角冒号不可缺少。</p>
+
+<h3>应用缓存接口 applicationCache</h3>
+
+<p>缓存状态</p>
+
+<p>事件</p>
 
 <h3>应用缓存的存储和清理</h3>
 
@@ -131,14 +193,6 @@ Mac/Linux: /Users/<username>/Library/Caches/Firefox/Profiles/<salt>.<profile nam
 <p>另请参阅 清除 DOM 存储数据。</p>
 
 <p>应用缓存可以变成废弃的。如果从服务器上移除一个应用的清单文件，浏览器将会清除所有清单中列出的应用缓存，并向 applicationCache 对象发送一个「obsolete」事件。这将使得应用缓存的状态变为 OBSOLETE。</p>
-
-<h3>缓存清单文件（manifest）</h3>
-
-<h3>应用缓存接口</h3>
-
-<p>缓存状态</p>
-
-<p>事件</p>
 
 <h3>陷阱</h3>
 
