@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML5 | Begin iOS]]></title>
   <link href="http://limingit.github.io/blog/categories/html5/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-01-15T06:26:32+00:00</updated>
+  <updated>2014-01-15T06:35:58+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -72,6 +72,33 @@
 <p>利用 manifest 将所有静态资源缓存到浏览器，页面只引用一个种子 JS 文件，其他的 JS 文件都通过异步加载引入。监听 applicationCache 对象的 updateready 和 noupdate 事件，如果有更新，就强制带版本号穿透缓存访问线上的最新资源文件；如果没更新，就直接不带版本号访问本地缓存的文件。</p>
 
 <p>存在一个不好处理的地方，就是 CSS 文件中的图片资源，如果不带版本号，始终访问的是本地的资源。因此最好 CSS 文件中的图片是带版本号的，manifest 里面也带上版本号；或者 CSS 有两个，一个用于缓存一个用于线上最新版浏览。</p>
+
+<p>说了这么多，让我们实际做一个例子出来：</p>
+
+<h3>开启应用缓存</h3>
+
+<p>首先，通过给页面 &lt;html&gt; 增加 manifest 特性来开启这个功能
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="ni">&amp;lt;</span>!DOCTYPE html&gt;
+</span><span class='line'><span class="nt">&lt;html</span> <span class="na">manifest=</span><span class="s">&quot;manifest.appcache&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span>...
+</span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>manifest</h3>
+
+<p>缓存清单文件（manifest）理论上可以使用任意扩展名，但传输它的 MIME 类型必须为 text/cache-manifest。</p>
+
+<p>我这里，将它的文件扩展名指定为 .appcache</p>
 
 <h3>配置Apache/Nginx</h3>
 
