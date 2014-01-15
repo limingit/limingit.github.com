@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: HTML5 | Begin iOS]]></title>
   <link href="http://limingit.github.io/tags/html5/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-01-15T10:56:35+00:00</updated>
+  <updated>2014-01-15T10:58:38+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -325,8 +325,11 @@ ExpiresByType text/cache-manifest &ldquo;access plus 0 seconds&rdquo;</p>
 
 <h3>参考资料：</h3>
 
-<p><a href="https://developer.mozilla.org/zh-CN/docs/HTML/Using_the_application_cache">使用应用缓存</a>
-<a href="http://www.html5rocks.com/zh/tutorials/appcache/beginner/">应用缓存初级使用指南</a></p>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/HTML/Using_the_application_cache">使用应用缓存</a></li>
+<li><a href="http://www.html5rocks.com/zh/tutorials/appcache/beginner/">应用缓存初级使用指南</a></li>
+</ul>
+
 ]]></content>
   </entry>
   
