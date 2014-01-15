@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: ApplicationCache | Begin iOS]]></title>
   <link href="http://limingit.github.io/tags/applicationcache/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-01-15T05:03:21+00:00</updated>
+  <updated>2014-01-15T06:19:54+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[使用 HTML5 离线应用缓存加速移动页面]]></title>
+    <title type="html"><![CDATA[使用 HTML5 应用缓存加速移动页面]]></title>
     <link href="http://limingit.github.io/blog/2014/01/14/using-the-application-cache/"/>
     <updated>2014-01-14T16:18:00+00:00</updated>
     <id>http://limingit.github.io/blog/2014/01/14/using-the-application-cache</id>
@@ -31,9 +31,15 @@
 </ol>
 
 
-<p>结合 SQLite 或者 localStorage 在本地进行一些数据存储，完全可能搭建一个离线状态可正常运行的程序，剩下的就是考虑本地和远程服务器之间的文件及数据缓存如何更新问题。</p>
+<p>基本的做法是：
+1. 页面在 &lt;html&gt; 声明使用一个 manifest 文件（后文会详细介绍），manifest 来维护需要缓存的资源文件（如：JS/CSS/图片等）列表。
+2. 初次访问页面的时候，浏览器在后台下载 manifest 中指定的资源文件。当再次访问这些资源文件，就直接使用浏览器缓存了。
+3. 被缓存的文件发生变更后，我们需要服务器端马上更新 manifest 文件。
+4. 变更后首次访问的时候，浏览器仍然使用缓存文件来运行应用，同时自动在后台更新发生变化的资源文件。</p>
 
-<p>利用这个机制，我们就可以在移动页面中实现网站加速，尤其是在 2G 这样的网络环境下，效果尤为明显。</p>
+<p>可以看到，它缓存的基本都是静态类型的文件。如果结合 SQLite 或者 localStorage 在本地进行一些数据缓存，完全可能搭建一个离线状态可正常运行的程序，剩下的就是考虑本地和远程服务器之间的资源文件及数据缓存如何更新问题。</p>
+
+<p>利用这个机制，我们就可以在移动页面中实现网站加速，尤其是在 2G 这样的网络环境下，加速效果尤为明显。</p>
 
 <h3>浏览器兼容性</h3>
 
@@ -41,7 +47,34 @@
 
 <p>目前 Web 端需要 Chrome4.0+/Firefox3.5+/IE10.0+/Opera10.6+/Safari4.0+，Mobile 端需要 Android2.1+/Opera Mobile11.0+/Safari3.2+</p>
 
+<p>目前主流的 Web 端浏览器和移动设备浏览器均已经支持，对不支持的浏览器，仍然可以提供降级方案来处理</p>
+
+<h3>技术特点</h3>
+
+<p>了解应用缓存的一些特点，有助于我们设计一套适合自身产品的整体解决方案。</p>
+
+<p>1、manifest 文件不能缓存，最起码得做 HTTP 304 校验。不然即使 manifest 文件变化了，浏览器也收不到变更通知。
+2、只有在 manifest 文件中的文件，才会被缓存，并且不支持通配符，所有文件必须全路径列在其中
+3、浏览器每次都会检查 manifest 是否有更新，如果有，就在后台更新文件
+4、引用了 manifest 的页面，自动被加入到离线列表，即使 manifest 文件里没指定它。
+5、缓存是全路径匹配，同一个文件始终是维持最新的，manifest 文件里即使写了两行，main.js?v=1 和 main.js?v=2 只会缓存一个
+6、缓存文件如果加 GET 参数，就会穿透缓存。</p>
+
+<h3>整体解决方案</h3>
+
+<p>利用 manifest 将所有静态资源缓存到浏览器，页面只引用一个种子 JS 文件，其他的 JS 文件都通过异步加载引入。监听 applicationCache 对象的 updateready 和 noupdate 事件，如果有更新，就强制带版本号穿透缓存访问线上的最新资源文件；如果没更新，就直接不带版本号访问本地缓存的文件。</p>
+
+<p>存在一个不好处理的地方，就是 CSS 文件中的图片资源，如果不带版本号，始终访问的是本地的资源。因此最好 CSS 文件中的图片是带版本号的，manifest 里面也带上版本号；或者 CSS 有两个，一个用于缓存一个用于线上最新版浏览。</p>
+
 <h3>配置Apache/Nginx</h3>
+
+<p>在 Apache 服务器上，若要设置适用于清单(.appcache)文件的 MIME 类型，可以向根目录或应用的同级目录下的一个 .htaccess 文件中增加：
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>AddType text/cache-manifest .appcache</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>在 Nginx 服务器上，需要修改 /etc/nginx/mime.types （如果你的 Nginx 安装在别的位置，请在对应路径寻找），在最后增加一行：
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text/cache-manifest                     appcache;</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h3>开启应用缓存</h3>
 
@@ -66,10 +99,6 @@ Mac/Linux: /Users/<username>/Library/Caches/Firefox/Profiles/<salt>.<profile nam
 <h3>缓存清单文件（manifest）</h3>
 
 <h3>应用缓存接口</h3>
-
-<h3>降级处理</h3>
-
-<p>页面内输出版本号</p>
 
 <p>缓存状态</p>
 
