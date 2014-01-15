@@ -154,7 +154,7 @@
 
 <h3>开启应用缓存</h3>
 
-<p>首先，通过给页面 &lt;html&gt; 增加 manifest 特性来开启这个功能</p>
+<p>首先，通过给页面 &lt;html&gt; 增加 manifest 特性来开启这个功能（）</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -167,13 +167,15 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h3>manifest</h3>
+<blockquote><p>有些浏览器，比如说firefox，当用户首次加载一个需要使用应用缓存的应用时，会显示一个提示栏。提示信息如下：</p>
 
-<p>缓存清单文件（manifest）理论上可以使用任意扩展名，但传输它的 MIME 类型必须为 text/cache-manifest。</p>
+<p>该站点 (www.example.com) 请求在你的电脑上存储数据以供离线使用。[允许] [对此站点永不允许] [暂时不允许]</p></blockquote>
 
-<p>我这里，将它的文件扩展名指定为 .appcache</p>
+<p>缓存清单文件（manifest）理论上可以使用任意扩展名，但传输它的 MIME 类型必须为 text/cache-manifest。我这里，将它的文件扩展名指定为 .appcache。</p>
 
-<h3>配置Apache/Nginx</h3>
+<p>因此，我们需要配置 HTTP 服务器，支持这种 MIME 类型。</p>
+
+<h3>配置Apache/Nginx服务器</h3>
 
 <p>在 Apache 服务器上，若要设置适用于清单(.appcache)文件的 MIME 类型，可以向根目录或应用的同级目录下的一个 .htaccess 文件中增加：</p>
 
@@ -187,7 +189,7 @@
 </pre></td><td class='code'><pre><code class=''><span class='line'>text/cache-manifest                     appcache;</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>开启应用缓存</h3>
+<h3>缓存清单文件格式</h3>
 
 <h3>加载文档与更新应用缓存的流程</h3>
 
