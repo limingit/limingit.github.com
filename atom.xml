@@ -4,7 +4,7 @@
   <title><![CDATA[Begin iOS]]></title>
   <link href="http://limingit.github.io/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-01-15T07:21:25+00:00</updated>
+  <updated>2014-01-15T10:38:13+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -166,6 +166,12 @@
 
 <h3>应用缓存接口 applicationCache</h3>
 
+<p>//当前文档对应的applicationCache对象
+window.applicationCache</p>
+
+<p>//当前缓存所处的状态，为0～5的整数值，分别对应一个状态，并分别对应一个常量
+window.applicationCache.status</p>
+
 <p>缓存状态</p>
 
 <p>每个应用缓存都有一个状态，标示着缓存的当前状况。共享同一清单 URI 的缓存拥有相同的缓存状态，可能是其中之一：</p>
@@ -225,9 +231,6 @@
 </span><span class='line'><span class="p">};</span>
 </span><span class='line'><span class="kd">var</span> <span class="nx">appCache</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">applicationCache</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">// Fired after the first cache of the manifest.</span>
-</span><span class='line'><span class="nx">appCache</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;cached&#39;</span><span class="p">,</span> <span class="nx">handleCacheEvent</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-</span><span class='line'>
 </span><span class='line'><span class="c1">// Checking for an update. Always the first event fired in the sequence.</span>
 </span><span class='line'><span class="nx">appCache</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;checking&#39;</span><span class="p">,</span> <span class="nx">handleCacheEvent</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
 </span><span class='line'>
@@ -250,8 +253,19 @@
 </span><span class='line'>
 </span><span class='line'><span class="c1">// Fired when the manifest resources have been newly redownloaded.</span>
 </span><span class='line'><span class="nx">appCache</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;updateready&#39;</span><span class="p">,</span> <span class="nx">handleCacheEvent</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Fired after the first cache of the manifest.</span>
+</span><span class='line'><span class="nx">appCache</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;cached&#39;</span><span class="p">,</span> <span class="nx">handleCacheEvent</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>Javascript API</p>
+
+<p>applicationCache.abort() 终止更新操作</p>
+
+<p>applicationCache.swapCache() 可将原缓存换成新缓存</p>
+
+<p>applicationCache.update() 页面会主动与服务器通信，检查页面当前的缓存是否为最新的，如不是，则下载更新后的资源</p>
 
 <h3>应用缓存的存储和清理</h3>
 
@@ -277,6 +291,23 @@ Mac/Linux: /Users/<username>/Library/Caches/Firefox/Profiles/<salt>.<profile nam
 
 <p>通过在 web 服务器上设置 expires header 来使 *.appcache 文件立即过期是个好主意。这避免了将清单文件缓存的风险。例如，在 Apache 中，你可以指定下面的配置项：
 ExpiresByType text/cache-manifest &ldquo;access plus 0 seconds&rdquo;</p>
+
+<h3>总结</h3>
+
+<ol>
+<li>站点离线存储的容量限制是 5Mb</li>
+<li>如果 manifest 文件，或者内部列举的某一个文件不能正常下载，整个更新过程将视为失败，浏览器继续全部使用老的缓存</li>
+<li>引用 manifest 的 html 必须与 manifest 文件同源，在同一个域下</li>
+<li>在 manifest 中使用的相对路径，相对参照物为 manifest 文件</li>
+<li>CACHE MANIFEST 字符串应在第一行，且必不可少</li>
+<li>系统会自动缓存引用清单文件的 HTML 文件</li>
+<li>manifest 文件中 CACHE 与 NETWORK，FALLBACK 的位置顺序没有关系，如果是隐式声明需要在最前面</li>
+<li>FALLBACK 中的资源必须和 manifest 文件同源</li>
+<li>当一个资源被缓存后，该浏览器直接请求这个绝对路径也会访问缓存中的资源。</li>
+<li>站点中的其他页面即使没有设置 manifest 属性，请求的资源如果在缓存中也从缓存中访问</li>
+<li>当 manifest 文件发生改变时，资源请求本身也会触发更新</li>
+</ol>
+
 ]]></content>
   </entry>
   
