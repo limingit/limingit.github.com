@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: ApplicationCache | Begin iOS]]></title>
   <link href="http://limingit.github.io/tags/applicationcache/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-01-15T04:51:03+00:00</updated>
+  <updated>2014-01-15T05:03:21+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[使用 HTML5 离线应用缓存加速移动设备页面]]></title>
+    <title type="html"><![CDATA[使用 HTML5 离线应用缓存加速移动页面]]></title>
     <link href="http://limingit.github.io/blog/2014/01/14/using-the-application-cache/"/>
     <updated>2014-01-14T16:18:00+00:00</updated>
     <id>http://limingit.github.io/blog/2014/01/14/using-the-application-cache</id>
@@ -31,9 +31,9 @@
 </ol>
 
 
-<p>结合 SQLite 或者 localStorage 在本地进行一些数据存储，完全可能搭建一个离线状态可正常运行的程序，唯一需要认真处理的就是文件及数据缓存的更新问题。</p>
+<p>结合 SQLite 或者 localStorage 在本地进行一些数据存储，完全可能搭建一个离线状态可正常运行的程序，剩下的就是考虑本地和远程服务器之间的文件及数据缓存如何更新问题。</p>
 
-<p>利用这个机制，我们就可以在 Mobile 页面开发中利用它实现网站加速，尤其是在 2G 这样的网络环境下，效果尤为明显。</p>
+<p>利用这个机制，我们就可以在移动页面中实现网站加速，尤其是在 2G 这样的网络环境下，效果尤为明显。</p>
 
 <h3>浏览器兼容性</h3>
 
