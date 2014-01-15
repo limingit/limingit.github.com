@@ -190,9 +190,7 @@
 
 <p>缓存清单文件是一个UTF-8 格式的纯文本文件，它列出了所有浏览器应该缓存起来的资源，以便能够离线访问。</p>
 
-<p>缓存清单文件可以包含三段内容 (CACHE、NETWORK 和 FALLBACK)，一般我们都按照这个顺序书写。缓存清单文件的第一行必须包含字符串 CACHE MANIFEST。</p>
-
-<p>范例：</p>
+<p>缓存清单文件可以包含三段内容 (CACHE、NETWORK 和 FALLBACK)，一般我们都按照这个顺序书写。缓存清单文件的第一行必须包含字符串 CACHE MANIFEST。范例：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -244,7 +242,90 @@
 
 <p>缓存状态</p>
 
+<p>每个应用缓存都有一个状态，标示着缓存的当前状况。共享同一清单 URI 的缓存拥有相同的缓存状态，可能是其中之一：</p>
+
+<ol>
+<li>UNCACHED(未缓存)一个特殊的值，用于表明一个应用缓存对象还没有完全初始化。</li>
+<li>IDLE(空闲)应用缓存此时未处于更新过程中。</li>
+<li>CHECKING(检查)清单已经获取完毕并检查更新。</li>
+<li>DOWNLOADING(下载中)下载资源并准备加入到缓存中，这是由于清单变化引起的。</li>
+<li>UPDATEREADY(更新就绪)一个新版本的应用缓存可以使用。有一个对应的事件 updateready，当下载完毕一个更新，并且还未使用 swapCache() 方法激活更新时，该事件触发，而不会是 cached 事件。</li>
+<li>OBSOLETE(废弃)应用缓存现在被废弃。</li>
+</ol>
+
+
 <p>事件</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">handleCacheEvent</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">//...</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">handleCacheError</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Error: Cache failed to update!&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">appCache</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">applicationCache</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Fired after the first cache of the manifest.</span>
+</span><span class='line'><span class="nx">appCache</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;cached&#39;</span><span class="p">,</span> <span class="nx">handleCacheEvent</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Checking for an update. Always the first event fired in the sequence.</span>
+</span><span class='line'><span class="nx">appCache</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;checking&#39;</span><span class="p">,</span> <span class="nx">handleCacheEvent</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// An update was found. The browser is fetching resources.</span>
+</span><span class='line'><span class="nx">appCache</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;downloading&#39;</span><span class="p">,</span> <span class="nx">handleCacheEvent</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// The manifest returns 404 or 410, the download failed,</span>
+</span><span class='line'><span class="c1">// or the manifest changed while the download was in progress.</span>
+</span><span class='line'><span class="nx">appCache</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="nx">handleCacheError</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Fired after the first download of the manifest.</span>
+</span><span class='line'><span class="nx">appCache</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;noupdate&#39;</span><span class="p">,</span> <span class="nx">handleCacheEvent</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Fired if the manifest file returns a 404 or 410.</span>
+</span><span class='line'><span class="c1">// This results in the application cache being deleted.</span>
+</span><span class='line'><span class="nx">appCache</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;obsolete&#39;</span><span class="p">,</span> <span class="nx">handleCacheEvent</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Fired for each resource listed in the manifest as it is being fetched.</span>
+</span><span class='line'><span class="nx">appCache</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;progress&#39;</span><span class="p">,</span> <span class="nx">handleCacheEvent</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Fired when the manifest resources have been newly redownloaded.</span>
+</span><span class='line'><span class="nx">appCache</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;updateready&#39;</span><span class="p">,</span> <span class="nx">handleCacheEvent</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>应用缓存的存储和清理</h3>
 
