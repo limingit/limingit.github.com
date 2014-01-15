@@ -4,7 +4,7 @@
   <title><![CDATA[Begin iOS]]></title>
   <link href="http://limingit.github.io/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-01-15T10:38:13+00:00</updated>
+  <updated>2014-01-15T10:56:35+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -78,7 +78,7 @@
 
 <h3>开启应用缓存</h3>
 
-<p>首先，通过给页面 &lt;html&gt; 增加 manifest 特性来开启这个功能（）</p>
+<p>首先，通过给页面 &lt;html&gt; 增加 manifest 特性来开启这个功能。</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -91,8 +91,9 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>有些浏览器，比如说firefox，当用户首次加载一个需要使用应用缓存的应用时，会显示一个提示栏。提示信息如下：
-该站点 (www.example.com) 请求在你的电脑上存储数据以供离线使用。[允许] [对此站点永不允许] [暂时不允许]</p>
+<p>有些浏览器，比如说firefox，当用户首次加载一个需要使用应用缓存的应用时，会显示一个提示栏。提示信息如下：</p>
+
+<p>该站点 (www.example.com) 请求在你的电脑上存储数据以供离线使用。[允许] [对此站点永不允许] [暂时不允许]</p>
 
 <p>缓存清单文件（manifest）理论上可以使用任意扩展名，但传输它的 MIME 类型必须为 text/cache-manifest。我这里，将它的文件扩展名指定为 .appcache。</p>
 
@@ -267,6 +268,14 @@ window.applicationCache.status</p>
 
 <p>applicationCache.update() 页面会主动与服务器通信，检查页面当前的缓存是否为最新的，如不是，则下载更新后的资源</p>
 
+<h3>降级方案</h3>
+
+<p>对于不支持应用缓存机制的早期浏览器，或者个别手机浏览器，可以让禁用这个功能。</p>
+
+<p>manifest 文件可以是动态的，例如 PHP，判断 userAgent，对不支持的浏览器，直接返回 404，让应用缓存功能失效。</p>
+
+<p>对于不支持的浏览器，还走线上的版本号管理机制，每次加载的时候，都带着页面输出的版本号。</p>
+
 <h3>应用缓存的存储和清理</h3>
 
 <p>在 Chrome 中，你可以在设置中选择 「清除浏览器数据&hellip;」 或访问 chrome://appcache-internals/ 来清除缓存。Safari 在设置中有一个类似的&#8221;清空缓存&#8221; 选项，但是需要重启浏览器后才能生效。</p>
@@ -306,8 +315,14 @@ ExpiresByType text/cache-manifest &ldquo;access plus 0 seconds&rdquo;</p>
 <li>当一个资源被缓存后，该浏览器直接请求这个绝对路径也会访问缓存中的资源。</li>
 <li>站点中的其他页面即使没有设置 manifest 属性，请求的资源如果在缓存中也从缓存中访问</li>
 <li>当 manifest 文件发生改变时，资源请求本身也会触发更新</li>
+<li>不要在清单文件中指定清单文件本身，否则将无法让浏览器得知清单文件有新版本出现</li>
 </ol>
 
+
+<h3>参考资料：</h3>
+
+<p><a href="https://developer.mozilla.org/zh-CN/docs/HTML/Using_the_application_cache">使用应用缓存</a>
+<a href="http://www.html5rocks.com/zh/tutorials/appcache/beginner/">应用缓存初级使用指南</a></p>
 ]]></content>
   </entry>
   
