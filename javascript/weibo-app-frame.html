@@ -280,11 +280,23 @@
 
 <h4>API方法</h4>
 
-<p><strong>App.trigger(&lsquo;setPageHeight&rsquo;,  height);</strong></p>
+<ol>
+<li><p><strong>触发行为</strong>：App.trigger(&lsquo;<cmd>&rsquo;, [&lsquo;<param>&rsquo;, [&lsquo;<function>&rsquo;]]);</p></li>
+<li><p>&lt;cmd&gt; 必选参数，指定行为的名称</p></li>
+<li>&lt;param&gt; 可选参数，指定调用行为的参数</li>
+<li>&lt;function&gt; 可选参数，指定行为的异步回调函数</li>
+</ol>
+
+
+<p>&lt;cmd&gt; 列表如下：</p>
 
 <ul>
 <li>用途：手动设置 iframe 的高度为指定的像素值值。（注意：一旦调用此方法以后，不再自动轮询iframe内容的高度。）</li>
 <li>参数：height 必选，iframe的高度值，单位为像素值</li>
+<li><p>返回值：无</p></li>
+<li><p>App.trigger(&lsquo;scrollToTop&rsquo;, status);</p></li>
+<li><p>用途：控制滚动到应用顶部</p></li>
+<li>参数：status 可选，控制跳转位置。取值为 page 的时候，滚动到页面顶部；默认滚动到 iframe 顶部。</li>
 <li>返回值：无</li>
 </ul>
 
