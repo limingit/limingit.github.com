@@ -1,0 +1,203 @@
+# encoding: UTF-8
+---
+layout: page
+title: "微博应用框架开发文档"
+date: 2014-01-17 04:30
+comments: false
+sharing: true
+footer: false
+---
+
+此文档只针对新接入的第三方应用，原有的站内应用、企业应用（专业版应用）、Page应用，需要第三方进行代码升级并在平台网站升级后才能使用。
+
+为了规范第三方应用接入，提供一致性的开发接入模式，2014年微博对原有的三种应用框架体系进行整合，形成一套新的框架体系。
+
+##文档目录
++ [新版应用框架特性](#feature)
++ [创建应用](#create)
++ [应用框架 POST 参数](#parameter)
++ [Web版应用客户端 JS 包使用说明](#client)
++ [FAQ](#faq)
++ [联系我们](#contact)
+
+##新版应用框架特性<a id="feature"></a>
++ **无需授权**。如果用户在登录状态访问应用，新的框架将默认授权。
++ **统一参数**。无论是哪种类型的应用，无论是 Web 版还是客户端嵌入的 H5 版本，客户端收到的参数都是相同的。
++ **统一接入方式**。开发者无论是接入站内应用、企业应用、Page应用，都是相同的接入方式，无需再
+
+##创建应用<a id="create"></a>
+
+略，参考开放平台网站文档
+
+##应用框架 POST 参数<a id="parameter"></a>
+
+应用框架会通过 POST 形式，发送给第三方页面一个加密后的参数， signed_request
+
+###自动授权失败参数
+
+参数名		| 必选 			| 类型 			| 说明    
+------------|---------------|---------------|----------
+user 		| true 			| Array			| 当前用户对象        
+algorithm	| true 			| String		| 签名算法，暂时用 HMAC-SHA256  
+issued_at	| true 			| Int			| 服务端生成时间，unix timestamp 格式  
+referer 	| true 			| String		| 页面的 document.referrer 
+ouid 		| false 		| uint64		| 当前应用的安装者 uid，站内应用无此参数
+
+
+###自动授权成功参数
+
+参数名		| 必选 			| 类型 			| 说明    
+------------|---------------|---------------|----------
+user 		| true 			| Array			| 当前用户对象        
+algorithm	| true 			| String		| 签名算法，暂时用 HMAC-SHA256  
+issued_at	| true 			| Int			| 服务端生成时间，unix timestamp 格式  
+expires 	| true 			| Int			| access_token 过期时间，unix timestamp 格式 
+oauth_token	| true 			| String		| access_token 
+user_id 	| true 			| unit64		| 当前用户微博 user id 
+referer 	| true 			| String		| 页面的 document.referrer 
+scope 		| true 			| String		| 应用的 scope 参数 
+ext_data 	| false 		| String		| 扩展字段，暂时用不上 
+ouid 		| false 		| uint64		| 当前应用的安装者 uid，站内应用无此参数
+
+{% codeblock lang:php 从POST过来的signed_request中提取oauth2信息 %}
+if(!empty($_REQUEST["signed_request"])){
+	$o = new SaeTOAuth( WB_AKEY , WB_SKEY  );
+	$data = $o->parseSignedRequest($_REQUEST["signed_request"]);
+	if($data == '-2'){
+		 die('sign is error!');
+	} else {
+		$_SESSION['oauth2'] = $data;
+	}
+}
+{% endcodeblock %}
+
+##Web版应用客户端 JS 包使用说明<a id="client"></a>
+
+###引入JS文件
+
+{% codeblock lang:html %}
+<script src="http://tjs.sjs.sinajs.cn/open/thirdpart/js/frame/appclient.js" type="text/javascript" charset="utf-8"></script>
+{% endcodeblock %}
+
+如果你在 open.weibo.com 设置了应用的高度为自适应，且引入了这个 JS 到需要自适应高度的页面，你的应用就能自动适应高度了。
+
+*友情提示*：为了对页面性能产生最小的影响，建议此文件放在 &lt;/body&gt; 之前
+
+###API方法
+
+1、**触发行为**
+
+{% codeblock %}
+App.trigger('<cmd>', ['<param>', ['<function>]]);
+{% endcodeblock %}
+
++ &lt;cmd&gt; 必选参数，指定行为的名称
++ &lt;param&gt; 可选参数，指定调用行为的参数
++ &lt;function&gt; 可选参数，指定行为的异步回调函数
+
+**&lt;cmd&gt; 列表如下**：
+<div class="beginios_indent">
+*setPageHeight* 设置iframe自身的高度
+
+{% codeblock lang:javascript 设置页面高度为 500px %}
+App.trigger('setPageHeight ', '500');
+{% endcodeblock %}
+
+*scrollTo* 改变父页面滚动条位置
+{% codeblock lang:javascript 设置父页面滚动到顶部位置200px的地方 %}
+App.trigger('scrollTo', 200); 
+{% endcodeblock %}
+
+{% codeblock lang:javascript 设置父页面滚动到iframe的顶部位置 %}
+App.trigger('scrollTo', 'page');
+{% endcodeblock %}
+
+*parentInfo* 获取父页面信息
+
+{% codeblock lang:javascript %}
+App.trigger('parentInfo', function(parentWin) {
+	console.log(parentWin);
+	// parentWin.iframe.width 获得iframe宽度
+	// parent.iframe.height 获得iframe高度
+	// parent.iframe.left 获得iframe距离父页面左端的距离
+	// parent.iframe.top 获得iframe距离父页面顶端的距离
+	// parent.page.height 父页面高度
+	// parent.page.width 父页面宽度
+	// parent.page.height 父页面高度
+	// parent.page.scrollTop 父页面的滚动条scrollTop
+	// parent.page.scrollLeft 父页面的滚动条scrollLeft
+	//parent.page.url 父页面url
+});
+{% endcodeblock %}
+
+*setTitle* 设置父页面标题栏（此API暂未开放）
+
+{% codeblock lang:javascript %}
+App.trigger('setTitle', "Home-My Application Name");
+{% endcodeblock %}
+
+</div>
+2、**事件监听** (on/off)
+
+	App.on('<event>;', '<function>');
+	App.off('<event>', '<function>');
+
++ &lt;event&gt;为必选参数，指定要监听的事件称
++ &lt;function&gt;为可选参数，指定事件的异步回调函数
+ 
+**&lt;event&gt; 列表如下**：
+
+*scroll* 外层滚动页面的事件
+{% codeblock lang:javascript 绑定 scroll 事件 %}
+App.on('scroll', function(scrollPos){
+    console.log(scrollPos);
+})
+{% endcodeblock %}
+
++ scrollPos.top 纵向滚动条距顶部距离
++ scrollPos.left 横向滚动条距左边框距离
+
+{% codeblock lang:javascript 解绑 scroll 事件 %}
+App.off('scroll', <function>)
+{% endcodeblock %}
+
+*resize* 外层改变页面大小的事件
+{% codeblock lang:javascript %}
+App.on('resize', function(parentWin) {
+    console.log(parentWin);
+    // parentWin.page.width 父页面宽度
+	// parentWin.page.height 父页面高度
+	// parentWin.win.width 父页面窗口宽度
+	// parentWin.win.height 父页面窗口高度
+});
+{% endcodeblock %}
+
+{% codeblock lang:javascript 解绑 resize 事件 %}
+App.off('resize', <function>)
+{% endcodeblock %}
+
+###FAQ<a id="faq"></a>
+1、**我的应用不升级，还能继续使用吗**？
+
+**答**：不主动升级的应用，将维持原版，不受任何影响。
+
+2、**我如何区分是Web版还是H5版**？
+
+**答**：第三方应用中，PHP 可以根据页面的 userAgent 来判断是不是移动设备，从而决定输出 H5 的内容还是 Web 版的内容。
+
+3、**我的应用地址是http://apps.weibo.com/1785311805/8rYu1uHD ，应用框架嵌入的是我的应用首页，能直接访问到某个具体的页面吗，例如：http://apps.weibo.com/1785311805/8rYu1uHD/test.php?param1=abc **？
+
+**答**：可以，目前框架支持带全 URL。
+
+4、**我的应用为何没有自适应高度**？
+
+**答**：请检查两个地方：open.weibo.com 的应用管理中心，是否将应用高度自适应勾选了；而是否部署了客户端 JS。如果都设置了还没有自适应高度，请寻找页面底部的联系方式。
+
+5、**我的页面大于 5000px，被框架挡住了，怎么办**？
+
+**答**：考虑到绝大多数应用不会有超过 5000px，所以我们做了限制，自适应不能超过这个限制。如果你一定要突破这个限制，请调用：App.trigger('setPageHeight ', '6000');
+
+###联系我们<a id="contact"></a>
+
++ 产品团队：[@檀木幻想]
++ 技术团队：[@jodg]、[@黑拳套]、[@woiweb]、[@Bencalie]
