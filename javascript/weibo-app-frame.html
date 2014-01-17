@@ -243,7 +243,7 @@
 </table>
 
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -253,24 +253,26 @@
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>//从POST过来的signed_request中提取oauth2信息
-</span><span class='line'>if(!empty($_REQUEST["signed_request"])){
-</span><span class='line'>  $o = new SaeTOAuth( WB_AKEY , WB_SKEY  );
-</span><span class='line'>  $data=$o->parseSignedRequest($_REQUEST["signed_request"]);
-</span><span class='line'>  if($data=='-2'){
-</span><span class='line'>       die('签名错误!');
-</span><span class='line'>  }else{
-</span><span class='line'>      $_SESSION['oauth2']=$data;
-</span><span class='line'>  }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">//从POST过来的signed_request中提取oauth2信息</span>
+</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s2">&quot;signed_request&quot;</span><span class="p">])){</span>
+</span><span class='line'>  <span class="nv">$o</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SaeTOAuth</span><span class="p">(</span> <span class="nx">WB_AKEY</span> <span class="p">,</span> <span class="nx">WB_SKEY</span>  <span class="p">);</span>
+</span><span class='line'>  <span class="nv">$data</span><span class="o">=</span><span class="nv">$o</span><span class="o">-&gt;</span><span class="na">parseSignedRequest</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s2">&quot;signed_request&quot;</span><span class="p">]);</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nv">$data</span><span class="o">==</span><span class="s1">&#39;-2&#39;</span><span class="p">){</span>
+</span><span class='line'>       <span class="k">die</span><span class="p">(</span><span class="s1">&#39;sign is error!&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span><span class='line'>      <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;oauth2&#39;</span><span class="p">]</span><span class="o">=</span><span class="nv">$data</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>Web版应用客户端 JS 包使用说明<a id="client"></a></h3>
 
 <h4>引入JS文件</h4>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;script src="http://tjs.sjs.sinajs.cn/open/thirdpart/js/frame/appclient.js" type="text/javascript" charset="utf-8">&lt;/script></span></code></pre></td></tr></table></div></figure>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://tjs.sjs.sinajs.cn/open/thirdpart/js/frame/appclient.js&quot;</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>如果你的应用在 open.weibo.com 设置了高度为自适应，且引入了这个 JS 到需要自适应高度的页面，你的应用就能自动适应高度了。</p>
