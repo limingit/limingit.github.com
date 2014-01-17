@@ -127,45 +127,46 @@
 <table>
 <thead>
 <tr>
-<th>参数名        </th>
-<th> 必选           </th>
-<th> 类型        </th>
+<th>参数名       </th>
+<th> 必选            </th>
+<th> 类型            </th>
 <th> 说明    </th>
-<th>  </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>user      </td>
-<td> true </td>
-<td> Array        </td>
+<td>user        </td>
+<td> true          </td>
+<td> Array         </td>
 <td> 当前用户对象        </td>
-<td></td>
 </tr>
 <tr>
-<td>col 2 is      </td>
-<td> centered      </td>
-<td>   $12        </td>
-<td>         </td>
-<td></td>
+<td>algorithm   </td>
+<td> true          </td>
+<td> String        </td>
+<td> 签名算法，暂时用 HMAC-SHA256  </td>
 </tr>
 <tr>
-<td>zebra stripes </td>
-<td> are neat      </td>
-<td>    $1        </td>
-<td>         </td>
-<td></td>
+<td>issued_at   </td>
+<td> true          </td>
+<td> Int           </td>
+<td> 服务端生成时间，unix timestamp 格式  </td>
+</tr>
+<tr>
+<td>referer     </td>
+<td> true          </td>
+<td> String        </td>
+<td> 页面的 document.referrer </td>
+</tr>
+<tr>
+<td>ouid        </td>
+<td> false         </td>
+<td> uint64        </td>
+<td> 当前应用的安装者 uid，站内应用无此参数</td>
 </tr>
 </tbody>
 </table>
 
-
-<p>|| <em>参数名</em> || <em>必选</em> || <em>类型</em> || <em>说明</em> ||
-||  || true || Array || 当前用户对象 ||
-|| algorithm || true || String || 签名算法，暂时用 HMAC-SHA256 ||
-|| issued_at || true || Int || 服务端生成时间，unix timestamp 格式 ||
-|| referer || true || String || 页面的 document.referrer ||
-|| ouid || false || Big Int || 当前应用的安装者 uid，站内应用无此参数 ||</p>
 
 <h4>自动授权成功参数</h4>
 
