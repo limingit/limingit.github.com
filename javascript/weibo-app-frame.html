@@ -97,6 +97,7 @@
 <ul>
 <li><a href="#feature">新版应用框架特性</a></li>
 <li><a href="#create">创建应用</a></li>
+<li><a href="#workflow">应用框架流程</a></li>
 <li><a href="#parameter">应用框架 POST 参数</a></li>
 <li><a href="#client">Web版应用客户端 JS 包使用说明</a></li>
 <li><a href="#faq">FAQ</a></li>
@@ -104,18 +105,64 @@
 </ul>
 
 
+<h3>名词解释</h3>
+
+<p><strong>应用接入方</strong>：开发应用的第三方团队或个人。
+<strong>应用框架</strong>：微博向应用接入方提供的整套解决方案。
+<strong>应用 iframe 外框</strong>：微博开放平台提供的应用承载的页面，内部通过 iframe 嵌入接入方的页面。</p>
+
 <h2>新版应用框架特性<a id="feature"></a></h2>
 
 <ul>
-<li><strong>无需授权</strong>。如果用户在登录状态访问应用，新的框架将默认授权。</li>
-<li><strong>统一参数</strong>。无论是哪种类型的应用，无论是 Web 版还是客户端嵌入的 H5 版本，客户端收到的参数都是相同的。</li>
-<li><strong>统一接入方式</strong>。开发者无论是接入站内应用、企业应用、Page应用，都是相同的接入方式，无需再</li>
+<li><strong>无需授权</strong>。如果用户在登录状态访问应用，新的框架将默认完成授权，并将 access_token 信息传递给第三方。</li>
+<li><strong>统一接入方式和参数</strong>。无论是哪种类型的应用，无论是 Web 版还是客户端嵌入的 H5 版本，客户端收到的参数都是相同的，接入方式也基本上都相同。</li>
+<li><strong>新增应用分享和赞</strong>。直接将应用分享到微博，并生成卡片展示，快速传播。</li>
 </ul>
 
 
 <h2>创建应用<a id="create"></a></h2>
 
-<p>略，参考开放平台网站文档</p>
+<p>（略，参考开放平台网站文档）</p>
+
+<h2>应用框架实现方式及页面流程<a id="workflow"></a></h2>
+
+<h3>实现方式</h3>
+
+<p>应用框架采用 iframe 嵌套，通过 POST 形式将参数传递给应用接入方提供的应用地址</p>
+
+<h3>页面流程</h3>
+
+<ul>
+<li>应用外框架获取当前登录用户信息，自动完成应用授权，并将 access_token 等信息加密</li>
+<li>应用外框架解析当前访问的 URL，并解析为对应的第三方页面 URL，将加密的 access_token 等信息通过 POST 传递给第三方</li>
+<li>第三方使用微博提供的 SDK （如 PHPSDK 等），将加密的信息解密</li>
+<li>如果接入方需要iframe 高度自适应等功能，请引入我们提供的 JS 包</li>
+</ul>
+
+
+<p><img src="/images/blog/weibo-app-workflow.png"></p>
+
+<p><strong>应用内支持两类形式的超链接</strong>：</p>
+
+<p>1）在当前窗口跳转，地址栏不变</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;应用实际地址链接&quot;</span> <span class="na">target=</span><span class="s">&quot;_self&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+</span><span class='line'>或<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;应用实际地址链接&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 2) 在当前窗口打开，刷新整个框架，地址栏改变</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://apps.weibo.com/xxx&quot;</span> <span class="na">target=</span><span class="s">&quot;_top&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>直接跳转至指定页面</strong>：</p>
+
+<p>假设您的站内应用地址是：apps.weibo.com/liwu，iframe中应用实际地址是：www.liwu.com。 当浏览器地址栏是apps.weibo.com/liwu/demo/a1.php时，iframe中的页面会定位至www.liwu.com/demo/a1.php</p>
 
 <h2>应用框架 POST 参数<a id="parameter"></a></h2>
 
