@@ -323,24 +323,34 @@
 *parentInfo* 获取父页面信息
 
 
-    App.trigger(&#8216;parentInfo&#8217;, function(parentWin) {
-        console.log(parentWin);
-        parentWin.iframe.width 获得iframe宽度
-        parent.iframe.height 获得iframe高度
-        parent.iframe.left 获得iframe距离父页面左端的距离
-        parent.iframe.top 获得iframe距离父页面顶端的距离
-        parent.page.height 父页面高度
-        parent.page.width 父页面宽度
-        parent.page.height 父页面高度
-        parent.page.scrollTop 父页面的滚动条scrollTop
-        parent.page.scrollLeft 父页面的滚动条scrollLeft
-        parent.page.url 父页面url
-    });
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;parentInfo&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parentWin</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">parentWin</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
 
+
++ parentWin.iframe.width 获得iframe宽度
++ parent.iframe.height 获得iframe高度
++ parent.iframe.left 获得iframe距离父页面左端的距离
++ parent.iframe.top 获得iframe距离父页面顶端的距离
++ parent.page.height 父页面高度
++ parent.page.width 父页面宽度
++ parent.page.height 父页面高度
++ parent.page.scrollTop 父页面的滚动条scrollTop
++ parent.page.scrollLeft 父页面的滚动条scrollLeft
++ parent.page.url 父页面url
 
 *setTitle* 设置父页面标题栏（此API暂未开放）
 
-    App.trigger(&#8216;setTitle&#8217;, &#8220;首页-我的应用&#8221;);
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;setTitle&#39;</span><span class="p">,</span> <span class="s2">&quot;Home-My Application Name&quot;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 </div>
 
 
