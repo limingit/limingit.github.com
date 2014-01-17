@@ -1,0 +1,279 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>help - Begin iOS</title>
+  <meta name="author" content="Bencalie">
+
+  
+  <meta name="description" content="Help Jan 17th, 2014 解决 invalid Multibyte Char (US-ASCII) 在 ~/.profile 中或者在 ~/.bash_profile中加入： export LC_ALL=zh_CN.UTF-8
+export LANG=zh_CN.UTF-8 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://limingit.github.io/help">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Begin iOS" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<base target="_self"/>
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Begin iOS</a></h1>
+  
+    <h2>A guide for iOS developer.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:limingit.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/objective-c/">Objective-C</a></li>
+  <li><a href="/ios/">iOS</a></li>
+  <li><a href="/cocos2d-x/">Cocos2d-x</a></li>
+  <li><a href="/javascript/">Javascript</a></li>
+  <li><a href="/android/">Android</a></li>
+  <li><a href="/resources/">Resources</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Help</h1>
+    <p class="meta">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-17T11:23:00+00:00" pubdate data-updated="true">Jan 17<span>th</span>, 2014</time></p>
+  </header>
+  
+  <p>解决 invalid Multibyte Char (US-ASCII)</p>
+
+<p>在 ~/.profile 中或者在 ~/.bash_profile中加入：</p>
+
+<pre><code>export LC_ALL=zh_CN.UTF-8
+export LANG=zh_CN.UTF-8
+</code></pre>
+
+<p>据称还有另一个办法，我还没试：</p>
+
+<p>在 Gemfile 中加入如下代码：</p>
+
+<pre><code>if RUBY_VERSION =~ /1.9/
+    Encoding.default_external = Encoding::UTF_8
+    Encoding.default_internal = Encoding::UTF_8
+end
+</code></pre>
+
+<p>但是重新连接的时候，提示：</p>
+
+<pre><code>-bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8): No such file or directory
+</code></pre>
+
+<p>原来我没有安装 en_US 的语言环境，依次执行：</p>
+
+<pre><code>locale -a #查看系统内安装的locale
+cd /usr/share/locales
+sudo ./install-language-pack en_US
+</code></pre>
+
+<p>重新登录，好了</p>
+
+  
+    <footer>
+      <p class="meta">
+        
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-17T11:23:00+00:00" pubdate data-updated="true">Jan 17<span>th</span>, 2014</time>
+        
+      </p>
+      
+        <div class="sharing">
+  
+  
+  
+  
+	<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<span class="jiathis_txt">&#x5206;&#x4eab;&#x5230;&#xff1a;</span>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=1822549" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">&#x66f4;&#x591a;</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=1822549" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1822549"></script>
+<!-- UY END -->
+
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>&#x5173;&#x4e8e;&#x6211;</h1>
+	<p>Front-End Engineer</p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/01/14/using-the-application-cache/">使用 HTML5 应用缓存加速移动页面</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/14/charles-proxy-for-mac/">Mac OS 下抓包工具 Charles 使用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/10/preface/">序</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+	<h1>Tags</h1>
+	<ul class="tag_cloud">
+		<a style="font-size: 90%" href="/tags/applicationcache/">ApplicationCache</a>
+<a style="font-size: 90%" href="/tags/charles/">Charles</a>
+<a style="font-size: 90%" href="/tags/html5/">HTML5</a>
+<a style="font-size: 90%" href="/tags/web-debugging-proxy/">Web Debugging Proxy</a>
+<a style="font-size: 210%" href="/tags/jing-yan/">经验</a>
+
+	</ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/limingit">@limingit</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'limingit',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Bencalie -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+
+  <script type="text/javascript">
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new?Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-47018713-1', 'beginios.com');
+	ga('send', 'pageview');
+  </script>
+
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
