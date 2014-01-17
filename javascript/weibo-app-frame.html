@@ -127,33 +127,41 @@
 <table>
 <thead>
 <tr>
-<th>Tables        </th>
-<th> Are           </th>
-<th> Cool  </th>
+<th>参数名        </th>
+<th> 必选           </th>
+<th> 类型        </th>
+<th> 说明    </th>
+<th>  </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>col 3 is      </td>
-<td> right-aligned </td>
-<td> $1600 </td>
+<td>user      </td>
+<td> true </td>
+<td> Array        </td>
+<td> 当前用户对象        </td>
+<td></td>
 </tr>
 <tr>
 <td>col 2 is      </td>
 <td> centered      </td>
-<td>   $12 </td>
+<td>   $12        </td>
+<td>         </td>
+<td></td>
 </tr>
 <tr>
 <td>zebra stripes </td>
 <td> are neat      </td>
-<td>    $1 </td>
+<td>    $1        </td>
+<td>         </td>
+<td></td>
 </tr>
 </tbody>
 </table>
 
 
 <p>|| <em>参数名</em> || <em>必选</em> || <em>类型</em> || <em>说明</em> ||
-|| user || true || Array || 当前用户对象 ||
+||  || true || Array || 当前用户对象 ||
 || algorithm || true || String || 签名算法，暂时用 HMAC-SHA256 ||
 || issued_at || true || Int || 服务端生成时间，unix timestamp 格式 ||
 || referer || true || String || 页面的 document.referrer ||
@@ -161,9 +169,7 @@
 
 <h4>自动授权成功参数</h4>
 
-<p>|| <em>参数名</em> || <em>必选</em> || <em>类型</em> || <em>说明</em> ||
-|| user || true || Array || 当前用户对象 ||
-|| algorithm || true || String || 签名算法，暂时用 HMAC-SHA256 ||
+<p>|| algorithm || true || String || 签名算法，暂时用 HMAC-SHA256 ||
 || issued_at || true || Int || 服务端生成时间，unix timestamp 格式 ||
 || expires || true || String || access_token 过期时间，unix timestamp 格式 ||
 || oauth_token || true || String || access_token ||
