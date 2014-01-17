@@ -164,29 +164,87 @@
 <td> uint64        </td>
 <td> 当前应用的安装者 uid，站内应用无此参数</td>
 </tr>
-<tr>
-<td>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</td>
-<td>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;</td>
-<td>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;</td>
-<td>&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;</td>
-</tr>
 </tbody>
 </table>
 
 
 <h4>自动授权成功参数</h4>
 
-<p>|| algorithm || true || String || 签名算法，暂时用 HMAC-SHA256 ||
-|| issued_at || true || Int || 服务端生成时间，unix timestamp 格式 ||
-|| expires || true || String || access_token 过期时间，unix timestamp 格式 ||
-|| oauth_token || true || String || access_token ||
-|| user_id || true || String || 当前用户微博 user id ||
-|| referer || true || String || 页面的 document.referrer ||
-|| scope || true || String || 应用的 scope 参数 ||
-|| ext_data || false || String || 扩展字段，暂时用不上 ||
-|| ouid || false || Big Int || 当前应用的安装者 uid，站内应用无此参数 ||</p>
+<table>
+<thead>
+<tr>
+<th>参数名       </th>
+<th> 必选            </th>
+<th> 类型            </th>
+<th> 说明    </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user        </td>
+<td> true          </td>
+<td> Array         </td>
+<td> 当前用户对象        </td>
+</tr>
+<tr>
+<td>algorithm   </td>
+<td> true          </td>
+<td> String        </td>
+<td> 签名算法，暂时用 HMAC-SHA256  </td>
+</tr>
+<tr>
+<td>issued_at   </td>
+<td> true          </td>
+<td> Int           </td>
+<td> 服务端生成时间，unix timestamp 格式  </td>
+</tr>
+<tr>
+<td>expires     </td>
+<td> true          </td>
+<td> Int           </td>
+<td> access_token 过期时间，unix timestamp 格式 </td>
+</tr>
+<tr>
+<td>oauth_token </td>
+<td> true          </td>
+<td> String        </td>
+<td> access_token </td>
+</tr>
+<tr>
+<td>user_id     </td>
+<td> true          </td>
+<td> unit64        </td>
+<td> 当前用户微博 user id </td>
+</tr>
+<tr>
+<td>referer     </td>
+<td> true          </td>
+<td> String        </td>
+<td> 页面的 document.referrer </td>
+</tr>
+<tr>
+<td>scope       </td>
+<td> true          </td>
+<td> String        </td>
+<td> 应用的 scope 参数 </td>
+</tr>
+<tr>
+<td>ext_data    </td>
+<td> false         </td>
+<td> String        </td>
+<td> 扩展字段，暂时用不上 </td>
+</tr>
+<tr>
+<td>ouid        </td>
+<td> false         </td>
+<td> uint64        </td>
+<td> 当前应用的安装者 uid，站内应用无此参数</td>
+</tr>
+</tbody>
+</table>
 
-<h3>Web版应用客户端 JS 包使用说明</h3>
+
+<p>|###Web版应用客户端 JS 包使用说明</p>
 
 <h3>FAQ</h3>
 
