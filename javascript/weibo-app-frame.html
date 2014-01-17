@@ -107,9 +107,10 @@
 <h3>新版应用框架特性</h3>
 
 <ul>
-<li><em>无需授权</em>。如果用户在登录状态访问应用，新的框架将默认授权。</li>
-<li><em>统一接入方式</em>。开发者无论是接入站内应用、企业应用、Page应用，都是相同的接入方式，无需再</li>
-<li><em>同时满足 Web 版和客户端嵌入的 H5 版</em>。无论是 Web 版还是 H5 版本，客户端收到的参数都是相同的。</li>
+<li><strong>无需授权</strong>。如果用户在登录状态访问应用，新的框架将默认授权。</li>
+<li><strong>统一参数</strong>。无论是哪种类型的应用，无论是 Web 版还是客户端嵌入的 H5 版本，客户端收到的参数都是相同的。</li>
+<li><strong>统一接入方式</strong>。开发者无论是接入站内应用、企业应用、Page应用，都是相同的接入方式，无需再</li>
+<li><strong>同时满足 Web 版和客户端嵌入的 H5 版</strong>。</li>
 </ul>
 
 
@@ -119,7 +120,30 @@
 
 <h3>应用框架 POST 参数</h3>
 
-<h4>小标题</h4>
+<p>应用框架会通过 POST 形式，发送给第三方页面一个加密后的参数， signed_request</p>
+
+<h4>自动授权失败参数</h4>
+
+<p>|| <em>参数名</em> || <em>必选</em> || <em>类型</em> || <em>说明</em> ||
+|| user || true || Array || 当前用户对象 ||
+|| algorithm || true || String || 签名算法，暂时用 HMAC-SHA256 ||
+|| issued_at || true || Int || 服务端生成时间，unix timestamp 格式 ||
+|| referer || true || String || 页面的 document.referrer ||
+|| ouid || false || Big Int || 当前应用的安装者 uid，站内应用无此参数 ||</p>
+
+<h4>自动授权成功参数</h4>
+
+<p>|| <em>参数名</em> || <em>必选</em> || <em>类型</em> || <em>说明</em> ||
+|| user || true || Array || 当前用户对象 ||
+|| algorithm || true || String || 签名算法，暂时用 HMAC-SHA256 ||
+|| issued_at || true || Int || 服务端生成时间，unix timestamp 格式 ||
+|| expires || true || String || access_token 过期时间，unix timestamp 格式 ||
+|| oauth_token || true || String || access_token ||
+|| user_id || true || String || 当前用户微博 user id ||
+|| referer || true || String || 页面的 document.referrer ||
+|| scope || true || String || 应用的 scope 参数 ||
+|| ext_data || false || String || 扩展字段，暂时用不上 ||
+|| ouid || false || Big Int || 当前应用的安装者 uid，站内应用无此参数 ||</p>
 
 <h3>Web版应用客户端 JS 包使用说明</h3>
 
