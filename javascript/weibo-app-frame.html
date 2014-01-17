@@ -280,8 +280,9 @@
 
 <h4>API方法</h4>
 
-<p><strong>触发行为</strong>
-App.trigger(&lsquo;&lt;cmd&gt;&rsquo;, [&lsquo;&lt;param&gt;&rsquo;, [&lsquo;&lt;function&gt;&rsquo;]]);</p>
+<p>1、<strong>触发行为</strong></p>
+
+<p>App.trigger(&lsquo;&lt;cmd&gt;&rsquo;, [&lsquo;&lt;param&gt;&rsquo;, [&lsquo;&lt;function&gt;&rsquo;]]);</p>
 
 <ul>
 <li>&lt;cmd&gt; 必选参数，指定行为的名称</li>
@@ -342,39 +343,102 @@ App.trigger(&lsquo;&lt;cmd&gt;&rsquo;, [&lsquo;&lt;param&gt;&rsquo;, [&lsquo;&lt
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;parentInfo&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'><span class="c1">//iframe宽度</span>
-</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">width</span>
-</span><span class='line'><span class="c1">//iframe高度</span>
-</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">height</span>
-</span><span class='line'><span class="c1">//iframe距离父页面左端的距离</span>
-</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">left</span>
-</span><span class='line'><span class="c1">//iframe距离父页面顶端的距离</span>
-</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">top</span>
-</span><span class='line'><span class="c1">//父页面高度</span>
-</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">height</span>
-</span><span class='line'><span class="c1">//父页面宽度</span>
-</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">width</span>
-</span><span class='line'><span class="c1">//父页面高度</span>
-</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">height</span>
-</span><span class='line'><span class="c1">//父页面的滚动条scrollTop</span>
-</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">scrollTop</span>
-</span><span class='line'><span class="c1">//父页面的滚动条scrollLeft</span>
-</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">scrollLeft</span>
-</span><span class='line'><span class="c1">//父页面url</span>
-</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">url</span>
+</span><span class='line'>  <span class="c1">//iframe宽度</span>
+</span><span class='line'>  <span class="nx">o</span><span class="p">.</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">width</span>
+</span><span class='line'>  <span class="c1">//iframe高度</span>
+</span><span class='line'>  <span class="nx">o</span><span class="p">.</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">height</span>
+</span><span class='line'>  <span class="c1">//iframe距离父页面左端的距离</span>
+</span><span class='line'>  <span class="nx">o</span><span class="p">.</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">left</span>
+</span><span class='line'>  <span class="c1">//iframe距离父页面顶端的距离</span>
+</span><span class='line'>  <span class="nx">o</span><span class="p">.</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">top</span>
+</span><span class='line'>  <span class="c1">//父页面高度</span>
+</span><span class='line'>  <span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">height</span>
+</span><span class='line'>  <span class="c1">//父页面宽度</span>
+</span><span class='line'>  <span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">width</span>
+</span><span class='line'>  <span class="c1">//父页面高度</span>
+</span><span class='line'>  <span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">height</span>
+</span><span class='line'>  <span class="c1">//父页面的滚动条scrollTop</span>
+</span><span class='line'>  <span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">scrollTop</span>
+</span><span class='line'>  <span class="c1">//父页面的滚动条scrollLeft</span>
+</span><span class='line'>  <span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">scrollLeft</span>
+</span><span class='line'>  <span class="c1">//父页面url</span>
+</span><span class='line'>  <span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">url</span>
 </span><span class='line'><span class="p">});</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>事件监听</strong> (on/off)
-App.on(&lsquo;&lt;event&gt;&rsquo;, &lsquo;&lt;function&gt;&rsquo;);
-App.off(&lsquo;&lt;event&gt;&rsquo;, &lsquo;&lt;function&gt;&rsquo;);</p>
+<p>2、<strong>事件监听</strong> (on/off)</p>
+
+<p>App.on(&lsquo;&lt;event&gt;&rsquo;, &lsquo;&lt;function&gt;&rsquo;);</p>
+
+<p>App.off(&lsquo;&lt;event&gt;&rsquo;, &lsquo;&lt;function&gt;&rsquo;);</p>
 
 <ul>
-<li>用途：控制滚动到应用顶部</li>
-<li>参数：status 可选，控制跳转位置。取值为 page 的时候，滚动到页面顶部；默认滚动到 iframe 顶部。</li>
-<li>返回值：无</li>
+<li>&lt;event&gt;为必选参数，指定要监听的事件称</li>
+<li>&lt;function&gt;为可选参数，指定事件的异步回调函数</li>
 </ul>
+
+
+<p>&lt;event&gt; 列表如下：</p>
+
+<p><em>scroll</em> 外层滚动页面的事件</p>
+
+<figure class='code'><figcaption><span>绑定 scroll 事件 </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;scroll&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scrollPos</span><span class="p">){</span>
+</span><span class='line'>    <span class="c1">//纵向滚动条距顶部距离</span>
+</span><span class='line'>    <span class="nx">scrollPos</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">//横向滚动条距左边框距离</span>
+</span><span class='line'>    <span class="nx">scrollPos</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>解绑 scroll 事件 </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="s1">&#39;scroll&#39;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="kd">function</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>resize</em> 外层改变页面大小的事件</p>
+
+<figure class='code'><figcaption><span>绑定 resize 事件 </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">o</span><span class="p">){</span>
+</span><span class='line'>    <span class="c1">//父页面宽度</span>
+</span><span class='line'>    <span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">width</span>
+</span><span class='line'>    <span class="c1">//父页面高度</span>
+</span><span class='line'>    <span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">height</span>
+</span><span class='line'>    <span class="c1">//父页面窗口宽度</span>
+</span><span class='line'>    <span class="nx">o</span><span class="p">.</span><span class="nx">win</span><span class="p">.</span><span class="nx">width</span>
+</span><span class='line'>    <span class="c1">//父页面窗口高度</span>
+</span><span class='line'>    <span class="nx">o</span><span class="p">.</span><span class="nx">win</span><span class="p">.</span><span class="nx">height</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>解绑 resize 事件 </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="kd">function</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;)</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>FAQ<a id="faq"></a></h3>
