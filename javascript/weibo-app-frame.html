@@ -280,22 +280,98 @@
 
 <h4>API方法</h4>
 
-<ol>
-<li><p><strong>触发行为</strong>：App.trigger(&lsquo;<cmd>&rsquo;, [&lsquo;<param>&rsquo;, [&lsquo;<function>&rsquo;]]);</p></li>
-<li><p>&lt;cmd&gt; 必选参数，指定行为的名称</p></li>
+<p><strong>触发行为</strong>
+App.trigger(&lsquo;&lt;cmd&gt;&rsquo;, [&lsquo;&lt;param&gt;&rsquo;, [&lsquo;&lt;function&gt;&rsquo;]]);</p>
+
+<ul>
+<li>&lt;cmd&gt; 必选参数，指定行为的名称</li>
 <li>&lt;param&gt; 可选参数，指定调用行为的参数</li>
 <li>&lt;function&gt; 可选参数，指定行为的异步回调函数</li>
-</ol>
+</ul>
 
 
 <p>&lt;cmd&gt; 列表如下：</p>
 
+<p><em>setPageHeight</em> 设置iframe自身的高度</p>
+
+<figure class='code'><figcaption><span>设置页面高度为 500px </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;setPageHeight &#39;</span><span class="p">,</span> <span class="s1">&#39;500&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>scrollTo</em> 改变父页面滚动条位置</p>
+
+<figure class='code'><figcaption><span>设置父页面滚动到顶部位置200px的地方 </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;scrollTo&#39;</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>设置父页面滚动到iframe的顶部位置 </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;scrollTo&#39;</span><span class="p">,</span> <span class="s1">&#39;page&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>parentInfo</em> 获取父页面信息</p>
+
+<figure class='code'><figcaption><span>获取父页面信息 </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;parentInfo&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="c1">//iframe宽度</span>
+</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">width</span>
+</span><span class='line'><span class="c1">//iframe高度</span>
+</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">height</span>
+</span><span class='line'><span class="c1">//iframe距离父页面左端的距离</span>
+</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">left</span>
+</span><span class='line'><span class="c1">//iframe距离父页面顶端的距离</span>
+</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">top</span>
+</span><span class='line'><span class="c1">//父页面高度</span>
+</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">height</span>
+</span><span class='line'><span class="c1">//父页面宽度</span>
+</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">width</span>
+</span><span class='line'><span class="c1">//父页面高度</span>
+</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">height</span>
+</span><span class='line'><span class="c1">//父页面的滚动条scrollTop</span>
+</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">scrollTop</span>
+</span><span class='line'><span class="c1">//父页面的滚动条scrollLeft</span>
+</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">scrollLeft</span>
+</span><span class='line'><span class="c1">//父页面url</span>
+</span><span class='line'><span class="nx">o</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">url</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>事件监听</strong> (on/off)
+App.on(&lsquo;&lt;event&gt;&rsquo;, &lsquo;&lt;function&gt;&rsquo;);
+App.off(&lsquo;&lt;event&gt;&rsquo;, &lsquo;&lt;function&gt;&rsquo;);</p>
+
 <ul>
-<li>用途：手动设置 iframe 的高度为指定的像素值值。（注意：一旦调用此方法以后，不再自动轮询iframe内容的高度。）</li>
-<li>参数：height 必选，iframe的高度值，单位为像素值</li>
-<li><p>返回值：无</p></li>
-<li><p>App.trigger(&lsquo;scrollToTop&rsquo;, status);</p></li>
-<li><p>用途：控制滚动到应用顶部</p></li>
+<li>用途：控制滚动到应用顶部</li>
 <li>参数：status 可选，控制跳转位置。取值为 page 的时候，滚动到页面顶部；默认滚动到 iframe 顶部。</li>
 <li>返回值：无</li>
 </ul>
