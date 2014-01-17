@@ -326,31 +326,50 @@
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;parentInfo&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parentWin</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">parentWin</span><span class="p">);</span>
+</span><span class='line'><span class="nx">parentWin</span><span class="p">.</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">width</span> <span class="err">获得</span><span class="nx">iframe</span><span class="err">宽度</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">parent</span><span class="p">.</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">height</span> <span class="err">获得</span><span class="nx">iframe</span><span class="err">高度</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">parent</span><span class="p">.</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">left</span> <span class="err">获得</span><span class="nx">iframe</span><span class="err">距离父页面左端的距离</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">parent</span><span class="p">.</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">top</span> <span class="err">获得</span><span class="nx">iframe</span><span class="err">距离父页面顶端的距离</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">parent</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">height</span> <span class="err">父页面高度</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">parent</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">width</span> <span class="err">父页面宽度</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">parent</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">height</span> <span class="err">父页面高度</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">parent</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="err">父页面的滚动条</span><span class="nx">scrollTop</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">parent</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">scrollLeft</span> <span class="err">父页面的滚动条</span><span class="nx">scrollLeft</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">parent</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">url</span> <span class="err">父页面</span><span class="nx">url</span>
+</span><span class='line'>
 </span><span class='line'><span class="p">});</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
-parentWin.iframe.width 获得iframe宽度
-
-parent.iframe.height 获得iframe高度
-
-parent.iframe.left 获得iframe距离父页面左端的距离
-
-parent.iframe.top 获得iframe距离父页面顶端的距离
-
-parent.page.height 父页面高度
-
-parent.page.width 父页面宽度
-
-parent.page.height 父页面高度
-
-parent.page.scrollTop 父页面的滚动条scrollTop
-
-parent.page.scrollLeft 父页面的滚动条scrollLeft
-
-parent.page.url 父页面url
 
 
 *setTitle* 设置父页面标题栏（此API暂未开放）
