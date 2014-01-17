@@ -104,7 +104,7 @@
 </ul>
 
 
-<h3>新版应用框架特性<a id="feature" target="_self"></a></h3>
+<h3>新版应用框架特性<a id="feature"></a></h3>
 
 <ul>
 <li><strong>无需授权</strong>。如果用户在登录状态访问应用，新的框架将默认授权。</li>
@@ -113,11 +113,11 @@
 </ul>
 
 
-<h3>创建应用<a id="create" target="_self"></a></h3>
+<h3>创建应用<a id="create"></a></h3>
 
 <p>略，参考开放平台网站文档</p>
 
-<h3>应用框架 POST 参数<a id="parameter" target="_self"></a></h3>
+<h3>应用框架 POST 参数<a id="parameter"></a></h3>
 
 <p>应用框架会通过 POST 形式，发送给第三方页面一个加密后的参数， signed_request</p>
 
@@ -243,8 +243,7 @@
 </table>
 
 
-<figure class='code'><figcaption><span>使用PHPSDK从signed_request获取access_token </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -254,22 +253,31 @@
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">//从POST过来的signed_request中提取oauth2信息</span>
-</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s2">&quot;signed_request&quot;</span><span class="p">])){</span>
-</span><span class='line'>  <span class="nv">$o</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SaeTOAuth</span><span class="p">(</span> <span class="nx">WB_AKEY</span> <span class="p">,</span> <span class="nx">WB_SKEY</span>  <span class="p">);</span>
-</span><span class='line'>  <span class="nv">$data</span><span class="o">=</span><span class="nv">$o</span><span class="o">-&gt;</span><span class="na">parseSignedRequest</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s2">&quot;signed_request&quot;</span><span class="p">]);</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nv">$data</span><span class="o">==</span><span class="s1">&#39;-2&#39;</span><span class="p">){</span>
-</span><span class='line'>       <span class="k">die</span><span class="p">(</span><span class="s1">&#39;签名错误!&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-</span><span class='line'>      <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;oauth2&#39;</span><span class="p">]</span><span class="o">=</span><span class="nv">$data</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//从POST过来的signed_request中提取oauth2信息
+</span><span class='line'>if(!empty($_REQUEST["signed_request"])){
+</span><span class='line'>  $o = new SaeTOAuth( WB_AKEY , WB_SKEY  );
+</span><span class='line'>  $data=$o->parseSignedRequest($_REQUEST["signed_request"]);
+</span><span class='line'>  if($data=='-2'){
+</span><span class='line'>       die('签名错误!');
+</span><span class='line'>  }else{
+</span><span class='line'>      $_SESSION['oauth2']=$data;
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>Web版应用客户端 JS 包使用说明<a id="client" target="_self"></a></h3>
+<h3>Web版应用客户端 JS 包使用说明<a id="client"></a></h3>
 
-<h3>FAQ<a id="faq" target="_self"></a></h3>
+<h4>引入JS文件</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;script src="http://tjs.sjs.sinajs.cn/open/thirdpart/js/frame/appclient.js" type="text/javascript" charset="utf-8">&lt;/script></span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果你的应用在 open.weibo.com 设置了高度为自适应，且引入了这个 JS 到需要自适应高度的页面，你的应用就能自动适应高度了。</p>
+
+<p><em>友情提示</em>：为了对页面性能产生最小的影响，建议此文件放在 &lt;/body&gt; 之前</p>
+
+<h3>FAQ<a id="faq"></a></h3>
 
 <p>我的应用不升级，还能继续使用吗？</p>
 
@@ -281,7 +289,7 @@
 
 <p>我的页面大于 5000px，被框架挡住了，怎么办？</p>
 
-<h3>联系我们<a id="contact" target="_self"></a></h3>
+<h3>联系我们<a id="contact"></a></h3>
 
   
 </article>
