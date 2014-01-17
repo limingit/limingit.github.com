@@ -255,11 +255,11 @@
 <span class='line-number'>9</span>
 </pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s2">&quot;signed_request&quot;</span><span class="p">])){</span>
 </span><span class='line'>  <span class="nv">$o</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SaeTOAuth</span><span class="p">(</span> <span class="nx">WB_AKEY</span> <span class="p">,</span> <span class="nx">WB_SKEY</span>  <span class="p">);</span>
-</span><span class='line'>  <span class="nv">$data</span><span class="o">=</span><span class="nv">$o</span><span class="o">-&gt;</span><span class="na">parseSignedRequest</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s2">&quot;signed_request&quot;</span><span class="p">]);</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nv">$data</span><span class="o">==</span><span class="s1">&#39;-2&#39;</span><span class="p">){</span>
+</span><span class='line'>  <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$o</span><span class="o">-&gt;</span><span class="na">parseSignedRequest</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s2">&quot;signed_request&quot;</span><span class="p">]);</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nv">$data</span> <span class="o">==</span> <span class="s1">&#39;-2&#39;</span><span class="p">){</span>
 </span><span class='line'>       <span class="k">die</span><span class="p">(</span><span class="s1">&#39;sign is error!&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-</span><span class='line'>      <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;oauth2&#39;</span><span class="p">]</span><span class="o">=</span><span class="nv">$data</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;oauth2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$data</span><span class="p">;</span>
 </span><span class='line'>  <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -326,39 +326,24 @@
 
 
 <ul>
-<li><em>parentInfo</em> 获取父页面信息</li>
+<li><p><em>parentInfo</em> 获取父页面信息
+App.trigger(&lsquo;parentInfo&rsquo;, function(parentWin) {
+    console.log(parentWin);
+    parentWin.iframe.width 获得iframe宽度
+    parent.iframe.height 获得iframe高度
+    parent.iframe.left 获得iframe距离父页面左端的距离
+    parent.iframe.top 获得iframe距离父页面顶端的距离
+    parent.page.height 父页面高度
+    parent.page.width 父页面宽度
+    parent.page.height 父页面高度
+    parent.page.scrollTop 父页面的滚动条scrollTop
+    parent.page.scrollLeft 父页面的滚动条scrollLeft
+    parent.page.url 父页面url
+});</p></li>
+<li><p><em>setTitle</em> 设置父页面标题栏（此API暂未开放）</p>
+
+<p>App.trigger(&lsquo;setTitle&rsquo;, &ldquo;首页-我的应用&rdquo;);</p></li>
 </ul>
-
-
-<figure class='code'><figcaption><span>获取父页面信息 </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;parentInfo&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parentWin</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">parentWin</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>parentWin.iframe.width 获得iframe宽度</li>
-<li>parent.iframe.height 获得iframe高度</li>
-<li>parent.iframe.left 获得iframe距离父页面左端的距离</li>
-<li>parent.iframe.top 获得iframe距离父页面顶端的距离</li>
-<li>parent.page.height 父页面高度</li>
-<li>parent.page.width 父页面宽度</li>
-<li>parent.page.height 父页面高度</li>
-<li>parent.page.scrollTop 父页面的滚动条scrollTop</li>
-<li>parent.page.scrollLeft 父页面的滚动条scrollLeft</li>
-<li><p>parent.page.url 父页面url</p></li>
-<li><p><em>setTitle</em> 设置父页面标题栏</p></li>
-</ul>
-
-
-<figure class='code'><figcaption><span>设置父页面标题栏 </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;setTitle&#39;</span><span class="p">,</span> <span class="s2">&quot;首页-我的应用&quot;</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
 
 
 <p>2、<strong>事件监听</strong> (on/off)</p>
@@ -433,7 +418,7 @@ App.off('&lt;event&gt;', '&lt;function&gt;');
 
 <p>2、<strong>我如何区分是Web版还是H5版</strong>？</p>
 
-<p><strong>答</strong>：第三方应用中，PHP 可以根据页面的 userAgent 来判断是不是移动设备，从而决定输出 H5 的内容还是 Web版的内容。</p>
+<p><strong>答</strong>：第三方应用中，PHP 可以根据页面的 userAgent 来判断是不是移动设备，从而决定输出 H5 的内容还是 Web 版的内容。</p>
 
 <p>3、<strong>我的应用地址是<a href="http://apps.weibo.com/1785311805/8rYu1uHD">http://apps.weibo.com/1785311805/8rYu1uHD</a> ，应用框架嵌入的是我的应用首页，能直接访问到某个具体的页面吗，例如：<a href="http://apps.weibo.com/1785311805/8rYu1uHD/test.php?param1=abc">http://apps.weibo.com/1785311805/8rYu1uHD/test.php?param1=abc</a> </strong>？</p>
 
