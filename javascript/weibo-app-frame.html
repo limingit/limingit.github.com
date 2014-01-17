@@ -296,7 +296,7 @@
 <p><strong>&lt;cmd&gt; 列表如下</strong>：</p>
 
 <div class="beginios_indent">
-*setPageHeight* 设置iframe自身的高度
+setPageHeight 设置iframe自身的高度
 
 
 <figure class='code'><figcaption><span>设置页面高度为 500px </span></figcaption>
@@ -305,7 +305,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-*scrollTo* 改变父页面滚动条位置
+scrollTo 改变父页面滚动条位置
 
 <figure class='code'><figcaption><span>设置父页面滚动到顶部位置200px的地方 </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -320,10 +320,11 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-*parentInfo* 获取父页面信息
+parentInfo 获取父页面信息
 
 
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>获取父页面信息 </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -352,10 +353,11 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-*setTitle* 设置父页面标题栏（此API暂未开放）
+setTitle 设置父页面标题栏（此API暂未开放）
 
 
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>设置父页面标题栏 </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;setTitle&#39;</span><span class="p">,</span> <span class="s2">&quot;Home-My Application Name&quot;</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -378,7 +380,7 @@ App.off('&lt;event&gt;', '&lt;function&gt;');
 <p><strong>&lt;event&gt; 列表如下</strong>：</p>
 
 <div class="beginios_indent">
-*scroll* 外层滚动页面的事件
+scroll 外层滚动页面的事件
 
 <figure class='code'><figcaption><span>绑定 scroll 事件 </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -387,7 +389,7 @@ App.off('&lt;event&gt;', '&lt;function&gt;');
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;scroll&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scrollPos</span><span class="p">){</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">scrollPos</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">scrollPos</span><span class="p">);</span>
 </span><span class='line'>  <span class="c1">// scrollPos.top 纵向滚动条距顶部距离</span>
 </span><span class='line'>  <span class="c1">// scrollPos.left 横向滚动条距左边框距离</span>
 </span><span class='line'><span class="p">})</span>
@@ -401,9 +403,10 @@ App.off('&lt;event&gt;', '&lt;function&gt;');
 </span></code></pre></td></tr></table></div></figure>
 
 
-*resize* 外层改变页面大小的事件
+resize 外层改变页面大小的事件
 
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>绑定 resize 事件 </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
