@@ -296,9 +296,7 @@
 <p><strong>&lt;cmd&gt; 列表如下</strong>：</p>
 
 <ul>
-<li><p><em>setPageHeight</em></p>
-
-<p>设置iframe自身的高度</p></li>
+<li><em>setPageHeight</em> 设置iframe自身的高度</li>
 </ul>
 
 
@@ -368,7 +366,7 @@ App.off('&lt;event&gt;', '&lt;function&gt;');
 </ul>
 
 
-<p>&lt;event&gt; 列表如下：</p>
+<p><strong>&lt;event&gt; 列表如下</strong>：</p>
 
 <p><em>scroll</em> 外层滚动页面的事件</p>
 
@@ -422,17 +420,30 @@ App.off('&lt;event&gt;', '&lt;function&gt;');
 
 <h3>FAQ<a id="faq"></a></h3>
 
-<p>我的应用不升级，还能继续使用吗？</p>
+<p>1、<strong>我的应用不升级，还能继续使用吗</strong>？</p>
 
-<p>我如何区分是Web版还是H5版</p>
+<p><strong>答</strong>：不主动升级的应用，将维持原版，不受任何影响。</p>
 
-<p>特定的 URL 怎么指定？</p>
+<p>2、<strong>我如何区分是Web版还是H5版</strong>？</p>
 
-<p>我的应用为何没有自适应高度？</p>
+<p><strong>答</strong>：第三方应用中，PHP 可以根据页面的 userAgent 来判断是不是移动设备，从而决定输出 H5 的内容还是 Web版的内容。</p>
 
-<p>我的页面大于 5000px，被框架挡住了，怎么办？</p>
+<p>3、**我的应用地址是<a href="http://apps.weibo.com/1785311805/8rYu1uHD%EF%BC%8C%E5%BA%94%E7%94%A8%E6%A1%86%E6%9E%B6%E5%B5%8C%E5%85%A5%E7%9A%84%E6%98%AF%E6%88%91%E7%9A%84%E5%BA%94%E7%94%A8%E9%A6%96%E9%A1%B5%EF%BC%8C%E8%83%BD%E7%9B%B4%E6%8E%A5%E8%AE%BF%E9%97%AE%E5%88%B0%E6%9F%90%E4%B8%AA%E5%85%B7%E4%BD%93%E7%9A%84%E9%A1%B5%E9%9D%A2%E5%90%97%EF%BC%8C%E4%BE%8B%E5%A6%82%EF%BC%9Ahttp://apps.weibo.com/1785311805/8rYu1uHD/test.php?param1=abc**%EF%BC%9F">http://apps.weibo.com/1785311805/8rYu1uHD%EF%BC%8C%E5%BA%94%E7%94%A8%E6%A1%86%E6%9E%B6%E5%B5%8C%E5%85%A5%E7%9A%84%E6%98%AF%E6%88%91%E7%9A%84%E5%BA%94%E7%94%A8%E9%A6%96%E9%A1%B5%EF%BC%8C%E8%83%BD%E7%9B%B4%E6%8E%A5%E8%AE%BF%E9%97%AE%E5%88%B0%E6%9F%90%E4%B8%AA%E5%85%B7%E4%BD%93%E7%9A%84%E9%A1%B5%E9%9D%A2%E5%90%97%EF%BC%8C%E4%BE%8B%E5%A6%82%EF%BC%9Ahttp://apps.weibo.com/1785311805/8rYu1uHD/test.php?param1=abc**%EF%BC%9F</a></p>
+
+<p><strong>答</strong>：可以，目前框架支持带全 URL。</p>
+
+<p>4、<strong>我的应用为何没有自适应高度</strong>？</p>
+
+<p><strong>答</strong>：请检查两个地方：open.weibo.com 的应用管理中心，是否将应用高度自适应勾选了；而是否部署了客户端 JS。如果都设置了还没有自适应高度，请寻找页面底部的联系方式。</p>
+
+<p>5、<strong>我的页面大于 5000px，被框架挡住了，怎么办</strong>？</p>
+
+<p><strong>答</strong>：考虑到绝大多数应用不会有超过 5000px，所以我们做了限制，自适应不能超过这个限制。如果你一定要突破这个限制，请调用：App.trigger(&lsquo;setPageHeight &rsquo;, &lsquo;6000&rsquo;);</p>
 
 <h3>联系我们<a id="contact"></a></h3>
+
+<p>产品团队：[@檀木幻想]
+技术团队：[@jodg]、[@黑拳套]、[@woiweb]、[@Bencalie]</p>
 
   
 </article>
