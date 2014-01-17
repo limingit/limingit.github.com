@@ -243,6 +243,30 @@
 </table>
 
 
+<figure class='code'><figcaption><span>使用PHPSDK从signed_request获取access_token </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">//从POST过来的signed_request中提取oauth2信息</span>
+</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s2">&quot;signed_request&quot;</span><span class="p">])){</span>
+</span><span class='line'>  <span class="nv">$o</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SaeTOAuth</span><span class="p">(</span> <span class="nx">WB_AKEY</span> <span class="p">,</span> <span class="nx">WB_SKEY</span>  <span class="p">);</span>
+</span><span class='line'>  <span class="nv">$data</span><span class="o">=</span><span class="nv">$o</span><span class="o">-&gt;</span><span class="na">parseSignedRequest</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s2">&quot;signed_request&quot;</span><span class="p">]);</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nv">$data</span><span class="o">==</span><span class="s1">&#39;-2&#39;</span><span class="p">){</span>
+</span><span class='line'>       <span class="k">die</span><span class="p">(</span><span class="s1">&#39;签名错误!&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span><span class='line'>      <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;oauth2&#39;</span><span class="p">]</span><span class="o">=</span><span class="nv">$data</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 <h3>Web版应用客户端 JS 包使用说明<a id="client" target="_self"></a></h3>
 
 <h3>FAQ<a id="faq" target="_self"></a></h3>
