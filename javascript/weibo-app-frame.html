@@ -63,7 +63,6 @@
   <li><a href="/android/">Android</a></li>
   <li><a href="/resources/">Resources</a></li>-->
 </ul>
-
 </nav>
   <div id="main">
     <div id="content">
@@ -118,8 +117,30 @@
 <li><strong>无需授权</strong>。如果用户在登录状态访问应用，新的框架将默认完成授权，并将 access_token 信息传递给第三方。</li>
 <li><strong>统一接入方式和参数</strong>。无论是哪种类型的应用，无论是 Web 版还是客户端嵌入的 H5 版本，客户端收到的参数都是相同的，接入方式也基本上都相同。</li>
 <li><strong>新增应用分享和赞</strong>。直接将应用分享到微博，并生成卡片展示，快速传播。</li>
+<li><strong>应用支持未登录访问</strong>。未登录微博也可以浏览应用，必要的时候唤起登录浮层。</li>
+<li><strong>应用宽度调整为 940px</strong>。不再支持原来的 760px，原来的 950 px 改为 940px。</li>
 </ul>
 
+
+<h3>新应用框架范例展示</h3>
+
+<h4>企业应用</h4>
+
+<p>应用名：</p>
+
+<p>预览图：Web版、H5版</p>
+
+<h4>站内应用</h4>
+
+<p>应用名：</p>
+
+<p>预览图：Web版、H5版</p>
+
+<h4>Page应用</h4>
+
+<p>应用名：</p>
+
+<p>预览图：Web版、H5版</p>
 
 <h2>创建应用<a id="create"></a></h2>
 
@@ -170,9 +191,9 @@
 
 <h2>应用框架 POST 参数<a id="parameter"></a></h2>
 
-<p>应用框架会通过 POST 形式，发送给第三方页面一个加密后的参数， signed_request</p>
+<p>应用框架会通过 POST 形式，发送给第三方页面一个加密后的参数 signed_request，这个参数可以使用 <a href="http://open.weibo.com/wiki/SDK">PHPSDK</a> 之类进行解密。</p>
 
-<h3>自动授权失败参数</h3>
+<h3>未登录状态访问应用参数</h3>
 
 <table>
 <thead>
@@ -218,7 +239,7 @@
 </table>
 
 
-<h3>自动授权成功参数</h3>
+<h3>登录状态访问应用，自动授权成功参数</h3>
 
 <table>
 <thead>
@@ -294,7 +315,7 @@
 </table>
 
 
-<figure class='code'><figcaption><span>从POST过来的signed_request中提取oauth2信息 </span></figcaption>
+<figure class='code'><figcaption><span>使用 PHPSDK 从 signed_request 提取参数 </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -609,7 +630,6 @@ resize 外层改变页面大小的事件
 	ga('create', 'UA-47018713-1', 'beginios.com');
 	ga('send', 'pageview');
   </script>
-
 
 </footer>
   
