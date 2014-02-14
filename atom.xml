@@ -4,7 +4,7 @@
   <title><![CDATA[Begin iOS]]></title>
   <link href="http://limingit.github.io/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-02-14T07:39:08+00:00</updated>
+  <updated>2014-02-14T08:01:25+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -18,7 +18,7 @@
     <link href="http://limingit.github.io/blog/2014/02/14/ios-uiwebview-support-telephone-call/"/>
     <updated>2014-02-14T06:39:00+00:00</updated>
     <id>http://limingit.github.io/blog/2014/02/14/ios-uiwebview-support-telephone-call</id>
-    <content type="html"><![CDATA[<p>在 iPhone 自带的 Safari 浏览器中，是可以通过苹果公司定义的 <a href="https://developer.apple.com/library/ios/featuredarticles/iPhoneURLScheme_Reference/Introduction/Introduction.html">URL Schemas</a> 直接呼出电话拨号的，效果如图：</p>
+    <content type="html"><![CDATA[<p>在 iPhone 自带的 Safari 浏览器中，是可以通过苹果公司定义的 <a href="https://developer.apple.com/library/ios/featuredarticles/iPhoneURLScheme_Reference/Introduction/Introduction.html">Apple URL Schemas</a> 直接呼出电话拨号的，效果如图：</p>
 
 <p><img src="http://limingit.github.io/images/blog/tel-url-schema.png"></p>
 
@@ -63,6 +63,9 @@
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>参考资料：
+<a href="http://answers.oreilly.com/topic/2166-how-to-send-a-text-message-from-your-mobile-website/">How to Send a Text Message from Your Mobile Website</a></p>
 ]]></content>
   </entry>
   
