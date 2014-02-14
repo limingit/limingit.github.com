@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Begin iOS</title>
+  <title>iOS UIWebview 中直接唤起电话拨号 - Begin iOS</title>
   <meta name="author" content="Bencalie">
 
   
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://limingit.github.io">
+  <link rel="canonical" href="http://limingit.github.io/blog/2014/02/14/ios-uiwebview-support-telephone-call">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Begin iOS" type="application/atom+xml">
@@ -67,15 +67,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/02/14/ios-uiwebview-support-telephone-call/">iOS UIWebview 中直接唤起电话拨号</a></h1>
+      <h1 class="entry-title">iOS UIWebview 中直接唤起电话拨号</h1>
     
     
       <p class="meta">
@@ -98,7 +95,7 @@
   </header>
 
 
-  <div class="entry-content"><p>在 iPhone 自带的 Safari 浏览器中，是可以通过苹果公司定义的 <a href="https://developer.apple.com/library/ios/featuredarticles/iPhoneURLScheme_Reference/Introduction/Introduction.html">URL Schemas</a> 直接呼出电话拨号的，效果如图：</p>
+<div class="entry-content"><p>在 iPhone 自带的 Safari 浏览器中，是可以通过苹果公司定义的 <a href="https://developer.apple.com/library/ios/featuredarticles/iPhoneURLScheme_Reference/Introduction/Introduction.html">URL Schemas</a> 直接呼出电话拨号的，效果如图：</p>
 
 <p><img src="/images/blog/tel-url-schema.png"></p>
 
@@ -140,89 +137,16 @@
 </span></code></pre></td></tr></table></div></figure>
 
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/14/using-the-application-cache/">使用 HTML5 应用缓存加速移动页面</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Bencalie</span></span>
 
-<time datetime="2014-01-14T16:18:00+00:00" pubdate data-updated="true">Jan 14<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>简介</h3>
-
-<p>HTML5 提供了一种应用缓存的机制，将 HTML/JS/CSS/图片等资源缓存在浏览器本地，便于 Web 应用可以在断网的情况下离线运行，达到类似于“脱机浏览”的效果。浏览器还提供了调用应用缓存的接口 window.applicationCache，来设定浏览器缓存的数据。</p>
-
-<p>它带来的好处有：</p>
-
-<ol>
-<li>离线浏览：即使断网状态，网站仍然可以浏览，保证了基本的可用性（当然，某些必须连接远程服务器的功能例外）</li>
-<li>应用加速：因为相关的文件被缓存到本地，没有网络延时和服务器处理时间，加载速度变快了</li>
-<li>减轻服务器的负载：浏览器只会下载服务器上发生变更的资源</li>
-</ol>
-
-
-<p>基本的做法是：</p>
-
-<ol>
-<li>页面在 &lt;html&gt; 声明使用一个 manifest 文件（后文会详细介绍），manifest 来维护需要缓存的资源文件（如：JS/CSS/图片等）列表。</li>
-<li>初次访问页面的时候，浏览器在后台下载 manifest 中指定的资源文件，生成应用缓存的第一个版本。</li>
-<li>后续访问的时候，就直接使用浏览器应用缓存里的资源了。同时浏览器会触发 applicationCache 对象的 checking 事件，去检查清单文件，如果缓存是最新的，再触发 noupdate 事件。</li>
-<li>如果被缓存的文件发生了变更，我们需要服务器端马上更新 manifest 文件。</li>
-<li>变更后首次访问的时候，浏览器仍然使用缓存文件来运行应用，同时自动在后台更新发生变化的资源文件。</li>
-</ol>
-
-
-<p>可以看到，它缓存的基本都是静态类型的文件。如果结合 SQLite 或者 localStorage 在本地进行一些数据缓存，完全可能搭建一个离线状态可正常运行的程序，剩下的就是考虑本地和远程服务器之间的资源文件及数据缓存如何更新问题。</p>
-
-<p>利用这个机制，我们就可以在移动页面中实现网站加速，尤其是在 2G 这样的网络环境下，加速效果尤为明显。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/01/14/using-the-application-cache/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/14/charles-proxy-for-mac/">Mac OS 下抓包工具 Charles 使用</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -234,129 +158,50 @@
   
 
 
-<time datetime="2014-01-14T02:43:00+00:00" pubdate data-updated="true">Jan 14<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>对于经常在 Windows 下进行 Web 开发的人来说，<a href="http://www.fiddler2.com/">Fiddler</a> 是神器。但由于它是 .Net Framework 下开发的，注定了用于 Linux 或者 Unix 之类系统上只能通过反向代理，如果不在同一个局域网内，非常麻烦。</p>
-
-<p>还好在 Mac OSX 下我们还有 <a href="http:///www.charlesproxy.com/">Charles</a>。</p>
-
-<p>和 Fiddler 相比较，二者的功能不相伯仲。优势在于 Charles 跨平台能力强，Charles 支持 Windows/Mac OS/Linux，Fiddler 只能安装在 Windows 下；劣势在于 Charles 是商业软件，最便宜也得 50 美金。</p>
-
-<p>当然，网上已经有很多破解版，感兴趣的网友请自己搜索。</p>
-
-<p>一些使用技巧如下：</p>
-
-<h3>记录设置</h3>
-
-<p>主菜单 Proxy->Recording Settings&hellip;</p>
-
-<p>Include 填写必须要记录的域名，可以使用通配符 * 和 ?，如： *.beginios.com</p>
-
-<p>Exclude 填写不需要记录的域名，可以使用通配符 * 和 ?</p>
-
-<p>注：如果不设置此项，表示全部记录</p>
-
-<h3>禁用缓存</h3>
-
-<p>主菜单 Tools->No Caching&hellip;</p>
-
-<p>勾选后，每次都从服务器读取</p>
-
-<h3>iOS 设备 HTTP 抓包</h3>
-
-<ol>
-<li>确保 iOS 设备和 Mac 电脑在同一个局域网内，启动 Charles</li>
-<li>打开 Proxy->Proxy Settings&hellip;，勾选 Enable transparent HTTP proxying</li>
-<li>查看 Mac 电脑的 IP 地址，如：192.168.1.100</li>
-<li>打开 iOS 设备的设置，进入当前 Wifi 连接，设置 HTTP 代理切换到“手动”，将服务器填为上一步中获得的 IP，端口填8888</li>
-<li>iOS 设备中，打开你要抓包的应用进行网络操作</li>
-<li>Charles 弹出确认框，点击 Allow 按钮即可</li>
-</ol>
-
-
-<h3>HTTPS抓包</h3>
-
-<ol>
-<li>下载 <a href="http://www.charlesproxy.com/ssl.zip">Charles 证书</a>，解压后导入到 iOS 设备中（将 crt 文件作为邮件附件发给自己，再在 iOS 设备中点击附件即可安装；也可上传至 dropbox 之类的网盘，通过 safari 下载安装）</li>
-<li>在Charles的工具栏上点击设置按钮，选择 Proxy Settings…</li>
-<li>切换到 SSL 选项卡，选中 Enable SSL Proxying，然后在 Locations 表单填写要抓包的域名和端口，点击Add按钮，在弹出的表单中 Host 填写域名，比如填 api.weibo.com，Port 填 443</li>
-</ol>
-
-
-<h3>替换本地文件</h3>
-
-<p>Tools &ndash;> Map Local&hellip;</p>
-
-<h3>网络延迟功能</h3>
-
-<p>主菜单  Proxy->Throttle Settings&hellip;</p>
-
-<p>可以用于测试慢速网络下程序的兼容性</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
+<time datetime="2014-02-14T06:39:00+00:00" pubdate data-updated="true">Feb 14<span>th</span>, 2014</time>
       
-  <header>
+
+
+    </p>
     
-      <h1 class="entry-title"><a href="/blog/2014/01/10/preface/">序</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
+      <div class="sharing">
   
-
-
-<time datetime="2014-01-10T01:59:00+00:00" pubdate data-updated="true">Jan 10<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[[[</span><span class="n">FrontEndEnginer</span> <span class="n">alloc</span><span class="p">]</span><span class="nl">initWithName:</span><span class="s">@&quot;Bencalie&quot;</span><span class="p">]</span><span class="n">sayHelloToEverybody</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>欢迎大家光临，我是一名 iOS 初学者，入门之路坎坎坷坷，此博客用于记录我的一些学习笔记。</p>
-
-<p>我的工作是前端开发(偏 JavaScript 方向)，学习移动开发也是工作和个人兴趣使然。本来是想把前端开发和 iOS 开发的博客分开，因精力有限，就都放一起了。因此，大家在博客中见到一些关于前端开发方向的博文，也不要奇怪。</p>
-
-<p>我目前主攻的方向是 iOS 开发和 Cocos2d-x 游戏开发，欢迎有共同爱好者一起学习探讨。</p>
+  
+  
+  
+	<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<span class="jiathis_txt">&#x5206;&#x4eab;&#x5230;&#xff1a;</span>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=1822549" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">&#x66f4;&#x591a;</a>
+	<a class="jiathis_counter_style"></a>
 </div>
-  
-  
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=1822549" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1822549"></script>
+<!-- UY END -->
 
-
-    </article>
   
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
 </div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/01/14/using-the-application-cache/" title="Previous Post: 使用 HTML5 应用缓存加速移动页面">&laquo; 使用 HTML5 应用缓存加速移动页面</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -386,21 +231,58 @@
   </ul>
 </section>
 <section>
+	<h1>Tags</h1>
+	<ul class="tag_cloud">
+		<a style="font-size: NaN%" href="/tags/applicationcache/">ApplicationCache</a>
+<a style="font-size: NaN%" href="/tags/charles/">Charles</a>
+<a style="font-size: NaN%" href="/tags/html5/">HTML5</a>
+<a style="font-size: NaN%" href="/tags/web-debugging-proxy/">Web Debugging Proxy</a>
+
+	</ul>
+</section>
+<section>
 	<h1>微博开发者</h1>
 	<ul>
 		<li><a href="http://beginios.com/javascript/weibo-app-frame" target="_blank">应用框架接入文档</a></li>
 		<li><a href="http://weibojs.com" target="_blank">微博 JSSDK 官网</a></li>
 	</ul>
-</section><section>
-	<h1>Link</h1>
-	<ul>
-		<li><a href="http://blog.liming.it/">liming.it</a></li>
-		<li><a href="http://wiki.liming.it/">iOS Beginner Wiki</a></li>
-	</ul>
 </section>
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/limingit">@limingit</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'limingit',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
 
   
 </aside>
+
 
     </div>
   </div>

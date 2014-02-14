@@ -115,10 +115,10 @@
 
 <ul>
 <li><strong>无需授权</strong>。如果用户在登录状态访问应用，新的框架将默认完成授权，并将 access_token 信息传递给第三方。</li>
-<li><strong>统一接入方式和参数</strong>。无论是哪种类型的应用，无论是 Web 版还是客户端嵌入的 H5 版本，客户端收到的参数都是相同的，接入方式也基本上都相同。</li>
+<li><strong>统一接入方式和参数</strong>。无论是哪种类型的应用，无论是 Web 版还是客户端嵌入的 H5 版本，客户端收到的参数都是相同的，接入方式也基本上都相同。应用内可以通过浏览器 userAgent 来区分是 Web 端还是 H5 状态。</li>
 <li><strong>新增应用分享和赞</strong>。直接将应用分享到微博，并生成卡片展示，快速传播。</li>
-<li><strong>应用支持未登录访问</strong>。未登录微博也可以浏览应用，必要的时候唤起登录浮层。</li>
-<li><strong>应用宽度调整为 940px</strong>。不再支持原来的 760px，原来的 950 px 改为 940px。</li>
+<li><strong>应用支持未登录访问</strong>。未登录微博也可以浏览应用，必要的时候通过我们的 JS 客户端唤起登录浮层。</li>
+<li><strong>应用宽度调整为 940px</strong>。不支持原来的 760px，原来的 950 px 改为 940px。</li>
 </ul>
 
 
@@ -126,15 +126,15 @@
 
 <h4>企业应用</h4>
 
-<p>应用名：</p>
+<p>应用名：北京汽车网上4S店</p>
 
 <p>预览图：Web版、H5版</p>
 
 <h4>站内应用</h4>
 
-<p>应用名：</p>
+<p>应用名：三格半</p>
 
-<p>预览图：Web版、H5版</p>
+<p>预览图：Web版</p>
 
 <h4>Page应用</h4>
 
@@ -548,6 +548,10 @@ resize 外层改变页面大小的事件
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/02/14/ios-uiwebview-support-telephone-call/">iOS UIWebview 中直接唤起电话拨号</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/01/14/using-the-application-cache/">使用 HTML5 应用缓存加速移动页面</a>
