@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: Tools | Begin iOS]]></title>
+  <link href="http://limingit.github.io/tags/tools/atom.xml" rel="self"/>
+  <link href="http://limingit.github.io/"/>
+  <updated>2014-02-17T06:58:14+00:00</updated>
+  <id>http://limingit.github.io/</id>
+  <author>
+    <name><![CDATA[Bencalie]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[iOS 开发工具集合]]></title>
+    <link href="http://limingit.github.io/blog/2014/02/17/ios-development-tools/"/>
+    <updated>2014-02-17T06:50:00+00:00</updated>
+    <id>http://limingit.github.io/blog/2014/02/17/ios-development-tools</id>
+    <content type="html"><![CDATA[<h3>SQLite 管理</h3>
+
+<h4>SQLiteManager</h4>
+
+<p>官方首页：<a href="http://www.sqlabs.net/sqlitemanager.php">http://www.sqlabs.net/sqlitemanager.php</a></p>
+
+<p>商业软件，支持 Windows 和 Mac 系统。</p>
+
+<p>本地 SQLite 数据库管理，可以进行增删改查。比 Firefox 的 SQLite Manager 插件更加强大</p>
+
+<p><img class="<a" src="href="http://www.sqlabs.net/images/sqlitemanager4/main@2x.jpg">http://www.sqlabs.net/images/sqlitemanager4/main@2x.jpg</a>"></p>
+]]></content>
+  </entry>
+  
+</feed>

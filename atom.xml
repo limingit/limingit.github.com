@@ -4,7 +4,7 @@
   <title><![CDATA[Begin iOS]]></title>
   <link href="http://limingit.github.io/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-02-14T08:06:44+00:00</updated>
+  <updated>2014-02-17T06:58:14+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS 开发工具集合]]></title>
+    <link href="http://limingit.github.io/blog/2014/02/17/ios-development-tools/"/>
+    <updated>2014-02-17T06:50:00+00:00</updated>
+    <id>http://limingit.github.io/blog/2014/02/17/ios-development-tools</id>
+    <content type="html"><![CDATA[<h3>SQLite 管理</h3>
+
+<h4>SQLiteManager</h4>
+
+<p>官方首页：<a href="http://www.sqlabs.net/sqlitemanager.php">http://www.sqlabs.net/sqlitemanager.php</a></p>
+
+<p>商业软件，支持 Windows 和 Mac 系统。</p>
+
+<p>本地 SQLite 数据库管理，可以进行增删改查。比 Firefox 的 SQLite Manager 插件更加强大</p>
+
+<p><img src="http://www.sqlabs.net/images/sqlitemanager4/main@2x.jpg"></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS UIWebview 中直接唤起电话拨号]]></title>
@@ -24,7 +43,7 @@
 
 <figure class='code'><figcaption><span>HTML中的写法 </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;tel:10086&quot;</span><span class="nt">&gt;</span>10086<span class="nt">&lt;/a&gt;</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;tel:10010&quot;</span><span class="nt">&gt;</span>联通客户服务热线10010<span class="nt">&lt;/a&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -68,7 +87,7 @@
 
 <h3>参考资料：</h3>
 
-<p>兼容性：<a href="http://answers.oreilly.com/topic/2166-how-to-send-a-text-message-from-your-mobile-website/">How to Send a Text Message from Your Mobile Website</a></p>
+<p>URL Schema 在浏览器中的兼容性：<a href="http://answers.oreilly.com/topic/2166-how-to-send-a-text-message-from-your-mobile-website/">How to Send a Text Message from Your Mobile Website</a></p>
 ]]></content>
   </entry>
   
