@@ -4,7 +4,7 @@
   <title><![CDATA[Begin iOS]]></title>
   <link href="http://limingit.github.io/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-02-17T07:03:58+00:00</updated>
+  <updated>2014-02-19T08:33:16+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -31,6 +31,30 @@
 <p>下载：<a href="http://pan.baidu.com/s/1gdqoSSV">百度网盘</a></p>
 
 <p><img src="http://www.sqlabs.net/images/sqlitemanager4/main@2x.jpg"></p>
+
+<h3>SQLiteExpert</h3>
+
+<p>官方首页：<a href="http://www.sqliteexpert.com/index.html">http://www.sqliteexpert.com/index.html</a></p>
+
+<p>分为个人版（免费）和专业版（$59.00），二者功能略有差异</p>
+
+<p><img src="http://www.sqliteexpert.com/screenshots/execute_sql_large.png"></p>
+
+<h3>Navicat for SQLite</h3>
+
+<p>官方首页：<a href="http://www.navicat.com.cn/">http://www.navicat.com.cn/</a></p>
+
+<p>商业软件，支持 Windows、Mac 和 Linux</p>
+
+<p><img src="http://www.navicat.com.cn/images/stories/products/sqlite/mac/img_productSQLite_02_Grid_Form_View_Mac_large.png"></p>
+
+<h3>MesaSQLite</h3>
+
+<p>官方首页：<a href="http://www.desertsandsoftware.com/?page_id=17">http://www.desertsandsoftware.com/?page_id=17</a></p>
+
+<p>免费软件，仅支持 Mac 系统</p>
+
+<p><img src="http://www.desertsandsoftware.com/wp-content/plugins/doptg/uploads/yQe4s44W86DHa85YSpjeg44Y31EX5DTeTkhqNmrPtdPGMr6gp5wpeecYaSyOypzjR.png"></p>
 ]]></content>
   </entry>
   
