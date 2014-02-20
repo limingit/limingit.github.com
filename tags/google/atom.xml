@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: google | Begin iOS]]></title>
   <link href="http://limingit.github.io/tags/google/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-02-20T03:39:25+00:00</updated>
+  <updated>2014-02-20T04:14:36+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -24,9 +24,9 @@
 
 <h3>实现方法</h3>
 
-<h4>注册<a href="https://plus.google.com/">Google+</a></h4>
+<h4>1、注册<a href="https://plus.google.com/">Google+</a></h4>
 
-<h4>修改一下google+网站的撰稿者部分,添加你的博客或个人网站链接。</h4>
+<h4>2、修改一下google+网站的撰稿者部分,添加你的博客或个人网站链接。</h4>
 
 <p>设置位置： google+ > 个人资料 > 简介 > 链接, 可以<a href="https://plus.google.com/me/about/edit/co">戳这里直接打开修改位置</a></p>
 
@@ -40,23 +40,23 @@
 
 <p>在链接面板里还有个“Google+网址”，点击使用此网址，可以查看自己在 Google+ 公开个人资料的网址，复制出来，下面要用到。</p>
 
-<h4>在您的网页上创建指向您 Google+ 个人资料的链接。</h4>
+<p><img src="/images/blog/google-plus-author.png"></p>
+
+<h4>3、在您的网页上创建指向您 Google+ 个人资料的链接。</h4>
 
 <p>两种方法, 自选一个：</p>
 
-<p>方法一：在页面(body部分）直接添加一个链接到你的 Google+ 页面</p>
+<p>方法一：在页面(body部分）直接添加一个链接到你的 Google+ 页面，例如:</p>
 
-<p>例如:
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://plus.google.com/107446839256480078362/posts?rel=author&quot;</span><span class="nt">&gt;</span>我的Google+<span class="nt">&lt;/a&gt;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>注意网址的协议是是 <a href="https://">https://</a> ，并且必须有 ?rel=author 参数。</p>
 
-<p>方法二: 在网站页面头部（head部分）容器中添加一行</p>
+<p>方法二: 在网站页面头部（head部分）容器中添加一行，例如:</p>
 
-<p>例如:
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;author&quot;</span> <span class="na">href=</span><span class="s">&quot;https://plus.google.com/107446839256480078362/posts&quot;</span> <span class="nt">/&gt;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
