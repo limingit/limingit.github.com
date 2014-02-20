@@ -4,24 +4,23 @@
 <!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <title>Begin iOS</title>
-  <meta name="author" content="Bencalie">
-
+  <meta name="author" content="Bencalie" />
   
-  <meta name="description" content="SQLite 管理 SQLiteManager 官方首页：http://www.sqlabs.net/sqlitemanager.php 商业软件（$49.00），支持 Windows 和 Mac 系统。 本地 SQLite 数据库管理，可以进行增删改查。比 Firefox 的 SQLite &hellip;">
+  <meta name="description" content="众多搜索引擎中，我比较中意谷歌，因为它搜索结果中有效信息比例很高。谷歌的搜索结果页中，经常看得到一些搜索结果带有作者信息和头像，众多搜索结果中，总能让人眼前一亮。 实现方法 注册Google+ 修改一下google+网站的撰稿者部分,添加你的博客或个人网站链接。 设置位置： google+ > &hellip;" />
   
-
+  <meta name="keyword" content="iOS Development, Cocos2d-x, Javascript" />
   <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="author" href="https://plus.google.com/107446839256480078362/posts" />
   
-  <link rel="canonical" href="http://limingit.github.io">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Begin iOS" type="application/atom+xml">
+  <link rel="canonical" href="http://limingit.github.io" />
+  <link href="/favicon.png" rel="icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="Begin iOS" type="application/atom+xml" />
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
@@ -68,6 +67,100 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/20/google-search-result-show-author/">在Google搜索结果上显示作者信息/作者头像</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-20T10:50:00+00:00" pubdate data-updated="true">Feb 20<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>众多搜索引擎中，我比较中意谷歌，因为它搜索结果中有效信息比例很高。谷歌的搜索结果页中，经常看得到一些搜索结果带有作者信息和头像，众多搜索结果中，总能让人眼前一亮。</p>
+
+<p><img src="/images/blog/google-search-result.png"></p>
+
+<h2>实现方法</h2>
+
+<h3>注册<a href="https://plus.google.com/">Google+</a></h3>
+
+<h3>修改一下google+网站的撰稿者部分,添加你的博客或个人网站链接。 设置位置： google+ > 个人资料 > 简介 > 链接, 可以<a href="https://plus.google.com/me/about/edit/co">戳这里直接打开修改位置</a></h3>
+
+<p><img src="/images/blog/google-plus-modify.png"></p>
+
+<p>点击修改</p>
+
+<p><img src="/images/blog/google-plus-custom.png"></p>
+
+<p>点击保存确认修改。</p>
+
+<p>在链接面板里还有个“Google+网址”，点击使用此网址，可以查看自己在 Google+ 公开个人资料的网址，复制出来，下面要用到。</p>
+
+<h3>在您的网页上创建指向您 Google+ 个人资料的链接。</h3>
+
+<p>两种方法, 自选一个：</p>
+
+<p>方法一：在页面(body部分）直接添加一个链接到你的 Google+ 页面</p>
+
+<p>例如:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://plus.google.com/107446839256480078362/posts?rel=author&quot;</span><span class="nt">&gt;</span>我的Google+<span class="nt">&lt;/a&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>注意网址的协议是是 <a href="https://">https://</a> ，并且必须有 ?rel=author 参数。</p>
+
+<p>方法二: 在网站页面头部（head部分）容器中添加一行</p>
+
+<p>例如:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;author&quot;</span> <span class="na">href=</span><span class="s">&quot;https://plus.google.com/107446839256480078362/posts&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>注意网址的协议是是 <a href="https://">https://</a> ，并且后面带有一个 /posts。</p>
+
+<p>本站选择的是后者。</p>
+
+<p>至此，已经大功告成了。 最后请确保设置中的<a href="https://plus.google.com/settings">个人资料搜索选项</a>: 帮助其他人在搜索结果中找到我的个人资料处于选中状态，否则是不会显示个人信息的。</p>
+
+<p><img src="/images/blog/google-plus-setting.png"></p>
+
+<p>你可以用 Google 的网站站长工具测试一下是否设置正确：<a href="http://www.google.com/webmasters/tools/richsnippets">http://www.google.com/webmasters/tools/richsnippets</a></p>
+
+<p>输入你的网址点预览，效果应该如图：</p>
+
+<p><img src="/images/blog/google-plus-test.png"></p>
+
+<p>一般设置成功后，需要几天后才能看得到，请大家有点耐心，表着急。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -449,6 +542,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/02/20/google-search-result-show-author/">在Google搜索结果上显示作者信息/作者头像</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/17/ios-development-tools/">iOS 开发工具集合</a>
       </li>
     
@@ -462,10 +559,6 @@
     
       <li class="post">
         <a href="/blog/2014/01/14/charles-proxy-for-mac/">Mac OS 下抓包工具 Charles 使用</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/10/preface/">序</a>
       </li>
     
   </ul>
