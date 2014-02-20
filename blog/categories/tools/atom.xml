@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tools | Begin iOS]]></title>
   <link href="http://limingit.github.io/blog/categories/tools/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-02-20T03:22:50+00:00</updated>
+  <updated>2014-02-20T03:39:25+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -18,7 +18,31 @@
     <link href="http://limingit.github.io/blog/2014/02/17/ios-development-tools/"/>
     <updated>2014-02-17T06:50:00+00:00</updated>
     <id>http://limingit.github.io/blog/2014/02/17/ios-development-tools</id>
-    <content type="html"><![CDATA[<h3>SQLite 管理</h3>
+    <content type="html"><![CDATA[<h3>IDE</h3>
+
+<h4>Xcode</h4>
+
+<p>苹果自家的集成开发工具，不必多说。</p>
+
+<p>官方首页：<a href="https://developer.apple.com/xcode/">https://developer.apple.com/xcode/</a></p>
+
+<p>免费使用，仅能运行在 Mac 下。</p>
+
+<p><img class="<a" src="href="https://devimages.apple.com.edgekey.net/xcode/images/xcode5-hero.jpg">https://devimages.apple.com.edgekey.net/xcode/images/xcode5-hero.jpg</a>"></p>
+
+<h4>JetBrains: App Code</h4>
+
+<p>JetBrains 有许多业内著名的开发工具：WebStorm、PHPStrom</p>
+
+<p>官方首页：<a href="http://www.jetbrains.com/objc/">http://www.jetbrains.com/objc/</a></p>
+
+<p>商业软件，个人授权 $99，商业授权 $199。它只能运行在 Mac 上。</p>
+
+<p>相对于 Xcode 来说，工程管理弱一些。使用的不多，难以置喙。</p>
+
+<p><img class="<a" src="href="http://www.jetbrains.com/objc/img/tour/Debugger.png">http://www.jetbrains.com/objc/img/tour/Debugger.png</a>"></p>
+
+<h3>SQLite 管理</h3>
 
 <h4>SQLiteManager</h4>
 
