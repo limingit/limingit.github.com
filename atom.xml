@@ -4,7 +4,7 @@
   <title><![CDATA[Begin iOS]]></title>
   <link href="http://limingit.github.io/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-02-24T10:43:45+00:00</updated>
+  <updated>2014-02-25T03:02:50+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -14,7 +14,58 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Markdown 编辑器]]></title>
+    <title type="html"><![CDATA[UIWebview 顺时针旋转 90 度]]></title>
+    <link href="http://limingit.github.io/blog/2014/02/24/uiwebview-rotate/"/>
+    <updated>2014-02-24T15:50:00+00:00</updated>
+    <id>http://limingit.github.io/blog/2014/02/24/uiwebview-rotate</id>
+    <content type="html"><![CDATA[<p>微博的 iPhone 客户端是竖屏浏览的，前两天 9173 推出了一个 Flappy Bird 微博版，是一个横屏的 HTML 游戏。因此在内嵌浏览器中依然是竖着浏览的，下面出现了一大块黑色背景，9173 不得已下面放了一个图标，示意玩家旋转屏幕为横屏来玩。如图：</p>
+
+<p><img src="images/blog/flappy-bird.jpg"></p>
+
+<p>这给人的感觉很不好，于是开始琢磨怎么改进。有两个思路：</p>
+
+<ul>
+<li>页面自身内容旋转 90 度</li>
+<li>Webview 本身旋转 90 度</li>
+</ul>
+
+
+<p>一开始的思路是页面内将 canvas 画布通过 CSS3 的 transform 来实现：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;canvas style="transform:rotate(90deg);">&lt;/canvas></span></code></pre></td></tr></table></div></figure>
+
+
+<p>经测试，虽然表面旋转过来了，JS 里的坐标系还是以 BODY 的为准，这个想法放弃。</p>
+
+<p>那只有尝试第二种了，直接旋转 Webview，这里只尝试了 iOS 系统，Android 未测试</p>
+
+<p>其实一行代码就搞定了（这里 webView 是 UIWebview 的引用）：</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">webView</span><span class="p">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">CGAffineTransformMakeRotation</span><span class="p">(</span><span class="n">M_PI</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>圆周率 PI 表示 180度，在 Objective-C 里用 M_PI 表示，旋转 90 度，就是除以 2。</p>
+
+<p>下面的代码，可以基于原有的旋转角度进一步旋转：</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">CGAffineTransform</span> <span class="n">transform</span> <span class="o">=</span> <span class="n">webView</span><span class="p">.</span><span class="n">transform</span><span class="p">;</span>
+</span><span class='line'><span class="n">webView</span><span class="p">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">CGAffineTransformRotate</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="n">M_PI</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>微博客户端里，可以进行判断，如果需要横屏展示的应用（开发者在后台设置），就自动旋转 UIWebview，同时将 navigationBar 和底部导航都旋转以适应。全屏游戏甚至不需要展示 navigationBar 和底部导航。</p>
+
+<p>需要注意的是，UIWebview 里最好就不要用 window 对象下 alert、confirm 等，因为他们还是竖屏显示的。可以自己用 HTML/CSS 制作这样的 UI。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[流行的 Markdown 编辑器]]></title>
     <link href="http://limingit.github.io/blog/2014/02/24/markdown-editor/"/>
     <updated>2014-02-24T15:50:00+00:00</updated>
     <id>http://limingit.github.io/blog/2014/02/24/markdown-editor</id>

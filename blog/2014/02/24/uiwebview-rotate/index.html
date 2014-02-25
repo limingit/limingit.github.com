@@ -5,10 +5,10 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8" />
-  <title>流行的 Markdown 编辑器 - Begin iOS</title>
+  <title>UIWebview 顺时针旋转 90 度 - Begin iOS</title>
   <meta name="author" content="Bencalie" />
   
-  <meta name="description" content="Markdown 简介 MarkdownPad 仅支持 Windows 系统，需要安装 Microsoft .NET Framework 4.0 免费版有一定限制，Pro 版本 $14.95 官方网站：http://markdownpad.com/ GoLangIDE Go 语言写的 &hellip;" />
+  <meta name="description" content="微博的 iPhone 客户端是竖屏浏览的，前两天 9173 推出了一个 Flappy Bird 微博版，是一个横屏的 HTML 游戏。因此在内嵌浏览器中依然是竖着浏览的，下面出现了一大块黑色背景，9173 不得已下面放了一个图标，示意玩家旋转屏幕为横屏来玩。如图： 这给人的感觉很不好， &hellip;" />
   
   <meta name="keyword" content="iOS Development, Cocos2d-x, Javascript" />
   <!-- http://t.co/dKP3o1e -->
@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="author" href="https://plus.google.com/107446839256480078362/posts" />
   
-  <link rel="canonical" href="http://limingit.github.io/blog/2014/02/24/markdown-editor" />
+  <link rel="canonical" href="http://limingit.github.io/blog/2014/02/24/uiwebview-rotate" />
   <link href="/favicon.png" rel="icon" />
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
   <link href="/atom.xml" rel="alternate" title="Begin iOS" type="application/atom+xml" />
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">流行的 Markdown 编辑器</h1>
+      <h1 class="entry-title">UIWebview 顺时针旋转 90 度</h1>
     
     
       <p class="meta">
@@ -93,77 +93,49 @@
   </header>
 
 
-<div class="entry-content"><p><a href="http://ux.etao.com/posts/620">Markdown 简介</a></p>
+<div class="entry-content"><p>微博的 iPhone 客户端是竖屏浏览的，前两天 9173 推出了一个 Flappy Bird 微博版，是一个横屏的 HTML 游戏。因此在内嵌浏览器中依然是竖着浏览的，下面出现了一大块黑色背景，9173 不得已下面放了一个图标，示意玩家旋转屏幕为横屏来玩。如图：</p>
 
-<h3>MarkdownPad</h3>
+<p><img src="images/blog/flappy-bird.jpg"></p>
 
-<p>仅支持 Windows 系统，需要安装 Microsoft .NET Framework 4.0</p>
+<p>这给人的感觉很不好，于是开始琢磨怎么改进。有两个思路：</p>
 
-<p>免费版有一定限制，Pro 版本 $14.95</p>
+<ul>
+<li>页面自身内容旋转 90 度</li>
+<li>Webview 本身旋转 90 度</li>
+</ul>
 
-<p>官方网站：<a href="http://markdownpad.com/">http://markdownpad.com/</a></p>
 
-<p><img src="http://markdownpad.com/img/markdownpad2.png"></p>
+<p>一开始的思路是页面内将 canvas 画布通过 CSS3 的 transform 来实现：</p>
 
-<h3>GoLangIDE</h3>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;canvas style="transform:rotate(90deg);">&lt;/canvas></span></code></pre></td></tr></table></div></figure>
 
-<p>Go 语言写的 Markdown 编辑器，支持 Windows、Linux、Mac</p>
 
-<p><a href="http://code.google.com/p/golangide/">http://code.google.com/p/golangide/</a></p>
+<p>经测试，虽然表面旋转过来了，JS 里的坐标系还是以 BODY 的为准，这个想法放弃。</p>
 
-<p><img src="images/blog/markdown-editor-liteide.png"></p>
+<p>那只有尝试第二种了，直接旋转 Webview，这里只尝试了 iOS 系统，Android 未测试</p>
 
-<h3>Mou</h3>
+<p>其实一行代码就搞定了（这里 webView 是 UIWebview 的引用）：</p>
 
-<p>官方网站：<a href="http://mouapp.com/">http://mouapp.com/</a></p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">webView</span><span class="p">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">CGAffineTransformMakeRotation</span><span class="p">(</span><span class="n">M_PI</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p><img src="http://mouapp.com/images/Mou_Screenshot_1.png"></p>
 
-<h3>Markdown Pro</h3>
+<p>圆周率 PI 表示 180度，在 Objective-C 里用 M_PI 表示，旋转 90 度，就是除以 2。</p>
 
-<p>带预览功能，支持 Mac OS X 10.7+</p>
+<p>下面的代码，可以基于原有的旋转角度进一步旋转：</p>
 
-<p>官方网站：<a href="http://markdownpro.com/">http://markdownpro.com/</a></p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">CGAffineTransform</span> <span class="n">transform</span> <span class="o">=</span> <span class="n">webView</span><span class="p">.</span><span class="n">transform</span><span class="p">;</span>
+</span><span class='line'><span class="n">webView</span><span class="p">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">CGAffineTransformRotate</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="n">M_PI</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p><img src="http://markdownpro.com/assets/main_window-6e78258db30c284deb8e2c5663cf1e25.jpg"></p>
 
-<h3>TEXTS</h3>
+<p>微博客户端里，可以进行判断，如果需要横屏展示的应用（开发者在后台设置），就自动旋转 UIWebview，同时将 navigationBar 和底部导航都旋转以适应。全屏游戏甚至不需要展示 navigationBar 和底部导航。</p>
 
-<p>支持 Windows 和 Mac OS X</p>
-
-<p>官方网站：<a href="http://www.texts.io/">http://www.texts.io/</a></p>
-
-<p><img src="http://www.texts.io/img/screenshot.png"></p>
-
-<h3>ByWord</h3>
-
-<p>官方网站：<a href="http://bywordapp.com/">http://bywordapp.com/</a></p>
-
-<h3>MarkPad</h3>
-
-<p>带预览功能，支持 Windows</p>
-
-<p>官方网站：<a href="http://code52.org/DownmarkerWPF/">http://code52.org/DownmarkerWPF/</a></p>
-
-<p><img src="http://code52.org/DownmarkerWPF/screenshot.png"></p>
-
-<h3>ReText</h3>
-
-<p>官方网站：<a href="http://sourceforge.net/p/retext/home/ReText/">http://sourceforge.net/p/retext/home/ReText/</a></p>
-
-<h3>Sublime Text 2</h3>
-
-<p>使用插件实现，如：Markdown Preview，MarkdownEditing</p>
-
-<p>官方网站：<a href="http://www.sublimetext.com/dev">http://www.sublimetext.com/dev</a></p>
-
-<h3>Dillinger</h3>
-
-<p>官方网站：<a href="http://dillinger.io/%EF%BC%88%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%89">http://dillinger.io/%EF%BC%88%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%89</a></p>
-
-<h3>Made（Chrome插件）</h3>
-
-<p>官方网站：<a href="https://chrome.google.com/webstore/detail/oknendfeeopgpibecfjljjfanledpbkog?hl=en">https://chrome.google.com/webstore/detail/oknendfeeopgpibecfjljjfanledpbkog?hl=en</a></p>
+<p>需要注意的是，UIWebview 里最好就不要用 window 对象下 alert、confirm 等，因为他们还是竖屏显示的。可以自己用 HTML/CSS 制作这样的 UI。</p>
 </div>
 
 
@@ -191,7 +163,7 @@
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/tools/'>Tools</a>
+    <a class='category' href='/blog/categories/uiwebview/'>UIWebview</a>, <a class='category' href='/blog/categories/ios/'>iOS</a>
   
 </span>
 
@@ -227,10 +199,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/02/20/google-search-result-show-author/" title="Previous Post: 在Google搜索结果中显示作者信息/头像">&laquo; 在Google搜索结果中显示作者信息/头像</a>
+        <a class="basic-alignment left" href="/blog/2014/02/24/markdown-editor/" title="Previous Post: 流行的 Markdown 编辑器">&laquo; 流行的 Markdown 编辑器</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/02/24/uiwebview-rotate/" title="Next Post: UIWebview 顺时针旋转 90 度">UIWebview 顺时针旋转 90 度 &raquo;</a>
       
     </p>
   </footer>
