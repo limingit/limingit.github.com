@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML5 | Begin iOS]]></title>
   <link href="http://limingit.github.io/blog/categories/html5/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-02-27T10:22:42+00:00</updated>
+  <updated>2014-02-27T10:27:20+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -92,11 +92,11 @@
 
 <p><img src="/images/blog/mobiledebug/mihtool-open-url.jpg"></p>
 
-<p>2、然后点击下面工具条的 i 图标，就能看到一个页面：<a href="http://localhost:1630/about%E3%80%82">http://localhost:1630/about%E3%80%82</a></p>
+<p>2、然后点击下面工具条的 i 图标，就能看到一个页面：<a href="http://localhost:1630/about">http://localhost:1630/about</a></p>
 
 <p><img src="/images/blog/mobiledebug/mihtool-about.jpg"></p>
 
-<p>这里可以看到 MIHTool 已经在设备上起了一个 HTTP 服务，直接打开这个地址：<a href="http://10.209.19.138:1630/%EF%BC%8C%E6%98%AF%E4%B8%80%E4%B8%AA%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97%EF%BC%8C%E5%91%8A%E8%AF%89%E4%BD%A0%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E8%BF%99%E4%B8%AA%E5%B7%A5%E5%85%B7%E3%80%82">http://10.209.19.138:1630/%EF%BC%8C%E6%98%AF%E4%B8%80%E4%B8%AA%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97%EF%BC%8C%E5%91%8A%E8%AF%89%E4%BD%A0%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E8%BF%99%E4%B8%AA%E5%B7%A5%E5%85%B7%E3%80%82</a></p>
+<p>这里可以看到 MIHTool 已经在设备上起了一个 HTTP 服务，直接打开这个地址：<a href="http://10.209.19.138:1630/">http://10.209.19.138:1630/</a> ，是一个使用指南，告诉你如何使用这个工具。</p>
 
 <p><img src="/images/blog/mobiledebug/mihtool-local-ip.png"></p>
 
