@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+  <title>移动页面前端调试 - iOS 系统 - Begin iOS</title>
+  <meta name="author" content="Bencalie" />
+  
+  <meta name="description" content="随着智能移动设备的普及，前端开发的工作内容，越来越多的向移动设备上转移，具备移动设备上的调试能力，是必不可少的。 主流的移动设备，还是 Android 和 iOS，因此，我将分两篇文章，分别介绍 iOS 和 Android 下的前端调试技术 iOS 设备下进行 HTML 页面的调试， &hellip;" />
+  
+  <meta name="keyword" content="iOS Development, Cocos2d-x, Javascript" />
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="author" href="https://plus.google.com/107446839256480078362/posts" />
+  <link rel="publisher" href="https://plus.google.com/107446839256480078362" />
+  
+  <link rel="canonical" href="http://limingit.github.io/blog/2014/02/27/ios-mobile-page-debug" />
+  <link href="/favicon.png" rel="icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="Begin iOS" type="application/atom+xml" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">-->
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Begin iOS</a></h1>
+  
+    <h2>A guide for iOS developer.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:limingit.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <!--<li><a href="/ios/">iOS</a></li>
+  <li><a href="/cocos2d-x/">Cocos2d-x</a></li>
+  <li><a href="/javascript/">Javascript</a></li>
+  <li><a href="/android/">Android</a></li>
+  <li><a href="/resources/">Resources</a></li>-->
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">移动页面前端调试 - iOS 系统</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-27T15:52:00+00:00" pubdate data-updated="true">Feb 27<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>随着智能移动设备的普及，前端开发的工作内容，越来越多的向移动设备上转移，具备移动设备上的调试能力，是必不可少的。</p>
+
+<p>主流的移动设备，还是 Android 和 iOS，因此，我将分两篇文章，分别介绍 iOS 和 Android 下的前端调试技术</p>
+
+<p>iOS 设备下进行 HTML 页面的调试，根据页面的调用方式不同，分为两种情况：</p>
+
+<ul>
+<li><p>直接在浏览器中显示 HTML 页面。无论系统自带的 Safari，还是其他厂商的浏览器（如 Chrome、猎豹、搜狗、海豚、Mercury、QQ 等等），均在此列。</p></li>
+<li><p>原生应用中集成的 UIWebview 中显示 HTML 页面。Cordova（原名 PhoneGap） 的内置 Webview 也算在此列。</p></li>
+</ul>
+
+
+<h2>测试环境访问</h2>
+
+<p>iOS 下不越狱是没法设置 HOST 的。</p>
+
+<p>如果你的代码还在测试环境，目前只能通过 Wifi 代理，在充当代理的机器上设置 HOST 来解决。</p>
+
+<p>如果越狱了就好办了， iFile 找到 /etc/hosts 修改。网上资料很多，大家自己发掘吧</p>
+
+<p>下面，我们就逐一介绍如何进行调试。</p>
+
+<h2>Safari</h2>
+
+<p>Mac 下的 Safari 是自带了开发人员工具的，可以进行页面调试，但是 iPhone/iPad 下由于手持设备屏幕大小和触摸式操作习惯的影响，iOS 系统的 Safari 没有带调试功能。</p>
+
+<p>如果你的设备是 iOS 6 以上，且有一台 Mac 电脑，你就可以利用 Mac 电脑上的 Safari ，远程进行调试。</p>
+
+<p><strong>注：Windows 下的 Safari 不支持这个功能。</strong></p>
+
+<p>分如下几个步骤完成：</p>
+
+<p>1、iOS 设备开启远程调试。进入设置 &ndash;> Safari &ndash;> 高级，将 Web 检查器一项开启。</p>
+
+<!--more-->
+
+
+<p><img src="images/blog/mobiledebug/ios-safari-setting.png"></p>
+
+<p>2、将设备用数据线连接到 Mac 电脑上。</p>
+
+<p>3、打开 Mac 电脑上的 Safari，打开偏好设置，在高级选项卡，勾选<strong>在菜单中显示“开发”菜单</strong>，开启开发模式。</p>
+
+<p><img src="images/blog/mobiledebug/mac-safari-setting.png"></p>
+
+<p>4、手机上 Safari 打开你需要调试的页面，然后再 Mac 电脑的 Safari 开发菜单下找到你的设备名，子菜单下有设备已经开启的网页。选择你需要调试的页面。</p>
+
+<p><img src="images/blog/mobiledebug/mac-safari-find.png"></p>
+
+<p>5、其实已经结束了，你将看到如图的 Web Inspector 界面，鼠标在这里操作，设备上也相应发生变化
+。</p>
+
+<p><img src="images/blog/mobiledebug/mac-safari-web-inspector.png"></p>
+
+<p><img src="images/blog/mobiledebug/ios-safari-debug.png"></p>
+
+<p>你可以像平时那样，调试 JavaScript，修改 HTML/CSS，查看本地的 cookie、本地存储、应用缓存等。</p>
+
+<p>检查器上还有个手型的图标，激活它以后，设备 Safari 上选择点击一个元素，检查器上就能相应反馈出来。</p>
+
+<p><img src="images/blog/mobiledebug/mac-safari-web-inspector-hand.png"></p>
+
+<h2>MIHTool（<a href="http://www.iunbug.com/mihtool">官网</a>）</h2>
+
+<p>MIHTool 是国内开发者<a href="http://weibo.com/unbug">@听奏</a> 开发的一款 iOS 调试工具。</p>
+
+<p>iPhone 版需要远程打开 Web Inspector，而 iPad 版是内置在界面中的。界面可以去官网<a href="http://www.iunbug.com/mihtool-zh">查看</a>。</p>
+
+<p>iPad 版跟 Mac 下的 Safari 调试类似，不多做介绍。这里仅仅介绍一下 iPhone 版的。</p>
+
+<p>1、打开应用，输入你要调试的页面</p>
+
+<p><img src="images/blog/mobiledebug/mihtool-open-url.jpg"></p>
+
+<p>2、然后点击下面工具条的 i 图标，就能看到一个页面：<a href="http://localhost:1630/about%E3%80%82">http://localhost:1630/about%E3%80%82</a></p>
+
+<p><img src="images/blog/mobiledebug/mihtool-about.jpg"></p>
+
+<p>这里可以看到 MIHTool 已经在设备上起了一个 HTTP 服务，直接打开这个地址：<a href="http://10.209.19.138:1630/%EF%BC%8C%E6%98%AF%E4%B8%80%E4%B8%AA%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97%EF%BC%8C%E5%91%8A%E8%AF%89%E4%BD%A0%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E8%BF%99%E4%B8%AA%E5%B7%A5%E5%85%B7%E3%80%82">http://10.209.19.138:1630/%EF%BC%8C%E6%98%AF%E4%B8%80%E4%B8%AA%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97%EF%BC%8C%E5%91%8A%E8%AF%89%E4%BD%A0%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E8%BF%99%E4%B8%AA%E5%B7%A5%E5%85%B7%E3%80%82</a></p>
+
+<p><img src="images/blog/mobiledebug/mihtool-local-ip.png"></p>
+
+<ul>
+<li>可以唤起设备上的应用来调试，包含 MIHTool、Safari、Chrome</li>
+<li>调用 Web Inspector 的方法（设备 IP，或者开发者提供的在线服务器）</li>
+<li>查看历史记录、重载当前页面、清理缓存/cookie 等</li>
+</ul>
+
+
+<p>大家重点关注 Web Inspector 部分，新标签中打开其中一个 URL，如图：</p>
+
+<p><img src="images/blog/mobiledebug/mihtool-romote-ip.png"></p>
+
+<p>点击 Targets 中的 URL，然后切换到 Elements 选项卡，我们现在看到的界面，跟 Chrome 的开发者工具一样。在这里尽情调试吧。</p>
+
+<p>来，我们修改一下页面的背景色，看看会发生什么？</p>
+
+<p><img src="images/blog/mobiledebug/mihtool-modify-color.png"></p>
+
+<p><img src="images/blog/mobiledebug/mihtool-about-modified.jpg"></p>
+
+<p>细心的人估计已经看出来了，本质上，MIHTool 就是 Weinre。</p>
+
+<!--
+## Chrome
+
+## 应用中的 UIWebView
+-->
+
+
+<p>iOS 下进行抓包，还可以安装 HTTPWatch，基础版是免费的，专业版需要 ￥648.00，还是比较贵的。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Bencalie</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-27T15:52:00+00:00" pubdate data-updated="true">Feb 27<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/debug/'>Debug</a>, <a class='category' href='/blog/categories/html5/'>HTML5</a>, <a class='category' href='/blog/categories/ios/'>iOS</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+	<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<span class="jiathis_txt">&#x5206;&#x4eab;&#x5230;&#xff1a;</span>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=1822549" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">&#x66f4;&#x591a;</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=1822549" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1822549"></script>
+<!-- UY END -->
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/02/26/android-html5-development-trap/" title="Previous Post: Android 下开发 HTML5 遇到的坑">&laquo; Android 下开发 HTML5 遇到的坑</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>关于我</h1>
+	<p>Front-End Engineer</p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/02/27/ios-mobile-page-debug/">移动页面前端调试 - iOS 系统</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/26/android-html5-development-trap/">Android 下开发 HTML5 遇到的坑</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/25/uiwebview-rotate/">UIWebview 顺时针旋转 90 度</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/24/markdown-editor/">流行的 Markdown 编辑器</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/20/google-search-result-show-author/">在Google搜索结果中显示作者信息/头像</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+	<h1>Tags</h1>
+	<ul class="tag_cloud">
+		<a style="font-size: 90%" href="/tags/android/">Android</a>
+<a style="font-size: 90%" href="/tags/applicationcache/">ApplicationCache</a>
+<a style="font-size: 90%" href="/tags/charles/">Charles</a>
+<a style="font-size: 210%" href="/tags/html5/">HTML5</a>
+<a style="font-size: 90%" href="/tags/markdown-editor/">Markdown Editor</a>
+<a style="font-size: 210%" href="/tags/tools/">Tools</a>
+<a style="font-size: 210%" href="/tags/uiwebview/">UIWebview</a>
+<a style="font-size: 90%" href="/tags/url-schema/">URL Schema</a>
+<a style="font-size: 90%" href="/tags/web-debugging-proxy/">Web Debugging Proxy</a>
+<a style="font-size: 90%" href="/tags/google/">google</a>
+<a style="font-size: 90%" href="/tags/ios/">iOS</a>
+
+	</ul>
+</section>
+<section>
+	<h1>微博开发者</h1>
+	<ul>
+		<li><a href="http://beginios.com/javascript/weibo-app-frame" target="_blank">应用框架接入文档</a></li>
+		<li><a href="http://weibojs.com" target="_blank">微博 JSSDK 官网</a></li>
+	</ul>
+</section>
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/limingit">@limingit</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'limingit',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Bencalie -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+
+  <script type="text/javascript">
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-47018713-1', 'beginios.com');
+	ga('send', 'pageview');
+  </script>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

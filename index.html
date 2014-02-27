@@ -8,7 +8,7 @@
   <title>Begin iOS</title>
   <meta name="author" content="Bencalie" />
   
-  <meta name="description" content="这两天在开发一个 HTML5 的应用，主要是用于 Android 下的 WebView 内嵌使用。开发阶段，在 PC 的 Chrome 上测试，一切正常。但是和应用真机联调的时候，遇到了一系列问题，耗时颇久，总算一一解决，总结如下 设置HOST 因为是在测试环境，第一步就是要设置 HOST， &hellip;" />
+  <meta name="description" content="随着智能移动设备的普及，前端开发的工作内容，越来越多的向移动设备上转移，具备移动设备上的调试能力，是必不可少的。 主流的移动设备，还是 Android 和 iOS，因此，我将分两篇文章，分别介绍 iOS 和 Android 下的前端调试技术 iOS 设备下进行 HTML 页面的调试， &hellip;" />
   
   <meta name="keyword" content="iOS Development, Cocos2d-x, Javascript" />
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,79 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/27/ios-mobile-page-debug/">移动页面前端调试 - iOS 系统</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-27T15:52:00+00:00" pubdate data-updated="true">Feb 27<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>随着智能移动设备的普及，前端开发的工作内容，越来越多的向移动设备上转移，具备移动设备上的调试能力，是必不可少的。</p>
+
+<p>主流的移动设备，还是 Android 和 iOS，因此，我将分两篇文章，分别介绍 iOS 和 Android 下的前端调试技术</p>
+
+<p>iOS 设备下进行 HTML 页面的调试，根据页面的调用方式不同，分为两种情况：</p>
+
+<ul>
+<li><p>直接在浏览器中显示 HTML 页面。无论系统自带的 Safari，还是其他厂商的浏览器（如 Chrome、猎豹、搜狗、海豚、Mercury、QQ 等等），均在此列。</p></li>
+<li><p>原生应用中集成的 UIWebview 中显示 HTML 页面。Cordova（原名 PhoneGap） 的内置 Webview 也算在此列。</p></li>
+</ul>
+
+
+<h2>测试环境访问</h2>
+
+<p>iOS 下不越狱是没法设置 HOST 的。</p>
+
+<p>如果你的代码还在测试环境，目前只能通过 Wifi 代理，在充当代理的机器上设置 HOST 来解决。</p>
+
+<p>如果越狱了就好办了， iFile 找到 /etc/hosts 修改。网上资料很多，大家自己发掘吧</p>
+
+<p>下面，我们就逐一介绍如何进行调试。</p>
+
+<h2>Safari</h2>
+
+<p>Mac 下的 Safari 是自带了开发人员工具的，可以进行页面调试，但是 iPhone/iPad 下由于手持设备屏幕大小和触摸式操作习惯的影响，iOS 系统的 Safari 没有带调试功能。</p>
+
+<p>如果你的设备是 iOS 6 以上，且有一台 Mac 电脑，你就可以利用 Mac 电脑上的 Safari ，远程进行调试。</p>
+
+<p><strong>注：Windows 下的 Safari 不支持这个功能。</strong></p>
+
+<p>分如下几个步骤完成：</p>
+
+<p>1、iOS 设备开启远程调试。进入设置 &ndash;> Safari &ndash;> 高级，将 Web 检查器一项开启。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/27/ios-mobile-page-debug/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -603,6 +676,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/02/27/ios-mobile-page-debug/">移动页面前端调试 - iOS 系统</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/26/android-html5-development-trap/">Android 下开发 HTML5 遇到的坑</a>
       </li>
     
@@ -616,10 +693,6 @@
     
       <li class="post">
         <a href="/blog/2014/02/20/google-search-result-show-author/">在Google搜索结果中显示作者信息/头像</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/17/ios-development-tools/">iOS 开发工具集合</a>
       </li>
     
   </ul>
