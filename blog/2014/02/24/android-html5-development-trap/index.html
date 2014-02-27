@@ -16,6 +16,7 @@
   <meta name="MobileOptimized" content="320" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="author" href="https://plus.google.com/107446839256480078362/posts" />
+  <link rel="publisher" href="https://plus.google.com/107446839256480078362" />
   
   <link rel="canonical" href="http://limingit.github.io/blog/2014/02/24/android-html5-development-trap" />
   <link href="/favicon.png" rel="icon" />
@@ -105,11 +106,9 @@
 </ul>
 
 
-<p><strong>坑一</strong>：设置 HOST 的时候，我习惯性修改的是 /etc/hosts，结果无论如何都不生效。后来查询资料，才知道，应该修改 /system/etc.hosts</p>
+<p>设置 HOST 的时候，我习惯性修改的是 /etc/hosts，结果无论如何都不生效。后来查询资料，才知道，应该修改 /system/etc/hosts。并且请注意 HOST 文件最后一定要有一行空行。</p>
 
-<p>并且请注意 HOST 文件最后一定要有一行空行。</p>
-
-<p>如果是在 Windows 下修改，并同步过去的，还要注意换行符的问题。</p>
+<p>如果是在 Windows 下修改并同步过去的，还要注意换行符的问题。</p>
 
 <!--more-->
 

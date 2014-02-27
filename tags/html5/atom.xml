@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: HTML5 | Begin iOS]]></title>
   <link href="http://limingit.github.io/tags/html5/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-02-27T05:33:24+00:00</updated>
+  <updated>2014-02-27T07:00:49+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -32,11 +32,9 @@
 </ul>
 
 
-<p><strong>坑一</strong>：设置 HOST 的时候，我习惯性修改的是 /etc/hosts，结果无论如何都不生效。后来查询资料，才知道，应该修改 /system/etc.hosts</p>
+<p>设置 HOST 的时候，我习惯性修改的是 /etc/hosts，结果无论如何都不生效。后来查询资料，才知道，应该修改 /system/etc/hosts。并且请注意 HOST 文件最后一定要有一行空行。</p>
 
-<p>并且请注意 HOST 文件最后一定要有一行空行。</p>
-
-<p>如果是在 Windows 下修改，并同步过去的，还要注意换行符的问题。</p>
+<p>如果是在 Windows 下修改并同步过去的，还要注意换行符的问题。</p>
 
 <!--more-->
 

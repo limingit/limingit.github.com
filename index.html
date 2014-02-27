@@ -16,6 +16,7 @@
   <meta name="MobileOptimized" content="320" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="author" href="https://plus.google.com/107446839256480078362/posts" />
+  <link rel="publisher" href="https://plus.google.com/107446839256480078362" />
   
   <link rel="canonical" href="http://limingit.github.io" />
   <link href="/favicon.png" rel="icon" />
@@ -200,11 +201,9 @@
 </ul>
 
 
-<p><strong>坑一</strong>：设置 HOST 的时候，我习惯性修改的是 /etc/hosts，结果无论如何都不生效。后来查询资料，才知道，应该修改 /system/etc.hosts</p>
+<p>设置 HOST 的时候，我习惯性修改的是 /etc/hosts，结果无论如何都不生效。后来查询资料，才知道，应该修改 /system/etc/hosts。并且请注意 HOST 文件最后一定要有一行空行。</p>
 
-<p>并且请注意 HOST 文件最后一定要有一行空行。</p>
-
-<p>如果是在 Windows 下修改，并同步过去的，还要注意换行符的问题。</p>
+<p>如果是在 Windows 下修改并同步过去的，还要注意换行符的问题。</p>
 
 </div>
   
@@ -454,7 +453,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/01/14/charles-proxy-for-mac/">Mac OS 下抓包工具 Charles 使用</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/01/14/charles-proxy-for-mac/">Mac OS X 下抓包工具 Charles 使用</a></h1>
     
     
       <p class="meta">
@@ -479,7 +478,7 @@
 
   <div class="entry-content"><p>对于经常在 Windows 下进行 Web 开发的人来说，<a href="http://www.fiddler2.com/">Fiddler</a> 是神器。但由于它是 .Net Framework 下开发的，注定了用于 Linux 或者 Unix 之类系统上只能通过反向代理，如果不在同一个局域网内，非常麻烦。</p>
 
-<p>还好在 Mac OSX 下我们还有 <a href="http:///www.charlesproxy.com/">Charles</a>。</p>
+<p>还好在 Mac OS X 下我们还有 <a href="http:///www.charlesproxy.com/">Charles</a>。</p>
 
 <p>和 Fiddler 相比较，二者的功能不相伯仲。优势在于 Charles 跨平台能力强，Charles 支持 Windows/Mac OS/Linux，Fiddler 只能安装在 Windows 下；劣势在于 Charles 是商业软件，最便宜也得 50 美金。</p>
 
