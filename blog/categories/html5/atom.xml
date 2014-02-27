@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML5 | Begin iOS]]></title>
   <link href="http://limingit.github.io/blog/categories/html5/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-02-27T07:00:49+00:00</updated>
+  <updated>2014-02-27T07:43:58+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Android 下开发 HTML5 遇到的坑]]></title>
-    <link href="http://limingit.github.io/blog/2014/02/24/android-html5-development-trap/"/>
-    <updated>2014-02-24T15:50:00+00:00</updated>
-    <id>http://limingit.github.io/blog/2014/02/24/android-html5-development-trap</id>
+    <link href="http://limingit.github.io/blog/2014/02/26/android-html5-development-trap/"/>
+    <updated>2014-02-26T15:50:00+00:00</updated>
+    <id>http://limingit.github.io/blog/2014/02/26/android-html5-development-trap</id>
     <content type="html"><![CDATA[<p>这两天在开发一个 HTML5 的应用，主要是用于 Android 下的 WebView 内嵌使用。开发阶段，在 PC 的 Chrome 上测试，一切正常。但是和应用真机联调的时候，遇到了一系列问题，耗时颇久，总算一一解决，总结如下</p>
 
 <h2>设置HOST</h2>
@@ -47,7 +47,18 @@
 
 <p>应用中使用了 SQLite 缓存部分数据，Android 2.* + 上 通过 try catch 捕获到 SQLite 报错：Cannot call method &lsquo;transaction&rsquo; of null。</p>
 
-<p>现在的解决方案是，不仅要检查是否有 openDatabase 还要检查实例化结果是否有 transaction 方法，如果没有就走 sessionStorage 来存储。</p>
+<p>最初的解决方案是，不仅要检查是否有 openDatabase 还要检查实例化结果是否有 transaction 方法，如果没有就走 sessionStorage 来存储。</p>
+
+<p>根本原因，是因为数据库路径的问题导致，当没有指定数据库文件路径而使用 Web SQL 数据库时，错误信息显示不能打开sqlite数据库文件。</p>
+
+<p>解决方法：
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">webView</span><span class="o">.</span><span class="na">getSettings</span><span class="o">().</span><span class="na">setJavaScriptEnabled</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+</span><span class='line'><span class="n">webView</span><span class="o">.</span><span class="na">getSettings</span><span class="o">().</span><span class="na">setDatabaseEnabled</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+</span><span class='line'><span class="n">webView</span><span class="o">.</span><span class="na">getSettings</span><span class="o">().</span><span class="na">setDatabasePath</span><span class="o">(</span><span class="n">dir</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h2>history.pushState</h2>
 
