@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: URL Schema | Begin iOS]]></title>
   <link href="http://limingit.github.io/tags/url-schema/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-02-25T08:34:56+00:00</updated>
+  <updated>2014-02-27T03:25:12+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -26,6 +26,9 @@
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;tel:10010&quot;</span><span class="nt">&gt;</span>联通客户服务热线10010<span class="nt">&lt;/a&gt;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<!--more-->
+
 
 <p>如果想禁用此功能，在页面的 &lt;head&gt;&lt;/head&gt; 之间添加如下代码：
 <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>

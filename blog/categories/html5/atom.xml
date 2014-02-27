@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML5 | Begin iOS]]></title>
   <link href="http://limingit.github.io/blog/categories/html5/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-02-25T08:34:56+00:00</updated>
+  <updated>2014-02-27T03:25:12+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Android 下开发 HTML5 遇到的坑]]></title>
+    <link href="http://limingit.github.io/blog/2014/02/24/android-html5-development-trap/"/>
+    <updated>2014-02-24T15:50:00+00:00</updated>
+    <id>http://limingit.github.io/blog/2014/02/24/android-html5-development-trap</id>
+    <content type="html"><![CDATA[<p>这两天在开发一个 HTML5 的应用，主要是用于 Android 下的 WebView 内嵌使用。开发阶段，在 PC 的 Chrome 上测试，一切正常。但是和应用真机联调的时候，遇到了一系列问题，耗时颇久，总算一一解决，总结如下</p>
+
+<h2>设置HOST</h2>
+
+<p>因为是在测试环境，第一步就是要设置 HOST，确保域名指向相应的 IP。</p>
+
+<p>一般来说，有两种办法：</p>
+
+<ul>
+<li><p>在手机浏览器中测试，是给 Wifi 设置 HTTP 代理，指向开着 Fiddler 或者 Charles 的 PC 机的 IP（端口号 8888），在 PC 机上设置 HOST，达到测试的目的。对于没有 ROOT 权限的 Android 机器，这几乎就足够了。</p></li>
+<li><p>在开发机中设置 HOST。不过这要求有 ROOT 权限才能编辑。</p></li>
+</ul>
+
+
+<p><strong>坑一</strong>：设置 HOST 的时候，我习惯性修改的是 /etc/hosts，结果无论如何都不生效。后来查询资料，才知道，应该修改 /system/etc.hosts</p>
+
+<p>并且请注意 HOST 文件最后一定要有一行空行。</p>
+
+<p>如果是在 Windows 下修改，并同步过去的，还要注意换行符的问题。</p>
+
+<!--more-->
+
+
+<h2>清缓存</h2>
+
+<p>应用的 WebView 自身也有缓存，有同事在改了文件后，一直发现无变化。后来进入设置->应用程序->管理应用程序，找到我们的 APP，清掉全部数据后才生效。</p>
+
+<h2>SQLite 数据库</h2>
+
+<p>应用中使用了 SQLite 缓存部分数据，Android 2.* + 上 通过 try catch 捕获到 SQLite 报错：Cannot call method &lsquo;transaction&rsquo; of null。</p>
+
+<p>现在的解决方案是，不仅要检查是否有 openDatabase 还要检查实例化结果是否有 transaction 方法，如果没有就走 sessionStorage 来存储。</p>
+
+<h2>history.pushState</h2>
+
+<p>pushState 执行完，取 URL 还是之前的。只能切换场景的时候，将新场景的 URL 通过传参的形式传递。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[使用 HTML5 应用缓存加速移动页面]]></title>

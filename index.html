@@ -8,7 +8,7 @@
   <title>Begin iOS</title>
   <meta name="author" content="Bencalie" />
   
-  <meta name="description" content="微博的 iPhone 客户端是竖屏浏览的，前两天 9173 推出了一个 Flappy Bird 微博版，是一个横屏的 HTML 游戏。因此在内嵌浏览器中依然是竖着浏览的，下面出现了一大块黑色背景，9173 不得已下面放了一个图标，示意玩家旋转屏幕为横屏来玩。如图： 这给人的感觉很不好， &hellip;" />
+  <meta name="description" content="微博的 iPhone 客户端是竖屏浏览的，前两天 9173 推出了一个 Flappy Bird 微博版，是一个横屏的 HTML 游戏。因此在内嵌浏览器中依然是竖着浏览的，下面出现了一大块黑色背景，9173 不得已下面放了一个图标，示意玩家旋转屏幕为横屏来玩。如图： " />
   
   <meta name="keyword" content="iOS Development, Cocos2d-x, Javascript" />
   <!-- http://t.co/dKP3o1e -->
@@ -98,47 +98,12 @@
 
 <p><img src="images/blog/flappy-bird.jpg"></p>
 
-<p>这给人的感觉很不好，于是开始琢磨怎么改进。有两个思路：</p>
-
-<ul>
-<li>页面自身内容旋转 90 度</li>
-<li>Webview 本身旋转 90 度</li>
-</ul>
-
-
-<p>一开始的思路是页面内将 canvas 画布通过 CSS3 的 transform 来实现：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;canvas style="transform:rotate(90deg);">&lt;/canvas></span></code></pre></td></tr></table></div></figure>
-
-
-<p>经测试，虽然表面旋转过来了，JS 里的坐标系还是以 BODY 的为准，这个想法放弃。</p>
-
-<p>那只有尝试第二种了，直接旋转 Webview，这里只尝试了 iOS 系统，Android 未测试</p>
-
-<p>其实一行代码就搞定了（这里 webView 是 UIWebview 的引用）：</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">webView</span><span class="p">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">CGAffineTransformMakeRotation</span><span class="p">(</span><span class="n">M_PI</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>圆周率 PI 表示 180度，在 Objective-C 里用 M_PI 表示，旋转 90 度，就是除以 2。</p>
-
-<p>下面的代码，可以基于原有的旋转角度进一步旋转：</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">CGAffineTransform</span> <span class="n">transform</span> <span class="o">=</span> <span class="n">webView</span><span class="p">.</span><span class="n">transform</span><span class="p">;</span>
-</span><span class='line'><span class="n">webView</span><span class="p">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">CGAffineTransformRotate</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="n">M_PI</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>微博客户端里，可以进行判断，如果需要横屏展示的应用（开发者在后台设置），就自动旋转 UIWebview，同时将 navigationBar 和底部导航都旋转以适应。全屏游戏甚至不需要展示 navigationBar 和底部导航。</p>
-
-<p>需要注意的是，UIWebview 里最好就不要用 window 对象下 alert、confirm 等，因为他们还是竖屏显示的。可以自己用 HTML/CSS 制作这样的 UI。</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/24/uiwebview-rotate/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -182,69 +147,71 @@
 
 <p>官方网站：<a href="http://markdownpad.com/">http://markdownpad.com/</a></p>
 
-<p><img src="http://markdownpad.com/img/markdownpad2.png"></p>
-
-<h3>GoLangIDE</h3>
-
-<p>Go 语言写的 Markdown 编辑器，支持 Windows、Linux、Mac</p>
-
-<p><a href="http://code.google.com/p/golangide/">http://code.google.com/p/golangide/</a></p>
-
-<p><img src="images/blog/markdown-editor-liteide.png"></p>
-
-<h3>Mou</h3>
-
-<p>官方网站：<a href="http://mouapp.com/">http://mouapp.com/</a></p>
-
-<p><img src="http://mouapp.com/images/Mou_Screenshot_1.png"></p>
-
-<h3>Markdown Pro</h3>
-
-<p>带预览功能，支持 Mac OS X 10.7+</p>
-
-<p>官方网站：<a href="http://markdownpro.com/">http://markdownpro.com/</a></p>
-
-<p><img src="http://markdownpro.com/assets/main_window-6e78258db30c284deb8e2c5663cf1e25.jpg"></p>
-
-<h3>TEXTS</h3>
-
-<p>支持 Windows 和 Mac OS X</p>
-
-<p>官方网站：<a href="http://www.texts.io/">http://www.texts.io/</a></p>
-
-<p><img src="http://www.texts.io/img/screenshot.png"></p>
-
-<h3>ByWord</h3>
-
-<p>官方网站：<a href="http://bywordapp.com/">http://bywordapp.com/</a></p>
-
-<h3>MarkPad</h3>
-
-<p>带预览功能，支持 Windows</p>
-
-<p>官方网站：<a href="http://code52.org/DownmarkerWPF/">http://code52.org/DownmarkerWPF/</a></p>
-
-<p><img src="http://code52.org/DownmarkerWPF/screenshot.png"></p>
-
-<h3>ReText</h3>
-
-<p>官方网站：<a href="http://sourceforge.net/p/retext/home/ReText/">http://sourceforge.net/p/retext/home/ReText/</a></p>
-
-<h3>Sublime Text 2</h3>
-
-<p>使用插件实现，如：Markdown Preview，MarkdownEditing</p>
-
-<p>官方网站：<a href="http://www.sublimetext.com/dev">http://www.sublimetext.com/dev</a></p>
-
-<h3>Dillinger</h3>
-
-<p>官方网站：<a href="http://dillinger.io/%EF%BC%88%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%89">http://dillinger.io/%EF%BC%88%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%89</a></p>
-
-<h3>Made（Chrome插件）</h3>
-
-<p>官方网站：<a href="https://chrome.google.com/webstore/detail/oknendfeeopgpibecfjljjfanledpbkog?hl=en">https://chrome.google.com/webstore/detail/oknendfeeopgpibecfjljjfanledpbkog?hl=en</a></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/24/markdown-editor/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/24/android-html5-development-trap/">Android 下开发 HTML5 遇到的坑</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-24T15:50:00+00:00" pubdate data-updated="true">Feb 24<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这两天在开发一个 HTML5 的应用，主要是用于 Android 下的 WebView 内嵌使用。开发阶段，在 PC 的 Chrome 上测试，一切正常。但是和应用真机联调的时候，遇到了一系列问题，耗时颇久，总算一一解决，总结如下</p>
+
+<h2>设置HOST</h2>
+
+<p>因为是在测试环境，第一步就是要设置 HOST，确保域名指向相应的 IP。</p>
+
+<p>一般来说，有两种办法：</p>
+
+<ul>
+<li><p>在手机浏览器中测试，是给 Wifi 设置 HTTP 代理，指向开着 Fiddler 或者 Charles 的 PC 机的 IP（端口号 8888），在 PC 机上设置 HOST，达到测试的目的。对于没有 ROOT 权限的 Android 机器，这几乎就足够了。</p></li>
+<li><p>在开发机中设置 HOST。不过这要求有 ROOT 权限才能编辑。</p></li>
+</ul>
+
+
+<p><strong>坑一</strong>：设置 HOST 的时候，我习惯性修改的是 /etc/hosts，结果无论如何都不生效。后来查询资料，才知道，应该修改 /system/etc.hosts</p>
+
+<p>并且请注意 HOST 文件最后一定要有一行空行。</p>
+
+<p>如果是在 Windows 下修改，并同步过去的，还要注意换行符的问题。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/24/android-html5-development-trap/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -290,55 +257,12 @@
 
 <p>设置位置： google+ > 个人资料 > 简介 > 链接, 可以<a href="https://plus.google.com/me/about/edit/co">戳这里直接打开修改位置</a></p>
 
-<p><img src="/images/blog/google-plus-modify.png"></p>
-
-<p>点击修改</p>
-
-<p><img src="/images/blog/google-plus-custom.png"></p>
-
-<p>点击保存确认修改。</p>
-
-<p>在链接面板里还有个“Google+网址”，点击使用此网址，可以查看自己在 Google+ 公开个人资料的网址，复制出来，下面要用到。</p>
-
-<p><img src="/images/blog/google-plus-author.png"></p>
-
-<h4>3、在您的网页上创建指向您 Google+ 个人资料的链接。</h4>
-
-<p>两种方法, 自选一个：</p>
-
-<p>方法一：在页面(body部分）直接添加一个链接到你的 Google+ 页面，例如:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://plus.google.com/107446839256480078362/posts?rel=author&quot;</span><span class="nt">&gt;</span>我的Google+<span class="nt">&lt;/a&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>注意网址的协议是是 <a href="https://">https://</a> ，并且必须有 ?rel=author 参数。</p>
-
-<p>方法二: 在网站页面头部（head部分）容器中添加一行，例如:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;author&quot;</span> <span class="na">href=</span><span class="s">&quot;https://plus.google.com/107446839256480078362/posts&quot;</span> <span class="nt">/&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>注意网址的协议是是 <a href="https://">https://</a> ，并且后面带有一个 /posts。</p>
-
-<p>本站选择的是后者。</p>
-
-<p>至此，已经大功告成了。 最后请确保设置中的<a href="https://plus.google.com/settings">个人资料搜索选项</a>: 帮助其他人在搜索结果中找到我的个人资料处于选中状态，否则是不会显示个人信息的。</p>
-
-<p><img src="/images/blog/google-plus-setting.png"></p>
-
-<p>你可以用 Google 的网站站长工具测试一下是否设置正确：<a href="http://www.google.com/webmasters/tools/richsnippets">http://www.google.com/webmasters/tools/richsnippets</a></p>
-
-<p>输入你的网址点预览，效果应该如图：</p>
-
-<p><img src="/images/blog/google-plus-test.png"></p>
-
-<p>一般设置成功后，需要几天后才能看得到，请大家有点耐心，表着急。</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/20/google-search-result-show-author/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -396,45 +320,12 @@
 
 <p><img src="http://www.jetbrains.com/objc/img/tour/Debugger.png"></p>
 
-<h3>SQLite 管理</h3>
-
-<h4>SQLiteManager</h4>
-
-<p>官方首页：<a href="http://www.sqlabs.net/sqlitemanager.php">http://www.sqlabs.net/sqlitemanager.php</a></p>
-
-<p>商业软件（$49.00），支持 Windows 和 Mac 系统。</p>
-
-<p>本地 SQLite 数据库管理，可以进行增删改查。比 Firefox 的 SQLite Manager 插件更加强大</p>
-
-<p>下载：<a href="http://pan.baidu.com/s/1gdqoSSV">百度网盘</a></p>
-
-<p><img src="http://www.sqlabs.net/images/sqlitemanager4/main@2x.jpg"></p>
-
-<h3>SQLiteExpert</h3>
-
-<p>官方首页：<a href="http://www.sqliteexpert.com/index.html">http://www.sqliteexpert.com/index.html</a></p>
-
-<p>分为个人版（免费）和专业版（$59.00），二者功能略有差异</p>
-
-<p><img src="http://www.sqliteexpert.com/screenshots/execute_sql_large.png"></p>
-
-<h3>Navicat for SQLite</h3>
-
-<p>官方首页：<a href="http://www.navicat.com.cn/">http://www.navicat.com.cn/</a></p>
-
-<p>商业软件，支持 Windows、Mac 和 Linux</p>
-
-<p><img src="http://www.navicat.com.cn/images/stories/products/sqlite/mac/img_productSQLite_02_Grid_Form_View_Mac_large.png"></p>
-
-<h3>MesaSQLite</h3>
-
-<p>官方首页：<a href="http://www.desertsandsoftware.com/?page_id=17">http://www.desertsandsoftware.com/?page_id=17</a></p>
-
-<p>免费软件，仅支持 Mac 系统</p>
-
-<p><img src="http://www.desertsandsoftware.com/wp-content/plugins/doptg/uploads/yQe4s44W86DHa85YSpjeg44Y31EX5DTeTkhqNmrPtdPGMr6gp5wpeecYaSyOypzjR.png"></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/17/ios-development-tools/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -478,49 +369,14 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>如果想禁用此功能，在页面的 &lt;head&gt;&lt;/head&gt; 之间添加如下代码：</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;format-detection&quot;</span> <span class="na">content=</span><span class="s">&quot;telephone=no&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
 
 
-<p>但在一个原生的 iOS 应用中，直接添加一个 UIWebview，嵌入相同的页面后，点击链接却没有出现这个确认提示。新浪微博官方客户端里也无效。长按这个链接，能看到呼叫、保存到通讯录的菜单，证明内置浏览器还是能识别这个 url schema。</p>
-
-<p>微信和百度的内置浏览器中，点击同样的链接，会直接唤起，如图：</p>
-
-<p><img src="/images/blog/weixin-tel-schema.jpg"></p>
-
-<p>经过研究，发现不同之处，微信等是原生应用中唤起的。</p>
-
-<p>需要在 UIViewController 的头文件中中设置支持 UIWebviewDelegate，并在实现代理方法 &ndash; (BOOL)webView:(UIWebView <em>)webView shouldStartLoadWithRequest:(NSURLRequest </em>)request navigationType:(UIWebViewNavigationType)navigationType，一旦发现是 tel:// 这种格式，就在由 Objective-C 唤起拨号。</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">webView:</span><span class="p">(</span><span class="n">UIWebView</span> <span class="o">*</span><span class="p">)</span><span class="nv">webView</span> <span class="nf">shouldStartLoadWithRequest:</span><span class="p">(</span><span class="n">NSURLRequest</span> <span class="o">*</span><span class="p">)</span><span class="nv">request</span> <span class="nf">navigationType:</span><span class="p">(</span><span class="n">UIWebViewNavigationType</span><span class="p">)</span><span class="nv">navigationType</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">request</span> <span class="n">URL</span><span class="p">];</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">([[</span><span class="n">url</span> <span class="n">schema</span><span class="p">]</span> <span class="nl">isEqualToString:</span><span class="s">@&quot;tel&quot;</span><span class="p">]){</span>
-</span><span class='line'>      <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">]</span> <span class="nl">openURL:</span><span class="n">url</span><span class="p">];</span>
-</span><span class='line'>      <span class="k">return</span> <span class="n">NO</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>参考资料：</h3>
-
-<p>URL Schema 在浏览器中的兼容性：<a href="http://answers.oreilly.com/topic/2166-how-to-send-a-text-message-from-your-mobile-website/">How to Send a Text Message from Your Mobile Website</a></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/14/ios-uiwebview-support-telephone-call/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -756,15 +612,15 @@
       </li>
     
       <li class="post">
+        <a href="/blog/2014/02/24/android-html5-development-trap/">Android 下开发 HTML5 遇到的坑</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/20/google-search-result-show-author/">在Google搜索结果中显示作者信息/头像</a>
       </li>
     
       <li class="post">
         <a href="/blog/2014/02/17/ios-development-tools/">iOS 开发工具集合</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/14/ios-uiwebview-support-telephone-call/">iOS UIWebview 中直接唤起电话拨号</a>
       </li>
     
   </ul>

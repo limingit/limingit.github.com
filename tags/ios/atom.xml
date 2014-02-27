@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: iOS | Begin iOS]]></title>
   <link href="http://limingit.github.io/tags/ios/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-02-25T08:34:56+00:00</updated>
+  <updated>2014-02-27T03:25:12+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<p>微博的 iPhone 客户端是竖屏浏览的，前两天 9173 推出了一个 Flappy Bird 微博版，是一个横屏的 HTML 游戏。因此在内嵌浏览器中依然是竖着浏览的，下面出现了一大块黑色背景，9173 不得已下面放了一个图标，示意玩家旋转屏幕为横屏来玩。如图：</p>
 
 <p><img src="images/blog/flappy-bird.jpg"></p>
+
+<!--more-->
+
 
 <p>这给人的感觉很不好，于是开始琢磨怎么改进。有两个思路：</p>
 
