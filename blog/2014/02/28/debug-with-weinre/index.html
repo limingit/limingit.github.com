@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8" />
-  <title>Begin iOS</title>
+  <title>使用 Weinre 调试移动网页 - Begin iOS</title>
   <meta name="author" content="Bencalie" />
   
   <meta name="description" content="Weinre （官方网页
@@ -19,7 +19,7 @@
   <link rel="author" href="https://plus.google.com/107446839256480078362/posts" />
   <link rel="publisher" href="https://plus.google.com/107446839256480078362" />
   
-  <link rel="canonical" href="http://limingit.github.io" />
+  <link rel="canonical" href="http://limingit.github.io/blog/2014/02/28/debug-with-weinre" />
   <link href="/favicon.png" rel="icon" />
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
   <link href="/atom.xml" rel="alternate" title="Begin iOS" type="application/atom+xml" />
@@ -65,15 +65,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/02/28/debug-with-weinre/">使用 Weinre 调试移动网页</a></h1>
+      <h1 class="entry-title">使用 Weinre 调试移动网页</h1>
     
     
       <p class="meta">
@@ -96,7 +93,7 @@
   </header>
 
 
-  <div class="entry-content"><p>Weinre （<a href="http://people.apache.org/~pmuellr/weinre/docs/latest/">官方网页</a>
+<div class="entry-content"><p>Weinre （<a href="http://people.apache.org/~pmuellr/weinre/docs/latest/">官方网页</a>
 ）全名是 <strong>WE</strong>b <strong>IN</strong>spector <strong>RE</strong>mote，它是一个网页调试工具，外观类似于 Firefox 下的 Firebug 和 Webkit 内核浏览器中的 Web Inspector，主要用于移动设备远程页面调试，典型应用就是在桌面浏览器里调试 iPhone、iPad、Android 手机等移动设备上网页中的 HTML/CSS/Javascript。</p>
 
 <p>Weinre 是 Apache Cordova 项目（江湖上曾经鼎鼎大名的 PhoneGap）的一部分。很多网页调试工具都是基于它开发出来的，比如 jsFiddle、Adobe Shadow、MIHTool。</p>
@@ -423,95 +420,16 @@
 
 <p><a href="http://muellerware.org/papers/weinre/manual.html">http://muellerware.org/papers/weinre/manual.html</a></p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/27/ios-mobile-page-debug/">移动页面前端调试 - iOS 系统</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Bencalie</span></span>
 
-<time datetime="2014-02-27T15:52:00+00:00" pubdate data-updated="true">Feb 27<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>随着移动智能设备的普及，前端开发的工作战线，越来越多偏向移动方向，因此，移动设备上的调试能力是必不可少的。</p>
-
-<p>主流的移动设备，还是 Android 和 iOS，因此，我将分两篇文章，分别介绍 iOS 和 Android 下的前端调试技术。</p>
-
-<p>iOS 设备下进行 HTML 页面的调试，根据页面的调用方式不同，分为两种情况：</p>
-
-<ul>
-<li><p>直接在浏览器中显示 HTML 页面。无论系统自带的 Safari，还是其他厂商的浏览器（如 Chrome、猎豹、搜狗、海豚、Mercury、QQ 等等），均在此列。</p></li>
-<li><p>原生应用中集成的 UIWebview 中显示 HTML 页面。Cordova（原名 PhoneGap） 的内置 Webview 也算在此列。</p></li>
-</ul>
-
-
-<h2>测试环境访问</h2>
-
-<p>iOS 下不越狱是没法设置 HOST 的。</p>
-
-<p>如果你的代码还在测试环境，目前只能通过 Wifi 代理，在充当代理的机器上设置 HOST 来解决。</p>
-
-<p>如果越狱了就好办了， iFile 找到 /etc/hosts 修改。网上资料很多，大家自己发掘吧</p>
-
-<p>下面，我们就逐一介绍如何进行调试。</p>
-
-<h2>Safari</h2>
-
-<p>Mac 下的 Safari 是自带了开发人员工具的，可以进行页面调试，但是 iPhone/iPad 下由于手持设备屏幕大小和触摸式操作习惯的影响，iOS 系统的 Safari 没有带调试功能。</p>
-
-<p>如果你的设备是 iOS 6 以上，且有一台 Mac 电脑，你就可以利用 Mac 电脑上的 Safari ，远程进行调试。</p>
-
-<p><strong>注：Windows 下的 Safari 不支持这个功能。</strong></p>
-
-<p>分如下几个步骤完成：</p>
-
-<p>1、iOS 设备开启远程调试。进入设置 &ndash;> Safari &ndash;> 高级，将 Web 检查器一项开启。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/02/27/ios-mobile-page-debug/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/26/android-html5-development-trap/">Android 下开发 HTML5 遇到的坑</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -523,465 +441,50 @@
   
 
 
-<time datetime="2014-02-26T15:50:00+00:00" pubdate data-updated="true">Feb 26<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>这两天在开发一个 HTML5 的应用，主要是用于 Android 下的 WebView 内嵌使用。开发阶段，在 PC 的 Chrome 上测试，一切正常。但是和应用真机联调的时候，遇到了一系列问题，耗时颇久，总算一一解决，总结如下</p>
-
-<h2>设置HOST</h2>
-
-<p>因为是在测试环境，第一步就是要设置 HOST，确保域名指向相应的 IP。</p>
-
-<p>一般来说，有两种办法：</p>
-
-<ul>
-<li><p>在手机浏览器中测试，是给 Wifi 设置 HTTP 代理，指向开着 Fiddler 或者 Charles 的 PC 机的 IP（端口号 8888），在 PC 机上设置 HOST，达到测试的目的。对于没有 ROOT 权限的 Android 机器，这几乎就足够了。</p></li>
-<li><p>在开发机中设置 HOST。不过这要求有 ROOT 权限才能编辑。</p></li>
-</ul>
-
-
-<p>设置 HOST 的时候，我习惯性修改的是 /etc/hosts，结果无论如何都不生效。后来查询资料，才知道，应该修改 /system/etc/hosts。并且请注意 HOST 文件最后一定要有一行空行。</p>
-
-<p>如果是在 Windows 下修改并同步过去的，还要注意换行符的问题。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/02/26/android-html5-development-trap/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
+<time datetime="2014-02-28T14:22:00+00:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
       
-  <header>
+
+
+    </p>
     
-      <h1 class="entry-title"><a href="/blog/2014/02/25/uiwebview-rotate/">UIWebview 顺时针旋转 90 度</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
+      <div class="sharing">
   
-
-
-<time datetime="2014-02-25T15:50:00+00:00" pubdate data-updated="true">Feb 25<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>微博的 iPhone 客户端是竖屏浏览的，前两天 9173 推出了一个 Flappy Bird 微博版，是一个横屏的 HTML 游戏。因此在内嵌浏览器中依然是竖着浏览的，下面出现了一大块黑色背景，9173 不得已下面放了一个图标，示意玩家旋转屏幕为横屏来玩。如图：</p>
-
-<p><img src="images/blog/flappy-bird.jpg"></p>
-
+  
+  
+  
+	<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<span class="jiathis_txt">&#x5206;&#x4eab;&#x5230;&#xff1a;</span>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=1822549" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">&#x66f4;&#x591a;</a>
+	<a class="jiathis_counter_style"></a>
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/02/25/uiwebview-rotate/">Read on &rarr;</a>
-    </footer>
-  
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=1822549" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1822549"></script>
+<!-- UY END -->
 
+  
+</div>
 
-    </article>
-  
-  
-    <article>
+    
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/24/markdown-editor/">流行的 Markdown 编辑器</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-24T15:50:00+00:00" pubdate data-updated="true">Feb 24<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://ux.etao.com/posts/620">Markdown 简介</a></p>
-
-<h3>MarkdownPad</h3>
-
-<p>仅支持 Windows 系统，需要安装 Microsoft .NET Framework 4.0</p>
-
-<p>免费版有一定限制，Pro 版本 $14.95</p>
-
-<p>官方网站：<a href="http://markdownpad.com/">http://markdownpad.com/</a></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/02/24/markdown-editor/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
+        <a class="basic-alignment left" href="/blog/2014/02/27/ios-mobile-page-debug/" title="Previous Post: 移动页面前端调试 - iOS 系统">&laquo; 移动页面前端调试 - iOS 系统</a>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/20/google-search-result-show-author/">在Google搜索结果中显示作者信息/头像</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-20T10:50:00+00:00" pubdate data-updated="true">Feb 20<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>众多搜索引擎中，我比较中意谷歌，因为它搜索结果中有效信息比例很高。谷歌的搜索结果页中，经常看得到一些搜索结果带有作者信息和头像，众多搜索结果中，总能让人眼前一亮。</p>
-
-<p><img src="/images/blog/google-search-result.png"></p>
-
-<h3>实现方法</h3>
-
-<h4>1、注册<a href="https://plus.google.com/">Google+</a></h4>
-
-<h4>2、修改一下google+网站的撰稿者部分,添加你的博客或个人网站链接。</h4>
-
-<p>设置位置： google+ > 个人资料 > 简介 > 链接, 可以<a href="https://plus.google.com/me/about/edit/co">戳这里直接打开修改位置</a></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/02/20/google-search-result-show-author/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/17/ios-development-tools/">iOS 开发工具集合</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-17T06:50:00+00:00" pubdate data-updated="true">Feb 17<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>IDE</h3>
-
-<h4>Xcode</h4>
-
-<p>苹果自家的集成开发工具，不必多说。</p>
-
-<p>官方首页：<a href="https://developer.apple.com/xcode/">https://developer.apple.com/xcode/</a></p>
-
-<p>免费使用，仅能运行在 Mac 下。</p>
-
-<p><img src="https://devimages.apple.com.edgekey.net/xcode/images/xcode5-hero.jpg"></p>
-
-<h4>JetBrains: App Code</h4>
-
-<p>JetBrains 有许多业内著名的开发工具：WebStorm、PHPStrom</p>
-
-<p>官方首页：<a href="http://www.jetbrains.com/objc/">http://www.jetbrains.com/objc/</a></p>
-
-<p>商业软件，个人授权 $99，商业授权 $199。它只能运行在 Mac 上。</p>
-
-<p>相对于 Xcode 来说，工程管理弱一些。使用的不多，难以置喙。</p>
-
-<p><img src="http://www.jetbrains.com/objc/img/tour/Debugger.png"></p>
+    </p>
+  </footer>
+</article>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/02/17/ios-development-tools/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/14/ios-uiwebview-support-telephone-call/">iOS UIWebview 中直接唤起电话拨号</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-14T06:39:00+00:00" pubdate data-updated="true">Feb 14<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在 iPhone 自带的 Safari 浏览器中，是可以通过苹果公司定义的 <a href="https://developer.apple.com/library/ios/featuredarticles/iPhoneURLScheme_Reference/Introduction/Introduction.html">Apple URL Schemas</a> 直接呼出电话拨号的，效果如图：</p>
-
-<p><img src="/images/blog/tel-url-schema.png"></p>
-
-<figure class='code'><figcaption><span>HTML中的写法 </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;tel:10010&quot;</span><span class="nt">&gt;</span>联通客户服务热线10010<span class="nt">&lt;/a&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/02/14/ios-uiwebview-support-telephone-call/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/14/using-the-application-cache/">使用 HTML5 应用缓存加速移动页面</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-14T16:18:00+00:00" pubdate data-updated="true">Jan 14<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>简介</h3>
-
-<p>HTML5 提供了一种应用缓存的机制，将 HTML/JS/CSS/图片等资源缓存在浏览器本地，便于 Web 应用可以在断网的情况下离线运行，达到类似于“脱机浏览”的效果。浏览器还提供了调用应用缓存的接口 window.applicationCache，来设定浏览器缓存的数据。</p>
-
-<p>它带来的好处有：</p>
-
-<ol>
-<li>离线浏览：即使断网状态，网站仍然可以浏览，保证了基本的可用性（当然，某些必须连接远程服务器的功能例外）</li>
-<li>应用加速：因为相关的文件被缓存到本地，没有网络延时和服务器处理时间，加载速度变快了</li>
-<li>减轻服务器的负载：浏览器只会下载服务器上发生变更的资源</li>
-</ol>
-
-
-<p>基本的做法是：</p>
-
-<ol>
-<li>页面在 &lt;html&gt; 声明使用一个 manifest 文件（后文会详细介绍），manifest 来维护需要缓存的资源文件（如：JS/CSS/图片等）列表。</li>
-<li>初次访问页面的时候，浏览器在后台下载 manifest 中指定的资源文件，生成应用缓存的第一个版本。</li>
-<li>后续访问的时候，就直接使用浏览器应用缓存里的资源了。同时浏览器会触发 applicationCache 对象的 checking 事件，去检查清单文件，如果缓存是最新的，再触发 noupdate 事件。</li>
-<li>如果被缓存的文件发生了变更，我们需要服务器端马上更新 manifest 文件。</li>
-<li>变更后首次访问的时候，浏览器仍然使用缓存文件来运行应用，同时自动在后台更新发生变化的资源文件。</li>
-</ol>
-
-
-<p>可以看到，它缓存的基本都是静态类型的文件。如果结合 SQLite 或者 localStorage 在本地进行一些数据缓存，完全可能搭建一个离线状态可正常运行的程序，剩下的就是考虑本地和远程服务器之间的资源文件及数据缓存如何更新问题。</p>
-
-<p>利用这个机制，我们就可以在移动页面中实现网站加速，尤其是在 2G 这样的网络环境下，加速效果尤为明显。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/01/14/using-the-application-cache/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/14/charles-proxy-for-mac/">Mac OS X 下抓包工具 Charles 使用</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-14T02:43:00+00:00" pubdate data-updated="true">Jan 14<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>对于经常在 Windows 下进行 Web 开发的人来说，<a href="http://www.fiddler2.com/">Fiddler</a> 是神器。但由于它是 .Net Framework 下开发的，注定了用于 Linux 或者 Unix 之类系统上只能通过反向代理，如果不在同一个局域网内，非常麻烦。</p>
-
-<p>还好在 Mac OS X 下我们还有 <a href="http:///www.charlesproxy.com/">Charles</a>。</p>
-
-<p>和 Fiddler 相比较，二者的功能不相伯仲。优势在于 Charles 跨平台能力强，Charles 支持 Windows/Mac OS/Linux，Fiddler 只能安装在 Windows 下；劣势在于 Charles 是商业软件，最便宜也得 50 美金。</p>
-
-<p>当然，网上已经有很多破解版，感兴趣的网友请自己搜索。</p>
-
-<p>一些使用技巧如下：</p>
-
-<h3>记录设置</h3>
-
-<p>主菜单 Proxy->Recording Settings&hellip;</p>
-
-<p>Include 填写必须要记录的域名，可以使用通配符 * 和 ?，如： *.beginios.com</p>
-
-<p>Exclude 填写不需要记录的域名，可以使用通配符 * 和 ?</p>
-
-<p>注：如果不设置此项，表示全部记录</p>
-
-<h3>禁用缓存</h3>
-
-<p>主菜单 Tools->No Caching&hellip;</p>
-
-<p>勾选后，每次都从服务器读取</p>
-
-<h3>iOS 设备 HTTP 抓包</h3>
-
-<ol>
-<li>确保 iOS 设备和 Mac 电脑在同一个局域网内，启动 Charles</li>
-<li>打开 Proxy->Proxy Settings&hellip;，勾选 Enable transparent HTTP proxying</li>
-<li>查看 Mac 电脑的 IP 地址，如：192.168.1.100</li>
-<li>打开 iOS 设备的设置，进入当前 Wifi 连接，设置 HTTP 代理切换到“手动”，将服务器填为上一步中获得的 IP，端口填8888</li>
-<li>iOS 设备中，打开你要抓包的应用进行网络操作</li>
-<li>Charles 弹出确认框，点击 Allow 按钮即可</li>
-</ol>
-
-
-<h3>HTTPS抓包</h3>
-
-<ol>
-<li>下载 <a href="http://www.charlesproxy.com/ssl.zip">Charles 证书</a>，解压后导入到 iOS 设备中（将 crt 文件作为邮件附件发给自己，再在 iOS 设备中点击附件即可安装；也可上传至 dropbox 之类的网盘，通过 safari 下载安装）</li>
-<li>在Charles的工具栏上点击设置按钮，选择 Proxy Settings…</li>
-<li>切换到 SSL 选项卡，选中 Enable SSL Proxying，然后在 Locations 表单填写要抓包的域名和端口，点击Add按钮，在弹出的表单中 Host 填写域名，比如填 api.weibo.com，Port 填 443</li>
-</ol>
-
-
-<h3>替换本地文件</h3>
-
-<p>Tools &ndash;> Map Local&hellip;</p>
-
-<h3>网络延迟功能</h3>
-
-<p>主菜单  Proxy->Throttle Settings&hellip;</p>
-
-<p>可以用于测试慢速网络下程序的兼容性</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
@@ -1019,21 +522,65 @@
   </ul>
 </section>
 <section>
+	<h1>Tags</h1>
+	<ul class="tag_cloud">
+		<a style="font-size: 90%" href="/tags/android/">Android</a>
+<a style="font-size: 90%" href="/tags/applicationcache/">ApplicationCache</a>
+<a style="font-size: 90%" href="/tags/charles/">Charles</a>
+<a style="font-size: 210%" href="/tags/html5/">HTML5</a>
+<a style="font-size: 90%" href="/tags/markdown-editor/">Markdown Editor</a>
+<a style="font-size: 210%" href="/tags/tools/">Tools</a>
+<a style="font-size: 210%" href="/tags/uiwebview/">UIWebview</a>
+<a style="font-size: 90%" href="/tags/url-schema/">URL Schema</a>
+<a style="font-size: 90%" href="/tags/web-debugging-proxy/">Web Debugging Proxy</a>
+<a style="font-size: 90%" href="/tags/google/">google</a>
+<a style="font-size: 90%" href="/tags/ios/">iOS</a>
+
+	</ul>
+</section>
+<section>
 	<h1>微博开发者</h1>
 	<ul>
 		<li><a href="http://beginios.com/javascript/weibo-app-frame" target="_blank">应用框架接入文档</a></li>
 		<li><a href="http://weibojs.com" target="_blank">微博 JSSDK 官网</a></li>
 	</ul>
-</section><section>
-	<h1>Link</h1>
-	<ul>
-		<li><a href="http://blog.liming.it/">liming.it</a></li>
-		<li><a href="http://wiki.liming.it/">iOS Beginner Wiki</a></li>
-	</ul>
 </section>
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/limingit">@limingit</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'limingit',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
 
   
 </aside>
+
 
     </div>
   </div>

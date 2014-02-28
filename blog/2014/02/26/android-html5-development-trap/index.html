@@ -130,11 +130,39 @@
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">webView</span><span class="o">.</span><span class="na">getSettings</span><span class="o">().</span><span class="na">setJavaScriptEnabled</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-</span><span class='line'><span class="n">webView</span><span class="o">.</span><span class="na">getSettings</span><span class="o">().</span><span class="na">setDatabaseEnabled</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-</span><span class='line'><span class="n">webView</span><span class="o">.</span><span class="na">getSettings</span><span class="o">().</span><span class="na">setDatabasePath</span><span class="o">(</span><span class="n">dir</span><span class="o">);</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">webView</span><span class="o">.</span><span class="na">setWebChromeClient</span><span class="o">(</span><span class="k">new</span> <span class="n">WebChromeClient</span><span class="o">(){</span>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onExceededDatabaseQuota</span><span class="o">(</span>
+</span><span class='line'>        <span class="n">String</span> <span class="n">url</span><span class="o">,</span>
+</span><span class='line'>        <span class="n">String</span> <span class="n">databaseIdentifier</span><span class="o">,</span>
+</span><span class='line'>        <span class="kt">long</span> <span class="n">currentQuota</span><span class="o">,</span>
+</span><span class='line'>        <span class="kt">long</span> <span class="n">estimatedSize</span><span class="o">,</span>
+</span><span class='line'>        <span class="kt">long</span> <span class="n">totalUsedQuota</span><span class="o">,</span>
+</span><span class='line'>        <span class="n">QuotaUpdater</span> <span class="n">quotaUpdater</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">quotaUpdater</span><span class="o">.</span><span class="na">updateQuota</span><span class="o">(</span><span class="mi">5</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">);</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">});</span>
+</span><span class='line'>    <span class="o">...</span>
+</span><span class='line'>    <span class="n">webSettings</span><span class="o">.</span><span class="na">setDatabaseEnabled</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">databasePath</span> <span class="o">=</span> <span class="n">getApplicationContext</span><span class="o">().</span><span class="na">getDir</span><span class="o">(</span><span class="s">&quot;database&quot;</span><span class="o">,</span> <span class="n">Context</span><span class="o">.</span><span class="na">MODE_PRIVATE</span><span class="o">).</span><span class="na">getPath</span><span class="o">();</span>
+</span><span class='line'>    <span class="n">webSettings</span><span class="o">.</span><span class="na">setDatabasePath</span><span class="o">(</span><span class="n">databasePath</span><span class="o">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>参考：<a href="http://www.html5online.com.cn/articles/2013012101.html">在WebView中设定使用Web Storage与Web SQL数据库</a></p>
 
 <h2>history.pushState</h2>
 
@@ -218,10 +246,18 @@
     <section>
 	<h1>关于我</h1>
 	<p>Front-End Engineer</p>
+	<ul>
+		<li>微博：<a href="http://weibo.com/bencalie" target="_blank">@Bencalie</a></li>
+		<li>Google+：<a href="https://plus.google.com/u/0/107446839256480078362?rel=author" target="_blank">Bencalie</a></li>
+	</ul>
 </section>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/02/28/debug-with-weinre/">使用 Weinre 调试移动网页</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/02/27/ios-mobile-page-debug/">移动页面前端调试 - iOS 系统</a>
@@ -237,10 +273,6 @@
     
       <li class="post">
         <a href="/blog/2014/02/24/markdown-editor/">流行的 Markdown 编辑器</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/20/google-search-result-show-author/">在Google搜索结果中显示作者信息/头像</a>
       </li>
     
   </ul>

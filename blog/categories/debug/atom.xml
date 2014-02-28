@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Debug | Begin iOS]]></title>
   <link href="http://limingit.github.io/blog/categories/debug/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-02-27T10:27:20+00:00</updated>
+  <updated>2014-02-28T17:49:47+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -79,6 +79,18 @@
 <p>检查器上还有个手型的图标，激活它以后，设备 Safari 上选择点击一个元素，检查器上就能相应反馈出来。</p>
 
 <p><img src="/images/blog/mobiledebug/mac-safari-web-inspector-hand.png"></p>
+
+<p><strong>iOS 6 以前的系统，就只能使用 Weinre 了。</strong></p>
+
+<h2>Weinre</h2>
+
+<p>如何使用，请阅读<a href="">使用 Weinre 调试移动网页</a></p>
+
+<h2>Adobe Edge（原名 Adobe Shadow）</h2>
+
+<p>Adobe Edge 是基于 Weinre 开发的工具，它能轻松的在多台设备（支持IOS、Android）上同步浏览网页，还能任选其一来调试。由于在移动设备上有App的支持，省去了手工插入target script这一步，非常方便。美中不足是它的client页访问的adobe远程服务器，延时比较大。在我这里每操作一下，大概1秒后才能收到反馈。</p>
+
+<p><a href="http://html.adobe.com/edge/inspect/">http://html.adobe.com/edge/inspect/</a></p>
 
 <h2>MIHTool（<a href="http://www.iunbug.com/mihtool">官网</a>）</h2>
 
