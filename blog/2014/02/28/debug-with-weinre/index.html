@@ -127,6 +127,9 @@
 
 <p>够简单吧。</p>
 
+<!--more-->
+
+
 <h3>安装期间的错误处理</h3>
 
 <p>执行 npm install weinre 的时候，遇到报错如下：</p>
@@ -398,27 +401,38 @@
 
 <h3>手机端调试</h3>
 
-<p>手机端打开潜入了 target-script-min.js 的页面，这时可以看到调试主界面有链接可点击了。</p>
+<p>手机端打开加载了 target-script-min.js 的页面，这时可以看到调试主界面有链接可点击了。里面的操作几乎和 Chrome 的开发人员工具一样。如图：</p>
+
+<p><img src="/images/blog/weinre-web-inspector.png"></p>
+
+<p>不过发觉有一些有问题的地方：我用猎豹浏览器，JS 动态写入的 DOM 节点无法查看，Chrome 是可以的。</p>
+
+<p>我这里 Network 一直没有数据，或者只抓到一些 Weinre 通讯数据，不知道为什么。Timeline 就死活没数据， Chrome 也不行。</p>
+
+<p>debug.phonegap.com 的使用方法一样，不过就是很慢。</p>
+
+<p><img src="/images/blog/weinre-debug-phonegap-com.png"></p>
 
 <h2>参考资料</h2>
 
-<p><a href="http://people.apache.org/~pmuellr/weinre/docs/latest/">官方文档</a></p>
+<ul>
+<li><a href="http://people.apache.org/~pmuellr/weinre/docs/latest/">官方文档</a></li>
+<li><a href="http://www.youtube.com/watch?v=MxmFrFEGInU">官方视频</a></li>
+<li>git仓库：</li>
+</ul>
 
-<p><a href="http://www.youtube.com/watch?v=MxmFrFEGInU">官方视频</a></p>
-
-<p>git仓库：</p>
 
 <p><a href="https://github.com/apache/cordova-weinre">https://github.com/apache/cordova-weinre</a></p>
 
 <p><a href="https://git-wip-us.apache.org/repos/asf?p=cordova-weinre.git;a=summary">https://git-wip-us.apache.org/repos/asf?p=cordova-weinre.git;a=summary</a></p>
 
-<p>npm 插件首页：<a href="https://www.npmjs.org/package/weinre">https://www.npmjs.org/package/weinre</a></p>
+<ul>
+<li>npm 插件首页：<a href="https://www.npmjs.org/package/weinre">https://www.npmjs.org/package/weinre</a></li>
+<li><a href="http://www.cnblogs.com/lhb25/p/debug-mobile-site-and-app-with-weinre.html">http://www.cnblogs.com/lhb25/p/debug-mobile-site-and-app-with-weinre.html</a></li>
+<li><a href="http://blog.csdn.net/dojotoolkit/article/details/6280924">http://blog.csdn.net/dojotoolkit/article/details/6280924</a></li>
+<li><a href="http://muellerware.org/papers/weinre/manual.html">http://muellerware.org/papers/weinre/manual.html</a></li>
+</ul>
 
-<p><a href="http://www.cnblogs.com/lhb25/p/debug-mobile-site-and-app-with-weinre.html">http://www.cnblogs.com/lhb25/p/debug-mobile-site-and-app-with-weinre.html</a></p>
-
-<p><a href="http://blog.csdn.net/dojotoolkit/article/details/6280924">http://blog.csdn.net/dojotoolkit/article/details/6280924</a></p>
-
-<p><a href="http://muellerware.org/papers/weinre/manual.html">http://muellerware.org/papers/weinre/manual.html</a></p>
 </div>
 
 
