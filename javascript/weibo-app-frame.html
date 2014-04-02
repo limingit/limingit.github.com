@@ -519,17 +519,21 @@ resize 外层改变页面大小的事件
 
 <p>4、<strong>我的应用为何没有自适应高度</strong>？</p>
 
-<p><strong>答</strong>：请检查两个地方：open.weibo.com 的应用管理中心，是否将应用高度自适应勾选了；而是否部署了客户端 JS。如果都设置了还没有自适应高度，请寻找页面底部的联系方式。</p>
+<p><strong>答</strong>：请检查两个地方：open.weibo.com 的应用管理中心，是否将应用高度自适应勾选了；是否部署了客户端 JS。如果都设置了还没有自适应高度，请寻找页面底部的联系方式。</p>
 
 <p>5、<strong>我的页面大于 5000px，被框架挡住了，怎么办</strong>？</p>
 
 <p><strong>答</strong>：考虑到绝大多数应用不会有超过 5000px，所以我们做了限制，自适应不能超过这个限制。如果你一定要突破这个限制，请调用：App.trigger(&lsquo;setPageHeight &rsquo;, &lsquo;6000&rsquo;);</p>
 
+<p>6、<strong>为什么我会出现双层导航</strong>？</p>
+
+<p>你需要给链接增加属性 target=&ldquo;_top&rdquo;</p>
+
 <h3>联系我们<a id="contact"></a></h3>
 
 <ul>
-<li>产品团队：[@檀木幻想]</li>
-<li>技术团队：[@jodg]、[@黑拳套]、[@woiweb]、[@Bencalie]</li>
+<li>产品团队：<a href="http://weibo.com/woodfantasy">@檀木幻想</a></li>
+<li>技术团队：<a href="http://weibo.com/725520316">@jodg</a>、<a href="http://weibo.com/blackcop">@黑拳套</a>、<a href="http://weibo.com/bencalie">@Bencalie</a></li>
 </ul>
 
 

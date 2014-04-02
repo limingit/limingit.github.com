@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Debug | Begin iOS]]></title>
   <link href="http://limingit.github.io/blog/categories/debug/atom.xml" rel="self"/>
   <link href="http://limingit.github.io/"/>
-  <updated>2014-03-24T09:15:46+00:00</updated>
+  <updated>2014-04-02T07:08:23+00:00</updated>
   <id>http://limingit.github.io/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -84,11 +84,11 @@
 
 <h2>Weinre</h2>
 
-<p>如何使用，请阅读<a href="">使用 Weinre 调试移动网页</a></p>
+<p>如何使用，请阅读<a href="http://beginios.com/blog/2014/02/28/debug-with-weinre/">使用 Weinre 调试移动网页</a></p>
 
 <h2>Adobe Edge（原名 Adobe Shadow）</h2>
 
-<p>Adobe Edge 是基于 Weinre 开发的工具，它能轻松的在多台设备（支持IOS、Android）上同步浏览网页，还能任选其一来调试。由于在移动设备上有App的支持，省去了手工插入target script这一步，非常方便。美中不足是它的client页访问的adobe远程服务器，延时比较大。在我这里每操作一下，大概1秒后才能收到反馈。</p>
+<p>Adobe Edge 是基于 Weinre 开发的工具，它能轻松的在多台设备（支持IOS、Android）上同步浏览网页，还能任选其一来调试。由于在移动设备上有 App 的支持，省去了手工插入 target script 这一步，非常方便。美中不足是它的 client 页访问的 Adobe 远程服务器，延时比较大。</p>
 
 <p><a href="http://html.adobe.com/edge/inspect/">http://html.adobe.com/edge/inspect/</a></p>
 
