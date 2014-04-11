@@ -431,12 +431,12 @@ login 唤起登录浮层
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
+<span class='line-number'>4</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// 请注意，redirect_uri 是登录成功后回调的 URL，必须传的是 *.weibo.com 下的 URL，不支持第三方的地址</span>
 </span><span class='line'>    <span class="s1">&#39;redirect_uri&#39;</span> <span class="o">:</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="s1">&#39;http://apps.weibo.com/1852339337/8s1i6v74?key=g-16504&#39;</span><span class="p">)</span>
 </span><span class='line'><span class="p">});</span>
 </span></code></pre></td></tr></table></div></figure>
-
-请注意，这个 redirect_uri，是登录成功后回调的URL，必须传的是 *.weibo.com 下的 URL，不支持第三方的地址。
 
 
 setTitle 设置父页面标题栏（此API暂未开放）
