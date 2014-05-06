@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Debug | Begin iOS]]></title>
-  <link href="http://limingit.github.io/blog/categories/debug/atom.xml" rel="self"/>
-  <link href="http://limingit.github.io/"/>
-  <updated>2014-04-21T03:13:26+00:00</updated>
-  <id>http://limingit.github.io/</id>
+  <link href="http://beginios.com/blog/categories/debug/atom.xml" rel="self"/>
+  <link href="http://beginios.com/"/>
+  <updated>2014-05-06T08:11:04+00:00</updated>
+  <id>http://beginios.com/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[移动页面前端调试 - iOS 系统]]></title>
-    <link href="http://limingit.github.io/blog/2014/02/27/ios-mobile-page-debug/"/>
+    <link href="http://beginios.com/blog/2014/02/27/ios-mobile-page-debug/"/>
     <updated>2014-02-27T15:52:00+00:00</updated>
-    <id>http://limingit.github.io/blog/2014/02/27/ios-mobile-page-debug</id>
+    <id>http://beginios.com/blog/2014/02/27/ios-mobile-page-debug</id>
     <content type="html"><![CDATA[<p>随着移动智能设备的普及，前端开发的工作战线，越来越多偏向移动方向，因此，移动设备上的调试能力是必不可少的。</p>
 
 <p>主流的移动设备，还是 Android 和 iOS，因此，我将分两篇文章，分别介绍 iOS 和 Android 下的前端调试技术。</p>

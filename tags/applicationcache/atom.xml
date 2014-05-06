@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: ApplicationCache | Begin iOS]]></title>
-  <link href="http://limingit.github.io/tags/applicationcache/atom.xml" rel="self"/>
-  <link href="http://limingit.github.io/"/>
-  <updated>2014-04-21T03:13:26+00:00</updated>
-  <id>http://limingit.github.io/</id>
+  <link href="http://beginios.com/tags/applicationcache/atom.xml" rel="self"/>
+  <link href="http://beginios.com/"/>
+  <updated>2014-05-06T08:11:04+00:00</updated>
+  <id>http://beginios.com/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[使用 HTML5 应用缓存加速移动页面]]></title>
-    <link href="http://limingit.github.io/blog/2014/01/14/using-the-application-cache/"/>
+    <link href="http://beginios.com/blog/2014/01/14/using-the-application-cache/"/>
     <updated>2014-01-14T16:18:00+00:00</updated>
-    <id>http://limingit.github.io/blog/2014/01/14/using-the-application-cache</id>
+    <id>http://beginios.com/blog/2014/01/14/using-the-application-cache</id>
     <content type="html"><![CDATA[<h3>简介</h3>
 
 <p>HTML5 提供了一种应用缓存的机制，将 HTML/JS/CSS/图片等资源缓存在浏览器本地，便于 Web 应用可以在断网的情况下离线运行，达到类似于“脱机浏览”的效果。浏览器还提供了调用应用缓存的接口 window.applicationCache，来设定浏览器缓存的数据。</p>

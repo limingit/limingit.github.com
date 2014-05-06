@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://limingit.github.io/sitemap.xml 
+Sitemap: http://beginios.com/sitemap.xml 

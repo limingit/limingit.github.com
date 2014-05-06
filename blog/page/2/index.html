@@ -8,8 +8,7 @@
   <title>Begin iOS</title>
   <meta name="author" content="Bencalie" />
   
-  <meta name="description" content="1
-[[[FrontEndEnginer alloc]initWithName:@&quot;Bencalie&quot;]sayHelloToEverybody]; 欢迎大家光临，我是一名 iOS 初学者，入门之路坎坎坷坷，此博客用于记录我的一些学习笔记。 我的工作是前端开发(偏 &hellip;" />
+  <meta name="description" content="对于经常在 Windows 下进行 Web 开发的人来说，Fiddler 是神器。但由于它是 .Net Framework 下开发的，注定了用于 Linux 或者 Unix 之类系统上只能通过反向代理，如果不在同一个局域网内，非常麻烦。 还好在 Mac OS X 下我们还有 Charles。 和 &hellip;" />
   
   <meta name="keyword" content="iOS Development, Cocos2d-x, Javascript" />
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@
   <link rel="author" href="https://plus.google.com/107446839256480078362/posts" />
   <link rel="publisher" href="https://plus.google.com/107446839256480078362" />
   
-  <link rel="canonical" href="http://limingit.github.io/blog/page/2" />
+  <link rel="canonical" href="http://beginios.com/blog/page/2" />
   <link href="/favicon.png" rel="icon" />
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
   <link href="/atom.xml" rel="alternate" title="Begin iOS" type="application/atom+xml" />
@@ -49,7 +48,7 @@
   
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:limingit.github.io" />
+    <input type="hidden" name="q" value="site:beginios.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -68,6 +67,97 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/14/charles-proxy-for-mac/">Mac OS X 下抓包工具 Charles 使用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-14T02:43:00+00:00" pubdate data-updated="true">Jan 14<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>对于经常在 Windows 下进行 Web 开发的人来说，<a href="http://www.fiddler2.com/">Fiddler</a> 是神器。但由于它是 .Net Framework 下开发的，注定了用于 Linux 或者 Unix 之类系统上只能通过反向代理，如果不在同一个局域网内，非常麻烦。</p>
+
+<p>还好在 Mac OS X 下我们还有 <a href="http:///www.charlesproxy.com/">Charles</a>。</p>
+
+<p>和 Fiddler 相比较，二者的功能不相伯仲。优势在于 Charles 跨平台能力强，Charles 支持 Windows/Mac OS/Linux，Fiddler 只能安装在 Windows 下；劣势在于 Charles 是商业软件，最便宜也得 50 美金。</p>
+
+<p>当然，网上已经有很多破解版，感兴趣的网友请自己搜索。</p>
+
+<p>一些使用技巧如下：</p>
+
+<h3>记录设置</h3>
+
+<p>主菜单 Proxy->Recording Settings&hellip;</p>
+
+<p>Include 填写必须要记录的域名，可以使用通配符 * 和 ?，如： *.beginios.com</p>
+
+<p>Exclude 填写不需要记录的域名，可以使用通配符 * 和 ?</p>
+
+<p>注：如果不设置此项，表示全部记录</p>
+
+<h3>禁用缓存</h3>
+
+<p>主菜单 Tools->No Caching&hellip;</p>
+
+<p>勾选后，每次都从服务器读取</p>
+
+<h3>iOS 设备 HTTP 抓包</h3>
+
+<ol>
+<li>确保 iOS 设备和 Mac 电脑在同一个局域网内，启动 Charles</li>
+<li>打开 Proxy->Proxy Settings&hellip;，勾选 Enable transparent HTTP proxying</li>
+<li>查看 Mac 电脑的 IP 地址，如：192.168.1.100</li>
+<li>打开 iOS 设备的设置，进入当前 Wifi 连接，设置 HTTP 代理切换到“手动”，将服务器填为上一步中获得的 IP，端口填8888</li>
+<li>iOS 设备中，打开你要抓包的应用进行网络操作</li>
+<li>Charles 弹出确认框，点击 Allow 按钮即可</li>
+</ol>
+
+
+<h3>HTTPS抓包</h3>
+
+<ol>
+<li>下载 <a href="http://www.charlesproxy.com/ssl.zip">Charles 证书</a>，解压后导入到 iOS 设备中（将 crt 文件作为邮件附件发给自己，再在 iOS 设备中点击附件即可安装；也可上传至 dropbox 之类的网盘，通过 safari 下载安装）</li>
+<li>在Charles的工具栏上点击设置按钮，选择 Proxy Settings…</li>
+<li>切换到 SSL 选项卡，选中 Enable SSL Proxying，然后在 Locations 表单填写要抓包的域名和端口，点击Add按钮，在弹出的表单中 Host 填写域名，比如填 api.weibo.com，Port 填 443</li>
+</ol>
+
+
+<h3>替换本地文件</h3>
+
+<p>Tools &ndash;> Map Local&hellip;</p>
+
+<h3>网络延迟功能</h3>
+
+<p>主菜单  Proxy->Throttle Settings&hellip;</p>
+
+<p>可以用于测试慢速网络下程序的兼容性</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -140,6 +230,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/29/customize-xcode-template/">自定义 Xcode 新文件模板</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/28/debug-with-weinre/">使用 Weinre 调试移动网页</a>
       </li>
     
@@ -153,10 +247,6 @@
     
       <li class="post">
         <a href="/blog/2014/02/25/uiwebview-rotate/">UIWebview 顺时针旋转 90 度</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/24/markdown-editor/">流行的 Markdown 编辑器</a>
       </li>
     
   </ul>

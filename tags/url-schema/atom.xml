@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: URL Schema | Begin iOS]]></title>
-  <link href="http://limingit.github.io/tags/url-schema/atom.xml" rel="self"/>
-  <link href="http://limingit.github.io/"/>
-  <updated>2014-04-21T03:13:26+00:00</updated>
-  <id>http://limingit.github.io/</id>
+  <link href="http://beginios.com/tags/url-schema/atom.xml" rel="self"/>
+  <link href="http://beginios.com/"/>
+  <updated>2014-05-06T08:11:04+00:00</updated>
+  <id>http://beginios.com/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[iOS UIWebview 中直接唤起电话拨号]]></title>
-    <link href="http://limingit.github.io/blog/2014/02/14/ios-uiwebview-support-telephone-call/"/>
+    <link href="http://beginios.com/blog/2014/02/14/ios-uiwebview-support-telephone-call/"/>
     <updated>2014-02-14T06:39:00+00:00</updated>
-    <id>http://limingit.github.io/blog/2014/02/14/ios-uiwebview-support-telephone-call</id>
+    <id>http://beginios.com/blog/2014/02/14/ios-uiwebview-support-telephone-call</id>
     <content type="html"><![CDATA[<p>在 iPhone 自带的 Safari 浏览器中，是可以通过苹果公司定义的 <a href="https://developer.apple.com/library/ios/featuredarticles/iPhoneURLScheme_Reference/Introduction/Introduction.html">Apple URL Schemas</a> 直接呼出电话拨号的，效果如图：</p>
 
 <p><img src="/images/blog/tel-url-schema.png"></p>
