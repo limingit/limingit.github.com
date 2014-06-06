@@ -201,11 +201,11 @@
 
 <p>如果需要其他微博用户浏览，可以将该微博用户添加到测试账号里。测试账号最多添加 15 人。</p>
 
+<h2>现有的应用如何转为 Page 轻应用（待补充）</h2>
+
 <h1>应用开发</h1>
 
-<p>应用创建完成后，就需要进入应用的开发了。</p>
-
-<p>应用开发其实并不复杂，就是如何处理微博传递过去的参数，并做相应的处理。</p>
+<p>应用创建完成后，就需要进入应用的开发了。应用开发其实并不复杂，就是<strong>如何处理微博传递过去的参数，并做相应的处理</strong>。</p>
 
 <p>其间会涉及到几个问题：</p>
 
@@ -232,22 +232,29 @@
 <h4>signed_request 的加密方式</h4>
 
 <p>signed_request 用小数点分隔成两段，小数点前是<strong>校验数据</strong>，小数点后是<strong>真实数据</strong>。
-校验数据用于确保数据没有被篡改过，只有校验通过的真实数据，才是可信的。</p>
-
-<p>这二者都使用了 base64 编码，因此需要先进行数据还原。</p>
+校验数据用于确保数据没有被篡改过，只有校验通过的真实数据，才是可信的。这二者都使用了 base64 编码，因此需要先进行数据还原。</p>
 
 <p>base64 数据的部分字符在 HTTP 传输的过程中可能会被和 URL 中其他字符混淆，因此开发者拿到的 base64 字符串，都做了特殊处理。因此 base64 解码之前，需要先将字符串还原为标准的 base64 字符。</p>
 
 <p><strong>还原方式</strong>：先根据字符串长度补上相应长度的等号（补上等号后的字符串长度应该是 4 的整数倍），然后将其中所有的 &ndash; 替换成 +，所有 _ 替换成 /。</p>
 
-<p>校验数据 base64 还原后，可能是乱码的字符，不用管它，保存在变量里，用于后续对比。</p>
+<p>真实数据 base64 解码后，转成 JSON 对象，就是开发者需要的信息了，下文会详细介绍每个参数。</p>
 
-<p>真实数据 base64 还原后，转成 JSON 对象，首先检查其中的 algorithm，必须是 HMAC-SHA256。</p>
+<p>那么，如何保证数据是正确切且有效的呢？</p>
 
-<p>然后对 base64 还原之前的数据，使用应用的 app secret 进行 sha256 加密，加密后的数据和 base64 解码后的校验数据必须一样，才能保证数据的有效性。</p>
+<p>首先，检查真实数据 base64 解码后 JSON 中的 algorithm，必须是 HMAC-SHA256。</p>
 
-<p>因此，signed_request 的解密方法已经可以写出来了。
-微博开放平台的 SDK 中，PHPSDK 和 JavaSDK 已经内置了这个功能，可以直接使用。其他语言需要开发者自行完成。</p>
+<p>其次，通过校验数据进行校验。校验方法：</p>
+
+<ul>
+<li>校验数据 base64 解码后（可能是乱码的字符，不用管它），保存在变量里，用于后续对比。</li>
+<li>对 base64 解码之前的数据，使用应用的 app secret 进行 sha256 加密，加密后的数据和校验数据 base64 解码后的结果必须一致，才能保证数据的有效性。</li>
+</ul>
+
+
+<p>因此，signed_request 的解密方法已经可以写出来了。</p>
+
+<p>微博开放平台的众多 SDK 中，PHPSDK 和 JavaSDK 已经内置了 signed_request 解码功能，可以直接使用。其他语言需要开发者自行完成。</p>
 
 <figure class='code'><figcaption><span>使用 PHPSDK 从 signed_request 提取参数 </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -259,7 +266,7 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s2">&quot;signed_request&quot;</span><span class="p">])){</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s2">&quot;signed_request&quot;</span><span class="p">])){</span>
 </span><span class='line'>        <span class="nv">$o</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SaeTOAuth</span><span class="p">(</span> <span class="nx">WB_AKEY</span> <span class="p">,</span> <span class="nx">WB_SKEY</span>  <span class="p">);</span>
 </span><span class='line'>        <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$o</span><span class="o">-&gt;</span><span class="na">parseSignedRequest</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s2">&quot;signed_request&quot;</span><span class="p">]);</span>
 </span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="nv">$data</span> <span class="o">==</span> <span class="s1">&#39;-2&#39;</span><span class="p">){</span>
@@ -1047,6 +1054,7 @@ scroll 外层滚动页面的事件</p>
 <li>linkcard 如何接入？</li>
 <li>微博支付如何接入？</li>
 <li>转评赞针对的是什么？</li>
+<li>Page应用如何发布card？</li>
 </ul>
 
 
@@ -1079,6 +1087,10 @@ scroll 外层滚动页面的事件</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/06/swift-guide/">Swift 入门</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/29/customize-xcode-template/">自定义 Xcode 新文件模板</a>
       </li>
     
@@ -1092,10 +1104,6 @@ scroll 外层滚动页面的事件</p>
     
       <li class="post">
         <a href="/blog/2014/02/26/android-html5-development-trap/">Android 下开发 HTML5 遇到的坑</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/25/uiwebview-rotate/">UIWebview 顺时针旋转 90 度</a>
       </li>
     
   </ul>
