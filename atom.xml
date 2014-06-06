@@ -4,7 +4,7 @@
   <title><![CDATA[Begin iOS]]></title>
   <link href="http://beginios.com/atom.xml" rel="self"/>
   <link href="http://beginios.com/"/>
-  <updated>2014-06-06T08:50:29+00:00</updated>
+  <updated>2014-06-06T09:51:32+00:00</updated>
   <id>http://beginios.com/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -28,12 +28,16 @@
 
 <p>iOS 或者 Mac OS X 下的应用开发，一直都是使用的 Objective-C（以下简称 OC）。</p>
 
-<p>对于很多有其他语言基础的开发者来说，刚接触到 OC 的语法都相当不适应，无论是函数声明，还是调用，都太颠覆了。</p>
+<p>对于很多有其他语言基础的开发者来说，刚接触到 OC 的语法都相当不适应，无论是函数声明，还是调用，都太颠覆传统的语法习惯了。（个人经验：当你习惯了，也不会觉得 OC 这语法有什么不妥，Xcode 的代码联想还是很给力的）</p>
 
-<blockquote><p>Swift 是一门全新的编程语言。</p><p>Swift 采用安全编程模式，并添加了很多现代化的功能特性，使得编程变得更容易、更灵活、更有趣。</p><footer><strong>《The Swift Programming Language》</strong></footer></blockquote>
+<p>苹果公司花了多年的时间来打造 Swift，通过改善已有的编译器、调试器、框架来为 Swift 提供底层支持。</p>
+
+<blockquote><p>Swift 是一门全新的编程语言，用于构建在 C 和 OC 语言之上的 iOS 和 OS X 程序开发，没有 C 的兼容性限制。</p><p>Swift 采用安全编程模式，并添加了很多现代化的特性，使得编程变得更容易、更灵活、更有趣。</p><p>Swift 身世清白（意即从零开始），由成熟和备受宠爱的 Cocoa 和 Cocoa Touch 框架的支持，是时候构想一下软件开发的全新模式了。</p><footer><strong>摘自《The Swift Programming Language》</strong></footer></blockquote>
 
 
-<p>Swift 更加类似于传统的 C、C++ 之类的语法，更加简单高效，未来 Swift 必然是 iOS 或 Mac OSX 也能够用开发的首选。</p>
+<p>Swift 更加类似于传统的 C、C++ 之类的语法，更加简单高效，未来 Swift 必然是 iOS 或 Mac OSX 应用开发的首选。</p>
+
+<p>Swift 支持 playground，可以和脚本语言一样，边写代码便查看运行结果，无需编译。</p>
 
 <h3>开发环境</h3>
 
@@ -66,11 +70,122 @@
 </span><span class='line'>var str = "Hello, playground"</span></code></pre></td></tr></table></div></figure>
 
 
-<p>在下面补上一行 <code>println(str)</code>，然后打开 Assistant Editor，在 Assistant Editor 里选择 TimeLine 下的 MyPlayground.playground (Timeline) 就能实时看到程序运行的结果了，如图：</p>
+<p>这里 import Cocoa 指定引入 Cocoa 框架，从这短短三行代码可以看出好多东西：</p>
+
+<ul>
+<li>语句无需分号（;）结束</li>
+<li>没有 main 函数了</li>
+<li>变量声明居然没指定强类型</li>
+</ul>
+
+
+<p>看起来比起一个基于 OC 创建的工程清爽了很多，不过我们还是先看看运行效果吧。</p>
+
+<p>在代码末尾补上一行 <code>println(str)</code>，然后打开 Assistant Editor，在 Assistant Editor 里选择 TimeLine 下的 MyPlayground.playground (Timeline) ，就能一边编辑，一边实时看到程序运行的结果了，如图：</p>
 
 <p><img src="http://beginios.com/images/blog/xcode-editor.jpg"></p>
 
-<h2>#</h2>
+<p>现在，让我们见识一下 Swift 吧。</p>
+
+<h3>Swift 快速入门</h3>
+
+<p>任何语言都是从 Hello world 开始的，Swift 里，一行就搞定了：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>println("Hello world")</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Swift 里，这一行代码就是一个完整的应用程序了，甚至范例代码里的 <code>import Cocoa</code>，也可以删掉。Swift 里在全局作用于中的代码就是程序入口，所以无需声明 main 方法。（这一点有点像 JavaScript 了，哈哈）</p>
+
+<h3>变量和常量声明</h3>
+
+<p><code>var</code> 用于声明变量，<code>let</code> 用于声明常量。和其他语言一样，常量只能赋值一次。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var myVariable = 42
+</span><span class='line'>myVarible = 50
+</span><span class='line'>let my Constant = 42</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以看到，无需强制指定变量或者常量的类型。变量一旦赋值后，可以重新赋别的值，但类型必须和初始值相同，不能改变。如果你将 myVariable 赋值为 &ldquo;some string&#8221;，就会发现报错：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Playground execution failed: error: &lt;REPL>:10:12: error: cannot convert the expression's type '()' to type 'Int'
+</span><span class='line'>myVariable = "some string"
+</span><span class='line'>~~~~~~~~~~~^~~~~~~~~~~~~~~</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果初始值不能提供变量的类型（或者没有初始值），可以在变量名后面制定类型，用冒号（:）分隔，如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>let explicitDouble: Double = 70</span></code></pre></td></tr></table></div></figure>
+
+
+<p>值永远不会隐式地转化为其他类型，如果需要转换值的类型，必须显示创建一个你想要的类型</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>let label = "The width is "
+</span><span class='line'>let width = 94
+</span><span class='line'>let widthLabel = label + String(width)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>还有一种更简便的方法，在字符串里添加值：圆括号中写值，并且括号前加反斜线（\），例如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>let apples = 3
+</span><span class='line'>let oranges = 5
+</span><span class='line'>let appleSummary = "I have \(apples) apples."
+</span><span class='line'>let fruitSummary = "I have \(apples + oranges) pieces of fruit."</span></code></pre></td></tr></table></div></figure>
+
+
+<p>创建数组和字典也很简单，直接使用方括号（[]），使用下标或者键名来访问其中的元素。例如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// 创建一个数组，并修改下标 1 的元素
+</span><span class='line'>var shoppingList = ["catfish", "water", "tulips", "blue paint"]
+</span><span class='line'>shoppingList[1] = "bottle of water"
+</span><span class='line'>
+</span><span class='line'>// 创建一个字典，并增加一个键/值对
+</span><span class='line'>var occupations = [
+</span><span class='line'>  "Malcolm": "Captain",
+</span><span class='line'>  "Kaylee": "Mechanic",
+</span><span class='line'>]
+</span><span class='line'>occupations["Jayne"] = "Public Relations"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>创建一个空数组，使用初始化语法：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var emptyArray = String[]()
+</span><span class='line'>var emptyDictionary = Dictionary&lt;String, Float>()
+</span><span class='line'>
+</span><span class='line'>emptyArray = []   // 不清楚数组元素类型，就直接方括号
+</span><span class='line'>emptyDictionary = [:]     // 不清楚字典类型，直接使用 [:]</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>流程控制</h4>
 
 <h3>参考资料</h3>
 
