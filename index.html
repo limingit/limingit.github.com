@@ -265,10 +265,214 @@
 
 <h4>流程控制</h4>
 
-<h3>参考资料</h3>
+<p>和其他语言一样，<code>if</code> 和 <code>switch</code> 是条件控制，<code>for-in</code>、<code>for</code>、<code>while</code>、<code>do-while</code> 是循环。条件或循环变量的圆括号可以省略，但是主体的花括号（{}）是必须的。</p>
 
-<p><a href="http://www.bobmccune.com/2012/03/04/creating-custom-xcode-4-file-templates/">Create Custom Xcode 4 File Templates</a>
-<a href="http://meandmark.com/blog/2011/12/creating-custom-xcode-4-project-templates/">Create Custom Xcode 4 Project Templates</a></p>
+<p>和其他语言相比，还是有一些细节需要注意：</p>
+
+<p><code>if</code> 语句中，条件必须是一个布尔表达式，因为 Swift 不支持隐式类型转换。这就意味着 if score { &hellip; } 这样写是通常都是错误的，除非 score 是布尔类型，即使是整型（Int）也不行。</p>
+
+<p>可以同时使用 <code>if</code> 和 <code>let</code> 来防止值的丢失。这些值是可选的，可选值通过包含另一个值或者包含 <code>nil</code> 来指明该值不存在。通过在类型后面添加问号来标记一个值为可选值。(很奇怪的感觉，这条件也不是布尔表达式啊？)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var optionalString: String? = "Hello"
+</span><span class='line'>optionalString == nil
+</span><span class='line'> 
+</span><span class='line'>var optionalName: String? = "John Appleseed"
+</span><span class='line'>var greeting = "Hello!"
+</span><span class='line'>if let name = optionalName {
+</span><span class='line'>    greeting = "Hello, \(name)"
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但这个 <code>let</code> 语句中，只允许可选值，不允许运算表达式存在，比如字符串连接的 +、逻辑非 ! 等等。</p>
+
+<figure class='code'><figcaption><span>错误范例</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var str1: String? = "Hello"
+</span><span class='line'>var str2: String? = "Swift"
+</span><span class='line'>var str3: String? = str1 + str2
+</span><span class='line'>var greeting:String
+</span><span class='line'>if let name = str1 + str2 {   // 这样写是错误的，因为 str1 和 str2 本身虽然是可选值，但连接起来就不是可选值了
+</span><span class='line'>  greeting = "Hello, \(name)"
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>只有可选值为 <code>nil</code> 的时候，才进入 <code>else</code> 的逻辑。</p>
+
+<p>switch 支持所有类型的数据，以及多种比较运算——没有限制必须是整数，也没有限制为必须测试相等。例如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>let vegetable = "red pepper"
+</span><span class='line'>switch vegetable {
+</span><span class='line'>  case "celery":
+</span><span class='line'>      let vegetableComment = "Add some raisins and make ants on a log."
+</span><span class='line'>  case "cucumber", "watercress":
+</span><span class='line'>      let vegetableComment = "That would make a good tea sandwich."
+</span><span class='line'>  case let x where x.hasSuffix("pepper"):
+</span><span class='line'>      let vegetableComment = "Is it a spicy \(x)?"
+</span><span class='line'>  default:
+</span><span class='line'>      let vegetableComment = "Everything tastes good in soup."
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行完 case 后，程序自动跳出 switch，因此无需每个 case 后再写一行 break 来跳出 switch</p>
+
+<p><code>for-in</code> 用来迭代字典中的元素，需要提供一对名字来访问每个键值对。例如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>let interestingNumbers = [
+</span><span class='line'>  "Prime": [2, 3, 5, 7, 11, 13],
+</span><span class='line'>  "Fibonacci": [1, 1, 2, 3, 5, 8],
+</span><span class='line'>  "Square": [1, 4, 9, 16, 25],
+</span><span class='line'>]
+</span><span class='line'>var largest = 0
+</span><span class='line'>for (kind, numbers) in interestingNumbers {
+</span><span class='line'>  for number in numbers {
+</span><span class='line'>      if number > largest {
+</span><span class='line'>          largest = number
+</span><span class='line'>      }
+</span><span class='line'>  }
+</span><span class='line'>}
+</span><span class='line'>println(largest)</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>while</code> 和 <code>do while</code>没什么特别的，通过条件来控制循环次数。例如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var n = 2
+</span><span class='line'>while n &lt; 100 {
+</span><span class='line'>  n = n * 2
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>var m = 2
+</span><span class='line'>do {
+</span><span class='line'>  m = m * 2
+</span><span class='line'>} while m &lt; 100</span></code></pre></td></tr></table></div></figure>
+
+
+<p>循环条件中有两种方式：一是通过 <code>..</code> 或 <code>...</code> 来表示一段索引区域，另一种是显示地指定初始值、判断条件及每次循环的增量，例如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var firstForLoop = 0
+</span><span class='line'>for i in 0..3 {
+</span><span class='line'>  firstForLoop += i
+</span><span class='line'>}
+</span><span class='line'>println(firstForLoop)
+</span><span class='line'>
+</span><span class='line'>var secondForLoop = 0
+</span><span class='line'>for var i = 0; i &lt; 3; ++i {
+</span><span class='line'>  secondForLoop += 1
+</span><span class='line'>}
+</span><span class='line'>println(secondForLoop)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>请注意：
+* <code>..</code> 或 <code>...</code> 的取值范围只适用于正整数类型；
+* 使用 <code>..</code> 的取值区间不包含最大值，使用 <code>...</code> 构造的范围则包含最大值。这二者的区别就相当于，前者判断条件里的 <code>&lt;</code>，后者是判断条件里的 <code>&lt;=</code></p>
+
+<h4>函数和闭包</h4>
+
+<p>Swift 里使用关键字 <code>func</code> 来声明一个函数。使用函数名及圆括号进行调用，参数放圆括号中，使用 &ndash;> 来分隔参数和函数的返回值类型。例如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func greet(name: String, day: String) -> String {
+</span><span class='line'>  return "Hello \(name), today is \(day)."
+</span><span class='line'>}
+</span><span class='line'>greet("Bob", "Tuesday")
+</span><span class='line'>
+</span><span class='line'>// 返回值中使用圆括号来指定返回多个值的类型
+</span><span class='line'>func getGasPrices() -> (Double, Double, Double) {
+</span><span class='line'>return (3.59, 3.69, 3.79)
+</span><span class='line'>}
+</span><span class='line'>getGasPrices()</span></code></pre></td></tr></table></div></figure>
+
+
+<p>函数的参数支持用 <code>...</code> 来表示可变长度的参数，通过数组来包含它们。例如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func sumOf(numbers: Int...) -> Int {
+</span><span class='line'>  var sum = 0
+</span><span class='line'>  for number in numbers {
+</span><span class='line'>      sum += number
+</span><span class='line'>  }
+</span><span class='line'>  return sum
+</span><span class='line'>}
+</span><span class='line'>sumOf()
+</span><span class='line'>sumOf(42, 597, 12)</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>参考资料</h3>
 </div>
   
   
