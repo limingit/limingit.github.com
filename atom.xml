@@ -4,7 +4,7 @@
   <title><![CDATA[Begin iOS]]></title>
   <link href="http://beginios.com/atom.xml" rel="self"/>
   <link href="http://beginios.com/"/>
-  <updated>2014-06-20T01:12:55+00:00</updated>
+  <updated>2014-06-20T01:19:07+00:00</updated>
   <id>http://beginios.com/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -18,7 +18,9 @@
     <link href="http://beginios.com/blog/2014/06/06/swift-programming-language-introduction/"/>
     <updated>2014-06-06T15:42:00+00:00</updated>
     <id>http://beginios.com/blog/2014/06/06/swift-programming-language-introduction</id>
-    <content type="html"><![CDATA[<object type="application/x-shockwave-flash" id="OctopusReader" name="OctopusReader" align="middle" data="http://vdisk.weibo.com/js/swf/reader/OctopusReader_v2.swf?sdsff" width="100%" height="100%" style="height: 385px;"><param name="quality" value="high"><param name="bgcolor" value="#ffffff"><param name="allowscriptaccess" value="sameDomain"><param name="allowfullscreen" value="true"><param name="wmode" value="transparent"><param name="flashvars" value="isPPT=0&amp;url=http://i.api.weipan.cn/2/preview/get/F0Ix0pBZQpL&amp;thumb=undefined&amp;filename=Swift 介绍.pdf"></object>
+    <content type="html"><![CDATA[<p>下载地址：<a href="http://vdisk.weibo.com/s/efsQO6GZWJ">微盘</a></p>
+
+<object type="application/x-shockwave-flash" id="OctopusReader" name="OctopusReader" align="middle" data="http://vdisk.weibo.com/js/swf/reader/OctopusReader_v2.swf?sdsff" width="100%" height="100%" style="height: 385px;"><param name="quality" value="high"><param name="bgcolor" value="#ffffff"><param name="allowscriptaccess" value="sameDomain"><param name="allowfullscreen" value="true"><param name="wmode" value="transparent"><param name="flashvars" value="isPPT=0&url=http://i.api.weipan.cn/2/preview/get/F0Ix0pBZQpL&thumb=undefined&filename=Swift 介绍.pdf"></object>
 
 ]]></content>
   </entry>
