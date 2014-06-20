@@ -1,0 +1,296 @@
+=JS API 是什么？=
+
+JS API 指的是轻应用 H5 版（内嵌在微博客户端中）为接入方应用提供的、唤起微博原生功能的 JavaScript 功能包。
+
+让轻应用能实现诸如获取当前网络状态、获取定位信息、唤起客户端二维码扫描、查看大图等功能，同时也提供了一些组件供接入方调用，如共享地址簿组件。
+
+=使用条件=
+
+微博 Android 与 iPhone 官方客户端 4.3.0 以上版本的内置浏览器。
+
+=引入 JS 文件=
+
+使用 H5 版 JS API，需要首先引入一个 JS 文件。
+
+<pre>
+<script src="http://tjs.sjs.sinajs.cn/open/thirdpart/js/pageapp/mobile/jsapi.js" charset="utf-8"></script>
+</pre>
+
+
+该 JS 文件会使用全局命名空间 WeiboJSBridge，提供了 3 个 JS 方法：
+
+* &bull; WeiboJSBridge.init() 用途：使用提供 appkey 和 access_token 进行初始化
+* &bull; WeiboJSBridge.invoke() 用途：调用 Bridge 的 Action 或组件
+* &bull; WeiboJSBridge.on() 用途：监听 Bridge 的事件
+
+
+下面，一一进行说明：
+
+=WeiboJSBridge.init()=
+
+针对收货地址组件等功能，需要接入方提供 appkey 和 access_token 信息，才能使用。
+
+
+'''目前仅有共享地址簿组件才需要调用 WeiboJSBridge.init() 方法'''。
+
+
+调用方法：
+
+<pre>
+WeiboJSBridge.init({
+	'appkey' : 'YOUR APPKEY',
+	'access_token' : 'YOUR ACCESS TOKEN'
+});
+</pre>
+
+access_token 获取的方法，请阅读[[轻应用开发指南|轻应用开发指南]]接收框架参数部分。
+
+
+请注意，access_token 是加密后的。加密方法是：将 access_token 的偶数位字符替换为对应的 app secret 的偶数位字符。即 app secret 的第2位字符，替换掉 access_token 的第2位字符；app secret 的第4位字符，替换掉 access_token 的第4位字符；依次类推。
+
+
+举个例子：
+
+<pre>
+access_token: 2.00oMqHMCmNrppB6474c47aa27ucvWD
+app secret  : e4932c7667489348d3fa307100aa38f3
+加密后的结果: 2403ocq6M7m8r3p8637ac071a07ac8W3
+
+// 最终的调用方法
+WeiboJSBridge.init({
+	'appkey' : '1683045782',
+	'access_token' : '2403ocq6M7m8r3p8637ac071a07ac8W3'
+});
+</pre>
+
+=WeiboJSBridge.invoke()=
+
+通过 `window.WeiboJSBridge` 的 `invoke` 方法来调用 bridge 的 action。
+
+例如：
+<pre>
+WeiboJSBridge.invoke("getNetworkType", {"param" : "value"}, function (params, success, code) {
+	if (success) {
+		document.write('网络状态是' + params.network_type);
+	} else {
+		if (code == WeiboJSBridge.STATUS_CODE.NO_RESULT) {
+			// do something.
+		}
+	}
+});
+</pre>
+
+第一个参数为要调用的 action，第二个为 参数列表，第三个为回调函数。
+
+==Action 列表==
+
+===openImage 查看大图===
+
+- 参数列表：
+* `url`: 当前选中的图片src；
+* `urls`: 当前页面中的所有图片src，用于支持横滑查看
+
+- 返回值：无
+
+- 错误码：
+* `MISSING_PARAMS`: `url` 与 `urls` 至少需要传递一个 
+
+
+===getNetworkType 获取网络状态===
+
+- 参数列表：无
+
+- 返回值：`{"network_type": "wwan"}`，`wwan` 代表 2G 或 3G， `wifi` 代表 WIFI, `fail` 代表无网络
+
+
+===scanQRCode 扫描二维码===
+
+- 参数列表：无
+
+- 返回值：`{"result": "http://weibo.com"}`
+
+- 错误码：
+* `USER_CANCELLED`: 用户取消了扫描
+* `SERVICE_FORBIDDEN`: 设备没有摄像头或用户不允许使用摄像头
+
+
+===pickImage 获取照片===
+
+- 参数列表：
+* `source`: `camera` 为拍照，其他为从相册选择
+
+- 返回值：`{"base64": "9sa1..."}`
+
+- 错误码：
+* `USER_CANCELLED`: 用户取消了选图  
+* `SERVICE_FORBIDDEN`: 设备没有摄像头或用户不允许选图
+
+
+===getLocation 定位===
+
+- 参数列表：无
+
+- 返回值：`{"lat": 100, "long": 100}`
+
+- 错误码：
+* `SERVICE_FORBIDDEN`: 定位服务不可用
+* `NO_RESULT`: 获取位置失败
+
+
+===queryPreloadCache 获取预加载内容===
+
+- 使用条件：
+* 仅 weibo.com、weibo.cn 及其子域名可以调用
+
+- 参数列表：
+* `cid`: 内容的id，必需
+
+- 返回值：`{"result": "{'key': 'value'}"}`，result为内容预加载接口返回值
+
+- 错误码：
+* `MISSING_PARAMS`: 未传递 `cid` 参数
+* `NO_RESULT`: 指定缓存不存在
+* `INTERNAL_ERROR`: 缓存读取失败
+* `ILLEGAL_ACCESS`: 调用域名无权限访问
+
+
+===deletePreloadCache 删除预加载缓存===
+
+- 使用条件：
+* 仅 weibo.com、weibo.cn 及其子域名可以调用
+
+- 参数列表：
+* `cid`: 内容的id，必需
+
+- 返回值：无
+
+- 错误码：
+* `MISSING_PARAMS`: 未传递 `cid` 参数
+* `INTERNAL_ERROR`: 文件删除失败（不包括缓存不存在）
+* `ILLEGAL_ACCESS`: 调用域名无权限访问
+
+
+===setBrowserTitle 设置顶导标题===
+
+- 参数列表：
+* `title`: 新标题，必需
+
+- 返回值：无
+
+- 备注：通过此方法设置的标题优先级最高
+
+- 错误码：
+* `MISSING_PARAMS`: 未传递 `title` 参数
+
+
+'''组件的使用在下文说明'''
+
+
+==Status Code 列表==
+
+状态码会在 action 的回调中提供
+
+<pre>
+OK: 				操作成功
+MISSING_PARAMS: 	缺少必须的参数
+ILLEGAL_ACCESS: 	非法调用
+INTERNAL_ERROR: 	客户端内部处理错误
+ACTION_NOT_FOUND: 	客户端未实现此 action
+NO_RESULT: 			客户端没有获取到结果
+USER_CANCELLED: 	用户取消了操作
+SERVICE_FORBIDDEN: 	相关服务未启用或被禁止 (如定位服务，相册权限)
+</pre>
+
+
+网页通过比对回调的code值和以上值进行处理
+
+<pre>
+if (code == WeiboJSBridge.STATUS_CODE.NO_RESULT) {
+	// 客户端没有获取到结果
+}
+</pre>
+
+
+=WeiboJSBridge.on()=
+
+有时 native 会给网页发送一些事件通知，网页可以选择性接收。
+
+
+<pre>
+WeiboJSBridge.on('networkTypeChanged', function(params){
+	document.write('网络状态已变为：' + params.network_type);
+});
+</pre>
+
+==Event 列表==
+
+
+===networkTypeChanged 网络状态改变===
+
+- 使用条件：
+* 目前仅iPhone支持
+- 参数列表：
+* `network_type`: 改变后的状态，`wwan` 或 `wifi` 或 `fail`
+
+=共享地址簿组件=
+
+共享地址簿组件用于接入方获得当前微博用户在微博的收货地址。目前处于内部体验阶段，不向所有接入方开放。
+
+{{center|http://liming.sinaapp.com/weibo/address.png}}
+
+
+第一步、使用共享地址簿组件，需要申请，请将 appkey 发送给 chenlei6@staff.weibo.com 申请该组件的使用权限。
+
+第二步、代码开发，共享地址簿组件提供了两个 Action 供调用：
+
+
+1、获取默认收货地址
+
+WeiboJSBridge.invoke("deliverAddress:default", {}, function(addr){ /* 回调函数 */ });
+
+
+2、选择其他的收货地址（可以增加、删除、修改地址）
+
+WeiboJSBridge.invoke("deliverAddress:change", {}, function(addr){ /* 回调函数 */ });
+
+
+以下是一个完整范例：
+
+<pre>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>共享地址簿组件</title>
+	</head>
+	<body>
+		<div id="address">收货地址读取中……</div>
+	<script>
+		function $(o){
+			return document.getElementById(o);
+		}
+		// 先执行初始化方法，请将 appkey 和加密后的 access_token 填写到这里
+		WeiboJSBridge.init({
+			'appkey' : 'YOUR APPKEY',
+			'access_token' : 'YOUR ACCESS TOKEN'
+		});
+		// 显示地址组件返回的地址
+		function showAddress(addr){
+			var address = $("address");
+			if(addr == null){
+				address.innerHTML = "没有默认收货地址";
+			} else {
+				address.innerHTML = addr.name + " " + addr.mobile + " " + addr.address;
+			}
+		}
+		// 获取当前登录用户的默认收货地址
+		WeiboJSBridge.invoke("deliverAddress:default", {}, showAddress);
+
+		// 给地址区域绑定点击事件，点击该区域，唤起地址组件选择界面
+		$('address').onclick = function(){
+			WeiboJSBridge.invoke("deliverAddress:change", {}, showAddress);
+		};
+	</script>
+	</body>
+</html>
+</pre>

@@ -1,0 +1,151 @@
+=引入JS文件=
+
+<pre><script src="http://tjs.sjs.sinajs.cn/open/thirdpart/js/frame/appclient.js" type="text/javascript" charset="utf-8"></script>
+</pre>
+
+
+引入了这个 JS 到需要自适应高度的页面，你的应用就能自动适应高度了。
+
+
+'''友情提示'''：为了对页面性能产生最小的影响，建议此文件放在 &lt;/body&gt; 之前
+
+
+=API方法=
+
+==='''触发行为'''===
+
+
+	App.trigger('<cmd>', ['<param>', ['<function>]]);
+
+* &bull; &lt;cmd&gt; 必选参数，指定行为的名称
+* &bull; &lt;param&gt; 可选参数，指定调用行为的参数
+* &bull; &lt;function&gt; 可选参数，指定行为的异步回调函数
+
+
+'''&lt;cmd&gt; 列表如下'''：
+
+
+'''setPageHeight 设置iframe自身的高度'''
+
+
+设置页面高度为 500px
+<pre>
+App.trigger('setPageHeight ', 500);
+</pre>
+
+
+'''scrollTo 改变父页面滚动条位置'''
+
+
+设置父页面滚动到顶部位置200px的地方
+<pre>
+App.trigger('scrollTo', 200); 
+</pre>
+
+设置父页面滚动到iframe的顶部位置
+<pre>
+App.trigger('scrollTo', 'page');
+</pre>
+
+
+'''parentInfo 获取父页面信息'''
+
+<pre>
+App.trigger('parentInfo', function(parentWin) {
+	console.log(parentWin);
+	// parentWin.iframe.width 获得iframe宽度
+	// parentWin.iframe.height 获得iframe高度
+	// parentWin.iframe.left 获得iframe距离父页面左端的距离
+	// parentWin.iframe.top 获得iframe距离父页面顶端的距离
+	// parentWin.page.height 父页面高度
+	// parentWin.page.width 父页面宽度
+	// parentWin.page.scrollTop 父页面的滚动条scrollTop
+	// parentWin.page.scrollLeft 父页面的滚动条scrollLeft
+	// parentWin.page.url 父页面url
+	// parentWin.win.width 父页面窗口宽度
+	// parentWin.win.height 父页面窗口高度
+});
+</pre>
+
+
+'''login 唤起登录浮层'''
+
+应用支持未登录状态下访问，必要的时候唤起登录浮层来登录微博。
+
+<pre>
+App.trigger('login', {
+	// 请注意，redirect_uri 是登录成功后回调的 URL，必须传的是 *.weibo.com 下的 URL，不支持第三方的地址
+	'redirect_uri' : encodeURIComponent('http://apps.weibo.com/1852339337/8s1i6v74?key=g-16504')
+});
+</pre>
+
+
+'''setShareDefaultText 设置分享功能的默认文案'''
+
+<pre>
+App.trigger('setShareDefaultText', "默认文案 http://weib.com");
+</pre>
+
+
+'''setTitle 设置父页面标题栏（此API暂未开放）'''
+
+<pre>
+App.trigger('setTitle', "Home-My Application Name");
+</pre>
+
+
+==='''事件监听''' (on/off)===
+
+	App.on('<event>;', '<function>');
+	App.off('<event>', '<function>');
+
+* &bull; &lt;event&gt;为必选参数，指定要监听的事件称
+* &bull; &lt;function&gt;为可选参数，指定事件的异步回调函数
+ 
+'''&lt;event&gt; 列表如下'''：
+
+
+'''scroll 外层滚动页面的事件'''
+
+
+绑定 scroll 事件
+<pre>
+App.on('scroll', function(scrollPos){
+	console.log(scrollPos);
+	// scrollPos.top 纵向滚动条距顶部距离
+	// scrollPos.left 横向滚动条距左边框距离
+})
+</pre>
+
+解绑 scroll 事件
+<pre>
+App.off('scroll', <function>)
+</pre>
+
+
+'''resize 外层改变页面大小的事件'''
+
+
+绑定 resize 事件
+<pre>
+App.on('resize', function(parentWin) {
+	console.log(parentWin);
+	// parentWin.page.width 父页面宽度
+	// parentWin.page.height 父页面高度
+	// parentWin.win.width 父页面窗口宽度
+	// parentWin.win.height 父页面窗口高度
+});
+</pre>
+
+解绑 resize 事件
+<pre>
+App.off('resize', <function>)
+</pre>
+
+
+=常见问题=
+
+===我的应用为什么没有高度自适应？===
+
+* &bull; 检查是否引入了微博提供的 JS 文件
+* &bull; 检查引入 JS 文件的 URL 是否正确？

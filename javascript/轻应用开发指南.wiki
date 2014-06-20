@@ -1,0 +1,505 @@
+=简介=
+
+===什么是轻应用？===
+
+轻应用是微博为第三方服务（H5页面）接入微博提供的一套基础框架和接入服务（Focus On Mobile）。
+
+轻应用入口在微博 Page 页（也叫 Profile 页、个人主页），或者微博的卡片（Card）中，由接入方以网页应用的形式开发。
+
+
+根据展示平台，轻应用分为两种：桌面浏览器上通过 iframe 嵌入（以下简称 '''Web 版'''），微博客户端内通过 Webview 展示（以下简称 '''H5 版'''）。你的应用可以选择两种展示平台之一，也可以二者都支持。
+
+===特点===
+
+轻应用提供符合微博平台属性的更多接近用户的渠道，促进用户与商家双向关系的形成，让用户更有效发现并使用服务。
+
+
+* &bull; '''接入便捷'''。接入方 H5 网页只需针对微博做少量的兼容工作，就能享受官方客户端提供的一系统轻应用服务，从而为用户提供更好的体验
+* &bull; '''无需授权'''。如果用户在登录状态访问应用，新的框架将默认完成授权，并将 access_token 信息传递给接入方。
+* &bull; '''更多的曝光机会'''。应用上线后会出现在 Page 页，以及微博 Feed 流的 card 中。支持 linkcard 接入，在微博中得到更好的展示。
+* &bull; 开发过程，'''统一了接入方式和参数'''。无论是 Web 版还是 H5 版，客户端收到的参数都是相同的，接入方式也基本上都相同。应用可以通过浏览器 userAgent 来区分是 Web 版还是 H5 版。
+* &bull; '''支持接入微博支付'''，一键完成商品支付。
+* &bull; [Web 版]'''新增应用分享和赞'''。直接将应用分享到微博，并生成卡片展示，快速传播。
+* &bull; [Web 版]'''支持未登录访问应用'''。未登录微博也可以浏览应用，必要的时候通过我们的 JS 客户端唤起登录浮层。
+* &bull; [Web 版]'''应用宽度调整为 940 px'''。不支持原来的 760px，原来的 950 px 改为 940px。
+
+===轻应用场景===
+
+有的轻应用，更加突出的是内页，如电影、图书，可能您希望在微博流中直接看到一个卡片，点击卡片就能直接进入到商品详情页直接购买；
+
+有的应用更突出应用首页，比如网页游戏、单页应用，它们入口唯一，点开应用首页进去就能玩；
+
+或者二者兼而有之，都是可以的。
+
+
+===应用范例===
+
+'''[http://apps.weibo.com/1838358847/8rYu1uHD 网上4S店]（Web & H5版 均接入）：
+
+{{center|http://www.sinaimg.cn/blog/developer/wiki/pageapp4s221.png}}
+{{center|http://www.sinaimg.cn/blog/developer/wiki/pageapp4smobile221.png}}
+
+'''H5 版本：
+
+友宝、爱影客
+
+
+
+更多轻应用的介绍，请[http://open.weibo.com/development/pro 点击这里]。
+
+=轻应用开发流程=
+
+轻应用的开发大致分为四个步骤：
+
+* &bull; 成为微博开发者
+* &bull; 应用创建
+* &bull; 应用开发
+* &bull; 应用审核及上线
+
+
+如下图所示：
+{{center|http://liming.sinaapp.com/weibo/workflow.png}}
+
+=加入微博开发者=
+
+开发 轻应用的第一步，是成为微博公司开发者。
+
+如果您还不是微博开发者，请先登录[http://open.weibo.com 微博开放平台]，然后进入管理中心完善开发者[http://open.weibo.com/developers/basicinfo 基本信息]和[http://open.weibo.com/developers/identity 身份认证]。
+
+
+基本信息部分，直接选择开发者类型为公司，完成表单。填写完成后，通过邮箱验证就可以开始创建应用了。
+
+{{center|http://liming.sinaapp.com/weibo/baseinfo.png}}
+
+
+通过身份认证，有利于应用的审核和各种权限的申请，请一并认真填写。
+
+{{center|http://liming.sinaapp.com/weibo/id-verify.png}}
+
+===个人开发者升级为公司开发者===
+
+如果已经是个人开发者，需要进入[http://open.weibo.com/developers/basicinfo 编辑开发者信息]页面，重新选择开发者类型为公司，然后保存资料即可。
+
+=应用创建=
+
+在 [http://open.weibo.com/development/pro Page 轻应用介绍页]，点击创建应用按钮，进入创建表单填写页面。
+
+
+{{center|http://liming.sinaapp.com/weibo/page-app-intro.png}}
+
+
+完成表单填写，会自动跳转到应用的控制台，在应用控制台可以进一步完善应用的基本信息。
+
+===编辑应用信息===
+
+打开应用信息->基本信息，可以查看应用的基本数据。点击编辑，可以进行修改。
+
+===测试地址（Web版、H5版）===
+
+打开应用信息->测试信息，可以看到应用的测试地址。因为应用还没通过审核并上线到应用广场，这个地址仅限开发者本人浏览访问。
+
+如果需要其他微博用户浏览，可以将该微博用户添加到测试账号里。每个应用测试账号最多添加 15 人。
+
+
+{{center|http://liming.sinaapp.com/weibo/test-address.png}}
+
+应用通过文案审核并上广场后，测试账号自动失效。
+
+
+===升级为轻应用===
+
+升级主要指的是原来已经成功创建了的企业应用、站内应用或个人版 Page 应用，升级为轻应用。
+
+由于已经创建了应用的 appkey，升级主要包含两个方面：一是微博开放平台后台将 appkey 升级为轻应用类型；二是应用将原来接收的旧参数改为新的参数。
+
+=应用开发=
+
+
+注：本小节内容包含应用开发的全部细节，请根据应用的实际情况选择。
+
+* &bull; 只有内页展示需求的应用，请直接看如何接入微博支付部分；
+* &bull; 只有主页展示需求的应用，请从接收框架参数部分开始阅读；
+* &bull; 兼而有之的，请完全阅读。
+
+
+应用创建完成后，就需要进入应用的开发过程了。应用开发其实并不复杂，就是'''如何处理微博框架传递过去的参数，并做相应的处理'''，其间会涉及到几个问题：
+
+
+'''应用主页开发'''：
+* 接收框架参数
+* Web 版和 H5 版的区分
+* Web 版 JavaScript 包的使用
+* H5 版如何调用微博客户端的 JS API
+
+'''应用内页开发'''：
+* 如何接入微博支付
+* 如何接入 linkcard
+
+'''企业应用升级为轻应用'''
+* 新旧参数对应
+
+===技术流程===
+
+===接收框架参数===
+
+应用框架会通过 POST 形式，发送给接入方页面一个加密后的参数 signed_request，
+参数中包含了 uid、access_token 等信息，如果应用需要用到，就需要解密后才能使用。
+
+如果是纯展示类应用，可以不用理会这个参数。
+
+有一点需要特别注意，就是参数 '''signed_request 是 POST 方式传输的，接入方的页面如果不支持 POST 接收，可能会无法正确显示'''。
+
+
+'''signed_request 的加密方式'''
+
+signed_request 用小数点分隔成两段，小数点前是'''校验数据'''，小数点后是'''真实数据'''。
+校验数据用于确保数据的有效性，比如没有被篡改过，只有校验成功的真实数据，才是可信的。
+
+这二者都使用了 base64 编码，因此需要先进行数据还原。base64 数据的部分字符在 HTTP 传输的过程中可能会被和 URL 中其他字符混淆，因此开发者拿到的 base64 字符串，都做了特殊处理。因此 base64 解码之前，需要先将字符串还原为标准的 base64 字符。
+
+
+ '''还原方式'''：先根据字符串长度补上相应长度的等号（补上等号后的字符串长度应该是 4 的整数倍），然后将其中所有的 - 替换成 +，所有 _ 替换成 /。
+
+
+真实数据 base64 解码后，转成 JSON 对象，就是开发者需要的信息了，下文会详细介绍每个参数。
+
+
+'''如何使用校验数据？'''
+
+首先，检查真实数据 base64 解码后 JSON 中的 algorithm，必须是 HMAC-SHA256。
+
+其次，通过校验数据进行校验，校验方法如下：
+
+* 校验数据 base64 解码后（可能是乱码的字符，不用管它），保存在变量里，用于后续对比。
+* 对 base64 解码之前的数据，使用应用的 app secret 进行 sha256 加密，加密后的数据和校验数据 base64 解码后的结果必须一致，才能保证数据的有效性。
+
+因此，signed_request 的解密方法已经可以写出来了。
+
+
+'''使用 SDK 进行数据解密'''
+
+微博开放平台的众多 SDK 中，PHPSDK 和 JavaSDK 已经内置了 signed_request 解码功能，可以直接使用。其他语言需要开发者自行完成。
+
+
+使用 PHPSDK 从 signed_request 提取参数
+<pre>
+if(!empty($_POST["signed_request"])){
+	$o = new SaeTOAuth( WB_AKEY , WB_SKEY  );
+	$data = $o->parseSignedRequest($_REQUEST["signed_request"]);
+	if($data == '-2'){
+		 die('sign is error!');
+	} else {
+		$_SESSION['oauth2'] = $data;
+	}
+}
+</pre>
+
+
+PHPSDK 解密 signed_request 的方法如下，供其他语言参考
+<pre>
+/**
+ * 解析 signed_request
+ * @param string $signed_request 应用框架在加载iframe时会通过向Canvas URL post的参数signed_request
+ * @return array
+ */
+function parseSignedRequest($signed_request) {
+
+	// 将 $signed_request 参数，用小数点.分隔成数组，下标0的赋值给 $encoded_sig，下标1的复制给 $payload
+	list($encoded_sig, $payload) = explode('.', $signed_request, 2);
+
+	// 对 $encoded_sig 进行 base64 解码，然后赋值给 $sig
+	$sig = self::base64decode($encoded_sig);
+
+	// 对 $payload 进行 base64 解码，并将字符串转为 JSON 赋值给 $data
+	$data = json_decode(self::base64decode($payload), true);
+
+	// 如果 $data 中的 algorithm 不是 HMAC-SHA256，表示数据校验出错，直接返回 -1
+	if (strtoupper($data['algorithm']) !== 'HMAC-SHA256') return '-1';
+
+	// 使用 app secret 对 $payload 进行 sha256 加密
+	$expected_sig = hash_hmac('sha256', $payload, $this->client_secret, true);
+
+	// 如果 sha256 加密后的结果和 $sig 是一致的，那么 $data 数据就没问题，直接返回给调用方；否则>表示数据校验出错，返回 -2
+	return ($sig !== $expected_sig)? '-2' : $data;
+}
+/**
+* @ignore
+*/
+function base64decode($str) {
+	// 将需要 base64 解码的字符串，按照字符串长度先补上相应的等号（补上等号后的字符串长度应该是4>的整数倍），然后将其中的 - 和 _ 分别替换成 + 和 /，然后对处理后的字符串执行 base64 解码
+	return base64_decode(strtr($str.str_repeat('=', (4 - strlen($str) % 4)), '-_', '+/'));
+}
+</pre>
+
+
+'''signed_request 解密后的格式'''
+
+未登录状态访问应用参数
+
+{| border="1" cellspacing="0" cellpadding="0" width="100%" class="parameters" style="border-color: #CCCCCC;"
+|-
+!width="10%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|参数名
+!width="5%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|必选
+!width="20%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|类型
+!width="65%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|说明
+{{api_args|user|true|array|当前用户对象}}
+{{api_args|algorithm|true|string|签名算法，暂时用HMAC-SHA256}}
+{{api_args|issued_at|true|int|服务端生成时间, unix timestamp格式}}
+{{api_args|referer|true|string|页面的 document.referrer}}
+{{api_args|ouid|false|uint64|当前应用的安装者 uid，站内应用无此参数}}
+|}
+
+
+登录状态访问应用，自动授权成功参数
+
+{| border="1" cellspacing="0" cellpadding="0" width="100%" class="parameters" style="border-color: #CCCCCC;"
+|-
+!width="10%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|参数名
+!width="5%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|必选
+!width="20%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|类型
+!width="65%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|说明
+{{api_args|user|true|array|当前用户对象}}
+{{api_args|algorithm|true|string|签名算法，暂时用HMAC-SHA256}}
+{{api_args|issued_at|true|int|服务端生成时间, unix timestamp格式}}
+{{api_args|expires|true|int|access_token 过期时间，unix timestamp 格式}}
+{{api_args|oauth_token|true|string|access_token}}
+{{api_args|user_id|true|unit64|当前登录用户微博 user id}}
+{{api_args|referer|true|string|页面的 document.referrer}}
+{{api_args|scope|true|string|应用的 scope 参数}}
+{{api_args|ext_data|true|string|扩展字段，暂时用不上}}
+{{api_args|ouid|false|uint64|当前应用的安装者 uid，站内应用无此参数}}
+|}
+
+
+能正确接收参数以后，应用还需要区分当前所处的平台。
+
+
+===Web版和H5版的区分===
+
+应用的基本信息中，可以选择 Web 版或者 H5 版之一，或者二者都兼容。如果二者都兼容，就有必要区分 Web 版和 H5 版。
+
+区分的作用有两个：一是为了让不同的设备下，应用可以进行适配，以达到最佳的显示效果；二是，Web 版和 H5 版调用的 Javascript 包不一样，区分后，可以减少不必要的 JS 代码。
+
+应用目前可以通过浏览器的 userAgent 来区分，当前是显示在 Web 浏览器还是微博客户端中，这也是目前唯一的方式。
+
+
+===Web 版 JavaScript 包的使用===
+
+Web 版是通过 iframe 来嵌入接入方应用，除了接收框架 POST 的参数，还需要和框架进行通讯，比如：iframe 高度自适应、获取父页面的信息、唤起登录浮层等。
+
+这些都是通过框架提供的一个 JavaScript 文件来提供的，具体使用方法请阅读 [[轻应用开发文档-Web版JavaScript包|Web 版 Javascript 包使用文档]]。
+
+
+===H5 版如何调用微博客户端的 JS API===
+
+微博客户端自从 4.3.0 开始，在 Webview 中新增了 JS API 功能，方便网页应用通过 JS API 调用一些系统功能，例如：获取网络状态、定位信息、扫描二维码、查看大图等功能。
+
+详细使用方法，请阅读：[[轻应用组件|轻应用组件]]
+
+
+===如何唤起微博支付===
+
+
+目前微博支付只支持线下接入，需要接入的开发者，请联系 chenlei6@staff.weibo.com。
+
+接入微博支付的同时，需要申请 linkcard 接入。
+
+
+===如何接入 linkcard 解析===
+
+
+注意：目前接入 linkcard 必须先接入微博支付，请联系 chenlei6@staff.weibo.com 申请接入微博支付。
+
+
+'''什么是 linkcard'''
+
+一条微博中如果包含一个链接，将展将现为一个短链接，如图：
+
+{{center|http://liming.sinaapp.com/weibo/link.png}}
+
+
+如果连该链接被解析为包含一个对象数据的特殊短链，那么该对象数据就可以在微博消息流内以卡片形式显示。这种形态就是微博
+消息流 linkcard（链接卡片）解析。
+
+被解析的链接会被替换为miniCard，显示上更丰富有力，点击率更高。在微博正文的下面，一般会解析出 linkcard，可以展示出缩略图、标题、简介等信息。解析效果如图：
+
+{{center|http://liming.sinaapp.com/weibo/card.png}}
+
+linkcard 是接入方网站链接在微博上承载特定功能的必要形式，依赖 linkcard，可以实现视频链接的直接播放、音频链接的直接试听等效果，以及轻应用直接载入。
+
+
+在用户分享接入方网站的链接到微博上时，我们将通过链接特征，识别出该链接是否属于某个轻应用接入方。对于轻应用接入方的链接，我们将调用该接入方登记的解析回调接口，获取事先约定好格式的对象数据。这些能成功获取到对象数据的链接，就可以在pc端、移动客户端展示成 linkcard，并实现用户点击后可以完成轻应用框架的加载。 
+ 
+
+'''优点'''：接入方只需按标准、规范的流程开发回调接口即可实现快速接入。 
+
+'''缺点'''：接入方属于被动接入，回调接口有失败率，可能造成个别链接 linkcard 解析不成功。
+
+
+'''如何接入 linkcard？'''
+
+线下提交申请，联系 mingjin@staff.weibo.com。
+
+
+'''接入 linkcard 接入方需要做的事情 '''
+
+我们先看看 linkcard 的工作流程：
+
+{{center|http://liming.sinaapp.com/weibo/linkcard-workflow.png}}
+
+
+图中的 1、2 具体描述如下： 
+ 
+1、接入方提供解析长 URL 匹配规则 
+ 
+长 URL 匹配规则是一个简单的正则表达式，匹配上的长 URL 在转短链时会当做参数用来调用接入方的对象数据回调接口，即图中的链接域名等特征。
+
+例如，我们要解析某商品为 linkcard，则商品的长链接 URL 是：http://www.productmall.com/sample/256819，那么长 URL 匹配规则应该是：www.productmall.com/sample/。（请注意，http:// 不包含，可变的商品编号也没有包含在内）
+
+2、接入方提供解析对象数据回调接口 
+ 
+该接口由接入方来开发。微博平台在通过上面的长 URL 匹配规则，匹配上的长 URL 在转短链时会调用接入方的这个接口，参数为匹配上的长 URL。 
+ 
+接入方判断参数 URL 为一个正确的需要解析为 linkcard 的页面时，接口返回需要解析的对象数据，理论上不同的参数 URL 返回不同的对象数据。反之，接口返回错误，微博平台将认为这个链接不是正常的 linkcard 对象，转为普通短链，不做 linkcard 解析。 
+
+
+'''对象数据接口'''
+
+接口请求方式：GET
+接口参数：url，符合匹配规则的长 URL
+接口返回值：JSON， JSON数据的具体属性字段见下表：
+
+{| border="1" cellspacing="0" cellpadding="0" width="100%" class="parameters" style="border-color: #CCCCCC;"
+|-
+!width="12%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|属性
+!width="10%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|属性类型
+!width="10%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|是否必填
+!width="68%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|说明描述
+{{api_args|display_name|string|必填|linkcard 显示的名称}}
+{{api_args|id|string|选填|linkcard的标识id。当有接入官方客户端二维码唤起功能时，先申请域名id 后填写该字段，值形式为123456：abcdefg。其中123456为向平台申请后分配的域id，各接入方均不相同。abcdefg为接入方自己补充的标识字符串，10-50 位，可含英文、数字、下划线，需同下文的URL一一对应。二者用英文冒号分隔。}}
+{{api_args|image|media link|必填|linkcard的缩略显示图片，图片大小强烈建议为120×120像素，为一个media link类型的对象。}}
+{{api_args|summary|string|选填|linkcard的文字描述，字数建议控制在300字以内，建议填写。}}
+{{api_args|url|string|必填|linkcard的URL地址，该地址必须为一个纯净的URL，尽量不带有无关的参数，其将作为对象数据的唯一标识依据，保持该URL的干净将有利于赞数据的统一和有效。如果接入方填写了上文的id，则URL需同上文的id 一一对应。}}
+{{api_args|tags|object array|选填|标签属性，对象数据的通用属性，为一个object array的对象数组。}}
+{{api_args|create_at|data time|选填|创建时间，格式强烈建议用国际化格式：Wed Jan 06 11: 26: 01+0800 2010，或者用简易格式：2012-10-18。}}
+{{api_args|object_type|string|必填|对象类型，如商品为product。具体由平台同接入方约定。}}
+|}
+
+上面的属性中，类型为 object、object array、media link 的，都是包含下一级属性的，具体说明如下：
+
+image（media link）
+{| border="1" cellspacing="0" cellpadding="0" width="100%" class="parameters" style="border-color: #CCCCCC;"
+|-
+!width="12%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|属性
+!width="10%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|属性类型
+!width="10%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|是否必填
+!width="68%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|说明描述
+{{api_args|url|string|必填|媒体的地址，本案例中，一级的image属性下应为linkcard配图地址。}}
+{{api_args|width|int|选填|媒体的宽度，本案例中，一级的image属性下应为linkcard配图的宽，建议为120像素}}
+{{api_args|height|int|选填|媒体的高度，本案例中，一级的image属性下应为linkcard配图的高，建议为120像素}}
+|}
+
+tags（object array）
+{| border="1" cellspacing="0" cellpadding="0" width="100%" class="parameters" style="border-color: #CCCCCC;"
+|-
+!width="12%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|属性
+!width="10%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|属性类型
+!width="10%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|是否必填
+!width="68%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|说明描述
+{{api_args|display_name|string|必填|标签显示的名称}}
+|}
+
+例如：
+
+接入方提供的长URL匹配规则：www.productmall.com/sample/ 
+
+示例链接：http://www.productmall.com/sample/256819 
+
+接入方提供的对象数据回调接口：http://www.productmall.com/api/get_data?url= 
+
+则我们的调用实例将为： 
+http://www.productmall.com/api/get_data?url=http%3a%2f%2fwww.productmall.com%2fsampl
+e%2f256819 
+
+接入方返回数据如下：
+
+（1）不接入官方客户端二维码唤起功能 
+<pre>
+{ 
+	"display_name": "这是商品的标题", 
+	"image": { 
+		"url": "http://www.productmall.com/7272.jpg", 
+		"width": 120, 
+		"height": 120 
+	}, 
+	"summary": "这是商品的简介", 
+	"url": "http://www.productmall.com/sample/256819.html", 
+	"tags": [ 
+		{ 
+			"display_name": "标签1" 
+		} 
+	], 
+	"create_at": "2012-10-18", 
+	"object_type": "product" 
+}
+</pre>
+ 
+（2）接入官方客户端二维码唤起功能（假如接入方申请后，开放平台给接入方分配的域名
+id 为1456439003） 
+<pre>
+{ 
+	"display_name": "这是商品的标题", 
+	"id": "1456439003:www_productmall_com_sample_256819", 
+	"image": { 
+		"url": "http://www.productmall.com/7272.jpg", 
+		"width": 120, 
+		"height": 120 
+	}, 
+	"summary": "这是商品的简介", 
+	"url": "http://www.productmall.com/sample/256819.html", 
+	"tags": [ 
+		{ 
+			"display_name": "标签1" 
+		} 
+	], 
+	"create_at": "2012-10-18", 
+	"object_type": "product"
+}
+</pre>
+
+===企业应用升级为轻应用===
+
+企业应用升级为轻应用以后，接受的参数会发生变化。新旧参数的对应关系如下：
+
+{| border="1" cellspacing="0" cellpadding="0" width="100%" class="parameters" style="border-color: #CCCCCC;"
+|-
+!width="10%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|旧参数
+!width="15%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|新参数
+!width="15%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|必选&类型及范围
+!width="50%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|说明
+{{api_args|cid|ouid|true、int|当前被访问的专业版用户uid}}
+{{api_args|viewer|user_id|true、int|当前登陆用户uid}}
+{{api_args|sub_appkey|（已废弃）|true、string|企业安装应用后的子key}}
+{{api_args|tokenString|oauth_token|true、string|未授权也有tokenString参数，但解析出的数组中无access_token信息}}
+|}
+
+
+=应用审核与上线=
+
+应用完成开发后，就需要提交应用审核了。进入[http://open.weibo.com 微博开放平台]，登录后打开应用，就可以看到提交审核的入口。
+
+{{center|http://liming.sinaapp.com/weibo/submit.png}}
+
+=常见问题=
+
+===H5版如何自适应高度？===
+
+H5 版不需要自适应高度，客户端将以 100% 大小来展示接入方的应用。
+
+===轻应用都没有顶部的头图了吗？===
+
+是的。
+
+=服务与支持=
+
+轻应用接入过程中遇到问题，请联系 mingjin@staff.weibo.com
