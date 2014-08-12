@@ -156,7 +156,7 @@
 <ul>
 <li>开启手机 USB 调试模式（红米手机的设置在“关于手机”里，连续点击 Android 版本四次，然后回到上一级，关于手机上面就出现了开发者选项）</li>
 <li>安装手机驱动
-手机与手机公司网站的对应列表：<a href="http://developer.android.com/tools/extras/oem-usb.html%EF%BC%8C%E4%B8%8D%E8%BF%87%E6%9C%89%E5%BE%88%E5%A4%9A%E4%B8%8D%E5%87%86%E4%BA%86%EF%BC%8C%E6%AF%94%E5%A6%82%E5%B0%8F%E7%B1%B3%E7%9A%84%E5%BA%94%E8%AF%A5%E6%98%AF%EF%BC%9Ahttp://xiazai.mi.com/">http://developer.android.com/tools/extras/oem-usb.html%EF%BC%8C%E4%B8%8D%E8%BF%87%E6%9C%89%E5%BE%88%E5%A4%9A%E4%B8%8D%E5%87%86%E4%BA%86%EF%BC%8C%E6%AF%94%E5%A6%82%E5%B0%8F%E7%B1%B3%E7%9A%84%E5%BA%94%E8%AF%A5%E6%98%AF%EF%BC%9Ahttp://xiazai.mi.com/</a></li>
+手机与手机公司网站的对应列表：<a href="http://developer.android.com/tools/extras/oem-usb.html">http://developer.android.com/tools/extras/oem-usb.html</a> ，不过有很多不准了，比如小米的应该是：<a href="http://xiazai.mi.com/">http://xiazai.mi.com/</a></li>
 <li>配置 Run As 里的 Run Configuration，在 Target 页签下点击 Manual，Apply 后点击 Run，选择设备</li>
 </ul>
 
@@ -164,11 +164,11 @@
 <h3>目录结构</h3>
 
 <ul>
-<li>src 存放程序源代码</li>
-<li>gen ADT自动产生的 R 文件</li>
-<li>assets 存放外部资源文件</li>
-<li>res 存放图片等描述文件</li>
-<li>AndroidManifest.xml 清单文件，整个程序的系统控制文件</li>
+<li><code>src</code> 存放程序源代码</li>
+<li><code>gen</code> ADT自动产生的 R 文件</li>
+<li><code>assets</code> 存放外部资源文件</li>
+<li><code>res</code> 存放图片等描述文件</li>
+<li><code>AndroidManifest.xml</code> 清单文件，整个程序的系统控制文件</li>
 </ul>
 
 
@@ -193,9 +193,9 @@
 <p>布局的距离单位有：设备独立像素dp、像素px、放大像素sp。</p>
 
 <ul>
-<li>dp，即 dip（device independent pixels，设备独立像素），在不同设备上显示效果不同，与设备硬件有关。一般为了支持 WVGA、HVGA 和 QVGA，推荐使用此单位，因为它不依赖像素。</li>
-<li>px，即 pixels（像素），在不同的设备上显示效果相同。一般用 HVGA 代表 320*480 像素</li>
-<li>sp，即 special pixels（放大像素），主要用于字体的显示</li>
+<li><code>dp</code>，即 dip（device independent pixels，设备独立像素），在不同设备上显示效果不同，与设备硬件有关。一般为了支持 WVGA、HVGA 和 QVGA，推荐使用此单位，因为它不依赖像素。</li>
+<li><code>px</code>，即 pixels（像素），在不同的设备上显示效果相同。一般用 HVGA 代表 320*480 像素</li>
+<li><code>sp</code>，即 special pixels（放大像素），主要用于字体的显示</li>
 </ul>
 
 
@@ -204,9 +204,9 @@
 <p>布局常用属性：</p>
 
 <ul>
-<li>id，布局文件的唯一标识</li>
-<li>layout_width，布局的宽度</li>
-<li>layout_height，布局的高度</li>
+<li><code>id</code>，布局文件的唯一标识</li>
+<li><code>layout_width</code>，布局的宽度</li>
+<li><code>layout_height</code>，布局的高度</li>
 </ul>
 
 
@@ -264,9 +264,9 @@
 
 
 <p>其中：
-* xmlns:android 和 xmlns:tools 为命名空间，系统自动产生
-* layout_width 和 layout_height 为布局的宽、高，参数有 fill_content、match_content、wrap_content
-* android:paddingBottom、android:paddingLeft、android:paddingRight、android:paddingTop 是布局的 padding
+* <code>xmlns:android</code> 和 <code>xmlns:tools</code> 为命名空间，系统自动产生
+* <code>layout_width</code> 和 <code>layout_height</code> 为布局的宽、高，参数有 fill_content、match_content、wrap_content
+* <code>android:paddingBottom</code>、<code>android:paddingLeft</code>、<code>android:paddingRight</code>、<code>android:paddingTop</code> 是布局的 padding
 * 范例表示在父容器中，距左 34 dp、距顶 41dp，如果不设置 layout_marginTop，则与父容器顶部上边缘对齐。</p>
 
 <p>相对控件布局，是指一个控件以另一个空间作为参照物布局。首先通过 id 确定参照控件，layout_above 表示位于该控件上方。
@@ -325,9 +325,9 @@ layout_alignTop 表示以该控件的上边缘为参照标准对齐，layout_mar
 
 
 <p>其中：
-* layout_alignBottom 表示与参照控件的对齐方式。layout_alignBaseLine 以参照控件的基线为参照标准。
-* layout_marginBottom 表示底部和参照控件下边缘的距离
-* layout_toRightOf 表示位于参照控件右侧，layout_toLeftOf 表示位于参照控件的左侧，layout_above 表示位于参照控件上方，layout_below 表示位于参照控件下方。</p>
+* <code>layout_alignBottom</code> 表示与参照控件的对齐方式。layout_alignBaseLine 以参照控件的基线为参照标准。
+* <code>layout_marginBottom</code> 表示底部和参照控件下边缘的距离
+* <code>layout_toRightOf</code> 表示位于参照控件右侧，<code>layout_toLeftOf</code> 表示位于参照控件的左侧，<code>layout_above</code> 表示位于参照控件上方，<code>layout_below</code> 表示位于参照控件下方。</p>
 
 <h3>线性布局</h3>
 
@@ -379,13 +379,13 @@ layout_alignTop 表示以该控件的上边缘为参照标准对齐，layout_mar
 </span><span class='line'>&lt;/LinearLayout></span></code></pre></td></tr></table></div></figure>
 
 
-<p>其中 android:orientation 表示控件的对齐方式，horziontal 表示水平排列，vertical 表示垂直排列。</p>
+<p>其中 <code>android:orientation</code> 表示控件的对齐方式，<code>horziontal</code> 表示水平排列，<code>vertical</code> 表示垂直排列。</p>
 
 <h3>表格布局</h3>
 
 <p>表格布局以行和列的形式，将界面划分成多个单元格。表格的每一行为一个 TableRow，每当一个控件添加到 TableRow 中就生成一个单元格。表格中的每一行可以有 0 到多个单元格，一个单元格可以跨越多列。</p>
 
-<p>表格布局针对列的设置提供了三个特有属性：stretchColumns（指定该列被拉伸）、shrinkColumns（指定该类被收缩）、collapseColumns（指定该列被隐藏），列号是一个数字，从 0 开始。</p>
+<p>表格布局针对列的设置提供了三个特有属性：<code>stretchColumns</code>（指定该列被拉伸）、<code>shrinkColumns</code>（指定该类被收缩）、<code>collapseColumns</code>（指定该列被隐藏），列号是一个数字，从 0 开始。</p>
 
 <h3>帧布局</h3>
 
@@ -398,14 +398,14 @@ layout_alignTop 表示以该控件的上边缘为参照标准对齐，layout_mar
 <p>网格布局使用一组无限细的直线将绘图区域分隔成行、列和单元，并指定控件的显示区域和控件在该区域的显示方式。</p>
 
 <p>新增的属性：
-* android:columnCount 列数
-* android:rowCount 行数
-* android:orientation 布局的显示方式，有 horizontal 和 vertical 两种，默认是 horizontal。
-* android:layout_column 控件所在的列
-* android:layout_row 控件所在的行
-* android:layout_columnSpan 控件跨越的列数
-* android:layout_rowSpan 控件跨越的行数
-* android:gravity 控件的位置：left、right、top、bottom、center、center_horizontal（水平居中）、center_vertical（垂直居中）、fill（填充所有网格）、fill_vitical（填充 1 列）、fill_horizontal（填充 1 行）</p>
+* <code>android:columnCount</code> 列数
+* <code>android:rowCount</code> 行数
+* <code>android:orientation</code> 布局的显示方式，有 horizontal 和 vertical 两种，默认是 horizontal。
+* <code>android:layout_column</code> 控件所在的列
+* <code>android:layout_row</code> 控件所在的行
+* <code>android:layout_columnSpan</code> 控件跨越的列数
+* <code>android:layout_rowSpan</code> 控件跨越的行数
+* <code>android:gravity</code> 控件的位置：left、right、top、bottom、center、center_horizontal（水平居中）、center_vertical（垂直居中）、fill（填充所有网格）、fill_vitical（填充 1 列）、fill_horizontal（填充 1 行）</p>
 
 <p>举个例子：</p>
 
