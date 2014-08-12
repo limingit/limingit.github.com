@@ -98,12 +98,12 @@
 
 打开应用信息->测试信息，可以看到应用的测试地址。因为应用还没通过审核并上线到应用广场，这个地址仅限开发者本人浏览访问。
 
-如果需要其他微博用户浏览，可以将该微博用户添加到测试账号里。每个应用测试账号最多添加 15 人。
+如果需要其他微博用户浏览，可以将该微博用户添加到测试帐号里。每个应用测试帐号最多添加 15 人。
 
 
 {{center|http://liming.sinaapp.com/weibo/test-address.png}}
 
-应用通过文案审核并上广场后，测试账号自动失效。
+应用通过文案审核并上广场后，测试帐号自动失效。
 
 
 ===升级为轻应用===
@@ -135,8 +135,11 @@
 * 如何接入微博支付
 * 如何接入 linkcard
 
-'''企业应用升级为轻应用'''
-* 新旧参数对应
+'''应用升级为轻应用'''
+* 企业应用迁移指南
+
+
+* 微博客户端二维码规则
 
 ===技术流程===
 
@@ -182,7 +185,7 @@ signed_request 用小数点分隔成两段，小数点前是'''校验数据'''�
 
 
 使用 PHPSDK 从 signed_request 提取参数
-<pre>
+<pre class="brush:php">
 if(!empty($_POST["signed_request"])){
 	$o = new SaeTOAuth( WB_AKEY , WB_SKEY  );
 	$data = $o->parseSignedRequest($_REQUEST["signed_request"]);
@@ -196,7 +199,7 @@ if(!empty($_POST["signed_request"])){
 
 
 PHPSDK 解密 signed_request 的方法如下，供其他语言参考
-<pre>
+<pre class="brush:php">
 /**
  * 解析 signed_request
  * @param string $signed_request 应用框架在加载iframe时会通过向Canvas URL post的参数signed_request
@@ -246,8 +249,12 @@ function base64decode($str) {
 {{api_args|algorithm|true|string|签名算法，暂时用HMAC-SHA256}}
 {{api_args|issued_at|true|int|服务端生成时间, unix timestamp格式}}
 {{api_args|referer|true|string|页面的 document.referrer}}
+{{api_args|origin|true|string|当前用户访问轻应用的地址；preview：正式预览地址，management：正式管理地址，test_preview：测试预览地址，test_management：测试管理地址}}
 {{api_args|ouid|false|uint64|当前应用的安装者 uid，站内应用无此参数}}
 |}
+
+
+轻应用管理地址默认加载appkey的应用地址，如第三方有管理地址的需求，请根据origin返回的字段进行二次跳转
 
 
 登录状态访问应用，自动授权成功参数
@@ -265,6 +272,7 @@ function base64decode($str) {
 {{api_args|oauth_token|true|string|access_token}}
 {{api_args|user_id|true|unit64|当前登录用户微博 user id}}
 {{api_args|referer|true|string|页面的 document.referrer}}
+{{api_args|origin|true|string|当前用户访问轻应用的地址}}
 {{api_args|scope|true|string|应用的 scope 参数}}
 {{api_args|ext_data|true|string|扩展字段，暂时用不上}}
 {{api_args|ouid|false|uint64|当前应用的安装者 uid，站内应用无此参数}}
@@ -272,7 +280,6 @@ function base64decode($str) {
 
 
 能正确接收参数以后，应用还需要区分当前所处的平台。
-
 
 ===Web版和H5版的区分===
 
@@ -287,14 +294,14 @@ function base64decode($str) {
 
 Web 版是通过 iframe 来嵌入接入方应用，除了接收框架 POST 的参数，还需要和框架进行通讯，比如：iframe 高度自适应、获取父页面的信息、唤起登录浮层等。
 
-这些都是通过框架提供的一个 JavaScript 文件来提供的，具体使用方法请阅读 [[轻应用开发文档-Web版JavaScript包|Web 版 Javascript 包使用文档]]。
+这些都是通过框架提供的一个 JavaScript 文件来提供的，具体使用方法请阅读 [[轻应用组件|轻应用组件]] Web 版组件的调用。
 
 
 ===H5 版如何调用微博客户端的 JS API===
 
 微博客户端自从 4.3.0 开始，在 Webview 中新增了 JS API 功能，方便网页应用通过 JS API 调用一些系统功能，例如：获取网络状态、定位信息、扫描二维码、查看大图等功能。
 
-详细使用方法，请阅读：[[轻应用组件|轻应用组件]]
+详细使用方法，请阅读：[[轻应用组件|轻应用组件]] H5 版组件的使用。
 
 
 ===如何唤起微博支付===
@@ -424,7 +431,7 @@ e%2f256819
 接入方返回数据如下：
 
 （1）不接入官方客户端二维码唤起功能 
-<pre>
+<pre class="brush:js">
 { 
 	"display_name": "这是商品的标题", 
 	"image": { 
@@ -446,7 +453,7 @@ e%2f256819
  
 （2）接入官方客户端二维码唤起功能（假如接入方申请后，开放平台给接入方分配的域名
 id 为1456439003） 
-<pre>
+<pre class="brush:js">
 { 
 	"display_name": "这是商品的标题", 
 	"id": "1456439003:www_productmall_com_sample_256819", 
@@ -467,9 +474,22 @@ id 为1456439003）
 }
 </pre>
 
-===企业应用升级为轻应用===
+===企业应用迁移指南（升级为轻应用）===
 
-企业应用升级为轻应用以后，接受的参数会发生变化。新旧参数的对应关系如下：
+企业应用和轻应用最直观的变化，是视觉效果上没有了夸张的头部（大头像、头图、Tab等），更专注内容的展示。
+
+
+
+企业应用升级为轻应用，需要做两件事：
+
+1、应用 appkey 升级。将 appkey 加入迁移列表，可以联系客服邮箱：weibo_app@vip.sina.com
+
+2、修改应用的参数。
+
+
+* 参数现在改为 POST 传输，并且是加密的，如何解密，请参看接收框架参数部分。
+
+* 企业应用升级为轻应用以后，参数名也会发生变化。新旧参数的对应关系如下：
 
 {| border="1" cellspacing="0" cellpadding="0" width="100%" class="parameters" style="border-color: #CCCCCC;"
 |-
@@ -478,10 +498,29 @@ id 为1456439003）
 !width="15%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|必选&类型及范围
 !width="50%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc"|说明
 {{api_args|cid|ouid|true、int|当前被访问的专业版用户uid}}
-{{api_args|viewer|user_id|true、int|当前登陆用户uid}}
+{{api_args|viewer|user_id|true、int|当前登录用户uid}}
 {{api_args|sub_appkey|（已废弃）|true、string|企业安装应用后的子key}}
 {{api_args|tokenString|oauth_token|true、string|未授权也有tokenString参数，但解析出的数组中无access_token信息}}
 |}
+
+===微博客户端二维码规则===
+
+使用此规则生成的二维码图片，使用微博客户端扫描后，可以直接进入对象正文页，而不是内置默认浏览器。区别请看下图：
+
+
+{{center|http://liming.sinaapp.com/weibo/diff.png}}
+
+
+测试应用规则（上广场之前使用）：
+
+* 应用首页生成的二维码：http://apps.weibo.com/qrcode/test?uid=xxx&appkey=xxx (这里的appkey算法是base62后的appkey）
+* 应用内页没有测试地址，入库后就是正式地址
+
+
+正式地址规则（上广场后使用）：
+
+* 应用首页生成的二维码：http://apps.weibo.com/qrcode/app?uid=xxx&appkey=xxx (这里的appkey算法是base62后的appkey）
+* 应用内页生成的二维码：http://apps.weibo.com/qrcode/linkcard?oid=xxx (这里的 oid 是对象入 linkcard 库后生成的 id) 
 
 
 =应用审核与上线=
@@ -490,16 +529,44 @@ id 为1456439003）
 
 {{center|http://liming.sinaapp.com/weibo/submit.png}}
 
+
+[[轻应用审核规范|轻应用审核规范]]
+
+
 =常见问题=
 
 ===H5版如何自适应高度？===
 
-H5 版不需要自适应高度，客户端将以 100% 大小来展示接入方的应用。
+H5 版不需要自适应高度，客户端将以 100% 大小来展示接入方的应用。部分 Android 机器下会出现 AJAX 动态加载的内容，滚动条拉不到底的情况，请调用[[轻应用组件|轻应用组件]]的 Action——setIframeSize。
 
 ===轻应用都没有顶部的头图了吗？===
 
 是的。
 
+===轻应用 H5 版，如何允许下载并安装 apk 文件？===
+
+正常的一个链接到 apk 文件，在微博客户端 Android 版里点击没有反应，请使用 window.open 方法打开
+
+<pre class="brush:js">window.open("http://test.com/yourfile.apk");</pre>
+
+===如何唤起私信功能===
+
+sinaweibo://messagelist?uid=***&nick=**&content=***&avatarimageurl=***
+
+* uid 必填
+* nick 昵称，选填
+* content 预占位内容 选填 ,增加默认文案
+* avatarimageurl 头像地址 选填
+
+例如：
+<pre class="brush:html">
+<a href="sinaweibo://messagelist?uid=1406758883">联系我</a>
+</pre>
+
 =服务与支持=
 
 轻应用接入过程中遇到问题，请联系 mingjin@staff.weibo.com
+
+=更新日志=
+
+* &bull; 2014.06.18 补充企业应用迁移指南、微博客户端二维码规则；更新FAQ

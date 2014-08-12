@@ -1,74 +1,250 @@
-=JS API 是什么？=
+=轻应用组件是什么？=
 
-JS API 指的是轻应用 H5 版（内嵌在微博客户端中）为接入方应用提供的、唤起微博原生功能的 JavaScript 功能包。
+轻应用组件是轻应用提供给开发者的，应用内可以直接调用的小组件。
+
+轻应用是区分 Web 版(PC 版)和 H5 版(移动版)的。
+
+由于 Web 版和 H5 版的应用视觉设计差异较大，组件的功能也大不一样。因此，针对 Web 版和 H5 版，轻应用提供了不同的 JS 来支持，请开发者务必使用正确的 JS 文件。
+
+（接入方的应用内，如何区分 Web 版和 H5 版请阅读[[轻应用开发指南|轻应用开发指南]] '''Web 版和 H5 版的区分'''部分）
+
+=Web 版轻应用组件调用=
+
+'''Web 版轻应用组件'''指的是轻应用 PC 版为接入方应用提供的、调用框架功能的 Javascript 功能包。
+
+主要功能包括：设置 iframe 高度、获取父页面信息、改变父页面滚动条位置、唤起登录浮层等
+
+==引入 JS 文件==
+
+<pre class="brush:html">
+<script src="http://tjs.sjs.sinajs.cn/open/thirdpart/js/frame/appclient.js" charset="utf-8"></script>
+</pre>
+
+引入了这个 JS 到需要自适应高度的页面，你的应用就能自动适应高度了。
+
+
+'''友情提示'''：为了对页面性能产生最小的影响，建议此文件放在 &lt;/body&gt; 之前
+
+
+==API方法==
+
+==='''触发行为'''===
+
+
+	App.trigger('<cmd>', ['<param>', ['<function>]]);
+
+* &bull; &lt;cmd&gt; 必选参数，指定行为的名称
+* &bull; &lt;param&gt; 可选参数，指定调用行为的参数
+* &bull; &lt;function&gt; 可选参数，指定行为的异步回调函数
+
+
+'''&lt;cmd&gt; 列表如下'''：
+
+
+===='''setPageHeight 设置iframe自身的高度'''====
+
+
+设置页面高度为 500px
+<pre class="brush:js">
+App.trigger('setPageHeight ', 500);
+</pre>
+
+
+===='''scrollTo 改变父页面滚动条位置'''====
+
+
+设置父页面滚动到顶部位置200px的地方
+<pre class="brush:js">
+App.trigger('scrollTo', 200); 
+</pre>
+
+设置父页面滚动到iframe的顶部位置
+<pre class="brush:js">
+App.trigger('scrollTo', 'page');
+</pre>
+
+
+===='''parentInfo 获取父页面信息'''====
+
+<pre class="brush:js">
+App.trigger('parentInfo', function(parentWin) {
+	console.log(parentWin);
+	// parentWin.iframe.width 获得iframe宽度
+	// parentWin.iframe.height 获得iframe高度
+	// parentWin.iframe.left 获得iframe距离父页面左端的距离
+	// parentWin.iframe.top 获得iframe距离父页面顶端的距离
+	// parentWin.page.height 父页面高度
+	// parentWin.page.width 父页面宽度
+	// parentWin.page.scrollTop 父页面的滚动条scrollTop
+	// parentWin.page.scrollLeft 父页面的滚动条scrollLeft
+	// parentWin.page.url 父页面url
+	// parentWin.win.width 父页面窗口宽度
+	// parentWin.win.height 父页面窗口高度
+});
+</pre>
+
+
+===='''login 唤起登录浮层'''====
+
+应用支持未登录状态下访问，必要的时候唤起登录浮层来登录微博。
+
+<pre class="brush:js">
+App.trigger('login', {
+	// 请注意，redirect_uri 是登录成功后回调的 URL，必须传的是 *.weibo.com 下的 URL，不支持第三方的地址
+	'redirect_uri' : encodeURIComponent('http://apps.weibo.com/1852339337/8s1i6v74?key=g-16504')
+});
+</pre>
+
+
+===='''setShareDefaultText 设置分享功能的默认文案'''====
+
+<pre class="brush:js">
+App.trigger('setShareDefaultText', "默认文案 http://weib.com");
+</pre>
+
+
+===='''sendMessage 唤起私信浮层或者IM'''====
+
+<pre class="brush:js">
+// 第二个参数为必选，提供 UID、昵称，用半角逗号分隔
+App.trigger('sendMessage', "1406758883,Bencalie");
+</pre>
+
+
+===='''deliverAddress:default 【共享地址簿组件 PC 版】获得当前登录用户的默认收货地址'''====
+
+<pre class="brush:js">
+/* 回调函数的形参是 addr
+ * 如果没有默认收货地址，返回 null
+ * 如果有收货地址，返回一个 JSON，形如
+ *	{
+ *		'name' : '张三',
+ *		'mobile' : '13901234567',
+ *		'address' : '北京海淀中关村大街40号'
+ *	}
+ */
+App.trigger('deliverAddress:default', function(addr){
+	var result = (addr == null) ? "亲，你没有设置默认收货地址" : addr.name + " " + addr.mobile + " " + addr.address;
+	document.getElementById('address').innerHTML = result;
+});
+</pre>
+
+
+===='''deliverAddress:change 【共享地址簿组件 PC 版】选择别的收货地址、或管理收货地址（增删改查）'''====
+
+<pre class="brush:js">
+/* 回调函数的形参是 addr
+ * 如果用户选择了一个收货地址，返回一个 JSON，形如
+ *	{
+ *		'name' : '张三',
+ *		'mobile' : '13901234567',
+ *		'address' : '北京海淀中关村大街40号'
+ *	}
+ */
+App.trigger('deliverAddress:change', function(addr){
+	var result = (addr == null) ? "亲，你没有设置默认收货地址" : addr.name + " " + addr.mobile + " " + addr.address;
+	document.getElementById('address').innerHTML = result;
+});
+</pre>
+
+
+===='''setTitle 设置父页面标题栏（此API暂未开放）'''====
+
+<pre class="brush:js">
+App.trigger('setTitle', "Home-My Application Name");
+</pre>
+
+
+==='''事件监听''' (on/off)===
+
+	App.on('<event>;', '<function>');
+	App.off('<event>', '<function>');
+
+* &bull; &lt;event&gt;为必选参数，指定要监听的事件称
+* &bull; &lt;function&gt;为可选参数，指定事件的异步回调函数
+ 
+'''&lt;event&gt; 列表如下'''：
+
+
+===='''scroll 外层滚动页面的事件'''====
+
+
+绑定 scroll 事件
+<pre class="brush:js">
+App.on('scroll', function(scrollPos){
+	console.log(scrollPos);
+	// scrollPos.top 纵向滚动条距顶部距离
+	// scrollPos.left 横向滚动条距左边框距离
+})
+</pre>
+
+解绑 scroll 事件
+<pre class="brush:js">
+App.off('scroll', <function>)
+</pre>
+
+
+===='''resize 外层改变页面大小的事件'''====
+
+
+绑定 resize 事件
+<pre class="brush:js">
+App.on('resize', function(parentWin) {
+	console.log(parentWin);
+	// parentWin.page.width 父页面宽度
+	// parentWin.page.height 父页面高度
+	// parentWin.win.width 父页面窗口宽度
+	// parentWin.win.height 父页面窗口高度
+});
+</pre>
+
+解绑 resize 事件
+<pre class="brush:js">
+App.off('resize', <function>)
+</pre>
+
+
+==常见问题==
+
+===我的应用为什么没有高度自适应？===
+
+* &bull; 检查是否引入了微博提供的 JS 文件
+* &bull; 检查引入 JS 文件的 URL 是否正确？
+
+
+=H5 版轻应用组件调用=
+
+'''H5 版轻应用组件'''指的是轻应用移动版（内嵌在微博客户端中）为接入方应用提供的、唤起微博原生功能的 JavaScript 功能包。
 
 让轻应用能实现诸如获取当前网络状态、获取定位信息、唤起客户端二维码扫描、查看大图等功能，同时也提供了一些组件供接入方调用，如共享地址簿组件。
 
-=使用条件=
+==使用条件==
 
 微博 Android 与 iPhone 官方客户端 4.3.0 以上版本的内置浏览器。
 
-=引入 JS 文件=
+==引入 JS 文件==
 
 使用 H5 版 JS API，需要首先引入一个 JS 文件。
 
-<pre>
+<pre class="brush:html">
 <script src="http://tjs.sjs.sinajs.cn/open/thirdpart/js/pageapp/mobile/jsapi.js" charset="utf-8"></script>
 </pre>
 
 
-该 JS 文件会使用全局命名空间 WeiboJSBridge，提供了 3 个 JS 方法：
+该 JS 文件会使用全局命名空间 WeiboJSBridge，提供了两个 JS 方法：
 
-* &bull; WeiboJSBridge.init() 用途：使用提供 appkey 和 access_token 进行初始化
 * &bull; WeiboJSBridge.invoke() 用途：调用 Bridge 的 Action 或组件
 * &bull; WeiboJSBridge.on() 用途：监听 Bridge 的事件
 
 
 下面，一一进行说明：
 
-=WeiboJSBridge.init()=
-
-针对收货地址组件等功能，需要接入方提供 appkey 和 access_token 信息，才能使用。
-
-
-'''目前仅有共享地址簿组件才需要调用 WeiboJSBridge.init() 方法'''。
-
-
-调用方法：
-
-<pre>
-WeiboJSBridge.init({
-	'appkey' : 'YOUR APPKEY',
-	'access_token' : 'YOUR ACCESS TOKEN'
-});
-</pre>
-
-access_token 获取的方法，请阅读[[轻应用开发指南|轻应用开发指南]]接收框架参数部分。
-
-
-请注意，access_token 是加密后的。加密方法是：将 access_token 的偶数位字符替换为对应的 app secret 的偶数位字符。即 app secret 的第2位字符，替换掉 access_token 的第2位字符；app secret 的第4位字符，替换掉 access_token 的第4位字符；依次类推。
-
-
-举个例子：
-
-<pre>
-access_token: 2.00oMqHMCmNrppB6474c47aa27ucvWD
-app secret  : e4932c7667489348d3fa307100aa38f3
-加密后的结果: 2403ocq6M7m8r3p8637ac071a07ac8W3
-
-// 最终的调用方法
-WeiboJSBridge.init({
-	'appkey' : '1683045782',
-	'access_token' : '2403ocq6M7m8r3p8637ac071a07ac8W3'
-});
-</pre>
-
-=WeiboJSBridge.invoke()=
+==WeiboJSBridge.invoke()==
 
 通过 `window.WeiboJSBridge` 的 `invoke` 方法来调用 bridge 的 action。
 
 例如：
-<pre>
+<pre class="brush:js">
 WeiboJSBridge.invoke("getNetworkType", {"param" : "value"}, function (params, success, code) {
 	if (success) {
 		document.write('网络状态是' + params.network_type);
@@ -82,9 +258,9 @@ WeiboJSBridge.invoke("getNetworkType", {"param" : "value"}, function (params, su
 
 第一个参数为要调用的 action，第二个为 参数列表，第三个为回调函数。
 
-==Action 列表==
+===Action 列表===
 
-===openImage 查看大图===
+====openImage 查看大图====
 
 - 参数列表：
 * `url`: 当前选中的图片src；
@@ -96,14 +272,14 @@ WeiboJSBridge.invoke("getNetworkType", {"param" : "value"}, function (params, su
 * `MISSING_PARAMS`: `url` 与 `urls` 至少需要传递一个 
 
 
-===getNetworkType 获取网络状态===
+====getNetworkType 获取网络状态====
 
 - 参数列表：无
 
 - 返回值：`{"network_type": "wwan"}`，`wwan` 代表 2G 或 3G， `wifi` 代表 WIFI, `fail` 代表无网络
 
 
-===scanQRCode 扫描二维码===
+====scanQRCode 扫描二维码====
 
 - 参数列表：无
 
@@ -114,7 +290,7 @@ WeiboJSBridge.invoke("getNetworkType", {"param" : "value"}, function (params, su
 * `SERVICE_FORBIDDEN`: 设备没有摄像头或用户不允许使用摄像头
 
 
-===pickImage 获取照片===
+====pickImage 获取照片====
 
 - 参数列表：
 * `source`: `camera` 为拍照，其他为从相册选择
@@ -126,7 +302,7 @@ WeiboJSBridge.invoke("getNetworkType", {"param" : "value"}, function (params, su
 * `SERVICE_FORBIDDEN`: 设备没有摄像头或用户不允许选图
 
 
-===getLocation 定位===
+====getLocation 定位====
 
 - 参数列表：无
 
@@ -137,7 +313,7 @@ WeiboJSBridge.invoke("getNetworkType", {"param" : "value"}, function (params, su
 * `NO_RESULT`: 获取位置失败
 
 
-===queryPreloadCache 获取预加载内容===
+====queryPreloadCache 获取预加载内容====
 
 - 使用条件：
 * 仅 weibo.com、weibo.cn 及其子域名可以调用
@@ -154,7 +330,7 @@ WeiboJSBridge.invoke("getNetworkType", {"param" : "value"}, function (params, su
 * `ILLEGAL_ACCESS`: 调用域名无权限访问
 
 
-===deletePreloadCache 删除预加载缓存===
+====deletePreloadCache 删除预加载缓存====
 
 - 使用条件：
 * 仅 weibo.com、weibo.cn 及其子域名可以调用
@@ -170,7 +346,7 @@ WeiboJSBridge.invoke("getNetworkType", {"param" : "value"}, function (params, su
 * `ILLEGAL_ACCESS`: 调用域名无权限访问
 
 
-===setBrowserTitle 设置顶导标题===
+====setBrowserTitle 设置顶导标题====
 
 - 参数列表：
 * `title`: 新标题，必需
@@ -183,14 +359,33 @@ WeiboJSBridge.invoke("getNetworkType", {"param" : "value"}, function (params, su
 * `MISSING_PARAMS`: 未传递 `title` 参数
 
 
+====setIframeSize 设置 iframe 高度====
+
+此方法用于解决部分 Android 机器下页面动态添加了内容，但滚动条拉不到底的问题。
+
+
+- 参数列表：
+* `title`: 新标题，必需
+
+- 返回值：无
+
+- 备注：通过此方法设置的标题优先级最高
+
+<pre class="brush:js">
+WeiboJSBridge.invoke("setIframeSize", {
+	'height' : 500		// 开发者需要自行计算动态添加内容后的页面高度，并当参数传递
+});
+</pre>
+
+
 '''组件的使用在下文说明'''
 
 
-==Status Code 列表==
+===Status Code 列表===
 
 状态码会在 action 的回调中提供
 
-<pre>
+<pre class="brush:html">
 OK: 				操作成功
 MISSING_PARAMS: 	缺少必须的参数
 ILLEGAL_ACCESS: 	非法调用
@@ -204,44 +399,104 @@ SERVICE_FORBIDDEN: 	相关服务未启用或被禁止 (如定位服务，相册�
 
 网页通过比对回调的code值和以上值进行处理
 
-<pre>
+<pre class="brush:js">
 if (code == WeiboJSBridge.STATUS_CODE.NO_RESULT) {
 	// 客户端没有获取到结果
 }
 </pre>
 
 
-=WeiboJSBridge.on()=
+==WeiboJSBridge.on()==
 
 有时 native 会给网页发送一些事件通知，网页可以选择性接收。
 
 
-<pre>
+<pre class="brush:js">
 WeiboJSBridge.on('networkTypeChanged', function(params){
 	document.write('网络状态已变为：' + params.network_type);
 });
 </pre>
 
-==Event 列表==
+===Event 列表===
 
 
-===networkTypeChanged 网络状态改变===
+====networkTypeChanged 网络状态改变====
 
 - 使用条件：
 * 目前仅iPhone支持
 - 参数列表：
 * `network_type`: 改变后的状态，`wwan` 或 `wifi` 或 `fail`
 
-=共享地址簿组件=
+==共享地址簿组件==
 
 共享地址簿组件用于接入方获得当前微博用户在微博的收货地址。目前处于内部体验阶段，不向所有接入方开放。
 
+组件有两种形态：
+
+PC 版：
+
+
+H5 版：
 {{center|http://liming.sinaapp.com/weibo/address.png}}
+
 
 
 第一步、使用共享地址簿组件，需要申请，请将 appkey 发送给 chenlei6@staff.weibo.com 申请该组件的使用权限。
 
-第二步、代码开发，共享地址簿组件提供了两个 Action 供调用：
+第二步、代码开发。共享地址簿组件提供了两个 Action 供调用：
+
+
+PC 版调用方法：（也可以[[#deliverAddress:default_.E3.80.90.E5.85.B1.E4.BA.AB.E5.9C.B0.E5.9D.80.E7.B0.BF.E7.BB.84.E4.BB.B6_PC_.E7.89.88.E3.80.91.E8.8E.B7.E5.BE.97.E5.BD.93.E5.89.8D.E7.99.BB.E5.BD.95.E7.94.A8.E6.88.B7.E7.9A.84.E9.BB.98.E8.AE.A4.E6.94.B6.E8.B4.A7.E5.9C.B0.E5.9D.80|点击这里]]）
+
+1、获取默认收货地址
+
+App.trigger('deliverAddress:default', function(addr){ /* 回调函数 */ });
+
+
+2、选择其他的收货地址（可以增加、删除、修改地址）
+
+App.trigger('deliverAddress:change', function(addr){ /* 回调函数 */ });
+
+
+完整 Web 版调用范例：
+
+<pre class="brush:html">
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>共享地址簿组件 Web 版</title>
+</head>
+<body>
+	<div id="address">收货地址读取中……</div>
+	<script src="http://tjs.sjs.sinajs.cn/open/thirdpart/js/frame/appclient.js" charset="utf-8"></script>
+	<script>
+		function $(o){
+			return document.getElementById(o);
+		}
+		// 显示地址组件返回的地址
+		function showAddress(addr){
+			var address = $("address");
+			if(addr == null){
+				address.innerHTML = "没有默认收货地址";
+			} else {
+				address.innerHTML = addr.name + " " + addr.mobile + " " + addr.address;
+			}
+		}
+		// 获取当前登录用户的默认收货地址
+		App.trigger('deliverAddress:default', showAddress);
+
+		// 给地址区域绑定点击事件，点击该区域，唤起地址组件选择界面
+		$('address').onclick = function(){
+			App.trigger('deliverAddress:change',  showAddress);
+		};
+	</script>
+</body>
+</html>
+</pre>
+
+
+H5 版调用方法：
 
 
 1、获取默认收货地址
@@ -254,26 +509,22 @@ WeiboJSBridge.invoke("deliverAddress:default", {}, function(addr){ /* 回调函�
 WeiboJSBridge.invoke("deliverAddress:change", {}, function(addr){ /* 回调函数 */ });
 
 
-以下是一个完整范例：
+完整 H5 版调用范例：
 
-<pre>
+<pre class="brush:html">
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<title>共享地址簿组件</title>
-	</head>
-	<body>
-		<div id="address">收货地址读取中……</div>
+<head>
+	<meta charset="utf-8" />
+	<title>共享地址簿组件 H5 版</title>
+</head>
+<body>
+	<div id="address">收货地址读取中……</div>
+	<script src="http://tjs.sjs.sinajs.cn/open/thirdpart/js/pageapp/mobile/jsapi.js" charset="utf-8"></script>
 	<script>
 		function $(o){
 			return document.getElementById(o);
 		}
-		// 先执行初始化方法，请将 appkey 和加密后的 access_token 填写到这里
-		WeiboJSBridge.init({
-			'appkey' : 'YOUR APPKEY',
-			'access_token' : 'YOUR ACCESS TOKEN'
-		});
 		// 显示地址组件返回的地址
 		function showAddress(addr){
 			var address = $("address");
@@ -291,6 +542,12 @@ WeiboJSBridge.invoke("deliverAddress:change", {}, function(addr){ /* 回调函�
 			WeiboJSBridge.invoke("deliverAddress:change", {}, showAddress);
 		};
 	</script>
-	</body>
+</body>
 </html>
 </pre>
+
+=更新日志=
+
+* &bull; 2014.08.08 轻应用 PC 端增加唤起收货地址组件功能，简化了 H5 版组件的调用
+* &bull; 2014.08.05 轻应用 PC 端增加唤起私信浮层或 IM 功能
+* &bull; 2014.06.18 合并 Web 版 Javascript 包文档到轻应用组件
