@@ -108,69 +108,7 @@
 
 <h2>开发环境</h2>
 
-<ul>
-<li>JDK + Eclipse + Android SDK + ADT
-  下载并安装 JDK
-  配置 Java 环境变量：新增 JAVA_HOME（指向 JDK 根）、修改 PATH（指向 JDK 根下面的 bin）
-  下载安装 Eclipse
-  下载 Android SDK，配置 SDK 环境变量——修改 PATH，增加 SDK/tools
-  安装 ADT，Eclipse 主菜单 Help &ndash;> Install &ndash;> New Software，打开 Install 对话框，
-  AVD创建</li>
-<li>ADT 集成工具</li>
-<li><p>SDK 资源：<a href="http://blog.csdn.net/gyming/article/details/8168166">http://blog.csdn.net/gyming/article/details/8168166</a>
-<a href="http://fxc13120.iteye.com/blog/2034442">http://fxc13120.iteye.com/blog/2034442</a>
-<a href="http://wenku.baidu.com/link?url=V7BeLn_QC1h7SpzfWSo0kXJ6xLyz7tpd0IiyN2S5XguGx7QfVkZfOJT7HpTmHvEunzYYYxfxF9qqxHQ_qYjS9CJkPi8tH-cYtNJ7JhKF04i">http://wenku.baidu.com/link?url=V7BeLn_QC1h7SpzfWSo0kXJ6xLyz7tpd0IiyN2S5XguGx7QfVkZfOJT7HpTmHvEunzYYYxfxF9qqxHQ_qYjS9CJkPi8tH-cYtNJ7JhKF04i</a></p></li>
-<li><p>超强模拟器 GenyMotion: <a href="https://cloud.genymotion.com/page/doc">https://cloud.genymotion.com/page/doc</a></p></li>
-</ul>
-
-
-<p>AVD 命令：
-进入 SDK 的 tools 目录，
-创建 AVD：执行 android create avd &mdash;name android01 &mdash;target 1
-启动模拟器：emulator -avd android01</p>
-
-<h2>Android 工程</h2>
-
-<h3>创建工程</h3>
-
-<ul>
-<li>关于 appcompat_v7 工程（创建工程的时候产生的，主要是为了旧版本兼容，更新ADT至22.6.0版本之后才出现）： <a href="http://blog.csdn.net/crazykbc/article/details/21553699">http://blog.csdn.net/crazykbc/article/details/21553699</a></li>
-</ul>
-
-
-<p>appcompat_v7是Google自己的一个兼容包，就是一个支持库，能让2.1以上全使用上4.0版本的界面</p>
-
-<p><a href="http://jingyan.baidu.com/article/3ea51489e04eb852e61bbaa4.html">http://jingyan.baidu.com/article/3ea51489e04eb852e61bbaa4.html</a></p>
-
-<p>[Android] 解決發生 parseSdkContent failed Could not initialize class android.graphics.Typeface 錯誤訊息
-請刪除 home/.android 的目錄，接著再重啟即可</p>
-
-<p>一般 Windows 系統 Home目錄位於 C:/Users/UserName 依個人的使用者名稱而異。</p>
-
-<p>或者是在eclipse 的安裝目錄中 下 cmd 指令 eclipse &ndash; clean</p>
-
-<p>順便刪除工作目錄中的以下目錄：YOUR_WORKSPACE/.metadata/.plugins/org.eclipse.core.resources/.snap，一樣可以解決</p>
-
-<h3>真机调试</h3>
-
-<ul>
-<li>开启手机 USB 调试模式（红米手机的设置在“关于手机”里，连续点击 Android 版本四次，然后回到上一级，关于手机上面就出现了开发者选项）</li>
-<li>安装手机驱动
-手机与手机公司网站的对应列表：<a href="http://developer.android.com/tools/extras/oem-usb.html">http://developer.android.com/tools/extras/oem-usb.html</a> ，不过有很多不准了，比如小米的应该是：<a href="http://xiazai.mi.com/">http://xiazai.mi.com/</a></li>
-<li>配置 Run As 里的 Run Configuration，在 Target 页签下点击 Manual，Apply 后点击 Run，选择设备</li>
-</ul>
-
-
-<h3>目录结构</h3>
-
-<ul>
-<li><code>src</code> 存放程序源代码</li>
-<li><code>gen</code> ADT自动产生的 R 文件</li>
-<li><code>assets</code> 存放外部资源文件</li>
-<li><code>res</code> 存放图片等描述文件</li>
-<li><code>AndroidManifest.xml</code> 清单文件，整个程序的系统控制文件</li>
-</ul>
-
+<p><a href="/android/development-environment.html">搭建 Android 开发环境</a></p>
 
 <h2>Activity</h2>
 
