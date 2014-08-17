@@ -320,16 +320,15 @@
 </span><span class='line'>&lt;/manifest></span></code></pre></td></tr></table></div></figure>
 
 
-<p>关于警告：Not targeting the latest versions of Android; compatibility modes apply. Consider testing and
- updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details.，是因为应用的 targetSDKVersion 不是选择的最新的，改成最近的即可。记住，这仅仅是一个警告，也可以在问题代码处，按 Ctrl+1，选择禁用这个警告。或者 Eclipse 里选择 project 的 clean 一下。</p>
+<p>关于警告：Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details.，是因为应用的 targetSDKVersion 不是选择的最新的，改成最近的即可。记住，这仅仅是一个警告，也可以在问题代码处，按 Ctrl+1，选择禁用这个警告。或者 Eclipse 里选择 project 的 clean 一下。</p>
 
-<p> # 应用程序的权限说明</p>
+<h1>应用程序的权限说明</h1>
 
-<p> 一个 Android 应用需要权限才能调用系统的功能；反之，一个应用也可能被其他应用调用，因此它需要声明调用自身所需要的权限。</p>
+<p>一个 Android 应用需要权限才能调用系统的功能；反之，一个应用也可能被其他应用调用，因此它需要声明调用自身所需要的权限。</p>
 
-<p> ## 声明运行该应用本身需要的权限</p>
+<h2>声明运行该应用本身需要的权限</h2>
 
-<p> 通过为 <manifest ... /> 元素添加 &lt;uses-permission &hellip; /> 子元素即可为程序本身声明权限。例如：</p>
+<p>通过为 &lt;manifest &hellip; /> 元素添加 &lt;uses-permission &hellip; /> 子元素即可为程序本身声明权限。例如：</p>
 
 <figure class='code'><figcaption><span>声明应用本身需要打电话的权限 </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
