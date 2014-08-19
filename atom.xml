@@ -4,7 +4,7 @@
   <title><![CDATA[Begin iOS]]></title>
   <link href="http://beginios.com/atom.xml" rel="self"/>
   <link href="http://beginios.com/"/>
-  <updated>2014-08-19T02:33:33+00:00</updated>
+  <updated>2014-08-19T02:35:44+00:00</updated>
   <id>http://beginios.com/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -84,7 +84,7 @@
 
 <p>最后拔掉手机重新连接一下，手机会提示是否允许连接这台电脑进行 USB 调试，确定后应该就可以了。</p>
 
-<p><img src="http://beginios.com/images/blog/android_device_chooser_sucess.png"></p>
+<p><img src="http://beginios.com/images/blog/android/android_device_chooser_sucess.png"></p>
 ]]></content>
   </entry>
   
