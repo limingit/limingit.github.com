@@ -8,7 +8,7 @@
   <title>Begin iOS</title>
   <meta name="author" content="Bencalie" />
   
-  <meta name="description" content="下载地址：微盘 " />
+  <meta name="description" content="在 Mac OSX 下做 Android 真机测试的时候，发现 Android Device Chooser 里，小米手机的状态显示为 unknown。但是手机的 USB 调试已经打开了。难道是因为驱动的问题？然而小米并没有提供 Mac 下的驱动程序。 注：小米手机打开 USB 调试模式的方法—— &hellip;" />
   
   <meta name="keyword" content="iOS Development, Cocos2d-x, Javascript" />
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,106 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/19/fix-unknown-android-phone-device-for-mac/">解决小米、红米及其他 Android 手机无法在 Mac 下进行真机调试的问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-19T15:42:00+00:00" pubdate data-updated="true">Aug 19<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在 Mac OSX 下做 Android 真机测试的时候，发现 Android Device Chooser 里，小米手机的状态显示为 unknown。但是手机的 USB 调试已经打开了。难道是因为驱动的问题？然而小米并没有提供 Mac 下的驱动程序。</p>
+
+<p><img src="/images/blog/android/unknown_android_phone.jpg"></p>
+
+<p>注：小米手机打开 USB 调试模式的方法——在“关于手机”里，连续点击“Android 版本”四次，然后回到上一级，“关于手机”上面就出现了“开发者选项”</p>
+
+<p>其实在 Linux 和 Mac 上是不需要安装驱动的，只要让 ADB 能够识别小米手机的 USB Vendor ID 即可。</p>
+
+<p>解决办法：</p>
+
+<p>1、配置 Android 开发环境。最好直接去 <a href="http://developer.android.com/sdk/index.html">Android 官网</a>下载一个集成的 ADT(Android Developer Tools) 工具即可，解压缩以后 Eclipse 和 SDK 都有了。</p>
+
+<p>记得配置 ~/.bash_profile，请自行搜索相关资料。</p>
+
+<p>2、查找设备的厂商号（Vendor ID）。点击屏幕左上角苹果标志->关于本机->更多信息->系统报告，在左侧列表选择 USB，就能看到对应的 USB 设备厂商号。</p>
+
+<p>找到其中的类似于“HM1 Android Phone”的东东（不同设备略有不同，自己摸索吧），点击在下方看详细信息，如图：</p>
+
+<p><img src="/images/blog/android/find_vendor_id.png"></p>
+
+<p>其中的厂商 ID 就是我们需要的，小米1的一般是 0x18dl，小米 2 以后 和 红米应该是 0x2717。</p>
+
+<p>3、执行命令</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>echo "0x2717" >> ~/.android/adb_usb.ini</span></code></pre></td></tr></table></div></figure>
+
+
+<p>4、重启 ADB。如果配置了 adb 的环境，就直接执行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb kill-server
+</span><span class='line'>adb start-server</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果没有，就要进入 Android SDK 目录下的 platform-tools 去执行（早期的 Android SDK 版本，可能在 tools 目录下）：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>./adb kill-server
+</span><span class='line'>./adb start-server</span></code></pre></td></tr></table></div></figure>
+
+
+<p>成功后应该能看见提示：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>* daemon not running. starting it now on port 5037 *
+</span><span class='line'>* daemon started successfully *</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果遇到错误：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>can't bind 'tcp:5037', 
+</span><span class='line'>ADB server didn't ACK
+</span><span class='line'>*faild to start daemon *</span></code></pre></td></tr></table></div></figure>
+
+
+<p>就将 5037 端口的进程杀掉重启就可以了，实在不行就重启一下电脑。</p>
+
+<p>最后拔掉手机重新连接一下，手机会提示是否允许连接这台电脑进行 USB 调试，确定后应该就可以了。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -914,69 +1014,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/17/ios-development-tools/">iOS 开发工具集合</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-17T06:50:00+00:00" pubdate data-updated="true">Feb 17<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>IDE</h3>
-
-<h4>Xcode</h4>
-
-<p>苹果自家的集成开发工具，不必多说。</p>
-
-<p>官方首页：<a href="https://developer.apple.com/xcode/">https://developer.apple.com/xcode/</a></p>
-
-<p>免费使用，仅能运行在 Mac 下。</p>
-
-<p><img src="https://devimages.apple.com.edgekey.net/xcode/images/xcode5-hero.jpg"></p>
-
-<h4>JetBrains: App Code</h4>
-
-<p>JetBrains 有许多业内著名的开发工具：WebStorm、PHPStrom</p>
-
-<p>官方首页：<a href="http://www.jetbrains.com/objc/">http://www.jetbrains.com/objc/</a></p>
-
-<p>商业软件，个人授权 $99，商业授权 $199。它只能运行在 Mac 上。</p>
-
-<p>相对于 Xcode 来说，工程管理弱一些。使用的不多，难以置喙。</p>
-
-<p><img src="http://www.jetbrains.com/objc/img/tour/Debugger.png"></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/02/17/ios-development-tools/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1001,6 +1038,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/08/19/fix-unknown-android-phone-device-for-mac/">解决小米、红米及其他 Android 手机无法在 Mac 下进行真机调试的问题</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/06/swift-programming-language-introduction/">Swift 介绍 PPT</a>
       </li>
     
@@ -1014,10 +1055,6 @@
     
       <li class="post">
         <a href="/blog/2014/02/28/debug-with-weinre/">使用 Weinre 调试移动网页</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/27/ios-mobile-page-debug/">移动页面前端调试 - iOS 系统</a>
       </li>
     
   </ul>

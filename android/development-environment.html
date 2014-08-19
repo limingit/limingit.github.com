@@ -108,6 +108,8 @@
 创建 AVD：执行 android create avd &mdash;name android01 &mdash;target 1
 启动模拟器：emulator -avd android01</p>
 
+<p>搜狗拼音输入法会占用 Eclipse 的格式化代码快捷键 Ctrl+Shift+F</p>
+
 <h1>创建 Android 工程</h1>
 
 <ul>
@@ -324,7 +326,7 @@
 
 <h1>应用程序的权限说明</h1>
 
-<p>一个 Android 应用需要权限才能调用系统的功能；反之，一个应用也可能被其他应用调用，因此它需要声明调用自身所需要的权限。</p>
+<p>一个应用需要权限才能调用 Android 系统的功能；反之，一个应用也可能被其他应用调用，因此它需要声明调用自身所需要的权限。</p>
 
 <h2>声明运行该应用本身需要的权限</h2>
 
@@ -336,7 +338,35 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
+<h2>声明调用该应用所需的权限</h2>
 
+<p>通过为应用的各组件元素，如 &lt;activity &hellip; /> 元素添加 &lt;uses-permission &hellip; /> 子元素即可声明调用该程序所需的权限。例如：</p>
+
+<figure class='code'><figcaption><span>声明该应用本身需要发送短信的权限 </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'> <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&quot;android.permission.SEND_SMS&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Android 提供了大量的权限，都位于 Manifest.permission 类中。</p>
+
+<table>
+<thead>
+<tr>
+<th>权限                  </th>
+<th> 说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACCESS_NETWORK_STATE    </td>
+<td> 允许应用程序获取网络状态信息的权限</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>所有应用权限，请参考：<a href="http://developer.android.com/reference/android/Manifest.permission.html">Manifest.permission</a></p>
 
   
     <footer>
@@ -407,6 +437,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/08/19/fix-unknown-android-phone-device-for-mac/">解决小米、红米及其他 Android 手机无法在 Mac 下进行真机调试的问题</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/06/swift-programming-language-introduction/">Swift 介绍 PPT</a>
       </li>
     
@@ -420,10 +454,6 @@
     
       <li class="post">
         <a href="/blog/2014/02/28/debug-with-weinre/">使用 Weinre 调试移动网页</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/27/ios-mobile-page-debug/">移动页面前端调试 - iOS 系统</a>
       </li>
     
   </ul>

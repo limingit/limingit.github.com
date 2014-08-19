@@ -5,10 +5,10 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8" />
-  <title>iOS 开发工具集合 - Begin iOS</title>
+  <title>Activity 介绍 - Begin iOS</title>
   <meta name="author" content="Bencalie" />
   
-  <meta name="description" content="IDE Xcode 苹果自家的集成开发工具，不必多说。 官方首页：https://developer.apple.com/xcode/ 免费使用，仅能运行在 Mac 下。 JetBrains: App Code JetBrains 有许多业内著名的开发工具：WebStorm、PHPStrom &hellip;" />
+  <meta name="description" content="Activity 介绍 Aug 15th, 2014 什么是 Activity 一款手机应用，用户能最直观感受到的，就是其用户界面。应用的各种功能也是用户通过在界面中的各种手势操作来完成。 通常一款应用，会有很多个不同的界面组成。这非常类似于“话剧”，话剧表演的舞台需要随着剧情的发展， &hellip;" />
   
   <meta name="keyword" content="iOS Development, Cocos2d-x, Javascript" />
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <link rel="author" href="https://plus.google.com/107446839256480078362/posts" />
   <link rel="publisher" href="https://plus.google.com/107446839256480078362" />
   
-  <link rel="canonical" href="http://beginios.com/blog/2014/02/17/ios-development-tools" />
+  <link rel="canonical" href="http://beginios.com/android/app/activity.html" />
   <link href="/favicon.png" rel="icon" />
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
   <link href="/atom.xml" rel="alternate" title="Begin iOS" type="application/atom+xml" />
@@ -66,15 +66,72 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">iOS 开发工具集合</h1>
-    
-    
+    <h1 class="entry-title">Activity 介绍</h1>
+    <p class="meta">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-15T14:16:00+00:00" pubdate data-updated="true">Aug 15<span>th</span>, 2014</time></p>
+  </header>
+  
+  <h1>什么是 Activity</h1>
+
+<p>一款手机应用，用户能最直观感受到的，就是其用户界面。应用的各种功能也是用户通过在界面中的各种手势操作来完成。</p>
+
+<p>通常一款应用，会有很多个不同的界面组成。这非常类似于“话剧”，话剧表演的舞台需要随着剧情的发展，切换到不同的场景。我们可以把每个手机操作界面，看做一个“场景”。其实在很多游戏里就是用的这个概念，比如 Cocos2D-X 中，就是用的 CCScene 类来表示场景。</p>
+
+<p>Android 应用也通常由多个基本组件组成，其中有四大组件是最常见的：Activity、Service、BroadcastReceiver、ContentProvider。</p>
+
+<p>每个 Activity 就是 Android 应用中的场景，它是负责与用户交互的组件。Activity 本身并没有可见的内容，任何一个场景都需要继承 Activity 类（<a href="http://developer.android.com/reference/android/app/Activity.html">android.app.Activity</a>）来实现具体的场景。</p>
+
+<p>有多少个用户界面，就需要有多少个 Activity，多个 Activity 组成一个 Activity 栈，当前活动的 Activity 位于栈顶。</p>
+
+<p>Activity 需要在 OnCreate() 方法中，通过 this.setContentView() 方法给自己指定一个 View 组件，不然将显示为空白。这个 View 组件内，就可以放许多 UI 控件。</p>
+
+<p>View 组件是所有 UI 控件、容器控件的基类，是用户可以实实在在看到的部分。View 组件可以放到容器组件中，或者直接通过 Activity 将它显示出来。</p>
+
+<p>setContentView() 方法用于将指定的 View 组件显示出来，它接受一个 View 对象作为参数，例如：</p>
+
+<figure class='code'><figcaption><span>Activity 的 onCreate 方法 </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Override</span>
+</span><span class='line'><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">LinearLayout</span> <span class="n">layout</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinearLayout</span><span class="o">(</span><span class="n">MainActivity</span><span class="o">.</span><span class="na">this</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">setContentView</span><span class="o">(</span><span class="n">layout</span><span class="o">);</span>
+</span><span class='line'><span class="c1">//   setContentView(R.layout.activity_main); // 或者直接引用 res/layout 目录定义的布局文件</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Intent 和 IntentFilter</h1>
+
+<p>严格地说，Intent 并不是 Android 应用的组件，但它对于 Android 应用的作用非常大——它是应用内不同组件之间的通信载体。当应用运行时，需要切换到不同的 Activity 的时候，就需要借助于 Intent 来实现。Intent可以启动 Activity、Service，也可以发送一条广播信息来出发系统中的 BroadcastReceiver。</p>
+
+<p>启动一个 Activity，可以调用可以调用</p>
+
+  
+    <footer>
       <p class="meta">
         
+        
 
 
 
@@ -86,112 +143,11 @@
   
 
 
-<time datetime="2014-02-17T06:50:00+00:00" pubdate data-updated="true">Feb 17<span>th</span>, 2014</time>
+<time datetime="2014-08-15T14:16:00+00:00" pubdate data-updated="true">Aug 15<span>th</span>, 2014</time>
         
       </p>
-    
-  </header>
-
-
-<div class="entry-content"><h3>IDE</h3>
-
-<h4>Xcode</h4>
-
-<p>苹果自家的集成开发工具，不必多说。</p>
-
-<p>官方首页：<a href="https://developer.apple.com/xcode/">https://developer.apple.com/xcode/</a></p>
-
-<p>免费使用，仅能运行在 Mac 下。</p>
-
-<p><img src="https://devimages.apple.com.edgekey.net/xcode/images/xcode5-hero.jpg"></p>
-
-<h4>JetBrains: App Code</h4>
-
-<p>JetBrains 有许多业内著名的开发工具：WebStorm、PHPStrom</p>
-
-<p>官方首页：<a href="http://www.jetbrains.com/objc/">http://www.jetbrains.com/objc/</a></p>
-
-<p>商业软件，个人授权 $99，商业授权 $199。它只能运行在 Mac 上。</p>
-
-<p>相对于 Xcode 来说，工程管理弱一些。使用的不多，难以置喙。</p>
-
-<p><img src="http://www.jetbrains.com/objc/img/tour/Debugger.png"></p>
-
-<!--more-->
-
-
-<h3>SQLite 管理</h3>
-
-<h4>SQLiteManager</h4>
-
-<p>官方首页：<a href="http://www.sqlabs.net/sqlitemanager.php">http://www.sqlabs.net/sqlitemanager.php</a></p>
-
-<p>商业软件（$49.00），支持 Windows 和 Mac 系统。</p>
-
-<p>本地 SQLite 数据库管理，可以进行增删改查。比 Firefox 的 SQLite Manager 插件更加强大</p>
-
-<p>下载：<a href="http://pan.baidu.com/s/1gdqoSSV">百度网盘</a></p>
-
-<p><img src="http://www.sqlabs.net/images/sqlitemanager4/main@2x.jpg"></p>
-
-<h3>SQLiteExpert</h3>
-
-<p>官方首页：<a href="http://www.sqliteexpert.com/index.html">http://www.sqliteexpert.com/index.html</a></p>
-
-<p>分为个人版（免费）和专业版（$59.00），二者功能略有差异</p>
-
-<p><img src="http://www.sqliteexpert.com/screenshots/execute_sql_large.png"></p>
-
-<h3>Navicat for SQLite</h3>
-
-<p>官方首页：<a href="http://www.navicat.com.cn/">http://www.navicat.com.cn/</a></p>
-
-<p>商业软件，支持 Windows、Mac 和 Linux</p>
-
-<p><img src="http://www.navicat.com.cn/images/stories/products/sqlite/mac/img_productSQLite_02_Grid_Form_View_Mac_large.png"></p>
-
-<h3>MesaSQLite</h3>
-
-<p>官方首页：<a href="http://www.desertsandsoftware.com/?page_id=17">http://www.desertsandsoftware.com/?page_id=17</a></p>
-
-<p>免费软件，仅支持 Mac 系统</p>
-
-<p><img src="http://www.desertsandsoftware.com/wp-content/plugins/doptg/uploads/yQe4s44W86DHa85YSpjeg44Y31EX5DTeTkhqNmrPtdPGMr6gp5wpeecYaSyOypzjR.png"></p>
-</div>
-
-
-  <footer>
-    <p class="meta">
       
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Bencalie</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-17T06:50:00+00:00" pubdate data-updated="true">Feb 17<span>th</span>, 2014</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/tools/'>Tools</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
+        <div class="sharing">
   
   
   
@@ -217,16 +173,9 @@
   
 </div>
 
-    
-    <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/02/14/ios-uiwebview-support-telephone-call/" title="Previous Post: iOS UIWebview 中直接唤起电话拨号">&laquo; iOS UIWebview 中直接唤起电话拨号</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2014/02/20/google-search-result-show-author/" title="Next Post: 在Google搜索结果中显示作者信息/头像">在Google搜索结果中显示作者信息/头像 &raquo;</a>
-      
-    </p>
-  </footer>
+    </footer>
+  
 </article>
 
 </div>

@@ -5,10 +5,10 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8" />
-  <title>iOS 开发工具集合 - Begin iOS</title>
+  <title>创建应用 - Begin iOS</title>
   <meta name="author" content="Bencalie" />
   
-  <meta name="description" content="IDE Xcode 苹果自家的集成开发工具，不必多说。 官方首页：https://developer.apple.com/xcode/ 免费使用，仅能运行在 Mac 下。 JetBrains: App Code JetBrains 有许多业内著名的开发工具：WebStorm、PHPStrom &hellip;" />
+  <meta name="description" content="创建应用 Aug 15th, 2014 Eclipse 创建 Android 应用 命令行创建 Android 应用 应用创建过程中自动产生的 appcompat_v7 工程 应用签名 Android 应用是以包名作为唯一标识。如果在同一台设备上安装两个包名相同的应用， &hellip;" />
   
   <meta name="keyword" content="iOS Development, Cocos2d-x, Javascript" />
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <link rel="author" href="https://plus.google.com/107446839256480078362/posts" />
   <link rel="publisher" href="https://plus.google.com/107446839256480078362" />
   
-  <link rel="canonical" href="http://beginios.com/blog/2014/02/17/ios-development-tools" />
+  <link rel="canonical" href="http://beginios.com/android/app/create-app.html" />
   <link href="/favicon.png" rel="icon" />
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
   <link href="/atom.xml" rel="alternate" title="Begin iOS" type="application/atom+xml" />
@@ -66,15 +66,107 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">iOS 开发工具集合</h1>
-    
-    
+    <h1 class="entry-title">创建应用</h1>
+    <p class="meta">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-15T14:16:00+00:00" pubdate data-updated="true">Aug 15<span>th</span>, 2014</time></p>
+  </header>
+  
+  <h1>Eclipse 创建 Android 应用</h1>
+
+<h1>命令行创建 Android 应用</h1>
+
+<h1>应用创建过程中自动产生的 appcompat_v7 工程</h1>
+
+<h1>应用签名</h1>
+
+<p>Android 应用是以包名作为唯一标识。如果在同一台设备上安装两个包名相同的应用，后安装的应用将覆盖先安装的应用。想象一下，如果你的应用和别的应用，使用了相同的包名，你的应用在后者安装后，莫名其妙就消失了，那该是多么尴尬和无奈的事情。</p>
+
+<p>为了避免在何种情况发生，Android 要求应用发布的时候，进行签名。签名的主要作用有两个：</p>
+
+<ul>
+<li>确定发布者的身份。应用开发者进行签名后，由于签名有密钥，别人无法冒名顶替。</li>
+<li>确保应用的完整性。签名会对应用包中的每个文件进行处理，从而确保程序包中的文件不会被掉包。</li>
+</ul>
+
+
+<p> 开发调试期间，ADT 会自动生成调试证书对应用进行签名，因此部署调试的时候并没有要求进行签名。但正式发布的时候，必须要使用数字证书来给应用签名后，才能发布。</p>
+
+<p> ## 在 Eclipse 中对 Android 应用签名</p>
+
+<ul>
+<li>右键点击 Android 工程，选择 Android Tools &ndash;> Export Signed Application Package&hellip;</li>
+<li>选择工程，默认是当前的工程，直接 Next</li>
+<li>选择签名的证书，这里可以使用现有的证书，或者创建一个新证书。使用现有的证书需要选择路径，并输入密码；如果选择创建新证书，点击下一步，会进入证书编辑界面。</li>
+<li>（如果选择新建）填写新建证书的信息，填写完毕后，点击 Next</li>
+<li>输入被发布的 APK 文件路径，点击 Finish 完成签名。</li>
+</ul>
+
+
+<h2>使用命令对 APK 包进行签名</h2>
+
+<ul>
+<li>创建 keystore 库。<JDK>/bin 目录内有 keytool.exe 用来生成数字证书。</li>
+</ul>
+
+
+<p> keytool -genkeypair -alias HelloAndroid.keystore -keyalg RSA -validity 400 -keystore HelloAndroid.keystore</p>
+
+<p> 参数说明：
+ + <code>-genkeypair</code>：指定生成数字证书
+ + <code>-alias</code>：指定生成数字证书的别名
+ + <code>-keyalg</code>：指定生成数字证书的算法，这里是 RSA 算法
+ + <code>-validity</code>：指定生成的数字证书的有效期
+ + <code>-keystore</code>：指定所生成的数字证书的存储路径</p>
+
+<p> 输入上面的命令后，会以交互方式让用户输入 keystore 的密码、作者、公司等详细信息。</p>
+
+<ul>
+<li><p>生成未签名的 APK 安装包。右键点击 Android 工程，选择 Android Tools &ndash;> Export Unsigned Application Package&hellip;，Eclipse 要求选择一个保存位置。</p></li>
+<li><p>使用 jarsigner 命令对未签名的 APK 安装包进行签名。<JDK>/bin 目录下提供了 jarsigner.exe 可以进行签名。</p></li>
+</ul>
+
+
+<p> jarsigner -verbose -keystore HelloAndroid.keystore -signedjar HelloAndroidSigned.apk HelloAndroidUnsigned.apk HelloAndroid.keystore</p>
+
+<p> 参数说明：
+ + <code>-verbose</code>：指定生成详细输出
+ + <code>-keystore</code>：指定数字证书的存储路径
+ + <code>-signedjar</code>：该选项后的三个参数分别为签名后的 APK 包、未签名的 APK 包、数字证书的别名</p>
+
+<p> 输入上面的命令后，将会以交互式方式让用户输入数字证书的密码</p>
+
+<ul>
+<li>适应 zipalign.exe 工具优化 APK 安装包。这是 Android 自带的一个档案整理工具，可用于优化 APK，从而提升应用和 Android 系统之间的交互效率，提升应用的运行速度。</li>
+</ul>
+
+
+<p>  zipalign -f -v 4 HelloAndroidSigned.apk HelloAndroidZip.apk</p>
+
+<p>参数说明：
+* <code>-f</code>：指定强制覆盖已有的文件
+* <code>-v</code>：指定生成详细的输出
+* <code>4</code>：自定档案整理所给予的字节数，通常指定为 4，也就是基于 32 位进行整理
+* <code>HelloAndroidSigned.apk</code> 和 <code>HelloAndroidZip.apk</code> 分别指定整理前的 APK 和整理后的 APK。</p>
+
+  
+    <footer>
       <p class="meta">
         
+        
 
 
 
@@ -86,112 +178,11 @@
   
 
 
-<time datetime="2014-02-17T06:50:00+00:00" pubdate data-updated="true">Feb 17<span>th</span>, 2014</time>
+<time datetime="2014-08-15T14:16:00+00:00" pubdate data-updated="true">Aug 15<span>th</span>, 2014</time>
         
       </p>
-    
-  </header>
-
-
-<div class="entry-content"><h3>IDE</h3>
-
-<h4>Xcode</h4>
-
-<p>苹果自家的集成开发工具，不必多说。</p>
-
-<p>官方首页：<a href="https://developer.apple.com/xcode/">https://developer.apple.com/xcode/</a></p>
-
-<p>免费使用，仅能运行在 Mac 下。</p>
-
-<p><img src="https://devimages.apple.com.edgekey.net/xcode/images/xcode5-hero.jpg"></p>
-
-<h4>JetBrains: App Code</h4>
-
-<p>JetBrains 有许多业内著名的开发工具：WebStorm、PHPStrom</p>
-
-<p>官方首页：<a href="http://www.jetbrains.com/objc/">http://www.jetbrains.com/objc/</a></p>
-
-<p>商业软件，个人授权 $99，商业授权 $199。它只能运行在 Mac 上。</p>
-
-<p>相对于 Xcode 来说，工程管理弱一些。使用的不多，难以置喙。</p>
-
-<p><img src="http://www.jetbrains.com/objc/img/tour/Debugger.png"></p>
-
-<!--more-->
-
-
-<h3>SQLite 管理</h3>
-
-<h4>SQLiteManager</h4>
-
-<p>官方首页：<a href="http://www.sqlabs.net/sqlitemanager.php">http://www.sqlabs.net/sqlitemanager.php</a></p>
-
-<p>商业软件（$49.00），支持 Windows 和 Mac 系统。</p>
-
-<p>本地 SQLite 数据库管理，可以进行增删改查。比 Firefox 的 SQLite Manager 插件更加强大</p>
-
-<p>下载：<a href="http://pan.baidu.com/s/1gdqoSSV">百度网盘</a></p>
-
-<p><img src="http://www.sqlabs.net/images/sqlitemanager4/main@2x.jpg"></p>
-
-<h3>SQLiteExpert</h3>
-
-<p>官方首页：<a href="http://www.sqliteexpert.com/index.html">http://www.sqliteexpert.com/index.html</a></p>
-
-<p>分为个人版（免费）和专业版（$59.00），二者功能略有差异</p>
-
-<p><img src="http://www.sqliteexpert.com/screenshots/execute_sql_large.png"></p>
-
-<h3>Navicat for SQLite</h3>
-
-<p>官方首页：<a href="http://www.navicat.com.cn/">http://www.navicat.com.cn/</a></p>
-
-<p>商业软件，支持 Windows、Mac 和 Linux</p>
-
-<p><img src="http://www.navicat.com.cn/images/stories/products/sqlite/mac/img_productSQLite_02_Grid_Form_View_Mac_large.png"></p>
-
-<h3>MesaSQLite</h3>
-
-<p>官方首页：<a href="http://www.desertsandsoftware.com/?page_id=17">http://www.desertsandsoftware.com/?page_id=17</a></p>
-
-<p>免费软件，仅支持 Mac 系统</p>
-
-<p><img src="http://www.desertsandsoftware.com/wp-content/plugins/doptg/uploads/yQe4s44W86DHa85YSpjeg44Y31EX5DTeTkhqNmrPtdPGMr6gp5wpeecYaSyOypzjR.png"></p>
-</div>
-
-
-  <footer>
-    <p class="meta">
       
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Bencalie</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-17T06:50:00+00:00" pubdate data-updated="true">Feb 17<span>th</span>, 2014</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/tools/'>Tools</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
+        <div class="sharing">
   
   
   
@@ -217,16 +208,9 @@
   
 </div>
 
-    
-    <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/02/14/ios-uiwebview-support-telephone-call/" title="Previous Post: iOS UIWebview 中直接唤起电话拨号">&laquo; iOS UIWebview 中直接唤起电话拨号</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2014/02/20/google-search-result-show-author/" title="Next Post: 在Google搜索结果中显示作者信息/头像">在Google搜索结果中显示作者信息/头像 &raquo;</a>
-      
-    </p>
-  </footer>
+    </footer>
+  
 </article>
 
 </div>
