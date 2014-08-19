@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 小米手机 | Begin iOS]]></title>
+  <link href="http://beginios.com/tags/xiao-mi-shou-ji/atom.xml" rel="self"/>
+  <link href="http://beginios.com/"/>
+  <updated>2014-08-19T03:25:52+00:00</updated>
+  <id>http://beginios.com/</id>
+  <author>
+    <name><![CDATA[Bencalie]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[解决小米、红米及其他 Android 手机无法在 Mac 下进行真机调试的问题]]></title>
+    <link href="http://beginios.com/blog/2014/08/19/fix-unknown-android-phone-device-for-mac/"/>
+    <updated>2014-08-19T15:42:00+00:00</updated>
+    <id>http://beginios.com/blog/2014/08/19/fix-unknown-android-phone-device-for-mac</id>
+    <content type="html"><![CDATA[<p>在 Mac OSX 下做 Android 真机测试的时候，发现 Android Device Chooser 里，小米手机的状态显示为 unknown。但是手机的 USB 调试已经打开了。难道是因为驱动的问题？然而小米并没有提供 Mac 下的驱动程序。</p>
+
+<p><img src="/images/blog/android/unknown_android_phone.jpg"></p>
+
+<p>注：小米手机打开 USB 调试模式的方法——在“关于手机”里，连续点击“Android 版本”四次，然后回到上一级，“关于手机”上面就出现了“开发者选项”</p>
+
+<p>其实在 Linux 和 Mac 上是不需要安装驱动的，只要让 ADB 能够识别小米手机的 USB Vendor ID 即可。</p>
+
+<p>解决办法：</p>
+
+<p>1、配置 Android 开发环境。最好直接去 <a href="http://developer.android.com/sdk/index.html">Android 官网</a>下载一个集成的 ADT(Android Developer Tools) 工具即可，解压缩以后 Eclipse 和 SDK 都有了。</p>
+
+<p>记得配置 ~/.bash_profile，请自行搜索相关资料。</p>
+
+<p>2、查找设备的厂商号（Vendor ID）。点击屏幕左上角苹果标志->关于本机->更多信息->系统报告，在左侧列表选择 USB，就能看到对应的 USB 设备厂商号。</p>
+
+<p>找到其中的类似于“HM1 Android Phone”的东东（不同设备略有不同，自己摸索吧），点击在下方看详细信息，如图：</p>
+
+<p><img src="/images/blog/android/find_vendor_id.png"></p>
+
+<!-- more -->
+
+
+<p>其中的厂商 ID 就是我们需要的，小米1的一般是 0x18dl，小米 2 以后 和 红米应该是 0x2717。</p>
+
+<p>3、执行命令
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>echo &ldquo;0x2717&rdquo; >> ~/.android/adb_usb.ini</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>4、重启 ADB。如果配置了 adb 的环境，就直接执行</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb kill-server
+</span><span class='line'>adb start-server</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>如果没有，就要进入 Android SDK 目录下的 platform-tools 去执行（早期的 Android SDK 版本，可能在 tools 目录下）：</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>./adb kill-server
+</span><span class='line'>./adb start-server</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>成功后应该能看见提示：
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>* daemon not running. starting it now on port 5037 *
+</span><span class='line'>* daemon started successfully *</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>如果遇到错误：
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>can&rsquo;t bind &lsquo;tcp:5037&rsquo;,
+</span><span class='line'>ADB server didn&rsquo;t ACK
+</span><span class='line'>*faild to start daemon *</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>就将 5037 端口的进程杀掉重启就可以了，实在不行就重启一下电脑。</p>
+
+<p>最后拔掉手机重新连接一下，手机会提示是否允许连接这台电脑进行 USB 调试，确定后应该就可以了。</p>
+
+<p><img src="/images/blog/android/android_device_chooser_sucess.png"></p>
+]]></content>
+  </entry>
+  
+</feed>

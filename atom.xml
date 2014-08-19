@@ -4,7 +4,7 @@
   <title><![CDATA[Begin iOS]]></title>
   <link href="http://beginios.com/atom.xml" rel="self"/>
   <link href="http://beginios.com/"/>
-  <updated>2014-08-19T02:35:44+00:00</updated>
+  <updated>2014-08-19T03:25:52+00:00</updated>
   <id>http://beginios.com/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -37,6 +37,9 @@
 <p>找到其中的类似于“HM1 Android Phone”的东东（不同设备略有不同，自己摸索吧），点击在下方看详细信息，如图：</p>
 
 <p><img src="http://beginios.com/images/blog/android/find_vendor_id.png"></p>
+
+<!-- more -->
+
 
 <p>其中的厂商 ID 就是我们需要的，小米1的一般是 0x18dl，小米 2 以后 和 红米应该是 0x2717。</p>
 

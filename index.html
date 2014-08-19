@@ -116,55 +116,12 @@
 
 <p><img src="/images/blog/android/find_vendor_id.png"></p>
 
-<p>其中的厂商 ID 就是我们需要的，小米1的一般是 0x18dl，小米 2 以后 和 红米应该是 0x2717。</p>
-
-<p>3、执行命令</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>echo "0x2717" >> ~/.android/adb_usb.ini</span></code></pre></td></tr></table></div></figure>
-
-
-<p>4、重启 ADB。如果配置了 adb 的环境，就直接执行</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>adb kill-server
-</span><span class='line'>adb start-server</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果没有，就要进入 Android SDK 目录下的 platform-tools 去执行（早期的 Android SDK 版本，可能在 tools 目录下）：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./adb kill-server
-</span><span class='line'>./adb start-server</span></code></pre></td></tr></table></div></figure>
-
-
-<p>成功后应该能看见提示：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>* daemon not running. starting it now on port 5037 *
-</span><span class='line'>* daemon started successfully *</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果遇到错误：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>can't bind 'tcp:5037', 
-</span><span class='line'>ADB server didn't ACK
-</span><span class='line'>*faild to start daemon *</span></code></pre></td></tr></table></div></figure>
-
-
-<p>就将 5037 端口的进程杀掉重启就可以了，实在不行就重启一下电脑。</p>
-
-<p>最后拔掉手机重新连接一下，手机会提示是否允许连接这台电脑进行 USB 调试，确定后应该就可以了。</p>
-
-<p><img src="/images/blog/android/android_device_chooser_sucess.png"></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/08/19/fix-unknown-android-phone-device-for-mac/">Read on &rarr;</a>
+    </footer>
   
 
 
