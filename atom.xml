@@ -4,7 +4,7 @@
   <title><![CDATA[Begin iOS]]></title>
   <link href="http://beginios.com/atom.xml" rel="self"/>
   <link href="http://beginios.com/"/>
-  <updated>2014-08-19T02:24:07+00:00</updated>
+  <updated>2014-08-19T02:33:33+00:00</updated>
   <id>http://beginios.com/</id>
   <author>
     <name><![CDATA[Bencalie]]></name>
@@ -83,6 +83,8 @@
 <p>就将 5037 端口的进程杀掉重启就可以了，实在不行就重启一下电脑。</p>
 
 <p>最后拔掉手机重新连接一下，手机会提示是否允许连接这台电脑进行 USB 调试，确定后应该就可以了。</p>
+
+<p><img src="http://beginios.com/images/blog/android_device_chooser_sucess.png"></p>
 ]]></content>
   </entry>
   
