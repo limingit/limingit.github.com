@@ -90,7 +90,7 @@
     </url>
     <url>
         <loc>http://beginios.com/android/</loc>
-        <lastmod>2014-08-17T07:37:48+00:00</lastmod>
+        <lastmod>2014-08-20T15:39:40+00:00</lastmod>
     </url>
     <url>
         <loc>http://beginios.com/android/development-environment.html</loc>
@@ -109,12 +109,16 @@
         <lastmod>2014-05-06T08:22:37+00:00</lastmod>
     </url>
     <url>
+        <loc>http://beginios.com/cocos2d-x/first-cocos2dx-project.html</loc>
+        <lastmod>2014-08-20T15:39:40+00:00</lastmod>
+    </url>
+    <url>
         <loc>http://beginios.com/cocos2d-x/install-cocos2d-x-3.html</loc>
-        <lastmod>2014-05-06T08:22:37+00:00</lastmod>
+        <lastmod>2014-08-20T15:39:40+00:00</lastmod>
     </url>
     <url>
         <loc>http://beginios.com/cocos2d-x/</loc>
-        <lastmod>2014-07-08T09:01:47+00:00</lastmod>
+        <lastmod>2014-08-20T15:39:40+00:00</lastmod>
     </url>
     <url>
         <loc>http://beginios.com/ios/objective-c/</loc>
@@ -122,7 +126,7 @@
     </url>
     <url>
         <loc>http://beginios.com/ios/</loc>
-        <lastmod>2014-08-12T09:10:34+00:00</lastmod>
+        <lastmod>2014-08-20T15:39:40+00:00</lastmod>
     </url>
     <url>
         <loc>http://beginios.com/ios/swift/</loc>
