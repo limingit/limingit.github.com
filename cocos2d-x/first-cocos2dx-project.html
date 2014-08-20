@@ -8,7 +8,13 @@
   <title>第一个 Cocos2D-X 工程：FirstGame - Begin iOS</title>
   <meta name="author" content="Bencalie" />
   
-  <meta name="description" content="第一个 Cocos2D-X 工程：FirstGame Apr 29th, 2014 Apr 29th, 2014 &#x5206;&#x4eab;&#x5230;&#xff1a; &#x66f4;&#x591a; 关于我 Front-End Engineer 微博：@Bencalie &hellip;" />
+  <meta name="description" content="第一个 Cocos2D-X 工程：FirstGame Apr 29th, 2014 环境：Windows 7 旗舰版(64位) + Cocos2D-X 使用命令行创建 cocos2d-x 工程 Eclipse 打开工程 工程目录结构 代码 AppDelegate.h 1
+2
+3
+4
+5
+6
+7 &hellip;" />
   
   <meta name="keyword" content="iOS Development, Cocos2d-x, Javascript" />
   <!-- http://t.co/dKP3o1e -->
@@ -85,7 +91,441 @@
 <time datetime="2014-04-29T14:16:00+00:00" pubdate data-updated="true">Apr 29<span>th</span>, 2014</time></p>
   </header>
   
-  
+  <p>环境：Windows 7 旗舰版(64位) + Cocos2D-X</p>
+
+<h1>使用命令行创建 cocos2d-x 工程</h1>
+
+<h1>Eclipse 打开工程</h1>
+
+<h1>工程目录结构</h1>
+
+<h1>代码</h1>
+
+<figure class='code'><figcaption><span>AppDelegate.h </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cp">#ifndef  _APP_DELEGATE_H_</span>
+</span><span class='line'><span class="cp">#define  _APP_DELEGATE_H_</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &quot;cocos2d.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/**</span>
+</span><span class='line'><span class="cm">@brief    The cocos2d Application.</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">The reason for implement as private inheritance is to hide some interface call by Director.</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'><span class="k">class</span>  <span class="nc">AppDelegate</span> <span class="o">:</span> <span class="k">private</span> <span class="n">cocos2d</span><span class="o">::</span><span class="n">Application</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="k">public</span><span class="o">:</span>
+</span><span class='line'>    <span class="n">AppDelegate</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">virtual</span> <span class="o">~</span><span class="n">AppDelegate</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="cm">/**</span>
+</span><span class='line'><span class="cm">    @brief    Implement Director and Scene init code here.</span>
+</span><span class='line'><span class="cm">    @return true    Initialize success, app continue.</span>
+</span><span class='line'><span class="cm">    @return false   Initialize failed, app terminate.</span>
+</span><span class='line'><span class="cm">    */</span>
+</span><span class='line'>    <span class="k">virtual</span> <span class="kt">bool</span> <span class="n">applicationDidFinishLaunching</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="cm">/**</span>
+</span><span class='line'><span class="cm">    @brief  The function be called when the application enter background</span>
+</span><span class='line'><span class="cm">    @param  the pointer of the application</span>
+</span><span class='line'><span class="cm">    */</span>
+</span><span class='line'>    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">applicationDidEnterBackground</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="cm">/**</span>
+</span><span class='line'><span class="cm">    @brief  The function be called when the application enter foreground</span>
+</span><span class='line'><span class="cm">    @param  the pointer of the application</span>
+</span><span class='line'><span class="cm">    */</span>
+</span><span class='line'>    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">applicationWillEnterForeground</span><span class="p">();</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#endif </span><span class="c1">// _APP_DELEGATE_H_</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>AppDelegate.cpp </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cp">#include &quot;AppDelegate.h&quot;</span>
+</span><span class='line'><span class="cp">#include &quot;HelloWorldScene.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">USING_NS_CC</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">AppDelegate</span><span class="o">::</span><span class="n">AppDelegate</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">AppDelegate</span><span class="o">::~</span><span class="n">AppDelegate</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">bool</span> <span class="n">AppDelegate</span><span class="o">::</span><span class="n">applicationDidFinishLaunching</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// initialize director</span>
+</span><span class='line'>    <span class="k">auto</span> <span class="n">director</span> <span class="o">=</span> <span class="n">Director</span><span class="o">::</span><span class="n">getInstance</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">auto</span> <span class="n">glview</span> <span class="o">=</span> <span class="n">director</span><span class="o">-&gt;</span><span class="n">getOpenGLView</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">glview</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">glview</span> <span class="o">=</span> <span class="n">GLView</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;My Game&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">director</span><span class="o">-&gt;</span><span class="n">setOpenGLView</span><span class="p">(</span><span class="n">glview</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// turn on display FPS</span>
+</span><span class='line'>    <span class="n">director</span><span class="o">-&gt;</span><span class="n">setDisplayStats</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// set FPS. the default value is 1.0/60 if you don&#39;t call this</span>
+</span><span class='line'>    <span class="n">director</span><span class="o">-&gt;</span><span class="n">setAnimationInterval</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mi">60</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// create a scene. it&#39;s an autorelease object</span>
+</span><span class='line'>    <span class="k">auto</span> <span class="n">scene</span> <span class="o">=</span> <span class="n">HelloWorld</span><span class="o">::</span><span class="n">createScene</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// run</span>
+</span><span class='line'>    <span class="n">director</span><span class="o">-&gt;</span><span class="n">runWithScene</span><span class="p">(</span><span class="n">scene</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// This function will be called when the app is inactive. When comes a phone call,it&#39;s be invoked too</span>
+</span><span class='line'><span class="kt">void</span> <span class="n">AppDelegate</span><span class="o">::</span><span class="n">applicationDidEnterBackground</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">Director</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">stopAnimation</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// if you use SimpleAudioEngine, it must be pause</span>
+</span><span class='line'>    <span class="c1">// SimpleAudioEngine::getInstance()-&gt;pauseBackgroundMusic();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// this function will be called when the app is active again</span>
+</span><span class='line'><span class="kt">void</span> <span class="n">AppDelegate</span><span class="o">::</span><span class="n">applicationWillEnterForeground</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">Director</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">startAnimation</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// if you use SimpleAudioEngine, it must resume here</span>
+</span><span class='line'>    <span class="c1">// SimpleAudioEngine::getInstance()-&gt;resumeBackgroundMusic();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>HelloWorldScene.h </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cp">#ifndef __HELLOWORLD_SCENE_H__</span>
+</span><span class='line'><span class="cp">#define __HELLOWORLD_SCENE_H__</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &quot;cocos2d.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">HelloWorld</span> <span class="o">:</span> <span class="k">public</span> <span class="n">cocos2d</span><span class="o">::</span><span class="n">Layer</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="k">public</span><span class="o">:</span>
+</span><span class='line'>    <span class="c1">// there&#39;s no &#39;id&#39; in cpp, so we recommend returning the class instance pointer</span>
+</span><span class='line'>    <span class="k">static</span> <span class="n">cocos2d</span><span class="o">::</span><span class="n">Scene</span><span class="o">*</span> <span class="n">createScene</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Here&#39;s a difference. Method &#39;init&#39; in cocos2d-x returns bool, instead of returning &#39;id&#39; in cocos2d-iphone</span>
+</span><span class='line'>    <span class="k">virtual</span> <span class="kt">bool</span> <span class="n">init</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// a selector callback</span>
+</span><span class='line'>    <span class="kt">void</span> <span class="n">menuCloseCallback</span><span class="p">(</span><span class="n">cocos2d</span><span class="o">::</span><span class="n">Ref</span><span class="o">*</span> <span class="n">pSender</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// implement the &quot;static create()&quot; method manually</span>
+</span><span class='line'>    <span class="n">CREATE_FUNC</span><span class="p">(</span><span class="n">HelloWorld</span><span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#endif </span><span class="c1">// __HELLOWORLD_SCENE_H__</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>HelloWorldScene.cpp </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cp">#include &quot;HelloWorldScene.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">USING_NS_CC</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">Scene</span><span class="o">*</span> <span class="n">HelloWorld</span><span class="o">::</span><span class="n">createScene</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="c1">// &#39;scene&#39; is an autorelease object</span>
+</span><span class='line'>    <span class="k">auto</span> <span class="n">scene</span> <span class="o">=</span> <span class="n">Scene</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// &#39;layer&#39; is an autorelease object</span>
+</span><span class='line'>    <span class="k">auto</span> <span class="n">layer</span> <span class="o">=</span> <span class="n">HelloWorld</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// add layer as a child to scene</span>
+</span><span class='line'>    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="n">layer</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// return the scene</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">scene</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// on &quot;init&quot; you need to initialize your instance</span>
+</span><span class='line'><span class="kt">bool</span> <span class="n">HelloWorld</span><span class="o">::</span><span class="n">init</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="c1">//////////////////////////////</span>
+</span><span class='line'>    <span class="c1">// 1. super init first</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="n">Layer</span><span class="o">::</span><span class="n">init</span><span class="p">()</span> <span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">Size</span> <span class="n">visibleSize</span> <span class="o">=</span> <span class="n">Director</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getVisibleSize</span><span class="p">();</span>
+</span><span class='line'>    <span class="n">Vec2</span> <span class="n">origin</span> <span class="o">=</span> <span class="n">Director</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getVisibleOrigin</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">/////////////////////////////</span>
+</span><span class='line'>    <span class="c1">// 2. add a menu item with &quot;X&quot; image, which is clicked to quit the program</span>
+</span><span class='line'>    <span class="c1">//    you may modify it.</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// add a &quot;close&quot; icon to exit the progress. it&#39;s an autorelease object</span>
+</span><span class='line'>    <span class="k">auto</span> <span class="n">closeItem</span> <span class="o">=</span> <span class="n">MenuItemImage</span><span class="o">::</span><span class="n">create</span><span class="p">(</span>
+</span><span class='line'>                                           <span class="s">&quot;CloseNormal.png&quot;</span><span class="p">,</span>
+</span><span class='line'>                                           <span class="s">&quot;CloseSelected.png&quot;</span><span class="p">,</span>
+</span><span class='line'>                                           <span class="n">CC_CALLBACK_1</span><span class="p">(</span><span class="n">HelloWorld</span><span class="o">::</span><span class="n">menuCloseCallback</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">closeItem</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">Vec2</span><span class="p">(</span><span class="n">origin</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">visibleSize</span><span class="p">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">closeItem</span><span class="o">-&gt;</span><span class="n">getContentSize</span><span class="p">().</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span> <span class="p">,</span>
+</span><span class='line'>                                <span class="n">origin</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">closeItem</span><span class="o">-&gt;</span><span class="n">getContentSize</span><span class="p">().</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// create menu, it&#39;s an autorelease object</span>
+</span><span class='line'>    <span class="k">auto</span> <span class="n">menu</span> <span class="o">=</span> <span class="n">Menu</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">closeItem</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">menu</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">Vec2</span><span class="o">::</span><span class="n">ZERO</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="n">menu</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">/////////////////////////////</span>
+</span><span class='line'>    <span class="c1">// 3. add your codes below...</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// add a label shows &quot;Hello World&quot;</span>
+</span><span class='line'>    <span class="c1">// create and initialize a label</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">auto</span> <span class="n">label</span> <span class="o">=</span> <span class="n">LabelTTF</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;Hello World&quot;</span><span class="p">,</span> <span class="s">&quot;Arial&quot;</span><span class="p">,</span> <span class="mi">24</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// position the label on the center of the screen</span>
+</span><span class='line'>    <span class="n">label</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">Vec2</span><span class="p">(</span><span class="n">origin</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">visibleSize</span><span class="p">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+</span><span class='line'>                            <span class="n">origin</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">visibleSize</span><span class="p">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">label</span><span class="o">-&gt;</span><span class="n">getContentSize</span><span class="p">().</span><span class="n">height</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// add the label as a child to this layer</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// add &quot;HelloWorld&quot; splash screen&quot;</span>
+</span><span class='line'>    <span class="k">auto</span> <span class="n">sprite</span> <span class="o">=</span> <span class="n">Sprite</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;HelloWorld.png&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// position the sprite on the center of the screen</span>
+</span><span class='line'>    <span class="n">sprite</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">Vec2</span><span class="p">(</span><span class="n">visibleSize</span><span class="p">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">origin</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">visibleSize</span><span class="p">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">origin</span><span class="p">.</span><span class="n">y</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// add the sprite as a child to this layer</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="n">sprite</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">HelloWorld</span><span class="o">::</span><span class="n">menuCloseCallback</span><span class="p">(</span><span class="n">Ref</span><span class="o">*</span> <span class="n">pSender</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="cp">#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)</span>
+</span><span class='line'>  <span class="n">MessageBox</span><span class="p">(</span><span class="s">&quot;You pressed the close button. Windows Store Apps do not implement a close button.&quot;</span><span class="p">,</span><span class="s">&quot;Alert&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span><span class="p">;</span>
+</span><span class='line'><span class="cp">#endif</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">Director</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">end</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)</span>
+</span><span class='line'>    <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'><span class="cp">#endif</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
   
     <footer>
@@ -105,6 +545,14 @@
 
 <time datetime="2014-04-29T14:16:00+00:00" pubdate data-updated="true">Apr 29<span>th</span>, 2014</time>
         
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/cocos2d-x/'>Cocos2D-X</a>
+  
+</span>
+
+
       </p>
       
         <div class="sharing">
