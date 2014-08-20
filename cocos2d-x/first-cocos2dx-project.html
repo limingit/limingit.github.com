@@ -8,13 +8,7 @@
   <title>第一个 Cocos2D-X 工程：FirstGame - Begin iOS</title>
   <meta name="author" content="Bencalie" />
   
-  <meta name="description" content="第一个 Cocos2D-X 工程：FirstGame Apr 29th, 2014 环境：Windows 7 旗舰版(64位) + Cocos2D-X 使用命令行创建 cocos2d-x 工程 Eclipse 打开工程 工程目录结构 代码 AppDelegate.h 1
-2
-3
-4
-5
-6
-7 &hellip;" />
+  <meta name="description" content="第一个 Cocos2D-X 工程：FirstGame Apr 29th, 2014 环境：Windows 7 旗舰版(64位) + Cocos2D-X v3.2 使用命令行创建 cocos2d-x 工程 配置 cocos2d-x 的开发环境完成后，就可以创建工程了。 执行命令创建：cocos &hellip;" />
   
   <meta name="keyword" content="iOS Development, Cocos2d-x, Javascript" />
   <!-- http://t.co/dKP3o1e -->
@@ -91,13 +85,43 @@
 <time datetime="2014-04-29T14:16:00+00:00" pubdate data-updated="true">Apr 29<span>th</span>, 2014</time></p>
   </header>
   
-  <p>环境：Windows 7 旗舰版(64位) + Cocos2D-X</p>
+  <p>环境：Windows 7 旗舰版(64位) + Cocos2D-X v3.2</p>
 
 <h1>使用命令行创建 cocos2d-x 工程</h1>
 
+<p><a href="/cocos2d-x/install-cocos2d-x-3.html">配置 cocos2d-x 的开发环境</a>完成后，就可以创建工程了。</p>
+
+<p>执行命令创建：<code>cocos new -p com.beginios.firstgame -l cpp -d F:\projects\cocos2d-x3 firstgame</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Runing command: new
+</span><span class='line'>> Copy template into F:\projects\cocos2d-x3\firstgame
+</span><span class='line'>> Copying cocos2d-x files...
+</span><span class='line'>> Rename project name from 'HelloCpp' to 'firstgame'
+</span><span class='line'>> Replace the project name from 'HelloCpp' to 'firstgame'
+</span><span class='line'>> Replace the project package name from 'org.cocos2dx.hellocpp' to 'com.beginios.firstgame'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Android 工程位于 <code>proj.android</code> 目录下，需要在该目录下执行 <code>python build_native.py</code> 来编译应用。</p>
+
 <h1>Eclipse 打开工程</h1>
 
+<ul>
+<li>主菜单 File &ndash;> New &ndash;> Projects&hellip; 打开创建工程的对话框</li>
+<li><p><img src="/images/blog/android/create_project_from_existing_code.png"></p></li>
+</ul>
+
+
+<p><img src="/images/blog/android/create_project_browser_code.png"></p>
+
 <h1>工程目录结构</h1>
+
+<p><img src="/images/blog/cocos2d-x/project_dir_tree.png"></p>
 
 <h1>代码</h1>
 
