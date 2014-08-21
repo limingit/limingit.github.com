@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8" />
-  <title>安装 Cocos2D-X 3.0 - Begin iOS</title>
+  <title>安装 Cocos2D-X 3.0 - ❤ Begin iOS</title>
   <meta name="author" content="Bencalie" />
   
   <meta name="description" content="安装 Cocos2D-X 3.0 Apr 29th, 2014 2014 年 4月，Cocos2D-X v3.0 正式发布，相对于 v2.2.1，环境的配置又发生了较大的变化，现在记录如下。 第一步是做准备。 如果要开发 Mac 或者 iOS 下的游戏，需要准备一台 Mac 电脑及 iPhone &hellip;" />
@@ -22,7 +22,7 @@
   <link rel="canonical" href="http://beginios.com/cocos2d-x/install-cocos2d-x-3.html" />
   <link href="/favicon.png" rel="icon" />
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
-  <link href="/atom.xml" rel="alternate" title="Begin iOS" type="application/atom+xml" />
+  <link href="/atom.xml" rel="alternate" title="❤ Begin iOS" type="application/atom+xml" />
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
@@ -34,7 +34,7 @@
 
 <body   >
   <header role="banner"><hgroup>
-  <h1><a href="/">Begin iOS</a></h1>
+  <h1><a href="/">❤ Begin iOS</a></h1>
   
     <h2>A guide for iOS developer.</h2>
   
@@ -279,6 +279,20 @@
 
 
 <p>用 Xcode 打开 <code>proj.ios_mac</code> 下的 <code>helloworld.xcodeproj</code>，运行编译即可</p>
+
+<p>Android 开发，需要先进入 <code>proj.android</code> 执行 <code>python build_native.py</code>，进行编译，然后再用 Eclipse 打开工程。</p>
+
+<p>cocos2d-x 工程错误：the import org.cocos2dx.lib cannot be resolved
+将 cocos2d-x 引擎目录的：/cocos/2d/platform/android/java/src/org/cocos2dx/lib 复制到 src 包下</p>
+
+<p>也可以导入cocos2dx/platform/android/java这个工程生成一个jar文件添加到项目的libs文件夹下即可。</p>
+
+<p>错误：[2014-08-19 13:09:24 &ndash; hellogame] Dx
+trouble writing output: already prepared
+[2014-08-19 13:09:24 &ndash; Dex Loader] Unable to execute dex: java.nio.BufferOverflowException. Check the Eclipse log for stack trace.
+[2014-08-19 13:09:24 &ndash; hellogame] Conversion to Dalvik format failed: Unable to execute dex: java.nio.BufferOverflowException. Check the Eclipse log for stack trace.</p>
+
+<p>右键工程-〉Build Path->Configure Build Path->点击Libraries，Remove Android Dependencies &ndash;>点击Order and Export 确认Android x.x的有没有勾上，没有勾上就勾上，然后按OK，然后clean一下工程，如果还不可以，就要重新Add Libraries,还有修改project.properties对应的版本</p>
 
 <h2>Windows 环境</h2>
 

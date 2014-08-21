@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8" />
-  <title>Android 常见错误 - Begin iOS</title>
+  <title>Android 常见错误 - ❤ Begin iOS</title>
   <meta name="author" content="Bencalie" />
   
   <meta name="description" content="Android 常见错误 Aug 15th, 2014 Android打包Apk的时候&#8221;app_name&#8221; is not translated in ar, cs, de, es, fi, fr, he, it, iw, ja, ko, nl, pl, pt, pt- &hellip;" />
@@ -22,7 +22,7 @@
   <link rel="canonical" href="http://beginios.com/android/error.html" />
   <link href="/favicon.png" rel="icon" />
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
-  <link href="/atom.xml" rel="alternate" title="Begin iOS" type="application/atom+xml" />
+  <link href="/atom.xml" rel="alternate" title="❤ Begin iOS" type="application/atom+xml" />
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
@@ -34,7 +34,7 @@
 
 <body   >
   <header role="banner"><hgroup>
-  <h1><a href="/">Begin iOS</a></h1>
+  <h1><a href="/">❤ Begin iOS</a></h1>
   
     <h2>A guide for iOS developer.</h2>
   
@@ -92,6 +92,35 @@
 
 <p>解决办法：打开 Eclipse &ndash;> 窗口 &ndash;> 首选项，找到 Android > Lint Error Checking 的 Correctness: Messages > MissingTranslate
 将 Severity 从 Fetal 改为 Warning；或者将 Run full error check when exporting app 前面的勾去掉就可以了</p>
+
+<ul>
+<li>小米手机真机发布的时候，提示 Installation error: INSTALL_CANCELED_BY_USER：</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[2014-08-19 12:39:51 - HelloAndroid] ------------------------------
+</span><span class='line'>[2014-08-19 12:39:51 - HelloAndroid] Android Launch!
+</span><span class='line'>[2014-08-19 12:39:51 - HelloAndroid] adb is running normally.
+</span><span class='line'>[2014-08-19 12:39:51 - HelloAndroid] Performing com.beginios.helloandroid.MainActivity activity launch
+</span><span class='line'>[2014-08-19 12:39:56 - HelloAndroid] Uploading HelloAndroid.apk onto device 'FA75VWVKV86HKBCE'
+</span><span class='line'>[2014-08-19 12:39:56 - HelloAndroid] Installing HelloAndroid.apk...
+</span><span class='line'>[2014-08-19 12:39:56 - HelloAndroid] Installation error: INSTALL_CANCELED_BY_USER
+</span><span class='line'>[2014-08-19 12:39:56 - HelloAndroid] Please check logcat output for more details.
+</span><span class='line'>[2014-08-19 12:39:57 - HelloAndroid] Launch canceled!</span></code></pre></td></tr></table></div></figure>
+
+
+<p>解决办法：可能是内存不够，杀掉一些进程；也可能是手机进入锁屏状态，将屏幕解锁就好了</p>
+
+<p>参考资料：<a href="http://blog.csdn.net/chillax_li/article/details/24272343">Android 开发基础——真机测试错误</a></p>
 
   
     <footer>
