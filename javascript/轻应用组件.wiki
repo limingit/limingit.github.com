@@ -359,6 +359,19 @@ WeiboJSBridge.invoke("getNetworkType", {"param" : "value"}, function (params, su
 * `MISSING_PARAMS`: 未传递 `title` 参数
 
 
+====login 唤起登录功能====
+
+- 参数列表：
+* `redirect_uri`: 登录后回调的地址，必需。并且该 URL 必须是 http://apps.weibo.com 开头，不接受任何其他域名的 URL
+
+- 返回值：无
+
+<pre class="brush:js">
+WeiboJSBridge.invoke("login", {
+	"redirect_uri" : encodeURIComponent("http://apps.weibo.com/test/1406758883/2I8KtA/demo/game/yangtuo")
+}, function (params, success, code) {});
+</pre>
+
 ====setIframeSize 设置 iframe 高度====
 
 此方法用于解决部分 Android 机器下页面动态添加了内容，但滚动条拉不到底的问题。
@@ -434,7 +447,7 @@ WeiboJSBridge.on('networkTypeChanged', function(params){
 组件有两种形态：
 
 PC 版：
-
+{{center|http://liming.sinaapp.com/weibo/address_web.png}}
 
 H5 版：
 {{center|http://liming.sinaapp.com/weibo/address.png}}
@@ -546,8 +559,62 @@ WeiboJSBridge.invoke("deliverAddress:change", {}, function(addr){ /* 回调函�
 </html>
 </pre>
 
+==轻应用 H5 底导==
+
+轻应用在微博客户端内现在都是在对象正文页的内置浏览器展示（底部有转评赞按钮），它是有一定缺陷的，如：
+
+* 不支持内页分享。比如你的应用内有一个对象，点击对象内的链接，iframe 内部跳转到一个非对象的 URL，这时候你点转发，仍然分享的是刚开始进来的对象的信息。
+* 不支持定制分享文案。点转发唤起的发布器，文案是固定的，你无法修改。
+* 可定制性差
+
+目前，轻应用提供了一款 H5 底导组件，该组件用 HTML+JavaScript 实现，和现在的对象正文页底导 UI 几乎雷同，但能够支持内页分享，并且文案可以随心所欲的定制。目前处于内部体验阶段，不向所有接入方开放。
+
+{{center|http://liming.sinaapp.com/weibo/h5nav.jpg}}
+
+接入方式：
+
+
+第一步、使用轻应用 H5 底导，需要申请，请将 appkey 发送给 chenlei6@staff.weibo.com 申请该组件的使用权限。
+
+第二步、在需要支持内页分享的页面内，引入轻应用组件移动版的 JS。
+
+<pre class="brush:html">
+<script src="http://tjs.sjs.sinajs.cn/open/thirdpart/js/pageapp/mobile/jsapi.js" charset="utf-8"></script>
+</pre>
+
+这时候，你就能直接看到组件了。
+
+第三步、修改默认分享文案。
+
+<pre class="brush:html">
+WeiboJSBridge.trigger('bottomNavigation:info', {
+	"title" : "我的分享文案，爱怎么写就怎么写，哈哈"
+}, function(){});
+</pre>
+
+完整范例：
+
+<pre class="brush:html">
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>轻应用 H5 底导</title>
+</head>
+<body>
+	<script src="http://tjs.sjs.sinajs.cn/open/thirdpart/js/pageapp/mobile/jsapi.js" charset="utf-8"></script>
+	<script>
+		WeiboJSBridge.trigger('bottomNavigation:info', {
+			"title" : "我的分享文案，爱怎么写就怎么写，哈哈"
+		}, function(){});
+	</script>
+</body>
+</html>
+</pre>
+
 =更新日志=
 
+* &bull; 2014.08.22 轻应用移动端增加 H5 底导、唤起登录功能
 * &bull; 2014.08.08 轻应用 PC 端增加唤起收货地址组件功能，简化了 H5 版组件的调用
 * &bull; 2014.08.05 轻应用 PC 端增加唤起私信浮层或 IM 功能
 * &bull; 2014.06.18 合并 Web 版 Javascript 包文档到轻应用组件
