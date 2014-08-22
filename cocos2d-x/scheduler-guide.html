@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+  <title>Cocos2D-X 定时器 ♫ Begin iOS</title>
+  <meta name="author" content="Bencalie" />
+  
+  <meta name="description" content="Cocos2D-X 定时器 Aug 22nd, 2014 游戏的本质就是不断的绘图，游戏基本上就是在重复以下几个动作： 处理用户输入（包括触摸事件和软键盘输入文字）
+处理定时事件
+绘图 游戏主循环就是反复执行以上动作，直到玩家退出游戏。 Cocos2D-X 提供了 scheduler （定时器， &hellip;" />
+  
+  <meta name="keyword" content="iOS Development, Cocos2d-x, Javascript" />
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta property="wb:webmaster" content="55c9e91dcbf77db5" />
+  <link rel="author" href="https://plus.google.com/107446839256480078362/posts" />
+  <link rel="publisher" href="https://plus.google.com/107446839256480078362" />
+  
+  <link rel="canonical" href="http://beginios.com/cocos2d-x/scheduler-guide.html" />
+  <link href="/favicon.png" rel="icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="Begin iOS" type="application/atom+xml" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">-->
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Begin iOS</a></h1>
+  
+    <h2>A guide for iOS developer.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:beginios.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <!--<li><a href="/ios/">iOS</a></li>
+  <li><a href="/cocos2d-x/">Cocos2d-x</a></li>
+  <li><a href="/javascript/">Javascript</a></li>
+  <li><a href="/android/">Android</a></li>
+  <li><a href="/resources/">Resources</a></li>-->
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Cocos2D-X 定时器</h1>
+    <p class="meta">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-22T14:16:00+00:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2014</time></p>
+  </header>
+  
+  <p>游戏的本质就是不断的绘图，游戏基本上就是在重复以下几个动作：</p>
+
+<ul>
+<li>处理用户输入（包括触摸事件和软键盘输入文字）</li>
+<li>处理定时事件</li>
+<li>绘图</li>
+</ul>
+
+
+<p>游戏主循环就是反复执行以上动作，直到玩家退出游戏。</p>
+
+<p>Cocos2D-X 提供了 scheduler （定时器，也有人翻译为调度器），用于不间断的触发一些行为或者检查状态，比如运动中精灵的碰撞检测。</p>
+
+<p>所有 Node 对象都知道如何定时器和取消定时器事件，使用定时器有几个好处：</p>
+
+<ul>
+<li>每当 Node 不再可见或已从场景中移除时，定时器会停止</li>
+<li>Cocos2D-X暂停时，定时器也会停止。当 Cocos2D-X 重新开始时，定时器也会自动继续启动</li>
+<li>Cocos2D-X封装了一个供各种不同平台使用的定时器，使用此定时器你不用关心和跟踪你所设定的定时对象的销毁和停止，以及崩溃的风险。</li>
+</ul>
+
+
+<h1>定时器的类型：</h1>
+
+<ul>
+<li>默认定时器 <code>schedulerUpdate</code></li>
+<li>自定义定时器 <code>scheduler</code></li>
+<li>一次性定时器 <code>schedulerOnce</code></li>
+</ul>
+
+
+<h1>默认定时器 <code>schedulerUpdate</code></h1>
+
+<p>这个定时器调用刷新时间 update 方法，这个方法在每一帧绘制之前都会被调用。由于每帧之间的时间间隔非常短（如果按 60 帧/秒算，两帧之间的间隔为 16.7 毫秒），所以每帧刷新一次已经足够完成大部分游戏中需要的逻辑判断。</p>
+
+<p>Cocos2D-X 中的 Node 默认没启动 update 事件，因此需要重载 update 方法来执行自己的逻辑代码。</p>
+
+<p>取消方式：<code>unscheduleUpdate()</code></p>
+
+<figure class='code'><figcaption><span>HelloWorldScene.h </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="kt">void</span> <span class="n">update</span><span class="p">(</span><span class="kt">float</span> <span class="n">dt</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>HelloWorldScene.cpp </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="kt">bool</span> <span class="n">HelloWorld</span><span class="o">::</span><span class="n">init</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="c1">// ...</span>
+</span><span class='line'>    <span class="n">scheduleUpdate</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">HelloWorld</span><span class="o">::</span><span class="n">update</span><span class="p">(</span><span class="kt">float</span> <span class="n">dt</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">log</span><span class="p">(</span><span class="s">&quot;update&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>自定义定时器 <code>scheduler</code></h1>
+
+<p>自定义调度器可以设定调用的时间间隔，比如 1 秒。自定义事件间隔必须大于两帧的间隔，否则两帧内的多次调用会被合并成一次调用。因此自定义事件间隔应该在 0.1 秒以上。</p>
+
+<p>取消方式：<code>unschedule(SEL_SCHEDULE selector, float delay)</code></p>
+
+<figure class='code'><figcaption><span>HelloWorldScene.h </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="kt">void</span> <span class="n">updateCustom</span><span class="p">(</span><span class="kt">float</span> <span class="n">dt</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>HelloWorldScene.cpp </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="kt">bool</span> <span class="n">HelloWorld</span><span class="o">::</span><span class="n">init</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="c1">// ...</span>
+</span><span class='line'>    <span class="c1">// 参数 1 为要添加的事件函数，参数 2 为事件触发的时间间隔</span>
+</span><span class='line'>    <span class="c1">// 参数 3 为触发一次后还会触发的次数，默认为 kRepeateForeer，表示无限次触发</span>
+</span><span class='line'>    <span class="c1">// 参数 4 表示第一次触发之前的延时</span>
+</span><span class='line'>    <span class="n">schedule</span><span class="p">(</span><span class="n">schedule_selector</span><span class="p">(</span><span class="n">HelloWorld</span><span class="o">::</span><span class="n">updateCustom</span><span class="p">),</span> <span class="mf">1.0f</span><span class="p">,</span> <span class="n">kRepeatForever</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">HelloWorld</span><span class="o">::</span><span class="n">updateCustom</span><span class="p">(</span><span class="kt">float</span> <span class="n">dt</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">log</span><span class="p">(</span><span class="s">&quot;Custom&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>单次定时器 <code>schedulerOnce</code></h1>
+
+<p>单次定时器只会触发一次</p>
+
+<p>取消方式：<code>unschedule(SEL_SCHEDULE selector, float delay)</code></p>
+
+<figure class='code'><figcaption><span>HelloWorldScene.h </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="kt">void</span> <span class="n">updateOnce</span><span class="p">(</span><span class="kt">float</span> <span class="n">dt</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>HelloWorldScene.cpp </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="kt">bool</span> <span class="n">HelloWorld</span><span class="o">::</span><span class="n">init</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="c1">// ...</span>
+</span><span class='line'>    <span class="c1">// 参数 1 为要添加的事件函数，参数 2 为事件触发的时间间隔</span>
+</span><span class='line'>    <span class="c1">// 参数 3 为触发一次后还会触发的次数，默认为 kRepeateForeer，表示无限次触发</span>
+</span><span class='line'>    <span class="c1">// 参数 4 表示第一次触发之前的延时</span>
+</span><span class='line'>    <span class="n">scheduleOnce</span><span class="p">(</span><span class="n">schedule_selector</span><span class="p">(</span><span class="n">HelloWorld</span><span class="o">::</span><span class="n">updateCustom</span><span class="p">),</span> <span class="mf">1.0f</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">HelloWorld</span><span class="o">::</span><span class="n">updateOnce</span><span class="p">(</span><span class="kt">float</span> <span class="n">dt</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">log</span><span class="p">(</span><span class="s">&quot;Once&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>取消定时器的方法</h1>
+
+<p>有三个：</p>
+
+<ul>
+<li><code>unschedule(SEL_SCHEDULE selector)</code> 取消自定义定时器或单次定时器</li>
+<li><code>unscheduleAllSelectors()</code> 取消所有定时器</li>
+<li><code>unscheduleUpdate()</code> 取消默认定时器</li>
+</ul>
+
+
+  
+    <footer>
+      <p class="meta">
+        
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-22T14:16:00+00:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2014</time>
+        
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/cocos2d-x/'>Cocos2D-X</a>
+  
+</span>
+
+
+      </p>
+      
+        <div class="sharing">
+  
+  
+  
+  
+	<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<span class="jiathis_txt">&#x5206;&#x4eab;&#x5230;&#xff1a;</span>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=1822549" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">&#x66f4;&#x591a;</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=1822549" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1822549"></script>
+<!-- UY END -->
+
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>关于我</h1>
+	<p>Front-End Engineer</p>
+	<ul>
+		<li>微博：<a href="http://weibo.com/bencalie" target="_blank">@Bencalie</a></li>
+		<li>Google+：<a href="https://plus.google.com/u/0/107446839256480078362?rel=author" target="_blank">Bencalie</a></li>
+	</ul>
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=1406758883&verifier=a7415e95&dpc=1"></iframe>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/08/19/fix-unknown-android-phone-device-for-mac/">解决小米、红米及其他 Android 手机无法在 Mac 下进行真机调试的问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/06/swift-programming-language-introduction/">Swift 介绍 PPT</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/06/swift-guide/">Swift 入门</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/29/customize-xcode-template/">自定义 Xcode 新文件模板</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/28/debug-with-weinre/">使用 Weinre 调试移动网页</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+	<h1>Tags</h1>
+	<ul class="tag_cloud">
+		<a style="font-size: 210%" href="/tags/android/">Android</a>
+<a style="font-size: 90%" href="/tags/applicationcache/">ApplicationCache</a>
+<a style="font-size: 90%" href="/tags/charles/">Charles</a>
+<a style="font-size: 210%" href="/tags/html5/">HTML5</a>
+<a style="font-size: 90%" href="/tags/markdown-editor/">Markdown Editor</a>
+<a style="font-size: 210%" href="/tags/tools/">Tools</a>
+<a style="font-size: 210%" href="/tags/uiwebview/">UIWebview</a>
+<a style="font-size: 90%" href="/tags/url-schema/">URL Schema</a>
+<a style="font-size: 90%" href="/tags/web-debugging-proxy/">Web Debugging Proxy</a>
+<a style="font-size: 90%" href="/tags/google/">google</a>
+<a style="font-size: 90%" href="/tags/ios/">iOS</a>
+<a style="font-size: 90%" href="/tags/xiao-mi-shou-ji/">小米手机</a>
+<a style="font-size: 90%" href="/tags/zhen-ji-diao-shi/">真机调试</a>
+
+	</ul>
+</section>
+<section>
+	<h1>微博开发者</h1>
+	<ul>
+		<li><a href="http://beginios.com/javascript/weibo-app-frame" target="_blank">应用框架接入文档</a></li>
+		<li><a href="http://weibojs.com" target="_blank">微博 JSSDK 官网</a></li>
+	</ul>
+</section>
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/limingit">@limingit</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'limingit',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Bencalie -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+
+  <script type="text/javascript">
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-47018713-1', 'beginios.com');
+	ga('send', 'pageview');
+  </script>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
