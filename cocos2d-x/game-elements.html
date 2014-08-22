@@ -98,7 +98,7 @@
 <p>CCDirector 只有一个，因此设计采用的是单例设计模式，游戏中任何地方都可以通过 CCDirector::getInstance() 来获取它的实例。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>CCDirector *pDirector = CCDirector::getInstance()    // cocos2d-x 2.x 是 CCDirector::sharedDirector()</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>auto director = Director::getInstance()  // cocos2d-x 2.x 是 CCDirector* pDirector = CCDirector::sharedDirector()</span></code></pre></td></tr></table></div></figure>
 
 
 <p>CCDirector 关于场景控制的方法有：</p>
@@ -156,6 +156,18 @@
 </ul>
 
 
+<figure class='code'><figcaption><span>创建 Layer </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="k">auto</span> <span class="n">layer</span> <span class="o">=</span> <span class="n">LayerColor</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">Color4B</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">255</span><span class="p">));</span>
+</span><span class='line'><span class="n">layer</span><span class="o">-&gt;</span><span class="n">setContentSize</span><span class="p">(</span><span class="n">CCSizeMake</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="mi">80</span><span class="p">));</span>
+</span><span class='line'><span class="n">layer</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">));</span>
+</span><span class='line'><span class="n">addChild</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 <h1>CCSprite</h1>
 
 <p>精灵是游戏中最重要的元素。CCSprite 代表了游戏中一个最小的可见单位。游戏角色、NPC、道具等，都是精灵。</p>
@@ -164,7 +176,7 @@
 
 <p>在实际的使用中，精灵是由纹理创建的。不加任何设置的情况下，精灵就是一张显示在屏幕上的图片。通常精灵放在层中，因此首选在层的初始化方法中创建精灵，并设置其属性，然后添加到层中。</p>
 
-<p>创建精灵的方法有多种：</p>
+<h2>创建精灵的方法有多种：</h2>
 
 <ul>
 <li>使用图片</li>
@@ -173,15 +185,96 @@
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="n">CCSprite</span><span class="o">*</span> <span class="n">fish</span> <span class="o">=</span> <span class="n">CCSprite</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;fish.png&quot;</span><span class="p">);</span>    <span class="c1">// 使用图片创建精灵</span>
-</span><span class='line'><span class="n">CCSprite</span><span class="o">*</span> <span class="n">smallFish</span> <span class="o">=</span> <span class="n">CCSprite</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;fish.png&quot;</span><span class="p">,</span> <span class="n">CCRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">));</span> <span class="c1">// 仅显示图片左上角的 100*100 像素大小的部分</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="k">auto</span> <span class="n">sprite</span> <span class="o">=</span> <span class="n">CCSprite</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;sprite.png&quot;</span><span class="p">);</span>    <span class="c1">// 使用图片创建精灵</span>
+</span><span class='line'><span class="k">auto</span> <span class="n">smallSprite</span> <span class="o">=</span> <span class="n">CCSprite</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;sprite.png&quot;</span><span class="p">,</span> <span class="n">CCRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">));</span> <span class="c1">// 仅显示图片左上角的 100*100 像素大小的部分</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <ul>
 <li>使用纹理 CCTexture2D</li>
+</ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="k">auto</span> <span class="n">sprite1</span> <span class="o">=</span> <span class="n">Sprite</span><span class="o">::</span><span class="n">createWithTexture</span><span class="p">(</span><span class="n">TextureCache</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addImage</span><span class="p">(</span><span class="s">&quot;HelloWorld.png&quot;</span><span class="p">));</span>
+</span><span class='line'><span class="k">this</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="n">sprite1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
 <li>使用 CCSpriteFrame</li>
 </ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="k">auto</span> <span class="n">sprite2</span><span class="o">=</span><span class="n">Sprite</span><span class="o">::</span><span class="n">createWithSpriteFrameName</span><span class="p">(</span><span class="s">&quot;HelloWorld.png&quot;</span><span class="p">);</span><span class="err">　　</span>
+</span><span class='line'><span class="k">this</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="n">sprite2</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>设置精灵的属性</h2>
+
+<p>可以设置的属性有：位置、方向、缩放比例等。</p>
+
+<h3>位置</h3>
+
+<figure class='code'><figcaption><span>把精灵置于屏幕中央 </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="n">Size</span> <span class="n">size</span> <span class="o">=</span> <span class="n">Director</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getVisibleSize</span><span class="p">();</span>   <span class="c1">// 取得场景的可见尺寸</span>
+</span><span class='line'><span class="n">Point</span> <span class="n">origin</span> <span class="o">=</span> <span class="n">Director</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getVisibleOrigin</span><span class="p">();</span>  <span class="c1">// 取得坐标原点位置</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">Point</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">origin</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">origin</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+</span><span class='line'><span class="n">sprite</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">pos</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">this</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="n">sprite</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>透明度</h3>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="n">sprite</span><span class="o">-&gt;</span><span class="n">setOpacity</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>    <span class="c1">// 透明度，取值范围 0~255</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>叠加在精灵上的颜色</h3>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="n">sprite</span><span class="o">-&gt;</span><span class="n">setColor</span><span class="p">(</span><span class="n">Color3B</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>   <span class="c1">// 叠加大红色</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在 cocos2d-x 中实现精灵显示的基本过程如下：</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="c1">//创建Scene</span>
+</span><span class='line'><span class="k">auto</span> <span class="n">scene</span> <span class="o">=</span> <span class="n">Scene</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+</span><span class='line'><span class="c1">//创建层</span>
+</span><span class='line'><span class="k">auto</span> <span class="n">layer</span> <span class="o">=</span> <span class="n">HelloWorld</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+</span><span class='line'><span class="c1">//把层加入场景中</span>
+</span><span class='line'><span class="n">scene</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="n">layer</span><span class="p">);</span>
+</span><span class='line'><span class="c1">//创建一个精灵</span>
+</span><span class='line'><span class="k">auto</span> <span class="n">sprite</span> <span class="o">=</span> <span class="n">Sprite</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;HelloWorld.png&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="c1">//把精灵加到层里</span>
+</span><span class='line'><span class="n">layer</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="n">sprite</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
   
