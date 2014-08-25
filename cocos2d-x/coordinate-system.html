@@ -8,7 +8,7 @@
   <title>Cocos2D-X 坐标系 ♫ Begin iOS</title>
   <meta name="author" content="Bencalie" />
   
-  <meta name="description" content="Cocos2D-X 坐标系 Aug 22nd, 2014 Cocos2D-X 和 OpenGL 的坐标系，都起源于笛卡尔坐标系。 笛卡尔坐标系，原点在左下角，x 轴向右，y 轴向上，z 轴向外。OpenGL 坐标系为笛卡尔右手系。 屏幕坐标系，原点在屏幕左上角，x 轴向右，y 轴向下。 Aug &hellip;" />
+  <meta name="description" content="Cocos2D-X 坐标系 Aug 22nd, 2014 Cocos2D-X 和 OpenGL 的坐标系，都起源于笛卡尔坐标系。 笛卡尔坐标系，原点在左下角，x 轴向右，y 轴向上，z 轴向外。OpenGL 坐标系为笛卡尔右手系。 屏幕坐标系，原点在屏幕左上角，x 轴向右，y 轴向下。 &hellip;" />
   
   <meta name="keyword" content="iOS Development, Cocos2d-x, Javascript" />
   <!-- http://t.co/dKP3o1e -->
@@ -92,6 +92,182 @@
 <p>屏幕坐标系，原点在屏幕左上角，x 轴向右，y 轴向下。</p>
 
 <p><img src="http://cn.cocos2d-x.org/doc/cocos-docs-master/manual/framework/native/v3/coordinate-system/res/UICoordinate.png"></p>
+
+<p>世界坐标系，也叫绝对坐标系，是游戏开发中的概念。</p>
+
+<p>本地坐标系，也叫相对坐标系，和节点相关联的坐标系。每个节点都有独立的坐标系，节点移动或改变方向，其坐标系也变化。</p>
+
+<p>最后在绘制屏幕的时候 cocos2d 会把节点的本地坐标映射成世界坐标系坐标。</p>
+
+<h1>锚点（AnchorPoint）</h1>
+
+<p>AnchorPoint 用于设置一个锚点，以便精确的控制节点的位置和变换。AnchorPoint 的两个参量 x 和 y 通常都是取值为 0~1 之间的实数，用于表示锚点相对于节点长宽的位置。锚点如果在节点左下角，应该是 (0,0)，在右下角 应该是 (1,0)，右上角应该是 (1,1)，中心点是 (0.5,0.5)，锚点也可以设置为 (2,0) 这样的。</p>
+
+<p>精灵的默认锚点是 (0.5,0.5)，其他节点的默认锚点是 (0,0)。就是说，默认的，对精灵设置 position 属性，是设置精灵中心点的坐标；其他节点设置的是节点左下角的坐标。</p>
+
+<p>个人理解：锚点说成是中心点，或者定位点更合适</p>
+
+<p>例子 1：</p>
+
+<figure class='code'><figcaption><span>红、绿两个层都显示在屏幕左下角 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>auto red = LayerColor::create(Color4B(255, 100, 100, 128), visibleSize.width/2, visibleSize.height/2);
+</span><span class='line'>auto green = LayerColor::create(Color4B(100, 255, 100, 128), visibleSize.width/4, visibleSize.height/4);
+</span><span class='line'>red->addChild(green);
+</span><span class='line'>this->addChild(red, 0);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子 2：</p>
+
+<figure class='code'><figcaption><span>红色屏幕居中、绿色位于红色左下角 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>auto red = LayerColor::create(Color4B(255, 100, 100, 128), visibleSize.width/2, visibleSize.height/2);
+</span><span class='line'>red->ignoreAnchorPointForPosition(false);
+</span><span class='line'>// 红色层的锚点设置为 (0.5, 0.5)，表示以后的 position 值指向的是它的中心点位置
+</span><span class='line'>red->setAnchorPoint(Point(0.5, 0.5));
+</span><span class='line'>red->setPosition(Point(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+</span><span class='line'>auto green = LayerColor::create(Color4B(100, 255, 100, 128), visibleSize.width/4, visibleSize.height/4);
+</span><span class='line'>red->addChild(green);
+</span><span class='line'>this->addChild(red, 0);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子 3：</p>
+
+<figure class='code'><figcaption><span>红色屏幕居中、绿色位于红色定焦 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>auto red = LayerColor::create(Color4B(255, 100, 100, 128), visibleSize.width/2, visibleSize.height/2);
+</span><span class='line'>red->ignoreAnchorPointForPosition(false);
+</span><span class='line'>red->setAnchorPoint(Point(0.5, 0.5));
+</span><span class='line'>red->setPosition(Point(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+</span><span class='line'>auto green = LayerColor::create(Color4B(100, 255, 100, 128), visibleSize.width/4, visibleSize.height/4);
+</span><span class='line'>green->ignoreAnchorPointForPosition(false);
+</span><span class='line'>// 绿色的锚点设置为 (1,1)，表示它是以右上角的点来定位，但没设置 position，所以 position 是 (0, 0)
+</span><span class='line'>green->setAnchorPoint(Point(1, 1));
+</span><span class='line'>red->addChild(green);
+</span><span class='line'>this->addChild(red, 0);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ignore Anchor Point（忽略锚点）全称是 ignoreAnchorPointForPosition，作用是将锚点固定在一个地方。</p>
+
+<p>如果设置其值为 true，则图片资源的 AnchorPiont固定为左下角，否则即为所设置的位置。</p>
+
+<h1>VertexZ，PositionZ 和 zOrder</h1>
+
+<ul>
+<li><code>VerextZ</code> 是 OpenGL 坐标系中的 Z 值</li>
+<li><code>PositionZ</code> 是 Cocos2d-x 坐标系中 Z 值</li>
+<li><code>zOrder</code> 是 Cocos2d-x 本地坐标系中 Z 值</li>
+</ul>
+
+
+<p>在实际开发中我们只需关注 zOrder。</p>
+
+<p>同样节点的 PositionZ 也是决定了该节点的渲染顺序，值越大，越靠前。但是与 zOrder 不同的区别在于，PositionZ 是全局渲染顺序，即在根节点上的渲染顺序，而 zOrder 则是局部渲染顺序，即该节点在其父节点上的渲染顺序，与 Node 的层级有关。就是说如果 red 的 PositionZ 值更大，你设置 green 的 zOrder 值为多大，都挡不住 red。</p>
+
+<p>个人总结： PositionZ 优先级最高，VertexZ 次之，zOrder 最低</p>
+
+<h1>触摸点（Touch position）</h1>
+
+<p>在函数中获取到 touch，我们在设计游戏逻辑时需要用到触摸点在 Cocos2d 坐标系中的位置，就需要将 touch 的坐标转换成 OpenGL 坐标系中的点坐标。</p>
+
+<p>Touch position 是屏幕坐标系中的点，OpenGL position 是 Cocos2d-x 用到的 OpenGL 坐标系上的点坐标。通常我们在开发中会使用两个接口 <code>getLocation()</code> 和 <code>getLocationInView()</code> 来进行相应坐标转换工作。</p>
+
+<p>在开发中一般使用 getLocation() 获取触摸点的 GL 坐标，而 getLocation() 内部实现是通过调用 Director::getInstance()&ndash;>convertToGL(_point); 返回 GL 坐标。</p>
+
+<p>此外，关于世界坐标系和本地坐标系的相互转换，在Node中定义了以下四个常用的坐标变换的相关方法。</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="c1">// 把世界坐标转换到当前节点的本地坐标系中</span>
+</span><span class='line'><span class="n">Point</span> <span class="n">convertToNodeSpace</span><span class="p">(</span><span class="k">const</span> <span class="n">Point</span><span class="o">&amp;</span> <span class="n">worldPoint</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 把基于当前节点的本地坐标系下的坐标转换到世界坐标系中</span>
+</span><span class='line'><span class="n">Point</span> <span class="n">convertToWorldSpace</span><span class="p">(</span><span class="k">const</span> <span class="n">Point</span><span class="o">&amp;</span> <span class="n">nodePoint</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 基于Anchor Point把世界坐标转换到当前节点的本地坐标系中</span>
+</span><span class='line'><span class="n">Point</span> <span class="n">convertToNodeSpaceAR</span><span class="p">(</span><span class="k">const</span> <span class="n">Point</span><span class="o">&amp;</span> <span class="n">worldPoint</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 基于Anchor Point把基于当前节点的本地坐标系下的坐标转换到世界坐标系中</span>
+</span><span class='line'><span class="n">Point</span> <span class="n">convertToWorldSpaceAR</span><span class="p">(</span><span class="k">const</span> <span class="n">Point</span><span class="o">&amp;</span> <span class="n">nodePoint</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="k">auto</span> <span class="o">*</span><span class="n">sprite1</span> <span class="o">=</span> <span class="n">Sprite</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;HelloWorld.png&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="n">sprite1</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">40</span><span class="p">));</span>
+</span><span class='line'><span class="n">sprite1</span><span class="o">-&gt;</span><span class="n">setAnchorPoint</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">));</span>
+</span><span class='line'><span class="k">this</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="n">sprite1</span><span class="p">);</span>  <span class="c1">//此时添加到的是世界坐标系，也就是OpenGL坐标系</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">auto</span> <span class="o">*</span><span class="n">sprite2</span> <span class="o">=</span> <span class="n">Sprite</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;HelloWorld.png&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="n">sprite2</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="o">-</span><span class="mi">20</span><span class="p">));</span>
+</span><span class='line'><span class="n">sprite2</span><span class="o">-&gt;</span><span class="n">setAnchorPoint</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span>
+</span><span class='line'><span class="k">this</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="n">sprite2</span><span class="p">);</span> <span class="c1">//此时添加到的是世界坐标系，也就是OpenGL坐标系</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//将 sprite2 这个节点的坐标ccp(-5,-20) 转换为 sprite1节点 下的本地(节点)坐标系统的 位置坐标</span>
+</span><span class='line'><span class="n">Point</span> <span class="n">point1</span> <span class="o">=</span> <span class="n">sprite1</span><span class="o">-&gt;</span><span class="n">convertToNodeSpace</span><span class="p">(</span><span class="n">sprite2</span><span class="o">-&gt;</span><span class="n">getPosition</span><span class="p">());</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//将 sprite2 这个节点的坐标ccp(-5,-20) 转换为 sprite1节点 下的世界坐标系统的 位置坐标</span>
+</span><span class='line'><span class="n">Point</span> <span class="n">point2</span> <span class="o">=</span> <span class="n">sprite1</span><span class="o">-&gt;</span><span class="n">convertToWorldSpace</span><span class="p">(</span><span class="n">sprite2</span><span class="o">-&gt;</span><span class="n">getPosition</span><span class="p">());</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">log</span><span class="p">(</span><span class="s">&quot;position = (%f,%f)&quot;</span><span class="p">,</span><span class="n">point1</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">point1</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>    <span class="c1">// 结果 Cocos2d: position = (-25.000000,-60.000000)</span>
+</span><span class='line'><span class="n">log</span><span class="p">(</span><span class="s">&quot;position = (%f,%f)&quot;</span><span class="p">,</span><span class="n">point2</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">point2</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>    <span class="c1">// 结果 Cocos2d: position = (15.000000,20.000000)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中:Point point1 = sprite1->convertToNodeSpace(sprite2->getPosition());</p>
+
+<p>相当于 sprite2 这个节点添加到（实际没有添加，只是这样理解）sprite1 这个节点上，那么就需要使用 sprite1 这个节点的节点坐标系统，这个节点的节点坐标系统的原点在（20，40），而 sprite1 的坐标是（-5，-20）（参照物是坐标原点，即屏幕左下角），那么经过变换之后，sprite1 的坐标就是（-25，-60）。</p>
+
+<p>其中:Point point2 = sprite1->convertToWorldSpace(sprite2->getPosition());</p>
+
+<p>此时的变换是将 sprite2 的坐标转换到 sprite1 的世界坐标系下，而其中世界坐标系是没有变化的，始终都是和 OpenGL 等同，只不过 sprite2 在变换的时候将 sprite1 作为了“参照”而已（不再是坐标原点，即屏幕左下角，而是 sprite1 的左下角）。所以变换之后 sprite2 的坐标为:（15，20）。</p>
 
   
     <footer>
