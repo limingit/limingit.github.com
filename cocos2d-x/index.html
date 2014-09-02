@@ -8,7 +8,10 @@
   <title>Cocos2D-X 开发 ♫ Begin iOS</title>
   <meta name="author" content="Bencalie" />
   
-  <meta name="description" content="Cocos2D-X 开发 Cocos2D-X引擎介绍 免费开源、国人制作 何为游戏引擎？ 引擎，又称为发动机。没有引擎，汽车无法驱动，或者摩托骡拉？坏的引擎，让开发者纠结，玩家虐心。 游戏引擎和交通工具引擎的概念一致，是驱动整体运转的核心部件，是动力的来源。游戏引擎也是产品的核心， &hellip;" />
+  <meta name="description" content="Cocos2D-X 开发 Cocos2D-X引擎介绍 Cocos2d-X是什么东西
+开发 Cocod2D-X 游戏，你准备好了吗？
+Cocos2D-X 3.x 新特性 开发环境配置 配置 Cocos2D-X 3.x 开发环境
+第一个 Cocos2D-X 工程：FirstGame 引擎的核心- &hellip;" />
   
   <meta name="keyword" content="iOS Development, Cocos2d-x, Javascript" />
   <!-- http://t.co/dKP3o1e -->
@@ -72,47 +75,77 @@
     <h1 class="entry-title">Cocos2D-X 开发</h1>
   </header>
   
-  <h2>Cocos2D-X引擎介绍</h2>
+  <h1>Cocos2D-X引擎介绍</h1>
 
-<p>免费开源、国人制作</p>
+<ul>
+<li><a href="/cocos2d-x/what-is-cocos2d-x.html">Cocos2d-X是什么东西</a></li>
+<li><a href="/cocos2d-x/are-you-ready-for-cocos2d-x-game-development.html">开发 Cocod2D-X 游戏，你准备好了吗？</a></li>
+<li><a href="http://blog.csdn.net/crayondeng/article/details/18453147">Cocos2D-X 3.x 新特性</a></li>
+</ul>
 
-<h3>何为游戏引擎？</h3>
 
-<p>引擎，又称为发动机。没有引擎，汽车无法驱动，或者摩托骡拉？坏的引擎，让开发者纠结，玩家虐心。</p>
+<h1>开发环境配置</h1>
 
-<p>游戏引擎和交通工具引擎的概念一致，是驱动整体运转的核心部件，是动力的来源。游戏引擎也是产品的核心，引擎好坏决定游戏的品质。</p>
+<ul>
+<li><a href="/cocos2d-x/install-cocos2d-x-3.html">配置 Cocos2D-X 3.x 开发环境</a></li>
+<li><a href="/cocos2d-x/first-cocos2dx-project.html">第一个 Cocos2D-X 工程：FirstGame</a></li>
+</ul>
 
-<p>作为游戏的核心，但不是游戏的全部。它是一个内核，提供通用化、标准化的功能，但不提供游戏特定的功能。（Quake游戏和引擎一个名字，这是特例）</p>
 
-<p>引擎跟前端开发中的框架和库的概念也有相似之处。</p>
+<h1>引擎的核心-渲染框架</h1>
 
-<p>电子游戏发展初期，没有引擎。1990 DOOM 游戏提出了游戏引擎的概念。早期的游戏，就是多个模块的结合，很难升级和后续维护。引擎开发方式提升了效率，减少了制作成本。</p>
+<ul>
+<li><a href="/cocos2d-x/game-elements.html">Cocos2D-X 游戏基本组成元素</a></li>
+<li><a href="/cocos2d-x/scheduler-guide.html">Cocos2D-X 定时器</a></li>
+<li><a href="/cocos2d-x/coordinate-system.html">Cocos2D-X 坐标系</a></li>
+<li><a href="/cocos2d-x/animation-and-effect.html">Cocos2D-X 动画和场景特效</a></li>
+<li><a href="/cocos2d-x/text-and-font.html">文本和字体</a></li>
+</ul>
 
-<p>优秀游戏引擎的特征：稳定性、性能（帧率、能够承载的运算量）、功能、简单易用、跨平台。最好还有配套的可视化编辑器和插件。</p>
 
-<p>知名的游戏引擎：虚幻、Unity、Cry Engine、Cocos2D-x、极品飞车、IW</p>
+<h1>动作</h1>
 
-<p>引擎分类：授权引擎、开源引擎、自主引擎</p>
+<ul>
+<li><a href="/cocos2d-x/action-guide.html">Cocos2D-X 动作</a></li>
+</ul>
 
-<p>Cocos2D-x是一个支持多平台的手机游戏引擎，使用 C++ 开发，基于 OpenGL ES、DirectX，支持多个平台。</p>
 
-<p>Cocos2D 的名字是因为引擎原创团队所在的阿根廷 Los Cocos，最初是 Python 语言开发的（Python 比较小众），2008 年随着 iPhone 手机的耀世，引擎团队推出了 Cocos2D-iPhone。</p>
+<h1>用户交互</h1>
 
-<p>2010年11月，Cocos2D-X 第一个版本发布。X，英文 Cross 的缩写，表示交叉，在这里意味着跨平台。Cocos2D-X 的发起者是王哲（Walzer，中国人）</p>
+<ul>
+<li><a href="/cocos2d-x/handle-user-interaction.html">用户交互</a></li>
+</ul>
 
-<p>Cocos2D-X 开发的项目是一种特殊的应用程序，但其核心还是应用程序，只不过舍弃了原有平台的 UI 组件，并将原有平台的交互都以消息的形式传递到 Cocos2D-X 的封装架构中，再由开发者通过 Cocos2D-X 的消息响应机制来完成游戏的开发。</p>
 
-<p>Cocos2D-X 特点：免费开源、跨平台（最适合移动平台）</p>
+<h1>游戏背景</h1>
 
-<h2>开发环境配置</h2>
+<h1>物理模拟与碰撞检测</h1>
 
-<p>引擎安装，其实就是将下载的源代码包解压缩。</p>
+<h1>游戏中的声音</h1>
 
-<p>Cocos2D-X 2.2+</p>
+<p><a href="/cocos2d-x/music-and-sound.html">音乐和音效</a></p>
 
-<p>Cocos2D-X 3.0</p>
+<h1>文件操作模块</h1>
 
-<p>文档地址：</p>
+<h1>内存管理机制</h1>
+
+<h1>粒子系统</h1>
+
+<ul>
+<li><a href="/cocos2d-x/particle-system.html">粒子系统</a></li>
+<li><a href="/cocos2d-x/map-guide.html">游戏地图</a></li>
+</ul>
+
+
+<h1>Lua脚本语言</h1>
+
+<h1>Cocos2D-HTML5</h1>
+
+<h1>引擎之外的附加功能</h1>
+
+<h1>Cocos2D-X的未来</h1>
+
+<h1>文档地址：</h1>
 
 <ul>
 <li>索引：<a href="http://www.cocos2d-x.org/wiki/Reference">http://www.cocos2d-x.org/wiki/Reference</a></li>
@@ -122,43 +155,16 @@
 </ul>
 
 
-<p><a href="/cocos2d-x/first-cocos2dx-project.html">第一个 Cocos2D-X 工程：FirstGame</a></p>
+<h1>相关工具</h1>
 
-<p><a href="/cocos2d-x/game-elements.html">Cocos2D-X 游戏基本组成元素</a></p>
+<ul>
+<li><a href="https://github.com/cocos2d/CocosBuilder">CocosBuilder</a>（Mac Only）</li>
+<li><a href="http://www.spritebuilder.com/">SpriteBuilder</a>（Mac Only）</li>
+<li><a href="https://www.makegameswith.us/tutorials/getting-started-with-spritebuilder/">SpriteBuilder Docs</a></li>
+</ul>
 
-<p><a href="/cocos2d-x/scheduler-guide.html">Cocos2D-X 定时器</a></p>
 
-<p><a href="/cocos2d-x/coordinate-system.html">Cocos2D-X 坐标系</a></p>
-
-<p><a href="/cocos2d-x/cocos2d-x-videos.html">Cocos2D-X 视频</a></p>
-
-<h2>引擎的核心-渲染框架</h2>
-
-<h2>动作</h2>
-
-<h2>用户交互</h2>
-
-<h2>游戏背景</h2>
-
-<h2>物理模拟与碰撞检测</h2>
-
-<h2>游戏中的声音</h2>
-
-<h2>文件操作模块</h2>
-
-<h2>内存管理机制</h2>
-
-<h2>粒子系统</h2>
-
-<h2>Lua脚本语言</h2>
-
-<h2>Cocos2D-HTML5</h2>
-
-<h2>引擎之外的附加功能</h2>
-
-<h2>Cocos2D-X的未来</h2>
-
-<h2>学习资料：</h2>
+<h1>学习资料：</h1>
 
 <ul>
 <li><a href="http://cn.cocos2d-x.org/">中文官方网站</a></li>
@@ -172,25 +178,38 @@
 </ul>
 
 
-<p>视频
-* <a href="http://www.mobiletrain.org/about/news/Cocos2D-X_video.html">千锋独家出品《Cocos2D-X游戏开发视频教程-捕鱼达人》</a>
-* <a href="http://edu.51cto.com/course/course_id-579.html">Cocos2d-x 跨平台游戏开发入门基础视频教程</a>
-* <a href="http://www.lampbrother.net/cocos2d/">兄弟连Cocos2d-x</a>
-* <a href="http://www.lanou3g.com/zxjx/cocos2d3d/">Cocos2d-x 3.0 开发视频教程 &ndash; 蓝鸥3G学院</a>
-* <a href="http://www.tairan.com/%E6%B3%B0%E7%84%B6%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B/">http://www.tairan.com/%E6%B3%B0%E7%84%B6%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B/</a></p>
+<h1>视频</h1>
 
-<p>cocos2d-x视频教程之横版过关游戏
-视频高清版下载地址：<a href="http://pan.baidu.com/share/link?shareid=1153875908&amp;uk=2401648946">http://pan.baidu.com/share/link?shareid=1153875908&amp;uk=2401648946</a>
-源码及资源下载地址：<a href="http://pan.baidu.com/share/link?shareid=1170659703&amp;uk=2401648946">http://pan.baidu.com/share/link?shareid=1170659703&amp;uk=2401648946</a>
-爱酷学习网直接观看地址：<a href="http://www.icoolxue.com/album/show/15">http://www.icoolxue.com/album/show/15</a>
-优酷播放地址：<a href="http://www.youku.com/playlist_show/id_19583650.html">http://www.youku.com/playlist_show/id_19583650.html</a></p>
+<ul>
+<li><a href="/cocos2d-x/cocos2d-x-videos.html">Cocos2D-X 视频</a></li>
+<li><a href="http://www.mobiletrain.org/about/news/Cocos2D-X_video.html">千锋独家出品《Cocos2D-X游戏开发视频教程-捕鱼达人》</a></li>
+<li><a href="http://edu.51cto.com/course/course_id-579.html">Cocos2d-x 跨平台游戏开发入门基础视频教程</a></li>
+<li><a href="http://www.lampbrother.net/cocos2d/">兄弟连Cocos2d-x</a></li>
+<li><a href="http://www.lanou3g.com/zxjx/cocos2d3d/">Cocos2d-x 3.0 开发视频教程 &ndash; 蓝鸥3G学院</a></li>
+<li><a href="http://www.tairan.com/%E6%B3%B0%E7%84%B6%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B/">http://www.tairan.com/%E6%B3%B0%E7%84%B6%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B/</a></li>
+</ul>
 
-<p>错误大全：
-* Android library projects cannot be launched
-* <a href="http://blog.csdn.net/oktears/article/details/22579365">http://blog.csdn.net/oktears/article/details/22579365</a>
-常见错误：
-* <a href="http://blog.csdn.net/callchunli/article/details/8929813">http://blog.csdn.net/callchunli/article/details/8929813</a>
-* <a href="http://blog.csdn.net/boyxiaolong/article/details/14224715">http://blog.csdn.net/boyxiaolong/article/details/14224715</a></p>
+
+<h1>cocos2d-x视频教程之横版过关游戏</h1>
+
+<ul>
+<li>视频高清版下载地址：<a href="http://pan.baidu.com/share/link?shareid=1153875908&amp;uk=2401648946">http://pan.baidu.com/share/link?shareid=1153875908&amp;uk=2401648946</a></li>
+<li>源码及资源下载地址：<a href="http://pan.baidu.com/share/link?shareid=1170659703&amp;uk=2401648946">http://pan.baidu.com/share/link?shareid=1170659703&amp;uk=2401648946</a></li>
+<li>爱酷学习网直接观看地址：<a href="http://www.icoolxue.com/album/show/15">http://www.icoolxue.com/album/show/15</a></li>
+<li>优酷播放地址：<a href="http://www.youku.com/playlist_show/id_19583650.html">http://www.youku.com/playlist_show/id_19583650.html</a></li>
+</ul>
+
+
+<h1>错误大全：</h1>
+
+<ul>
+<li>Android library projects cannot be launched</li>
+<li><a href="http://blog.csdn.net/oktears/article/details/22579365">http://blog.csdn.net/oktears/article/details/22579365</a></li>
+<li>常见错误：</li>
+<li><a href="http://blog.csdn.net/callchunli/article/details/8929813">http://blog.csdn.net/callchunli/article/details/8929813</a></li>
+<li><a href="http://blog.csdn.net/boyxiaolong/article/details/14224715">http://blog.csdn.net/boyxiaolong/article/details/14224715</a></li>
+</ul>
+
 
   
     <footer>

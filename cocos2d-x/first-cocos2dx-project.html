@@ -551,6 +551,36 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
+<h1>日志输入</h1>
+
+<p>Cocos2D-X 开发中，经常需要将开发日志输出到控制台，以便调试程序。可以使用 <code>CCLOG()</code>，来打印日志。</p>
+
+<p>各语言略有差异：</p>
+
+<ul>
+<li>C++：<code>CCLOG()</code></li>
+<li>Lua：<code>print</code></li>
+<li>JSB：<code>cc.log</code></li>
+</ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="n">CCLOG</span><span class="p">(</span><span class="s">&quot;Characters: %c %c&quot;</span><span class="p">,</span> <span class="sc">&#39;a&#39;</span><span class="p">,</span> <span class="mi">65</span><span class="p">);</span>
+</span><span class='line'><span class="n">CCLOG</span><span class="p">(</span><span class="s">&quot;Decimals: %d %ld&quot;</span><span class="p">,</span> <span class="mi">1977</span><span class="p">,</span> <span class="mi">650000L</span><span class="p">);</span>
+</span><span class='line'><span class="n">CCLOG</span><span class="p">(</span><span class="s">&quot;Preceding with blanks: %10d&quot;</span><span class="p">,</span> <span class="mi">1977</span><span class="p">);</span>
+</span><span class='line'><span class="n">CCLOG</span><span class="p">(</span><span class="s">&quot;Preceding with zeros: %010d&quot;</span><span class="p">,</span> <span class="mi">1977</span><span class="p">);</span>
+</span><span class='line'><span class="n">CCLOG</span><span class="p">(</span><span class="s">&quot;Some different radixes: %d %x %o %#x %#o&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+</span><span class='line'><span class="n">CCLOG</span><span class="p">(</span><span class="s">&quot;Floats: %4.2f %.0e %E&quot;</span><span class="p">,</span> <span class="mf">3.1416</span><span class="p">,</span> <span class="mf">3.1416</span><span class="p">,</span> <span class="mf">3.1416</span><span class="p">);</span>
+</span><span class='line'><span class="n">CCLOG</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span><span class="s">&quot;A string&quot;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
   
     <footer>
       <p class="meta">

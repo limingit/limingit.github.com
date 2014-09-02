@@ -1,0 +1,348 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+  <title>Cocos2D-X 文本和字体 ♫ Begin iOS</title>
+  <meta name="author" content="Bencalie" />
+  
+  <meta name="description" content="Cocos2D-X 文本和字体 Aug 22nd, 2014 通常在游戏制作中存在两种文字方式：美术字和排版字。 美术字是由美工人员制作的纹理图片表现的文字，从代码的角度看，和一般的纹理图片没有区别，它就是一张包含文字信息的图片。一般用来当做游戏的标题或者 LOGO，这类字绚丽华美，创意十足。 &hellip;" />
+  
+  <meta name="keyword" content="iOS Development, Cocos2d-x, Javascript" />
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta property="wb:webmaster" content="55c9e91dcbf77db5" />
+  <link rel="author" href="https://plus.google.com/107446839256480078362/posts" />
+  <link rel="publisher" href="https://plus.google.com/107446839256480078362" />
+  
+  <link rel="canonical" href="http://beginios.com/cocos2d-x/text-and-font.html" />
+  <link href="/favicon.png" rel="icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="Begin iOS" type="application/atom+xml" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">-->
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Begin iOS</a></h1>
+  
+    <h2>A guide for iOS developer.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:beginios.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <!--<li><a href="/ios/">iOS</a></li>
+  <li><a href="/cocos2d-x/">Cocos2d-x</a></li>
+  <li><a href="/javascript/">Javascript</a></li>
+  <li><a href="/android/">Android</a></li>
+  <li><a href="/resources/">Resources</a></li>-->
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Cocos2D-X 文本和字体</h1>
+    <p class="meta">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-22T23:36:00+00:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2014</time></p>
+  </header>
+  
+  <p>通常在游戏制作中存在两种文字方式：美术字和排版字。</p>
+
+<p>美术字是由美工人员制作的纹理图片表现的文字，从代码的角度看，和一般的纹理图片没有区别，它就是一张包含文字信息的图片。一般用来当做游戏的标题或者 LOGO，这类字绚丽华美，创意十足。排版字的技术原理是来自活字印刷，建立一个个字块，然后采用拼接索引的方式组成文字。</p>
+
+<p>Cocos2D-X 提供了三个类：LabelTTF、LabelBMFont、LableAtlas。</p>
+
+<h1>LableTTF</h1>
+
+<p>TTF（True Type Fonts）是由美国苹果公司和微软公司共同开发的一款电脑轮廓字体类型标准。</p>
+
+<p>LabelTTF 类派生自 Sprite，开发者完全可以将它当做精灵来使用，它可以执行各类动作及变化效果。</p>
+
+<p>优缺点：</p>
+
+<ul>
+<li>任何一种 TTF 字体都包含了某种语言当中所有的字母和符号，开发者可以随意调整字体的大小、颜色及样式。</li>
+<li>TTF 标准得到了普及，很多操作系统中已经提供了多种字体，开发者无需任何的编辑，就可以直接使用。</li>
+<li>创建和更新的过程比较缓慢，这是由于字体包含的内容比较多，并且初始化时候需要创建纹理图片。</li>
+</ul>
+
+
+<p>创建函数：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// 参数：文字内容、字体名称、字号、标签尺寸、水平对齐方式、垂直对齐方式
+</span><span class='line'>static LabelTTF * create(const std::string& string, const std::string& fontName, float fontSize,
+</span><span class='line'>                           const Size& dimensions = Size::ZERO, TextHAlignment hAlignment = TextHAlignment::CENTER,
+</span><span class='line'>                           TextVAlignment vAlignment = TextVAlignment::TOP);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>举个例子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// 参数：文字内容、字体名称、字号
+</span><span class='line'>auto label = LabelTTF::create("Hello World", "Arial", 24);
+</span><span class='line'>  
+</span><span class='line'>// position the label on the center of the screen
+</span><span class='line'>label->setPosition(Vec2(origin.x + visibleSize.width/2,
+</span><span class='line'>                      origin.y + visibleSize.height - label->getContentSize().height));
+</span><span class='line'>
+</span><span class='line'>// add the label as a child to this layer
+</span><span class='line'>this->addChild(label, 1);</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>LabelBMFont</h1>
+
+<p>LabelBMFont 是引擎当中最快速最自由的字体类，同时也是使用起来最麻烦的字体。开发者至少需要有一个编辑器。</p>
+
+<p>LabelBMFont 派生自 SpriteBatchNode，特点：</p>
+
+<ul>
+<li>需要一个图片编辑器，用于编辑字体的纹理图集</li>
+<li>具备了很快的创建及更新速度</li>
+<li>自由度非常高，每个字母或符号都是单独的精灵。</li>
+<li>自制的字体方式，开发者可以自定义其中的字母、符号，甚至包含阴影、外框及花纹。</li>
+</ul>
+
+
+<h1>LabelAtlas</h1>
+
+  
+    <footer>
+      <p class="meta">
+        
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-22T23:36:00+00:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2014</time>
+        
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/cocos2d-x/'>Cocos2D-X</a>
+  
+</span>
+
+
+      </p>
+      
+        <div class="sharing">
+  
+  
+  
+  
+	<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<span class="jiathis_txt">&#x5206;&#x4eab;&#x5230;&#xff1a;</span>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=1822549" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">&#x66f4;&#x591a;</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=1822549" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1822549"></script>
+<!-- UY END -->
+
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>关于我</h1>
+	<p>Front-End Engineer</p>
+	<ul>
+		<li>微博：<a href="http://weibo.com/bencalie" target="_blank">@Bencalie</a></li>
+		<li>Google+：<a href="https://plus.google.com/u/0/107446839256480078362?rel=author" target="_blank">Bencalie</a></li>
+	</ul>
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=1406758883&verifier=a7415e95&dpc=1"></iframe>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/08/19/fix-unknown-android-phone-device-for-mac/">解决小米、红米及其他 Android 手机无法在 Mac 下进行真机调试的问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/06/swift-programming-language-introduction/">Swift 介绍 PPT</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/06/swift-guide/">Swift 入门</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/29/customize-xcode-template/">自定义 Xcode 新文件模板</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/28/debug-with-weinre/">使用 Weinre 调试移动网页</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+	<h1>Tags</h1>
+	<ul class="tag_cloud">
+		<a style="font-size: 210%" href="/tags/android/">Android</a>
+<a style="font-size: 90%" href="/tags/applicationcache/">ApplicationCache</a>
+<a style="font-size: 90%" href="/tags/charles/">Charles</a>
+<a style="font-size: 210%" href="/tags/html5/">HTML5</a>
+<a style="font-size: 90%" href="/tags/markdown-editor/">Markdown Editor</a>
+<a style="font-size: 210%" href="/tags/tools/">Tools</a>
+<a style="font-size: 210%" href="/tags/uiwebview/">UIWebview</a>
+<a style="font-size: 90%" href="/tags/url-schema/">URL Schema</a>
+<a style="font-size: 90%" href="/tags/web-debugging-proxy/">Web Debugging Proxy</a>
+<a style="font-size: 90%" href="/tags/google/">google</a>
+<a style="font-size: 90%" href="/tags/ios/">iOS</a>
+<a style="font-size: 90%" href="/tags/xiao-mi-shou-ji/">小米手机</a>
+<a style="font-size: 90%" href="/tags/zhen-ji-diao-shi/">真机调试</a>
+
+	</ul>
+</section>
+<section>
+	<h1>微博开发者</h1>
+	<ul>
+		<li><a href="http://beginios.com/javascript/weibo-app-frame" target="_blank">应用框架接入文档</a></li>
+		<li><a href="http://weibojs.com" target="_blank">微博 JSSDK 官网</a></li>
+	</ul>
+</section>
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/limingit">@limingit</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'limingit',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Bencalie -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+
+  <script type="text/javascript">
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-47018713-1', 'beginios.com');
+	ga('send', 'pageview');
+  </script>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

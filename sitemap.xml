@@ -105,28 +105,68 @@
         <lastmod>2014-08-19T03:25:47+00:00</lastmod>
     </url>
     <url>
+        <loc>http://beginios.com/cocos2d-x/text-and-font.html</loc>
+        <lastmod>2014-08-25T15:46:05+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://beginios.com/cocos2d-x/c++.html</loc>
+        <lastmod>2014-09-02T04:58:55+00:00</lastmod>
+    </url>
+    <url>
         <loc>http://beginios.com/cocos2d-x/coordinate-system.html</loc>
         <lastmod>2014-08-22T18:56:24+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://beginios.com/cocos2d-x/what-is-cocos2d-x.html</loc>
+        <lastmod>2014-08-26T07:44:00+00:00</lastmod>
     </url>
     <url>
         <loc>http://beginios.com/cocos2d-x/cocos2d-x-videos.html</loc>
         <lastmod>2014-08-22T09:08:30+00:00</lastmod>
     </url>
     <url>
+        <loc>http://beginios.com/cocos2d-x/music-and-sound.html</loc>
+        <lastmod>2014-08-28T09:57:04+00:00</lastmod>
+    </url>
+    <url>
         <loc>http://beginios.com/cocos2d-x/first-cocos2dx-project.html</loc>
-        <lastmod>2014-08-20T16:45:42+00:00</lastmod>
+        <lastmod>2014-09-02T03:30:50+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://beginios.com/cocos2d-x/particle-system.html</loc>
+        <lastmod>2014-09-02T04:58:55+00:00</lastmod>
     </url>
     <url>
         <loc>http://beginios.com/cocos2d-x/install-cocos2d-x-3.html</loc>
-        <lastmod>2014-08-21T06:50:10+00:00</lastmod>
+        <lastmod>2014-08-26T07:44:00+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://beginios.com/cocos2d-x/animation-and-effect.html</loc>
+        <lastmod>2014-08-27T10:00:35+00:00</lastmod>
     </url>
     <url>
         <loc>http://beginios.com/cocos2d-x/scheduler-guide.html</loc>
         <lastmod>2014-08-22T09:48:24+00:00</lastmod>
     </url>
     <url>
+        <loc>http://beginios.com/cocos2d-x/map-guide.html</loc>
+        <lastmod>2014-09-02T04:58:55+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://beginios.com/cocos2d-x/are-you-ready-for-cocos2d-x-game-development.html</loc>
+        <lastmod>2014-08-26T07:44:00+00:00</lastmod>
+    </url>
+    <url>
         <loc>http://beginios.com/cocos2d-x/</loc>
-        <lastmod>2014-08-22T18:56:24+00:00</lastmod>
+        <lastmod>2014-09-02T04:58:55+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://beginios.com/cocos2d-x/handle-user-interaction.html</loc>
+        <lastmod>2014-08-28T09:57:04+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://beginios.com/cocos2d-x/action-guide.html</loc>
+        <lastmod>2014-08-27T10:00:35+00:00</lastmod>
     </url>
     <url>
         <loc>http://beginios.com/cocos2d-x/game-elements.html</loc>
