@@ -148,14 +148,81 @@
 
 <p>如果记不住，可以点击右侧的 Browser&hellip; 选择父类，点击后弹出的对话框中输入 Activity，第一个就是我们需要的，点击 OK 确认。</p>
 
-<p><img src="/images/blog/android/create_a_class.jpg"></p>
+<p><img src="/images/blog/android/choice_super_class.jpg"></p>
 
 <ul>
-<li>其它各项，保持默认值即可。点击 Finish 按钮完成类的创建。</li>
+<li>其它各项，保持默认值即可。点击 Finish 按钮完成类的创建。这时候类还是空的，没有任何内容。</li>
 </ul>
 
 
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">beginios</span><span class="o">.</span><span class="na">firstapp</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">android.app.Activity</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>增加 onCreate() 方法。在类的花括号中输入 onCreate，然后按快捷键 <code>Alt+/</code>，唤起输入联想，第一个就应该是我们需要的了，直接回车选择第一个，代码自动生成，结果如下：</li>
+</ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">beginios</span><span class="o">.</span><span class="na">firstapp</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">android.app.Activity</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">android.os.Bundle</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
+</span><span class='line'>  <span class="nd">@Override</span>
+</span><span class='line'>  <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="c1">// TODO Auto-generated method stub</span>
+</span><span class='line'>      <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>请注意，<code>Alt+/</code> 这个快捷键能帮助我们快速完成一些预置函数模板的输入，一定要勤使用，带来高效输入的同时，还避免了手动输入可能造成的错误。</p>
+
 <h2>创建一个布局</h2>
+
+<ul>
+<li>在 Package Explorer 面板，右键点击 res/layout 目录，New &ndash;> Android XML File，会弹出创建布局文件的窗口。在 File 字段输入 Layout 文件名：custom_layout，可以看到，对话框中默认选中了 LinearLayout，在这里可以改为别的。不过我们暂时不需要修改，直接点击 Finish 结束创建。</li>
+</ul>
+
+
+<p><img src="/images/blog/android/create_a_layout.jpg"></p>
+
+<ul>
+<li>双击打开 custom_layout.xml，可以看到如图的界面：</li>
+</ul>
+
+
+<p><img src="/images/blog/android/edit_layout.jpg"></p>
+
+<p>这是一个可视化布局编辑器。</p>
 
 <h1>Intent 和 IntentFilter</h1>
 
